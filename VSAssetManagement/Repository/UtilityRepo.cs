@@ -12,9 +12,9 @@ namespace VSAssetManagement.Repo
             _context = context;
         }
 
-        public List<Status> getStatusListForType(string type)
+        public List<Status> getStatusListForType(IOModels.Pagination page)
         {
-            return _context.Status.Where(s => s.Type == type).ToList();
+            return _context.Status.Where(s => s.Type.ToUpper() == page.searchParam.ToUpper()).ToList();
         }
     }
 }

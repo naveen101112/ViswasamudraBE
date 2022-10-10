@@ -1,6 +1,7 @@
 ﻿using VSAssetManagement.Models;
 using System.Collections.Generic;
 using System.Linq;
+using io = VSAssetManagement.IOModels;
 
 namespace VSAssetManagement.Repo
 {
@@ -12,9 +13,16 @@ namespace VSAssetManagement.Repo
             _context = context;
         }
 
-        public List<Asset> getAllList()
+        public List<Asset> getAllList(io.Pagination page)
         {
-            return _context.Asset.ToList();
+            if (page.searchParam == null)
+            {
+                return _context.Asset.Skip(page.skip()).Take(page.take()).ToList();
+            }
+            else
+            {
+                return _context.Asset.Skip(page.skip()).Take(page.take()).ToList();
+            }
         }
 
         public int create(Asset asset)

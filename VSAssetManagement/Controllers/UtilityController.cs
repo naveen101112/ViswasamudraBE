@@ -13,10 +13,10 @@ namespace VSAssetManagement.Controllers
     {
         UtilityRepo repo = new UtilityRepo(new VISWASAMUDRAContext());
 
-        [HttpGet("status/{type}")]
-        public ActionResult getByStatusListByType(string type)
+        [HttpGet("status")]
+        public ActionResult getByStatusListByType([FromQuery] io.Pagination page)
         {
-            List <Status> statusList = repo.getStatusListForType(type);
+            List <Status> statusList = repo.getStatusListForType(page);
             if (statusList == null) return NotFound();
             return Ok(statusList);
         }

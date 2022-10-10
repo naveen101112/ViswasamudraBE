@@ -16,7 +16,7 @@ namespace VSAssetManagement.Controllers
 
         #region Asset
         [HttpGet("asset")]
-        public ActionResult getAllList()
+        public ActionResult getAllList([FromQuery] io.Pagination pagination)
         {
             List<io.Asset> list = 
                 JsonConvert.
