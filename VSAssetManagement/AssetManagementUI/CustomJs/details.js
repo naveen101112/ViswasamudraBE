@@ -16,8 +16,10 @@ function callAPI(params){
 function onLoadData(){
     var params = {};
     params={
-        url:'/utility/status/asset',
-        data:'',
+        url:'/utility/status',
+        data:{
+            searchParam:"asset",
+        },
         type:'GET'
     }
     callAPI(params);

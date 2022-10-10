@@ -16,11 +16,11 @@ namespace VSAssetManagement.Controllers
 
         #region Asset
         [HttpGet("asset")]
-        public ActionResult getAllList([FromQuery] io.Pagination pagination)
+        public ActionResult getAllList([FromQuery] io.Pagination page)
         {
             List<io.Asset> list = 
                 JsonConvert.
-                DeserializeObject<List<io.Asset>>(JsonConvert.SerializeObject(repo.getAllList()));
+                DeserializeObject<List<io.Asset>>(JsonConvert.SerializeObject(repo.getAllList(page)));
 
             return Ok(list);
         }
