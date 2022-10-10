@@ -31,9 +31,10 @@ namespace VSAssetManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult createAsset([FromBody] Asset asset)
+        public ActionResult createAsset([FromBody] io.Asset record)
         {
-            int id = assetRepo.createAsset(asset);
+            int id = assetRepo.createAsset(JsonConvert.
+                DeserializeObject<Asset>(JsonConvert.SerializeObject(record)));
             return Created($"/asset/{id}","Created Successfully.");
         }
     }

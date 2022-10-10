@@ -32,9 +32,10 @@ namespace VSAssetManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult getById([FromBody] Project asset)
+        public ActionResult getById([FromBody] io.Project record)
         {
-            int id = repo.createAsset(asset);
+            int id = repo.create(JsonConvert.
+                DeserializeObject<Project>(JsonConvert.SerializeObject(record)));
             return Created($"/project/{id}","Created Successfully.");
         }
     }

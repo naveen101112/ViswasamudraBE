@@ -31,9 +31,10 @@ namespace VSAssetManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult getById([FromBody] Store record)
+        public ActionResult getById([FromBody] io.Store record)
         {
-            int id = repo.createAsset(record);
+            int id = repo.createAsset(JsonConvert.
+                DeserializeObject<Store>(JsonConvert.SerializeObject(record)));
             return Created($"/store/{id}","Created Successfully.");
         }
     }

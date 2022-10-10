@@ -17,7 +17,7 @@ namespace VSAssetManagement.Repo
             return _context.Project.ToList();
         }
 
-        public int createAsset(Project record)
+        public int create(Project record)
         {
             _context.Project.Add(record);
             _context.SaveChanges();
