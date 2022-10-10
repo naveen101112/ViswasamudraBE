@@ -8,6 +8,7 @@ namespace VSAssetManagement.Controllers
     [ApiController]
     public class AssetController : ControllerBase
     {
+        //Nagarjun S
         AssetRepo assetRepo = new AssetRepo(new VISWASAMUDRAContext());
         [HttpGet]
         public ActionResult assetList()
