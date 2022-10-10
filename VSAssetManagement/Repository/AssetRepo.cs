@@ -17,7 +17,7 @@ namespace VSAssetManagement.Repo
             return _context.Asset.ToList();
         }
 
-        public int createAsset(Asset asset)
+        public int create(Asset asset)
         {
             _context.Asset.Add(asset);
             _context.SaveChanges();
@@ -27,6 +27,23 @@ namespace VSAssetManagement.Repo
         public Asset getById(int id)
         {
             return _context.Asset.Where(a=>a.Id==id).FirstOrDefault();
+        }
+
+        public int update(Asset asset)
+        {
+            _context.Asset.Update(asset);
+            return _context.SaveChanges();
+        }
+
+        public int delete(int id)
+        {
+            _context.Asset.Remove(getById(id));
+            return _context.SaveChanges();
+        }
+
+        public int countById(int id)
+        {
+            return _context.Asset.Where(a=>a.Id == id).Count();
         }
     }
 }

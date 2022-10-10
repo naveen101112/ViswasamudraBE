@@ -13,7 +13,7 @@ namespace VSAssetManagement.Controllers
     {
         StoreRepo repo = new StoreRepo(new VISWASAMUDRAContext());
         [HttpGet]
-        public ActionResult getList()
+        public ActionResult getAllList()
         {
             List<io.Store> list =
                 JsonConvert.
@@ -31,11 +31,28 @@ namespace VSAssetManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult getById([FromBody] io.Store record)
+        public ActionResult createRecord([FromBody] io.Store record)
         {
             int id = repo.createAsset(JsonConvert.
                 DeserializeObject<Store>(JsonConvert.SerializeObject(record)));
             return Created($"/store/{id}","Created Successfully.");
+        }
+
+        [HttpPut]
+        public ActionResult updateRecord([FromBody] io.Store record)
+        {
+            int id = repo.update(JsonConvert.
+                DeserializeObject<Store>(JsonConvert.SerializeObject(record)));
+            if (id == 0) return Conflict("Error updating record");
+            return Ok("Updated successfully");
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult deleteRecord(int id)
+        {
+            int count = repo.delete(id);
+            if (id == 0) return Conflict("Error deleting record");
+            return Ok("Deleted successfully");
         }
     }
 }

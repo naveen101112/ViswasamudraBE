@@ -4,40 +4,40 @@ using System.Linq;
 
 namespace VSAssetManagement.Repo
 {
-    public class StoreRepo
+    public class BatchRepo
     {
         protected VISWASAMUDRAContext _context { get; set; }
-        public StoreRepo(VISWASAMUDRAContext context)
+        public BatchRepo(VISWASAMUDRAContext context)
         {
             _context = context;
         }
 
-        public List<Store> getAllList()
+        public List<Batch> getAllList()
         {
-            return _context.Store.ToList();
+            return _context.Batch.ToList();
         }
 
-        public int createAsset(Store record)
+        public int createAsset(Batch record)
         {
-            _context.Store.Add(record);
+            _context.Batch.Add(record);
             _context.SaveChanges();
             return record.Id;
         }
 
-        public Store getById(int id)
+        public Batch getById(int id)
         {
-            return _context.Store.Where(a=>a.Id==id).FirstOrDefault();
+            return _context.Batch.Where(a=>a.Id==id).FirstOrDefault();
         }
 
-        public int update(Store record)
+        public int update(Batch record)
         {
-            _context.Store.Update(record);
+            _context.Batch.Update(record);
             return _context.SaveChanges();
         }
 
         public int delete(int id)
         {
-            _context.Store.Remove(getById(id));
+            _context.Batch.Remove(getById(id));
             return _context.SaveChanges();
         }
     }

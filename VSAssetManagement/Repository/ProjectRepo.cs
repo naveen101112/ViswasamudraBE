@@ -28,5 +28,17 @@ namespace VSAssetManagement.Repo
         {
             return _context.Project.Where(a=>a.Id==id).FirstOrDefault();
         }
+
+        public int update(Project record)
+        {
+            _context.Project.Update(record);
+            return _context.SaveChanges();
+        }
+
+        public int delete(int id)
+        {
+            _context.Project.Remove(getById(id));
+            return _context.SaveChanges();
+        }
     }
 }

@@ -4,40 +4,40 @@ using System.Linq;
 
 namespace VSAssetManagement.Repo
 {
-    public class StoreRepo
+    public class TagRepo
     {
         protected VISWASAMUDRAContext _context { get; set; }
-        public StoreRepo(VISWASAMUDRAContext context)
+        public TagRepo(VISWASAMUDRAContext context)
         {
             _context = context;
         }
 
-        public List<Store> getAllList()
+        public List<Tag> getAllList()
         {
-            return _context.Store.ToList();
+            return _context.Tag.ToList();
         }
 
-        public int createAsset(Store record)
+        public int create(Tag record)
         {
-            _context.Store.Add(record);
+            _context.Tag.Add(record);
             _context.SaveChanges();
             return record.Id;
         }
 
-        public Store getById(int id)
+        public Tag getById(int id)
         {
-            return _context.Store.Where(a=>a.Id==id).FirstOrDefault();
+            return _context.Tag.Where(a=>a.Id==id).FirstOrDefault();
         }
 
-        public int update(Store record)
+        public int update(Tag record)
         {
-            _context.Store.Update(record);
+            _context.Tag.Update(record);
             return _context.SaveChanges();
         }
 
         public int delete(int id)
         {
-            _context.Store.Remove(getById(id));
+            _context.Tag.Remove(getById(id));
             return _context.SaveChanges();
         }
     }
