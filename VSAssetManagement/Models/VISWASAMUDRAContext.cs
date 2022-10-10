@@ -23,9 +23,10 @@ namespace VSAssetManagement.Models
         public virtual DbSet<Asset> Asset { get; set; }
         public virtual DbSet<AssetHistory> AssetHistory { get; set; }
         public virtual DbSet<AssetOperations> AssetOperations { get; set; }
+        public virtual DbSet<Batch> Batch { get; set; }
         public virtual DbSet<Project> Project { get; set; }
-        public virtual DbSet<PurchaseReferenceBatchDetails> PurchaseReferenceBatchDetails { get; set; }
-        public virtual DbSet<PurchaseReferenceBatchMaster> PurchaseReferenceBatchMaster { get; set; }
+        public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Store> Store { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
 
@@ -44,14 +45,16 @@ namespace VSAssetManagement.Models
         {
             modelBuilder.Entity<Asset>(entity =>
             {
+                entity.HasKey(e => e.Guid)
+                    .HasName("PK_ASSET_1");
+
                 entity.ToTable("ASSET");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Guid)
+                    .HasColumnName("guid")
+                    .HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.BatchId)
-                    .HasColumnName("BATCH_ID")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+                entity.Property(e => e.BatchGuid).HasColumnName("BATCH_GUID");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -75,6 +78,10 @@ namespace VSAssetManagement.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()
                     .HasColumnName("LAST_UPDATED_BY")
@@ -92,39 +99,49 @@ namespace VSAssetManagement.Models
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ProjectId).HasColumnName("PROJECT_ID");
+                entity.Property(e => e.ProjectGuid).HasColumnName("PROJECT_GUID");
 
                 entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
 
                 entity.Property(e => e.Size).HasColumnName("SIZE");
 
-                entity.Property(e => e.StoreId).HasColumnName("STORE_ID");
+                entity.Property(e => e.StoreGuid).HasColumnName("STORE_GUID");
 
                 entity.Property(e => e.Type)
                     .HasColumnName("TYPE")
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
+                entity.HasOne(d => d.Batch)
+                    .WithMany(p => p.Asset)
+                    .HasForeignKey(d => d.BatchGuid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ASSET_BATCH");
+
                 entity.HasOne(d => d.Project)
                     .WithMany(p => p.Asset)
-                    .HasForeignKey(d => d.ProjectId)
+                    .HasForeignKey(d => d.ProjectGuid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ASSET_PROJECT");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.Asset)
-                    .HasForeignKey(d => d.StoreId)
+                    .HasForeignKey(d => d.StoreGuid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ASSET_STORE");
             });
 
             modelBuilder.Entity<AssetHistory>(entity =>
             {
+                entity.HasKey(e => e.Guid);
+
                 entity.ToTable("ASSET_HISTORY");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.AssetId).HasColumnName("ASSET_ID");
+                entity.Property(e => e.AssetGuid).HasColumnName("ASSET_GUID");
 
                 entity.Property(e => e.AssetStatus)
                     .HasColumnName("ASSET_STATUS")
@@ -142,6 +159,10 @@ namespace VSAssetManagement.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()
                     .HasColumnName("LAST_UPDATED_BY")
@@ -157,26 +178,29 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.TagId).HasColumnName("TAG_ID");
 
-                entity.HasOne(d => d.Asset)
+                entity.HasOne(d => d.AssetGu)
                     .WithMany(p => p.AssetHistory)
-                    .HasForeignKey(d => d.AssetId)
+                    .HasForeignKey(d => d.AssetGuid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ASSET_HISTORY_ASSET_HISTORY");
-
-                entity.HasOne(d => d.Tag)
-                    .WithMany(p => p.AssetHistory)
-                    .HasForeignKey(d => d.TagId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ASSET_HISTORY_TAG");
+                    .HasConstraintName("FK_ASSET_HISTORY_ASSET");
             });
 
             modelBuilder.Entity<AssetOperations>(entity =>
             {
+                entity.HasKey(e => e.Guid);
+
                 entity.ToTable("ASSET_OPERATIONS");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .ValueGeneratedNever();
 
-                entity.Property(e => e.AssetId).HasColumnName("ASSET_ID");
+                entity.Property(e => e.AssetGuid).HasColumnName("ASSET_GUID");
+
+                entity.Property(e => e.Company)
+                    .HasColumnName("COMPANY")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
@@ -188,6 +212,20 @@ namespace VSAssetManagement.Models
                     .HasColumnName("CREATED_DATE_TIME")
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Department)
+                    .HasColumnName("DEPARTMENT")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Initiater)
+                    .HasColumnName("INITIATER")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.LastUdatedBy)
                     .IsRequired()
@@ -207,113 +245,31 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
 
-                entity.Property(e => e.TagId).HasColumnName("TAG_ID");
+                entity.Property(e => e.TagGuid).HasColumnName("TAG_GUID");
 
-                entity.HasOne(d => d.Asset)
+                entity.HasOne(d => d.AssetGu)
                     .WithMany(p => p.AssetOperations)
-                    .HasForeignKey(d => d.AssetId)
+                    .HasForeignKey(d => d.AssetGuid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ASSET_OPERATIONS_ASSET");
 
-                entity.HasOne(d => d.Tag)
+                entity.HasOne(d => d.TagGu)
                     .WithMany(p => p.AssetOperations)
-                    .HasForeignKey(d => d.TagId)
+                    .HasForeignKey(d => d.TagGuid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ASSET_OPERATIONS_TAG");
             });
 
-            modelBuilder.Entity<Project>(entity =>
+            modelBuilder.Entity<Batch>(entity =>
             {
-                entity.ToTable("PROJECT");
+                entity.HasKey(e => e.Guid)
+                    .HasName("PK_PURCHASE_REFERENCE_BATCH_DETAILS");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.ToTable("BATCH");
 
-                entity.Property(e => e.AddressLine1)
-                    .HasColumnName("ADDRESS_LINE_1")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.AddressLine2)
-                    .HasColumnName("ADDRESS_LINE_2")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CityTown)
-                    .HasColumnName("CITY_TOWN")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ClientName)
-                    .HasColumnName("CLIENT_NAME")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasColumnName("CODE")
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CreateDateTime)
-                    .HasColumnName("CREATE_DATE_TIME")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.CreatedBy)
-                    .HasColumnName("CREATED_BY")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.EndDate)
-                    .HasColumnName("END_DATE")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.GstinNo)
-                    .HasColumnName("GSTIN_NO")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.LastUpdatedBy)
-                    .HasColumnName("LAST_UPDATED_BY")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.LastUpdatedDateTime)
-                    .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("NAME")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ProjectSiteHead)
-                    .HasColumnName("PROJECT_SITE_HEAD")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
-
-                entity.Property(e => e.SiteHeadMobile)
-                    .HasColumnName("SITE_HEAD_MOBILE")
-                    .HasMaxLength(12)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StartDate)
-                    .HasColumnName("START_DATE")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.Type)
-                    .HasColumnName("TYPE")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<PurchaseReferenceBatchDetails>(entity =>
-            {
-                entity.ToTable("PURCHASE_REFERENCE_BATCH_DETAILS");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.AssetSize)
                     .HasColumnName("ASSET_SIZE")
@@ -342,7 +298,12 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -351,26 +312,145 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.PurchaseBatchMasterId).HasColumnName("PURCHASE_BATCH_MASTER_ID");
+                entity.Property(e => e.PurchaseBatchMasterGuid).HasColumnName("PURCHASE_BATCH_MASTER_GUID");
 
                 entity.Property(e => e.Quantity).HasColumnName("QUANTITY");
 
                 entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
 
-                entity.HasOne(d => d.PurchaseBatchMaster)
-                    .WithMany(p => p.PurchaseReferenceBatchDetails)
-                    .HasForeignKey(d => d.PurchaseBatchMasterId)
+                entity.HasOne(d => d.PurchaseBatchMasterGu)
+                    .WithMany(p => p.Batch)
+                    .HasForeignKey(d => d.PurchaseBatchMasterGuid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PURCHASE_REFERENCE_BATCH_DETAILS_MASTER");
+                    .HasConstraintName("FK_BATCH_PURCHASE_ORDER");
             });
 
-            modelBuilder.Entity<PurchaseReferenceBatchMaster>(entity =>
+            modelBuilder.Entity<Project>(entity =>
             {
-                entity.ToTable("PURCHASE_REFERENCE_BATCH_MASTER");
+                entity.HasKey(e => e.Guid)
+                    .HasName("PK_PROJECT_1");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.ToTable("PROJECT");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.AddressLine1)
+                    .HasColumnName("ADDRESS_LINE_1")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AddressLine2)
+                    .HasColumnName("ADDRESS_LINE_2")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CityTown)
+                    .HasColumnName("CITY_TOWN")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ClientName)
+                    .HasColumnName("CLIENT_NAME")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasColumnName("CODE")
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Company)
+                    .HasColumnName("COMPANY")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreateDateTime)
+                    .HasColumnName("CREATE_DATE_TIME")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("CREATED_BY")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Department)
+                    .HasColumnName("DEPARTMENT")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EndDate)
+                    .HasColumnName("END_DATE")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.GstinNo)
+                    .HasColumnName("GSTIN_NO")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.LastUpdatedBy)
+                    .HasColumnName("LAST_UPDATED_BY")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastUpdatedDateTime)
+                    .HasColumnName("LAST_UPDATED_DATE_TIME")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("NAME")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProjectHead)
+                    .HasColumnName("PROJECT_HEAD")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProjectSiteHead)
+                    .HasColumnName("PROJECT_SITE_HEAD")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+
+                entity.Property(e => e.SiteHeadMobile)
+                    .HasColumnName("SITE_HEAD_MOBILE")
+                    .HasMaxLength(12)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StartDate)
+                    .HasColumnName("START_DATE")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("TYPE")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<PurchaseOrder>(entity =>
+            {
+                entity.HasKey(e => e.Guid)
+                    .HasName("PK_PURCHASE_REFERENCE_BATCH_MASTER");
+
+                entity.ToTable("PURCHASE_ORDER");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
@@ -379,7 +459,12 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -388,7 +473,8 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.PurchaseOrderDate)
                     .HasColumnName("PURCHASE_ORDER_DATE")
@@ -411,11 +497,37 @@ namespace VSAssetManagement.Models
                 entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
             });
 
+            modelBuilder.Entity<Status>(entity =>
+            {
+                entity.ToTable("STATUS");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasColumnName("DESCRIPTION")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("TYPE")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Store>(entity =>
             {
+                entity.HasKey(e => e.Guid);
+
                 entity.ToTable("STORE");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.MainStoreId).HasColumnName("MAIN_STORE_ID");
 
@@ -429,9 +541,13 @@ namespace VSAssetManagement.Models
 
             modelBuilder.Entity<Tag>(entity =>
             {
+                entity.HasKey(e => e.Guid);
+
                 entity.ToTable("TAG");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -449,6 +565,10 @@ namespace VSAssetManagement.Models
                     .HasColumnName("CREATED_DATE_TIME")
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()

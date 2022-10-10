@@ -21,15 +21,17 @@ namespace VSAssetManagement.Models
         public string Type { get; set; }
         public int? Size { get; set; }
         public string CompanyName { get; set; }
-        public int ProjectId { get; set; }
-        public int StoreId { get; set; }
-        public string BatchId { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
+        public Guid Guid { get; set; }
+        public Guid ProjectGuid { get; set; }
+        public Guid StoreGuid { get; set; }
+        public Guid BatchGuid { get; set; }
 
+        public virtual Batch Batch { get; set; }
         public virtual Project Project { get; set; }
         public virtual Store Store { get; set; }
         public virtual ICollection<AssetHistory> AssetHistory { get; set; }

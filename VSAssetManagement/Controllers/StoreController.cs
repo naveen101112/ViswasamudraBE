@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using VSAssetManagement.Models;
 using VSAssetManagement.Repo;
+using io = VSAssetManagement.IOModels;
 
 namespace VSAssetManagement.Controllers
 {
@@ -12,13 +15,17 @@ namespace VSAssetManagement.Controllers
         [HttpGet]
         public ActionResult getList()
         {
-            return Ok(repo.getAllList());
+            List<io.Store> list =
+                JsonConvert.
+                DeserializeObject<List<io.Store>>(JsonConvert.SerializeObject(repo.getAllList()));
+            return Ok(list);
         }
 
         [HttpGet("{id}")]
         public ActionResult getById(int id)
         {
-            Store record = repo.getById(id);
+            io.Store record = JsonConvert.
+                DeserializeObject<io.Store>(JsonConvert.SerializeObject(repo.getById(id)));
             if (record == null) return NotFound();
             return Ok(record);
         }

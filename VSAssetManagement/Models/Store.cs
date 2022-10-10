@@ -18,6 +18,7 @@ namespace VSAssetManagement.Models
         public string Name { get; set; }
         public int MainStoreId { get; set; }
         public int RecordStatus { get; set; }
+        public Guid Guid { get; set; }
 
         public virtual ICollection<Asset> Asset { get; set; }
     }

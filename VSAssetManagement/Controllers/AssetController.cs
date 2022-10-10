@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using VSAssetManagement.Models;
 using VSAssetManagement.Repo;
+using io = VSAssetManagement.IOModels;
 
 namespace VSAssetManagement.Controllers
 {
@@ -12,7 +15,11 @@ namespace VSAssetManagement.Controllers
         [HttpGet]
         public ActionResult assetList()
         {
-            return Ok(assetRepo.getAllList());
+            List<io.Asset> list = 
+                JsonConvert.
+                DeserializeObject<List<io.Asset>>(JsonConvert.SerializeObject(assetRepo.getAllList()));
+
+            return Ok(list);
         }
 
         [HttpGet("{id}")]

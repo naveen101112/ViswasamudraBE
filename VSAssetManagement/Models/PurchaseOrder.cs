@@ -7,21 +7,25 @@ using System.Collections.Generic;
 
 namespace VSAssetManagement.Models
 {
-    public partial class PurchaseReferenceBatchDetails
+    public partial class PurchaseOrder
     {
+        public PurchaseOrder()
+        {
+            Batch = new HashSet<Batch>();
+        }
+
         public int Id { get; set; }
-        public int PurchaseBatchMasterId { get; set; }
-        public string BatchNo { get; set; }
-        public string BatchName { get; set; }
-        public int? Quantity { get; set; }
-        public string AssetType { get; set; }
-        public string AssetSize { get; set; }
+        public string PurchaseOrderNo { get; set; }
+        public DateTime? PurchaseOrderDate { get; set; }
+        public string ReceivedBy { get; set; }
+        public DateTime? ReceivedDate { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
+        public Guid Guid { get; set; }
 
-        public virtual PurchaseReferenceBatchMaster PurchaseBatchMaster { get; set; }
+        public virtual ICollection<Batch> Batch { get; set; }
     }
 }

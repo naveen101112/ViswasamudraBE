@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
-
-namespace VSAssetManagement.Models
+namespace VSAssetManagement.IOModels
 {
     public partial class AssetHistory
     {
@@ -19,7 +14,5 @@ namespace VSAssetManagement.Models
         public int RecordStatus { get; set; }
         public Guid AssetGuid { get; set; }
         public Guid Guid { get; set; }
-
-        public virtual Asset AssetGu { get; set; }
     }
 }
