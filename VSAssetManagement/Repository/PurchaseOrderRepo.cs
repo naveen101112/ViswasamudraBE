@@ -17,7 +17,7 @@ namespace VSAssetManagement.Repo
             return _context.PurchaseOrder.ToList();
         }
 
-        public int createAsset(PurchaseOrder record)
+        public int create(PurchaseOrder record)
         {
             _context.PurchaseOrder.Add(record);
             _context.SaveChanges();

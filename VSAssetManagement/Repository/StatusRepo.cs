@@ -1,44 +1,43 @@
 ﻿using VSAssetManagement.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace VSAssetManagement.Repo
 {
-    public class BatchRepo
+    public class StatusRepo
     {
         protected VISWASAMUDRAContext _context { get; set; }
-        public BatchRepo(VISWASAMUDRAContext context)
+        public StatusRepo(VISWASAMUDRAContext context)
         {
             _context = context;
         }
 
-        public List<Batch> getAllList()
+        public List<Status> getAllList()
         {
-            return _context.Batch.ToList();
+            return _context.Status.ToList();
         }
 
-        public int create(Batch record)
+        public int create(Status record)
         {
-            _context.Batch.Add(record);
+            _context.Status.Add(record);
             _context.SaveChanges();
             return record.Id;
         }
 
-        public Batch getById(int id)
+        public Status getById(int id)
         {
-            return _context.Batch.Where(a=>a.Id==id).FirstOrDefault();
+            return _context.Status.Where(a=>a.Id==id).FirstOrDefault();
         }
 
-        public int update(Batch record)
+        public int update(Status record)
         {
-            _context.Batch.Update(record);
+            _context.Status.Update(record);
             return _context.SaveChanges();
         }
 
         public int delete(int id)
         {
-            _context.Batch.Remove(getById(id));
+            _context.Status.Remove(getById(id));
             return _context.SaveChanges();
         }
     }

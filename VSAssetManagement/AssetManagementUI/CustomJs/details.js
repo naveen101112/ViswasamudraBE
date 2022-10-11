@@ -11,6 +11,23 @@ function callAPI(params){
     });
 }
 
+function loadGridData(urlString){
+    var params = {};
+    params={
+        url:urlString,
+        type:'GET',
+        successCallback: function (data, status){
+            console.log(data);
+            var tableObject = {
+                jsonData: data,
+                noSort: ['id']
+            }
+            tableFromJson(tableObject);      
+        }
+    }
+    callAPI(params);
+}
+
 function onLoadData(param){
     //$('#PageHeader').text(getAllUrlParams().title);
     param={
