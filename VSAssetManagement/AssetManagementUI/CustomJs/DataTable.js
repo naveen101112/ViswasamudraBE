@@ -1,11 +1,11 @@
-var tableFromJson = (jsonData) => {
+var tableFromJson = (tableObject) => {
     let tableData = [];
-    if(jsonData){
-        tableData = jsonData;
+    if(tableObject.jsonData){
+        tableData = tableObject.jsonData;
     }
-
+    if(tableObject.noSort)
+      tableObject.noSort=tableObject.noSort.map(e=>e.toUpperCase());
     // Extract value from table header. 
-    // ('Book ID', 'Book Name', 'Category' and 'Price')
     let col = [];
     for (let i = 0; i < tableData.length; i++) {
       for (let key in tableData[i]) {
@@ -24,6 +24,8 @@ var tableFromJson = (jsonData) => {
 
     for (let i = 0; i < col.length; i++) {
       let th = document.createElement("th");      // table header.
+      if(tableObject.noSort && tableObject.noSort.indexOf(col[i].toUpperCase())>-1)
+        th.setAttribute('data-sortable','false');
       th.innerHTML = col[i];
       row.appendChild(th);
     }

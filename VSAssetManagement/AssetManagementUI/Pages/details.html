@@ -33,6 +33,7 @@
     <!-- footable css -->
     <link rel="stylesheet" href="../assets/plugins/footable/css/footable.bootstrap.min.css">
     <link rel="stylesheet" href="../assets/plugins/footable/css/footable.standalone.min.css">
+	<link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
 
     <!-- vendor css -->
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -40,12 +41,11 @@
 	<script src="../CustomJs/DataTable.js"></script>
 	<link rel="stylesheet" href="dist/sortable-tables.min.css">
 	<script src="dist/sortable-tables.min.js"></script>
-    
 
 
 </head>
 
-<body onload="onLoadData();" class="">
+<body class="">
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
 		<div class="loader-track">
@@ -72,7 +72,7 @@
 					
 				</ul>
 				
-				<div class="card text-center">
+				<div class="card text-center invisible">
 					<div class="card-block">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 						<i class="feather icon-sunset f-40"></i>
@@ -612,6 +612,7 @@
 
     <script src="../assets/js/vendor-all.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
     <script src="../assets/js/waves.min.js"></script>
     <script src="../assets/js/pcoded.min.js"></script>
 	<script src="../assets/js/menu-setting.min.js"></script>
@@ -630,10 +631,26 @@
             "paging": {
                 "enabled": true
             },
+			"filtering": {
+				"enabled": false
+			},
             "sorting": {
                 "enabled": true
             }
         });
+
+		$('#clickEvent').click(
+			function(){
+				console.log($(this).attr('alt'));
+				if($(this).attr('alt') == 'asset'){
+					params={
+						title:'Asset',
+						type:'asset'
+					}
+				}
+				onLoadData(params);
+			}
+		);
     });
 </script>
 

@@ -11,18 +11,23 @@ function callAPI(params){
     });
 }
 
-function onLoadData(status){
-    $('#PageHeader').text(getAllUrlParams().title);
+function onLoadData(param){
+    //$('#PageHeader').text(getAllUrlParams().title);
+    $('#PageHeader').text(param.title);
     var params = {};
     params={
         url:'/utility/status',
         data:{
-            searchParam:"asset",
+            searchParam: param.type,
         },
         type:'GET',
         successCallback: function (data, status){
             console.log(data);
-            tableFromJson(data);      
+            var tableObject = {
+                jsonData: data,
+                noSort: ['id']
+            }
+            tableFromJson(tableObject);      
         }
     }
     var response=callAPI(params);
