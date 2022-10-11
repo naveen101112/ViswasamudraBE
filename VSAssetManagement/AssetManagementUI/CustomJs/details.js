@@ -4,23 +4,27 @@ function callAPI(params){
     $.ajax(basePath+params.url, {
         type: params.type,
         data: params.data,
-        success: function (data, status, xhr) {
-            console.log(data,status,xhr);
-        },
+        success: params.successCallback,
         error: function (jqXhr, textStatus, errorMessage) {
             console.log(jqXhr,textStatus,errorMessage);
         }
     });
 }
 
-function onLoadData(){
+function onLoadData(status){
+    $('#PageHeader').text(getAllUrlParams().title);
     var params = {};
     params={
         url:'/utility/status',
         data:{
             searchParam:"asset",
         },
-        type:'GET'
+        type:'GET',
+        successCallback: function (data, status){
+            console.log(data);
+            tableFromJson(data);      
+        }
     }
-    callAPI(params);
+    var response=callAPI(params);
+    
 }
