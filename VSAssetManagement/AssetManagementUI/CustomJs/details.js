@@ -13,6 +13,10 @@ function callAPI(params){
 
 function onLoadData(param){
     //$('#PageHeader').text(getAllUrlParams().title);
+    param={
+        title:'Asset',
+        type:'asset'
+    }
     $('#PageHeader').text(param.title);
     var params = {};
     params={

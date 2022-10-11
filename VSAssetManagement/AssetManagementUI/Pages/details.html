@@ -45,7 +45,7 @@
 
 </head>
 
-<body class="">
+<body onload="onLoadData()" class="">
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
 		<div class="loader-track">
@@ -639,7 +639,7 @@
             }
         });
 
-		$('#clickEvent').click(
+		$('clickEvent').click(
 			function(){
 				console.log($(this).attr('alt'));
 				if($(this).attr('alt') == 'asset'){
