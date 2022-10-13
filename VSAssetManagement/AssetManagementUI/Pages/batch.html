@@ -545,20 +545,15 @@
                     <div class="page-wrapper">
                         <!-- [ breadcrumb ] start -->
                         <div class="page-header">
-                            <div class="page-block">
-                                <div class="row align-items-center">
-                                    <div class="col-md-12">
-                                        
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="page-block"></div>
                         </div>
                         <!-- [ breadcrumb ] end -->
                         <!-- [ Main Content ] start -->
-                        <div class="row">
+						<input type="hidden" id="type" value="batch">
+                        <div class="row" id="data-grid">
                             <!-- [ foo-table ] start -->
                             <div class="col-sm-12">
-                                <div class="card" style="width: 158%;">
+                                <div class="card">
                                     <div class="card-header">
                                         <h5 id="PageHeader">PO Batch</h5>
                                         <div class="card-header-right">
@@ -577,25 +572,6 @@
                                     </div>
                                     <div class="card-body">
                                         <table id="demo-foo-filtering" class="table table-striped table-hover">
-                                            <!--<thead>
-                                                <tr>
-                                                    <th>First Name</th>
-                                                    <th data-breakpoints="xs">Last Name</th>
-                                                    <th data-breakpoints="xs">Job Title</th>
-                                                    <th data-breakpoints="xs">BOB</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody >
-                                                <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td><span class="tag tag-danger">Suspended</span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>-->
                                         </table>
                                     </div>
                                 </div>
@@ -603,6 +579,61 @@
                             <!-- [ foo-table ] end -->
                         </div>
                         <!-- [ Main Content ] end -->
+
+						<div class="row" id="edit-form" style="display: none;">
+                            <!-- [ Form Validation ] start -->
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>PO Batch Operations</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="form-data">
+											<input type="hidden" name="id">
+											<input type="hidden" name="guid">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Purchase Order Id</label>
+                                                        <input type="text" class="form-control" name="purchaseOrderID" placeholder="Order Id">
+                                                    </div>
+                                                </div><div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Number</label>
+                                                        <input type="text" class="form-control" name="batchNo" placeholder="Batch Number">
+                                                    </div>
+                                                </div>
+												<div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Name</label>
+                                                        <input type="text" class="form-control" name="name" placeholder="Batch Name">
+                                                    </div>
+                                                </div><div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Quantity</label>
+                                                        <input type="text" class="form-control" name="quantity" placeholder="Quantity">
+                                                    </div>
+                                                </div>
+												<div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Asset Type</label>
+                                                        <input type="text" class="form-control" name="assetType" placeholder="Asset Type">
+                                                    </div>
+                                                </div><div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Asset Size</label>
+                                                        <input type="text" class="form-control" name="assetSize" placeholder="Asset Size">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" id="update-data" class="btn waves-effect waves-light btn-primary">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Form Validation ] end -->
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -618,41 +649,11 @@
 	<script src="../assets/js/menu-setting.min.js"></script>
 	<script src="../CustomJs/menu.min.js"></script>
 	<script src="../CustomJs/QueryString.js"></script>
-	
+	<script src="../CustomJs/default-events.js"></script>
 
 
 <!-- footable Js -->
 <script src="../assets/plugins/footable/js/footable.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        // [ Foo-table ]
-        $('#demo-foo-filtering').footable({
-            "paging": {
-                "enabled": true
-            },
-			"filtering": {
-				"enabled": false
-			},
-            "sorting": {
-                "enabled": true
-            }
-        });
-
-		$('clickEvent').click(
-			function(){
-				console.log($(this).attr('alt'));
-				if($(this).attr('alt') == 'asset'){
-					params={
-						title:'Asset',
-						type:'asset'
-					}
-				}
-				onLoadData(params);
-			}
-		);
-    });
-</script>
 
 
 </body>

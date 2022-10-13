@@ -80,7 +80,8 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()
@@ -103,14 +104,7 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
 
-                entity.Property(e => e.Size).HasColumnName("SIZE");
-
                 entity.Property(e => e.StoreGuid).HasColumnName("STORE_GUID");
-
-                entity.Property(e => e.Type)
-                    .HasColumnName("TYPE")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Batch)
                     .WithMany(p => p.Asset)
@@ -161,7 +155,8 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()
@@ -220,7 +215,8 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
                 entity.Property(e => e.Initiater)
                     .HasColumnName("INITIATER")
@@ -303,7 +299,8 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -396,7 +393,8 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -464,7 +462,8 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -527,7 +526,8 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
                 entity.Property(e => e.MainStoreId).HasColumnName("MAIN_STORE_ID");
 
@@ -568,7 +568,8 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()

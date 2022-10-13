@@ -40,5 +40,20 @@ namespace VSAssetManagement.Repo
             _context.AssetHistory.Remove(getById(id));
             return _context.SaveChanges();
         }
+
+        public IEnumerable<dynamic> getDataGrid()
+        {
+            return (from record in _context.AssetHistory
+                    join status in _context.Status on record.AssetStatus equals status.Id.ToString()
+                    select new
+                    {
+                        Id = record.Id,
+                        AssetID = record.AssetGuid,
+                        TagID = record.TagId,
+                        Status = status.Description,
+                        Guid = record.Guid
+                    }).ToList();
+
+        }
     }
 }

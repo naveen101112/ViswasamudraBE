@@ -4,6 +4,7 @@ function callAPI(params){
     $.ajax(basePath+params.url, {
         type: params.type,
         data: params.data,
+        dataType: 'json',
         success: params.successCallback,
         error: function (jqXhr, textStatus, errorMessage) {
             console.log(jqXhr,textStatus,errorMessage);
@@ -11,7 +12,10 @@ function callAPI(params){
     });
 }
 
-function loadGridData(urlString){
+function loadGridData(){
+    $('#data-grid').show();
+    $('#edit-form').hide();
+    var urlString = '/'+$('#type').val()+'/grid';
     var params = {};
     params={
         url:urlString,
@@ -20,7 +24,8 @@ function loadGridData(urlString){
             console.log(data);
             var tableObject = {
                 jsonData: data,
-                noSort: ['id']
+                noSort: ['id'],
+                editable: true
             }
             tableFromJson(tableObject);      
         }

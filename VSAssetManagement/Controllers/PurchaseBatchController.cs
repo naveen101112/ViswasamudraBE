@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using VSAssetManagement.Models;
@@ -22,11 +23,19 @@ namespace VSAssetManagement.Controllers
             return Ok(list);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("blank")]
         public ActionResult getById(int id)
         {
             io.Batch record = JsonConvert.
-                DeserializeObject<io.Batch>(JsonConvert.SerializeObject(repo.getById(id)));
+                DeserializeObject<io.Batch>(JsonConvert.SerializeObject(repo.getByOnlyId(id)));
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult getByIdEdit(int id)
+        {
+            var record = repo.getbyIdEdit(id);
             if (record == null) return NotFound();
             return Ok(record);
         }
@@ -40,12 +49,19 @@ namespace VSAssetManagement.Controllers
         }
 
         [HttpPut]
-        public ActionResult updateRecord([FromBody] io.Tag record)
+        public ActionResult updateRecord([FromForm] io.Batch record)
         {
-            int id = repo.update(JsonConvert.
-                DeserializeObject<Batch>(JsonConvert.SerializeObject(record)));
+            Batch batch = repo.getById(record.Id, record.Guid);
+            batch.BatchName = record.BatchName;
+            batch.BatchNo = record.BatchNo;
+            batch.AssetSize = record.AssetSize;
+            batch.AssetType = record.AssetType;
+            batch.PurchaseBatchMasterGuid = record.PurchaseOrderID;
+            batch.Quantity = record.Quantity;
+            repo._context.Entry(batch).State = EntityState.Detached;
+            int id = repo.update(batch);
             if (id == 0) return Conflict("Error updating record");
-            return Ok("Updated successfully");
+            return Ok(new { status = "success" });
         }
 
         [HttpDelete("{id}")]
@@ -54,6 +70,12 @@ namespace VSAssetManagement.Controllers
             int count = repo.delete(id);
             if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
+        }
+
+        [HttpGet("grid")]
+        public ActionResult getDataGrid()
+        {
+            return Ok(repo.getDataGrid());
         }
     }
 }

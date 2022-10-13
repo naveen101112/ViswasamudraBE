@@ -40,5 +40,51 @@ namespace VSAssetManagement.Repo
             _context.Project.Remove(getById(id));
             return _context.SaveChanges();
         }
+
+        public IEnumerable<dynamic> getDataGrid()
+        {
+            return (from record in _context.Project
+                    select new
+                    {
+                        Id = record.Id,
+                        Code = record.Code,
+                        Name = record.Name,
+                        Type = record.Type,
+                        ClientName = record.ClientName,
+                        StartDate = StaticData.getDateString(record.StartDate.Value),
+                        EndDate = StaticData.getDateString(record.EndDate.Value),
+                        ProjectSiteHead = record.ProjectSiteHead,
+                        SiteHeadMobile = record.SiteHeadMobile,
+                        GSTINNo = record.GstinNo,
+                        CityTown = record.CityTown,
+                        Address1 = record.AddressLine1,
+                        Address2 = record.AddressLine2,
+                        Guid = record.Guid
+                    }).ToList();
+
+        }
+
+        public dynamic getByIdEdit(int id)
+        {
+            return (from record in _context.Project
+                    where record.Id == id
+                    select new
+                    {
+                        Id = record.Id,
+                        Code = record.Code,
+                        Name = record.Name,
+                        Type = record.Type,
+                        ClientName = record.ClientName,
+                        StartDate = StaticData.getDateString(record.StartDate.Value),
+                        EndDate = StaticData.getDateString(record.EndDate.Value),
+                        ProjectSiteHead = record.ProjectSiteHead,
+                        SiteHeadMobile = record.SiteHeadMobile,
+                        GSTINNo = record.GstinNo,
+                        CityTown = record.CityTown,
+                        AddressLine1 = record.AddressLine1,
+                        AddressLine2 = record.AddressLine2,
+                        Guid = record.Guid
+                    }).FirstOrDefault();
+        }
     }
 }

@@ -22,11 +22,19 @@ namespace VSAssetManagement.Controllers
             return Ok(list);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("blank")]
         public ActionResult getById(int id)
         {
             io.Project record = JsonConvert.
                 DeserializeObject<io.Project>(JsonConvert.SerializeObject(repo.getById(id)));
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult getByIdEdit(int id)
+        {
+            var record = repo.getByIdEdit(id);
             if (record == null) return NotFound();
             return Ok(record);
         }
@@ -54,6 +62,12 @@ namespace VSAssetManagement.Controllers
             int count = repo.delete(id);
             if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
+        }
+
+        [HttpGet("grid")]
+        public ActionResult getDataGrid()
+        {
+            return Ok(repo.getDataGrid());
         }
     }
 }

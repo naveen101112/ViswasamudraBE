@@ -17,6 +17,6 @@ namespace VSAssetManagement.IOModels
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
-        public Guid PurchaseBatchMasterGuid { get; set; }
+        public Guid PurchaseOrderID { get; set; }
     }
 }

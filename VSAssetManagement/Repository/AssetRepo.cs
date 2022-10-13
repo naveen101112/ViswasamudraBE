@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using io = VSAssetManagement.IOModels;
+using System;
 
 namespace VSAssetManagement.Repo
 {
@@ -44,9 +45,14 @@ namespace VSAssetManagement.Repo
             return asset.Id;
         }
 
-        public Asset getById(int id)
+        public Asset getByOnlyId(int id)
         {
             return _context.Asset.Where(a=>a.Id==id).FirstOrDefault();
+        }
+
+        public Asset getById(int id, Guid guid)
+        {
+            return _context.Asset.Where(a => a.Id == id && a.Guid == guid).FirstOrDefault();
         }
 
         public int update(Asset asset)
@@ -57,13 +63,46 @@ namespace VSAssetManagement.Repo
 
         public int delete(int id)
         {
-            _context.Asset.Remove(getById(id));
+            _context.Asset.Remove(getByOnlyId(id));
             return _context.SaveChanges();
         }
 
         public int countById(int id)
         {
             return _context.Asset.Where(a=>a.Id == id).Count();
+        }
+
+        public dynamic getByIdEdit(int id)
+        {
+            return (from asset in _context.Asset
+                    where asset.Id == id
+                    select new
+                    {
+                        Id = asset.Id,
+                        Code = asset.Code,
+                        Name = asset.Name,
+                        CompanyName = asset.CompanyName,
+                        ProjectGuid = asset.ProjectGuid,
+                        StoreGuid = asset.StoreGuid,
+                        BatchGuid = asset.BatchGuid,
+                        Guid = asset.Guid
+                    }).FirstOrDefault();
+        }
+
+        public IEnumerable<dynamic> getDataGrid()
+        {
+            return (from asset in _context.Asset
+                    select new
+                    {
+                        Id = asset.Id,
+                        Code = asset.Code,
+                        Name = asset.Name,
+                        CompanyName = asset.CompanyName,
+                        ProjectGuid = asset.ProjectGuid,
+                        StoreGuid = asset.StoreGuid,
+                        BatchGuid = asset.BatchGuid,
+                        Guid = asset.Guid
+                    }).ToList();
         }
     }
 }

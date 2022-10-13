@@ -22,11 +22,16 @@ namespace VSAssetManagement.Controllers
             return Ok(list);
         }
 
+        [HttpGet("grid")]
+        public ActionResult getDataGrid()
+        {
+            return Ok(repo.getDataGrid());
+        }
+
         [HttpGet("{id}")]
         public ActionResult getById(int id)
         {
-            io.Tag record = JsonConvert.
-                DeserializeObject<io.Tag>(JsonConvert.SerializeObject(repo.getById(id)));
+            var record = repo.getByIdEdit(id);
             if (record == null) return NotFound();
             return Ok(record);
         }
@@ -40,12 +45,15 @@ namespace VSAssetManagement.Controllers
         }
 
         [HttpPut]
-        public ActionResult updateRecord([FromBody] io.Tag record)
+        public ActionResult updateRecord([FromForm] io.Tag record)
         {
-            int id = repo.update(JsonConvert.
-                DeserializeObject<Tag>(JsonConvert.SerializeObject(record)));
+            Tag tag = repo.getById(record.Id, record.Guid);
+            tag.Name = record.Name;
+            tag.Code = record.Code;
+            tag.Status = record.Status;
+            int id = repo.update(tag);
             if (id == 0) return Conflict("Error updating record");
-            return Ok("Updated successfully");
+            return Ok(new { status = "success" });
         }
 
         [HttpDelete("{id}")]

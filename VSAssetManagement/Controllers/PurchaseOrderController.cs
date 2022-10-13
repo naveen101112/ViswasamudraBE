@@ -25,8 +25,7 @@ namespace VSAssetManagement.Controllers
         [HttpGet("{id}")]
         public ActionResult getById(int id)
         {
-            io.PurchaseOrder record = JsonConvert.
-                DeserializeObject<io.PurchaseOrder>(JsonConvert.SerializeObject(repo.getById(id)));
+            var record = repo.getByIdEdit(id);
             if (record == null) return NotFound();
             return Ok(record);
         }
@@ -40,10 +39,14 @@ namespace VSAssetManagement.Controllers
         }
 
         [HttpPut]
-        public ActionResult updateRecord([FromBody] io.PurchaseOrder record)
+        public ActionResult updateRecord([FromForm] io.PurchaseOrder record)
         {
-            int id = repo.update(JsonConvert.
-                DeserializeObject<PurchaseOrder>(JsonConvert.SerializeObject(record)));
+            PurchaseOrder order = repo.getById(record.Id, record.Guid);
+            order.PurchaseOrderNo = record.PurchaseOrderNo;
+            order.PurchaseOrderDate = record.PurchaseOrderDate;
+            order.ReceivedBy = record.ReceivedBy;
+            order.ReceivedDate = record.ReceivedDate;
+            int id = repo.update(order);
             if (id == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
         }
@@ -54,6 +57,12 @@ namespace VSAssetManagement.Controllers
             int count = repo.delete(id);
             if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
+        }
+
+        [HttpGet("grid")]
+        public ActionResult getDataGrid()
+        {
+            return Ok(repo.getDataGrid());
         }
     }
 }

@@ -25,10 +25,18 @@ namespace VSAssetManagement.Controllers
             return Ok(list);
         }
 
-        [HttpGet("asset/{id}")]
+        [HttpGet("asset/blank")]
         public ActionResult getById(int id)
         {
-            Asset record = repo.getById(id);
+            Asset record = repo.getByOnlyId(id);
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
+
+        [HttpGet("asset/{id}")]
+        public ActionResult getByIdEdit(int id)
+        {
+            var record = repo.getByIdEdit(id);
             if (record == null) return NotFound();
             return Ok(record);
         }
@@ -42,12 +50,18 @@ namespace VSAssetManagement.Controllers
         }
 
         [HttpPut("asset")]
-        public ActionResult updateRecord([FromBody] io.Asset record)
+        public ActionResult updateRecord([FromForm] io.Asset record)
         {
-            int id = repo.update(JsonConvert.
-                DeserializeObject<Asset>(JsonConvert.SerializeObject(record)));
+            Asset asset = repo.getById(record.Id, record.Guid);
+            asset.Code = record.Code;
+            asset.Name = record.Name;
+            asset.ProjectGuid = record.ProjectGuid;
+            asset.StoreGuid = record.StoreGuid;
+            asset.BatchGuid = record.BatchGuid;
+            asset.CompanyName = record.CompanyName;
+            int id = repo.update(asset);
             if(id == 0) return Conflict("Error updating record");
-            return Ok("Updated successfully");
+            return Ok(new {status="success"});
         }
 
         [HttpDelete("asset/{id}")]
@@ -56,6 +70,12 @@ namespace VSAssetManagement.Controllers
             int count = repo.delete(id);
             if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
+        }
+
+        [HttpGet("asset/grid")]
+        public ActionResult getDataGrid()
+        {
+            return Ok(repo.getDataGrid());
         }
         #endregion
 
@@ -102,6 +122,12 @@ namespace VSAssetManagement.Controllers
             if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
         }
+
+        [HttpGet("assetHistory/grid")]
+        public ActionResult getDataGridHistory()
+        {
+            return Ok(historyRepo.getDataGrid());
+        }
         #endregion
 
         #region AssetOperations
@@ -146,6 +172,12 @@ namespace VSAssetManagement.Controllers
             int count = operationsRepo.delete(id);
             if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
+        }
+
+        [HttpGet("assetOperations/grid")]
+        public ActionResult getDataGridOperations()
+        {
+            return Ok(operationsRepo.getDataGrid());
         }
         #endregion
     }
