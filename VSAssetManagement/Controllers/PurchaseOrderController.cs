@@ -7,7 +7,7 @@ using io = VSAssetManagement.IOModels;
 
 namespace VSAssetManagement.Controllers
 {
-    [Route("purchase-order")]
+    [Route("purchaseorder")]
     [ApiController]
     public class PurchaseOrderController : ControllerBase
     {
