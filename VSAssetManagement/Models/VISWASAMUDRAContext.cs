@@ -192,8 +192,8 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.AssetGuid).HasColumnName("ASSET_GUID");
 
-                entity.Property(e => e.Company)
-                    .HasColumnName("COMPANY")
+                entity.Property(e => e.CompanyCode)
+                    .HasColumnName("COMPANY_CODE")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -208,8 +208,8 @@ namespace VSAssetManagement.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.Department)
-                    .HasColumnName("DEPARTMENT")
+                entity.Property(e => e.DeptCode)
+                    .HasColumnName("DEPT_CODE")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -362,8 +362,8 @@ namespace VSAssetManagement.Models
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Company)
-                    .HasColumnName("COMPANY")
+                entity.Property(e => e.CompanyCode)
+                    .HasColumnName("COMPANYCODE")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -377,8 +377,8 @@ namespace VSAssetManagement.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Department)
-                    .HasColumnName("DEPARTMENT")
+                entity.Property(e => e.DeptCode)
+                    .HasColumnName("DEPT_CODE")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 

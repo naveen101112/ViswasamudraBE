@@ -33,8 +33,8 @@ namespace VSAssetManagement.Models
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
-        public string Company { get; set; }
-        public string Department { get; set; }
+        public string CompanyCode { get; set; }
+        public string DeptCode { get; set; }
         public string ProjectHead { get; set; }
 
         public virtual ICollection<Asset> Asset { get; set; }

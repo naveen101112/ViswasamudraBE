@@ -5979,7 +5979,7 @@ body.layout-1 .pcoded-navbar.icon-colored .sidemenu > li:nth-child(48) > a {
 .pcoded-navbar[class*="brand-"]:not(.brand-default) .mobile-menu span,
 .pcoded-navbar[class*="brand-"]:not(.brand-default) .mobile-menu span:after,
 .pcoded-navbar[class*="brand-"]:not(.brand-default) .mobile-menu span:before {
-    background: #fff;
+    background: #000;
 }
 
 .pcoded-navbar[class*="brand-"]:not(.brand-default) .mobile-menu.on span {
@@ -5993,7 +5993,8 @@ body.layout-1 .pcoded-navbar.icon-colored .sidemenu > li:nth-child(48) > a {
 
 .pcoded-navbar.brand-blue .header-logo,
 .pcoded-navbar[class*="navbar-"].brand-blue .header-logo {
-    background: #4680ff;
+    background: white;
+    border-bottom: 2px solid #c4c4c4;
 }
 
 .pcoded-navbar.brand-blue .header-logo .b-bg,
@@ -15775,9 +15776,9 @@ div.code-toolbar > .toolbar span:hover {
 
 /**====== Help Desk Application css start ======**/
 
-.logo{
-    width: 160px;
-    height: 50px;
+.logo {
+    width: 177px;
+    height: 54px;
 }
 
 .logo-thumb{

@@ -19,8 +19,8 @@ INSERT INTO [dbo].[PROJECT]
            ,[CREATED_BY]
            ,[LAST_UPDATED_BY]
            ,[RECORD_STATUS]
-           ,[COMPANY]
-           ,[DEPARTMENT]
+           ,[COMPANY_CODE]
+           ,[DEPT_CODE]
            ,[PROJECT_HEAD])
      VALUES
            ('PRC'

@@ -19,8 +19,8 @@ namespace VSAssetManagement.Models
         public Guid Guid { get; set; }
         public Guid AssetGuid { get; set; }
         public Guid TagGuid { get; set; }
-        public string Company { get; set; }
-        public string Department { get; set; }
+        public string CompanyCode { get; set; }
+        public string DeptCode { get; set; }
         public string Initiater { get; set; }
 
         public virtual Asset AssetGu { get; set; }
