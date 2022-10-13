@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSAssetManagement", "VSAsse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViswasamudraCommonObjects", "ViswasamudraCommonObjects\ViswasamudraCommonObjects.csproj", "{9341F600-F0B6-49A3-8D23-E4786FF95797}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViswaSamudraUI", "ViswaSamudraUI\ViswaSamudraUI.csproj", "{F45ACDF8-7AFC-4B77-8284-B3B48BD3515E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9341F600-F0B6-49A3-8D23-E4786FF95797}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9341F600-F0B6-49A3-8D23-E4786FF95797}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9341F600-F0B6-49A3-8D23-E4786FF95797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F45ACDF8-7AFC-4B77-8284-B3B48BD3515E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F45ACDF8-7AFC-4B77-8284-B3B48BD3515E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F45ACDF8-7AFC-4B77-8284-B3B48BD3515E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F45ACDF8-7AFC-4B77-8284-B3B48BD3515E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

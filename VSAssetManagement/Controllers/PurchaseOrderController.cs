@@ -7,11 +7,12 @@ using io = VSAssetManagement.IOModels;
 
 namespace VSAssetManagement.Controllers
 {
-    [Route("purchaseorder")]
+    [Route("PurchaseOrder")]
     [ApiController]
     public class PurchaseOrderController : ControllerBase
     {
         PurchaseOrderRepo repo = new PurchaseOrderRepo(new VISWASAMUDRAContext());
+
         [HttpGet]
         public ActionResult getAllList()
         {
