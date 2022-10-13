@@ -11,13 +11,13 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using ViswaSamudraUI.Models;
 using Newtonsoft.Json;
-using System.Configuration;
+
 
 namespace ViswaSamudraUI.Controllers
 {
     public class HomeController : Controller
     {
-        String baseUri = ConfigurationManager.AppSettings["urls"];
+        String baseUri = CommonHelper.configuration["urls"];
         public async Task<IActionResult> Index()
         {
             DataTable dt = new DataTable();
@@ -26,7 +26,7 @@ namespace ViswaSamudraUI.Controllers
                 client.BaseAddress = new Uri(baseUri);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage getdata = await client.GetAsync("purchase-order");
+                HttpResponseMessage getdata = await client.GetAsync("PurchaseOrder");
 
                 if (getdata.IsSuccessStatusCode)
                 {
