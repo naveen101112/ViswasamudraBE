@@ -294,7 +294,7 @@ p.text-muted {
     width: 20px;
     height: 20px;
     right: 8px;
-    top: 8px;
+    top: 0px;
 }
 
 .card .card-header .card-header-right .btn.dropdown-toggle.mobile-menu span {

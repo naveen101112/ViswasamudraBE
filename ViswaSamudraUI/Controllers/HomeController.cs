@@ -11,35 +11,18 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using ViswaSamudraUI.Models;
 using Newtonsoft.Json;
-
+using VSAssetManagement.IOModels;
+using ViswaSamudraUI.Providers.Assets;
 
 namespace ViswaSamudraUI.Controllers
 {
     public class HomeController : Controller
     {
-        String baseUri = CommonHelper.configuration["urls"];
+        PurchaseOrderProvider purchaseOrder = new PurchaseOrderProvider();
         public async Task<IActionResult> Index()
-        {
-            DataTable dt = new DataTable();
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(baseUri);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage getdata = await client.GetAsync("PurchaseOrder");
-
-                if (getdata.IsSuccessStatusCode)
-                {
-                    string result = getdata.Content.ReadAsStringAsync().Result;
-                    dt = JsonConvert.DeserializeObject<DataTable>(result);
-                }
-                else
-                {
-                    Console.WriteLine("Error");
-                }
-                ViewData.Model = dt;
-            }
-            return View();
+        {            
+            IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder(); 
+            return View(poList);
         }
 
         

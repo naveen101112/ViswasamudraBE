@@ -8,7 +8,7 @@ INSERT INTO [dbo].[PURCHASE_ORDER]
            ,[RECEIVED_BY]
            ,[CREATED_BY]
            ,[LAST_UPDATED_BY]
-           ,[RECORD_STATUS]
+           ,[RECORD_STATUS])
      VALUES
            ('ABCD123443434'
            ,GETDATE()-12
