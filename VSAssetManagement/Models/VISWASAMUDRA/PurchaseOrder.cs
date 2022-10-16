@@ -5,30 +5,30 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace VSAssetManagement.Models
+namespace VSManagement.Models.VISWASAMUDRA
 {
-    public partial class Batch
+    public partial class PurchaseOrder
     {
-        public Batch()
+        public PurchaseOrder()
         {
-            Asset = new HashSet<Asset>();
+            Batch = new HashSet<Batch>();
         }
 
         public int Id { get; set; }
-        public string BatchNo { get; set; }
-        public string BatchName { get; set; }
-        public int? Quantity { get; set; }
-        public string AssetType { get; set; }
-        public string AssetSize { get; set; }
+        public string PurchaseOrderNo { get; set; }
+        public DateTime? PurchaseOrderDate { get; set; }
+        public string ReceivedBy { get; set; }
+        public DateTime? ReceivedDate { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
-        public Guid PurchaseBatchMasterGuid { get; set; }
+        public string CompanyCode { get; set; }
+        public string DeptCode { get; set; }
+        public string UserCode { get; set; }
 
-        public virtual PurchaseOrder PurchaseBatchMasterGu { get; set; }
-        public virtual ICollection<Asset> Asset { get; set; }
+        public virtual ICollection<Batch> Batch { get; set; }
     }
 }

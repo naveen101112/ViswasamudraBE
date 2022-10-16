@@ -26,6 +26,7 @@ namespace VSAssetManagement.IOModels
         public Guid Guid { get; set; }
         public string CompanyCode { get; set; }
         public string DeptCode { get; set; }
+        public string UserCode { get; set; }
         public string ProjectHead { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace VSAssetManagement.Models
+namespace VSManagement.Models.VISWASAMUDRA
 {
     public partial class VISWASAMUDRAContext : DbContext
     {
@@ -80,8 +80,7 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()
@@ -106,19 +105,19 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.StoreGuid).HasColumnName("STORE_GUID");
 
-                entity.HasOne(d => d.Batch)
+                entity.HasOne(d => d.BatchGu)
                     .WithMany(p => p.Asset)
                     .HasForeignKey(d => d.BatchGuid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ASSET_BATCH");
 
-                entity.HasOne(d => d.Project)
+                entity.HasOne(d => d.ProjectGu)
                     .WithMany(p => p.Asset)
                     .HasForeignKey(d => d.ProjectGuid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ASSET_PROJECT");
 
-                entity.HasOne(d => d.Store)
+                entity.HasOne(d => d.StoreGu)
                     .WithMany(p => p.Asset)
                     .HasForeignKey(d => d.StoreGuid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -142,6 +141,11 @@ namespace VSAssetManagement.Models
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
+                entity.Property(e => e.CompanyCode)
+                    .HasColumnName("COMPANY_CODE")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
                     .HasColumnName("CREATED_BY")
@@ -153,10 +157,14 @@ namespace VSAssetManagement.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.DeptCode)
+                    .HasColumnName("DEPT_CODE")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()
@@ -172,6 +180,11 @@ namespace VSAssetManagement.Models
                 entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
 
                 entity.Property(e => e.TagId).HasColumnName("TAG_ID");
+
+                entity.Property(e => e.UserCode)
+                    .HasColumnName("USER_CODE")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.AssetGu)
                     .WithMany(p => p.AssetHistory)
@@ -194,7 +207,7 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.CompanyCode)
                     .HasColumnName("COMPANY_CODE")
-                    .HasMaxLength(50)
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CreatedBy)
@@ -210,13 +223,12 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.DeptCode)
                     .HasColumnName("DEPT_CODE")
-                    .HasMaxLength(50)
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Initiater)
                     .HasColumnName("INITIATER")
@@ -299,8 +311,7 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -363,8 +374,8 @@ namespace VSAssetManagement.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.CompanyCode)
-                    .HasColumnName("COMPANYCODE")
-                    .HasMaxLength(50)
+                    .HasColumnName("COMPANY_CODE")
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CreateDateTime)
@@ -379,7 +390,7 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.DeptCode)
                     .HasColumnName("DEPT_CODE")
-                    .HasMaxLength(50)
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.EndDate)
@@ -393,8 +404,7 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -437,6 +447,11 @@ namespace VSAssetManagement.Models
                     .HasColumnName("TYPE")
                     .HasMaxLength(30)
                     .IsUnicode(false);
+
+                entity.Property(e => e.UserCode)
+                    .HasColumnName("USER_CODE")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<PurchaseOrder>(entity =>
@@ -450,6 +465,11 @@ namespace VSAssetManagement.Models
                     .HasColumnName("GUID")
                     .HasDefaultValueSql("(newid())");
 
+                entity.Property(e => e.CompanyCode)
+                    .HasColumnName("COMPANY_CODE")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
@@ -460,10 +480,14 @@ namespace VSAssetManagement.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.DeptCode)
+                    .HasColumnName("DEPT_CODE")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -494,6 +518,11 @@ namespace VSAssetManagement.Models
                     .HasColumnType("date");
 
                 entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+
+                entity.Property(e => e.UserCode)
+                    .HasColumnName("USER_CODE")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Status>(entity =>
@@ -526,8 +555,7 @@ namespace VSAssetManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.MainStoreId).HasColumnName("MAIN_STORE_ID");
 
@@ -555,6 +583,11 @@ namespace VSAssetManagement.Models
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
+                entity.Property(e => e.CompanyCode)
+                    .HasColumnName("COMPANY_CODE")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
                     .HasColumnName("CREATED_BY")
@@ -566,10 +599,14 @@ namespace VSAssetManagement.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.DeptCode)
+                    .HasColumnName("DEPT_CODE")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()
@@ -593,6 +630,11 @@ namespace VSAssetManagement.Models
                 entity.Property(e => e.Status)
                     .HasColumnName("STATUS")
                     .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserCode)
+                    .HasColumnName("USER_CODE")
+                    .HasMaxLength(10)
                     .IsUnicode(false);
             });
 

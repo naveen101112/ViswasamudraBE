@@ -5,12 +5,12 @@ using VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Controllers
 {
-	public class BatchController : Controller
+	public class ProjectController : Controller
 	{
-        BatchProvider batchOrder = new BatchProvider();
+		ProjectProvider provider = new ProjectProvider();
         public IActionResult Index()
 		{
-            IEnumerable<Batch> list = batchOrder.GetAll();
+            IEnumerable<Project> list = provider.GetAll();
             return View(list);
 		}
 	}

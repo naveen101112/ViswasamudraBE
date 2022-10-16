@@ -21,7 +21,7 @@ namespace ViswaSamudraUI.Controllers
         PurchaseOrderProvider purchaseOrder = new PurchaseOrderProvider();
         public async Task<IActionResult> Index()
         {            
-            IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder(); 
+            IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAll(); 
             return View(poList);
         }
 

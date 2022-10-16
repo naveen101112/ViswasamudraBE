@@ -15784,3 +15784,28 @@ div.code-toolbar > .toolbar span:hover {
 .logo-thumb{
     width: 40px;
 }
+
+.h5-body{
+    margin-top:15px;
+}
+
+.body-add-record{
+
+}
+
+.add-new {
+    /*float: right;*/
+    height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: none;
+    min-width: 100px;
+    border-radius: 50px;
+    line-height: 7px;
+    background-color: #4680ff;
+    color:white;
+}
+
+.add-new i {
+    margin-right: 4px;
+}

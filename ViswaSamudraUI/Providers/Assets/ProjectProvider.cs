@@ -3,12 +3,12 @@ using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
 {
-	public class BatchProvider
-	{
+	public class ProjectProvider
+    {
         CommonHelper ch = new CommonHelper();
-        public IEnumerable<io.Batch> GetAll()
+        public IEnumerable<io.Project> GetAll()
         {
-            return (IEnumerable<io.Batch>)ch.GetRequest<io.Batch>("Batch");
+            return (IEnumerable<io.Project>)ch.GetRequest<io.Project>("Project");
         }
     }
 }

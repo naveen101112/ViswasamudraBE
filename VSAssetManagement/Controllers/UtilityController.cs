@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using VSAssetManagement.Models;
+using VSManagement.Models.VISWASAMUDRA;
 using VSAssetManagement.Repo;
 using io = VSAssetManagement.IOModels;
 

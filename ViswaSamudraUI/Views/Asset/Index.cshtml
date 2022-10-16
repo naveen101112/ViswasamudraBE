@@ -1,14 +1,16 @@
 ﻿@using System.Data
-@model IEnumerable<VSAssetManagement.IOModels.Batch>
+@model IEnumerable<VSAssetManagement.IOModels.Asset>
 
 <div class="col-sm-12" style="padding:1px">
     <div class="card">
         <div class="card-header">
-            <h5>Batch</h5>
+            <h5 class="h5-body">Asset</h5>
             <div class="card-header-right">
+                <button type="button" class="btn add-new"><i class="fa fa-plus"></i> Add New</button>
+                <button type="button" class="btn waves-effect waves-light btn-icon btn-primary body-add-record" hidden><i class="feather icon-plus-square"></i></button>
                 <div class="btn-group card-option">
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="feather icon-more-horizontal"></i>
+                        <i class="feather icon-more-vertical"></i>
                     </button>
                     <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
                         <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
@@ -26,18 +28,18 @@
                     <tr>
                             <th>#</th>
                             <th data-breakpoints="xs">Id</th>
-                            <th data-breakpoints="xs">Batch No</th>
-                            <th data-breakpoints="xs">Batch Name</th>
-                            <th data-breakpoints="xs">Quantity</th>
-                            <th data-breakpoints="xs">Asset Type</th>
-                            <th data-breakpoints="xs">Asset Size</th>
+                            <th data-breakpoints="xs">Code</th>
+                            <th data-breakpoints="xs">Name</th>
+                            <th data-breakpoints="xs">Company Name</th>
                             <th data-breakpoints="xs">Created By</th>
                             <th data-breakpoints="xs">Created Date Time</th>
                             <th data-breakpoints="xs">Last Updated By</th>
                             <th data-breakpoints="xs">Last Updated Date Time</th>
                             <th data-breakpoints="xs">Record Status</th>
                             <th data-breakpoints="xs" hidden>Guid</th>
-                            <th data-breakpoints="xs" hidden>Purchase Batch Master Guid</th>
+                            <th data-breakpoints="xs" hidden>Project Guid</th>
+                            <th data-breakpoints="xs" hidden>Store Guid</th>
+                            <th data-breakpoints="xs" hidden>Batch Guid</th>
 
                     </tr>
                 </thead>
@@ -47,21 +49,21 @@
                         {
                         <tr>
                             <td>
-                               @Html.ActionLink("", "Ops","Batch", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                               @Html.ActionLink("", "Ops","Asset", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                             </td>
                                 <td>@Html.DisplayFor(modelItem=>item.Id)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.BatchName)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Quantity)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.AssetType)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.AssetSize)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Code)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.RecordStatus)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.PurchaseBatchMasterGuid)</td>
+                                <td hidden>@Html.DisplayFor(modelItem=>item.ProjectGuid)</td>
+                                <td hidden>@Html.DisplayFor(modelItem=>item.StoreGuid)</td>
+                                <td hidden>@Html.DisplayFor(modelItem=>item.BatchGuid)</td>
                         </tr>
                         }                    
                 </tbody>

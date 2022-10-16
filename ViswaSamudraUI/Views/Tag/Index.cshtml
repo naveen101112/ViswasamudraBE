@@ -1,10 +1,10 @@
 ﻿@using System.Data
-@model IEnumerable<VSAssetManagement.IOModels.Batch>
+@model IEnumerable<VSAssetManagement.IOModels.Tag>
 
 <div class="col-sm-12" style="padding:1px">
     <div class="card">
         <div class="card-header">
-            <h5>Batch</h5>
+            <h5>Tag</h5>
             <div class="card-header-right">
                 <div class="btn-group card-option">
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,18 +26,18 @@
                     <tr>
                             <th>#</th>
                             <th data-breakpoints="xs">Id</th>
-                            <th data-breakpoints="xs">Batch No</th>
-                            <th data-breakpoints="xs">Batch Name</th>
-                            <th data-breakpoints="xs">Quantity</th>
-                            <th data-breakpoints="xs">Asset Type</th>
-                            <th data-breakpoints="xs">Asset Size</th>
+                            <th data-breakpoints="xs">Code</th>
+                            <th data-breakpoints="xs">Name</th>
+                            <th data-breakpoints="xs">Status</th>
                             <th data-breakpoints="xs">Created By</th>
                             <th data-breakpoints="xs">Created Date Time</th>
                             <th data-breakpoints="xs">Last Updated By</th>
                             <th data-breakpoints="xs">Last Updated Date Time</th>
                             <th data-breakpoints="xs">Record Status</th>
                             <th data-breakpoints="xs" hidden>Guid</th>
-                            <th data-breakpoints="xs" hidden>Purchase Batch Master Guid</th>
+                            <th data-breakpoints="xs">Company Code</th>
+                            <th data-breakpoints="xs">Dept Code</th>
+                            <th data-breakpoints="xs">User Code</th>
 
                     </tr>
                 </thead>
@@ -47,21 +47,21 @@
                         {
                         <tr>
                             <td>
-                               @Html.ActionLink("", "Ops","Batch", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                               @Html.ActionLink("", "Ops","Tag", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                             </td>
                                 <td>@Html.DisplayFor(modelItem=>item.Id)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.BatchName)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Quantity)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.AssetType)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.AssetSize)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Code)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Status)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.RecordStatus)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.PurchaseBatchMasterGuid)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Guid)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CompanyCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.DeptCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.UserCode)</td>
                         </tr>
                         }                    
                 </tbody>
