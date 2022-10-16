@@ -24,5 +24,10 @@ namespace ViswaSamudraUI.Controllers
             IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder();
             return View(poList);
         }
+
+        public void PurchaseOrder()
+        {
+
+        }
     }
 }

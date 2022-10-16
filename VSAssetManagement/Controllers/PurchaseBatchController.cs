@@ -56,7 +56,7 @@ namespace VSAssetManagement.Controllers
             batch.BatchNo = record.BatchNo;
             batch.AssetSize = record.AssetSize;
             batch.AssetType = record.AssetType;
-            batch.PurchaseBatchMasterGuid = record.PurchaseOrderID;
+            batch.PurchaseBatchMasterGuid = record.PurchaseBatchMasterGuid;
             batch.Quantity = record.Quantity;
             repo._context.Entry(batch).State = EntityState.Detached;
             int id = repo.update(batch);
