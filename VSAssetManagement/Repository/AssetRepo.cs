@@ -26,18 +26,6 @@ namespace VSAssetManagement.Repo
             }
         }
 
-        public List<Asset> getAllListQuery(io.Pagination page)
-        {
-            if (page.searchParam == null)
-            {
-                return _context.Asset.Skip(page.skip()).Take(page.take()).ToList();
-            }
-            else
-            {
-                return _context.Asset.Skip(page.skip()).Take(page.take()).ToList();
-            }
-        }
-
         public int create(Asset asset)
         {
             _context.Asset.Add(asset);

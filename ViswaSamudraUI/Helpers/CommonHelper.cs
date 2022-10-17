@@ -40,27 +40,28 @@ namespace ViswaSamudraUI
             }
         }
 
-        //public ActionResult UpdateRequest()
-        //{
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri("http://localhost:64189/api/student");
+        public IEnumerable<T> GetDetailsRequest<T>(String Route,T PoIoModel)
+        {
+            IEnumerable<T> ModelList = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseUri);
+                var postTask = client.PostAsJsonAsync<T>(Route, PoIoModel);
+                postTask.Wait();
 
-        //        //HTTP POST
-        //        var postTask = client.PostAsJsonAsync<T>("student", student);
-        //        postTask.Wait();
-
-        //        var result = postTask.Result;
-        //        if (result.IsSuccessStatusCode)
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-
-        //    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-
-        //    return View(student);
-        //}
+                var getdata = postTask.Result;
+                if (getdata.IsSuccessStatusCode)
+                {
+                    string result = getdata.Content.ReadAsStringAsync().Result;
+                    ModelList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<T>>(result);
+                }
+                else
+                {
+                    Console.WriteLine("Error");
+                }
+                return ModelList;
+            }
+        }
 
     }
 }

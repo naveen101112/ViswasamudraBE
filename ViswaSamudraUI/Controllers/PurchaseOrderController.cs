@@ -25,9 +25,10 @@ namespace ViswaSamudraUI.Controllers
             return View(poList);
         }
 
-        public void PurchaseOrder()
+        public async Task<IActionResult> PoGetDetailById(PurchaseOrder PoIoModel)
         {
-
+            IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder(PoIoModel);
+            return View(poList);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using System.Globalization;
 
+using io = VSAssetManagement.IOModels;
 namespace VSAssetManagement.Repo
 {
     public class PurchaseOrderRepo
@@ -17,6 +18,15 @@ namespace VSAssetManagement.Repo
         public List<PurchaseOrder> getAllList()
         {
             return _context.PurchaseOrder.ToList();
+        }
+        public List<PurchaseOrder> searchListQuery(io.PurchaseOrder po)
+        {
+            IQueryable<PurchaseOrder> query = _context.Set<PurchaseOrder>();
+            if (po.Id != null)
+            {
+                query.Where(t => t.Id == po.Id);
+            }
+            return query.ToList<PurchaseOrder>();
         }
 
         public int create(PurchaseOrder record)
