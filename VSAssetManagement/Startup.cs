@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using VSManagement.Models.VISWASAMUDRA;
-using VSAssetManagement.Repo;
+using VSManagement.Repository.AssetManagement;
 using WebApi.Middleware;
 
 namespace VSAssetManagement
