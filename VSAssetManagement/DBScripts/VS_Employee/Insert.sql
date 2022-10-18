@@ -62,3 +62,54 @@ INSERT INTO [dbo].[BRANCH]
            ,1)
 GO
 
+INSERT INTO [dbo].[DEPARTMENT]
+           ([CompanyUID]
+           ,[Name]
+           ,[Code]
+           ,[CompanyCode]
+           ,[CreatedBy])
+     VALUES
+           ('1B3301C6-3194-44BD-9AF9-30F968564CB3'
+           ,'Department1'
+           ,'DTRCZ'
+           ,'WINGZ'
+           ,'User1')
+GO
+
+INSERT INTO [dbo].[DEPUTATION]
+           ([DepartmentUID]
+           ,[Name]
+           ,[Code]
+           ,[CreatedBy])
+     VALUES
+           ('FCBD7BFC-B219-429E-9723-A5442BE01DBD'
+           ,'Deputation1'
+           ,'DETRZ'
+           ,'User1')
+GO
+
+INSERT INTO [dbo].[LOCATIONS]
+           ([BranchUID]
+           ,[Name]
+           ,[Code]
+           ,[BranchCode]
+           ,[CreatedBy])
+     VALUES
+           ('F13BA215-9977-4207-81D5-D9F069FADA50'
+           ,'Location1'
+           ,'LOCTZ'
+           ,'BRTCZ'
+           ,'User1')
+GO
+
+INSERT INTO [dbo].[SALUTATION]
+           ([DepartmentUID]
+           ,[Name]
+           ,[Code]
+           ,[CreatedBy])
+     VALUES
+           ('FCBD7BFC-B219-429E-9723-A5442BE01DBD'
+           ,'Salutation1'
+           ,'SALTZ'
+           ,'User1')
+GO

@@ -8,3 +8,9 @@ if (!optionsBuilder.IsConfigured)
     IConfigurationRoot configuration = builder.Build();
     optionsBuilder.UseSqlServer(configuration.GetConnectionString("VISWASAMUDRA"));
 }
+
+Column Names Fetch:
+
+SELECT COLUMN_NAME--dbo.ToProperCase(COLUMN_NAME)
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = N'ZONES'
