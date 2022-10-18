@@ -22,13 +22,13 @@ namespace VSAssetManagement.Repo
         public List<PurchaseOrder> searchListQuery(io.PurchaseOrder po)
         {
             IQueryable<PurchaseOrder> query = _context.Set<PurchaseOrder>();
-            if (po.Id != null)
+            if (po.Guid != null)
             {
-                query.Where(t => t.Id == po.Id);
+                query= query.Where(t => t.Guid == po.Guid);
             }
             if(po.ReceivedBy != null)
             {
-                query.Where(t => t.ReceivedBy == po.ReceivedBy);
+                query= query.Where(t => t.ReceivedBy == po.ReceivedBy);
             }
             return query.ToList<PurchaseOrder>();
         }
@@ -59,7 +59,7 @@ namespace VSAssetManagement.Repo
 
         public PurchaseOrder getById(int id, Guid guid)
         {
-            return _context.PurchaseOrder.Where(a=>a.Id==id && a.Guid == guid).FirstOrDefault();
+            return _context.PurchaseOrder.Where(a=>a.Id==id || a.Guid == guid).FirstOrDefault();
         }
 
         public PurchaseOrder getByOnlyId(int id)

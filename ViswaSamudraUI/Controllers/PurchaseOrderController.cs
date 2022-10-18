@@ -30,5 +30,11 @@ namespace ViswaSamudraUI.Controllers
             IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder(PoIoModel);
             return View("PoOps", poList.FirstOrDefault());
         }
+
+        public ActionResult PoUpdate(PurchaseOrder PoIoModel)
+        {
+            String poStatus = purchaseOrder.AddPurchaseOrder(PoIoModel);
+            return Content(poStatus);
+        }
     }
 }

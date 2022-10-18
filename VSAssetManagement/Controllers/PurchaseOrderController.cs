@@ -42,7 +42,7 @@ namespace VSAssetManagement.Controllers
             return Ok(record);
         }
 
-        [HttpPost]
+        [HttpPost("CreatePO")]
         public ActionResult createRecord([FromBody] io.PurchaseOrder record)
         {
             int id = repo.create(JsonConvert.
@@ -50,13 +50,13 @@ namespace VSAssetManagement.Controllers
             return Created($"/PurchaseOrder/{id}","Created Successfully.");
         }
 
-        [HttpPut]
-        public ActionResult updateRecord([FromForm] io.PurchaseOrder record)
+        [HttpPost("UpdatePo")]
+        public ActionResult updateRecord([FromBody] io.PurchaseOrder record)
         {
             PurchaseOrder order = repo.getById(record.Id, record.Guid);
-            order.PurchaseOrderNo = record.PurchaseOrderNo;
+            order.PurchaseOrderNo = record.PurchaseOrderNo.ToString();
             order.PurchaseOrderDate = record.PurchaseOrderDate;
-            order.ReceivedBy = record.ReceivedBy;
+            order.ReceivedBy = record.ReceivedBy.ToString();
             order.ReceivedDate = record.ReceivedDate;
             int id = repo.update(order);
             if (id == 0) return Conflict("Error updating record");

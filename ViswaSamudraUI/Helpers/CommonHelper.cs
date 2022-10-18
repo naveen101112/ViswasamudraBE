@@ -63,5 +63,27 @@ namespace ViswaSamudraUI
             }
         }
 
+        public String PostRequest<T>(String Route, T PoIoModel)
+        {
+            String Status = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseUri);
+                var postTask = client.PostAsJsonAsync<T>(Route, PoIoModel);
+                postTask.Wait();
+
+                var getdata = postTask.Result;
+                if (getdata.IsSuccessStatusCode)
+                {
+                    Status= getdata.Content.ReadAsStringAsync().Result;                    
+                }
+                else
+                {
+                    Console.WriteLine("Error");
+                }
+                return Status;
+            }
+        }
+
     }
 }

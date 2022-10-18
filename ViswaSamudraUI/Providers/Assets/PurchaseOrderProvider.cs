@@ -13,5 +13,12 @@ namespace ViswaSamudraUI.Providers.Assets
             else
                 return (IEnumerable<io.PurchaseOrder>)ch.GetDetailsRequest<io.PurchaseOrder>("purchaseOrder/posearch", PoIoModel); 
         }
+        public string AddPurchaseOrder(io.PurchaseOrder PoIoModel = null)
+        {
+            if (PoIoModel != null)
+                return ch.PostRequest<io.PurchaseOrder>("purchaseOrder/UpdatePo", PoIoModel);
+            else
+                return null;
+        }
     }
 }
