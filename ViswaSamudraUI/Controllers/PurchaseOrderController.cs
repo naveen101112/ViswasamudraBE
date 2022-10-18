@@ -28,7 +28,7 @@ namespace ViswaSamudraUI.Controllers
         public async Task<IActionResult> PoGetDetailById(PurchaseOrder PoIoModel)
         {
             IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder(PoIoModel);
-            return View(poList);
+            return View("PoOps", poList.FirstOrDefault());
         }
     }
 }

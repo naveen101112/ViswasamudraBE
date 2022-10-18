@@ -34,31 +34,21 @@
 	<link rel="stylesheet" href="../assets/plugins/data-tables/css/datatables.min.css">
 
 	<!-- vendor css -->
-	<link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
 
 
 
 </head>
 
 <body class="">
+	@RenderSection("Scripts",false/*required*/)
 
-	<style>
-		#chartdiv1 {
-			width: 100%;
-			height: 250px;
-		}
-
-		#chartdiv2 {
-			width: 100%;
-			height: 250px;
-		}
-	</style>
 
 	<!-- Resources -->
-	<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-	<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-	<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
 
 
 	<!-- [ Pre-loader ] start -->
@@ -313,8 +303,7 @@
 	<script src="../assets/plugins/data-tables/js/datatables.min.js"></script>
 	<script src="../assets/js/pages/data-basic-custom.js"></script>
 
-	<script src="../CustomJs/Chart1.js"></script>
-	<script src="../CustomJs/Chart2.js"></script>
+
 
 </body>
 </html>

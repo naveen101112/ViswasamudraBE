@@ -28,8 +28,8 @@ namespace VSAssetManagement.Controllers
         {
             var AssectModel = JsonConvert.
                 DeserializeObject<io.PurchaseOrder>(JsonConvert.SerializeObject(record));
-            List<io.Asset> list =
-            JsonConvert.DeserializeObject<List<io.Asset>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
+            List<io.PurchaseOrder> list =
+            JsonConvert.DeserializeObject<List<io.PurchaseOrder>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
 
             return Ok(list);
         }
@@ -47,7 +47,7 @@ namespace VSAssetManagement.Controllers
         {
             int id = repo.create(JsonConvert.
                 DeserializeObject<PurchaseOrder>(JsonConvert.SerializeObject(record)));
-            return Created($"/project/{id}","Created Successfully.");
+            return Created($"/PurchaseOrder/{id}","Created Successfully.");
         }
 
         [HttpPut]

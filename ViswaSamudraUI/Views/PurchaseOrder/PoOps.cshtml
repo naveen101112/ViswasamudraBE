@@ -1,5 +1,53 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using System.Data
+@model VSAssetManagement.IOModels.PurchaseOrder
+@using (Html.BeginForm("", "", FormMethod.Post, new { style = "width:100%" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-sm-12" style="padding:1px">
+        <div class="card">
+                                    <div class="card-header">
+                                        <h5>Purchase Order</h5>
+                                       @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="validation-form123" action="#!">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">PO Number</label>                                                       
+                                                        @Html.EditorFor(model => model.PurchaseOrderNo, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order No",@id="poNo" } })
+                                                        @Html.ValidationMessageFor(model => model.PurchaseOrderNo, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                       <label class="form-label">PO Date</label> 
+                                                       @Html.EditorFor(model => model.PurchaseOrderDate, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order Date",@id="poData" } })
+                                                       @Html.ValidationMessageFor(model => model.PurchaseOrderDate, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Received By</label>
+                                                        @Html.EditorFor(model => model.ReceivedBy, new { htmlAttributes = new { @class = "form-control",@placeholder="Received By",@id="recivedBy" } })
+                                                        @Html.ValidationMessageFor(model => model.ReceivedBy, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Received Date</label>
+                                                        @Html.EditorFor(model => model.ReceivedDate, new { htmlAttributes = new { @class = "form-control",@placeholder="Received Date",@id="recivedDate" } })
+                                                        @Html.ValidationMessageFor(model => model.PurchaseOrderNo, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>                                              
+                                            </div>
+                                            <a id="btnPurchaseOrder" class="btn waves-effect waves-light btn-primary">Submit</a>
+                                        </form>
+                                    </div>
+                                </div>
+  </div>
+}
+@section Scripts
+{
+    <script src="@Url.Content("../customjs/purchaseorder.js")"></script>
 }

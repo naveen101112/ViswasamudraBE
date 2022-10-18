@@ -26,6 +26,10 @@ namespace VSAssetManagement.Repo
             {
                 query.Where(t => t.Id == po.Id);
             }
+            if(po.ReceivedBy != null)
+            {
+                query.Where(t => t.ReceivedBy == po.ReceivedBy);
+            }
             return query.ToList<PurchaseOrder>();
         }
 
