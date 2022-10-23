@@ -4,6 +4,8 @@
    <div class="card">
       <div class="card-header">
          <h5>Purchase Order</h5>
+        
+            
       </div>
       <div class="card-body">
          @using (Html.BeginForm("", "", FormMethod.Post, new { style = "width:100%" }))
@@ -42,21 +44,23 @@
          </div>
          <div class="card" style="margin-top: 0px;box-shadow:none">
             <div class="card-header" id="headingOne" style="padding: 3px 0px;">
-               <h5 class="mb-0"><a href="#!" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Collapsible Group Item #1</a></h5>
+               <h5 class="mb-0"><a href="#!" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Batches</a></h5>
             </div>
             <div id="collapseOne" style="padding:0px" class=" card-body collapse show revenue-scroll ps ps--active-y" aria-labelledby="headingOne" data-parent="#accordionExample">
-               <table id="demo-foo-filtering" class="table table-striped table-hover footable footable-1 footable-paging footable-paging-center breakpoint-lg" style="">
+                        <table id="demo-foo-filtering" class="table table-striped table-bordered nowrap" style="">
                   <thead>
                      <tr class="footable-header">
+                        <th data-breakpoints="xs" class="footable-sortable" style="display: table-cell;">#<span class="fooicon fooicon-sort"></span></th>
                         <th class="footable-sortable footable-first-visible footable-asc" style="display: table-cell;">First Name<span class="fooicon fooicon-sort-asc"></span></th>
-                        <th data-breakpoints="xs" class="footable-sortable" style="display: table-cell;pa">Last Name<span class="fooicon fooicon-sort"></span></th>
+                        <th data-breakpoints="xs" class="footable-sortable" style="display: table-cell;">Last Name<span class="fooicon fooicon-sort"></span></th>
                         <th data-breakpoints="xs" class="footable-sortable" style="display: table-cell;">Job Title<span class="fooicon fooicon-sort"></span></th>
                         <th data-breakpoints="xs" class="footable-sortable" style="display: table-cell;">BOB<span class="fooicon fooicon-sort"></span></th>
                         <th class="footable-sortable footable-last-visible" style="display: table-cell;">Status<span class="fooicon fooicon-sort"></span></th>
                      </tr>
                   </thead>
-                  <tbody>
+                  <tbody>                     
                      <tr>
+                                    <td><a href="#" class="icon feather icon-edit"></a></td>
                         <td class="footable-first-visible" style="display: table-cell;">Airi Satou</td>
                         <td style="display: table-cell;">Accountant</td>
                         <td style="display: table-cell;">Tokyo</td>
@@ -66,6 +70,7 @@
                         </td>
                      </tr>
                      <tr>
+                                    <td><a href="#" class="icon feather icon-edit"></a></td>
                         <td class="footable-first-visible" style="display: table-cell;">Bradley Greer</td>
                         <td style="display: table-cell;">Software</td>
                         <td style="display: table-cell;">London</td>
@@ -75,6 +80,7 @@
                         </td>
                      </tr>
                      <tr>
+                                    <td><a href="#" class="icon feather icon-edit"></a></td>
                         <td class="footable-first-visible" style="display: table-cell;">Brielle</td>
                         <td style="display: table-cell;">Specialist</td>
                         <td style="display: table-cell;">New York</td>
@@ -84,6 +90,7 @@
                         </td>
                      </tr>
                      <tr>
+                                    <td><a href="#" class="icon feather icon-edit"></a></td>
                         <td class="footable-first-visible" style="display: table-cell;">Charde Marshall</td>
                         <td style="display: table-cell;">Regional Director</td>
                         <td style="display: table-cell;">San</td>
@@ -93,6 +100,7 @@
                         </td>
                      </tr>
                      <tr>
+                                    <td><a href="#" class="icon feather icon-edit"></a></td>
                         <td class="footable-first-visible" style="display: table-cell;">Colleen Hurst</td>
                         <td style="display: table-cell;">Javascript Developer</td>
                         <td style="display: table-cell;">San</td>
@@ -101,12 +109,32 @@
                            <span class="tag tag-default">Disabled</span>
                         </td>
                      </tr>
+                                          <tr>
+                        <td><a href="#" class="icon feather icon-edit"></a></td>
+                        <td class="footable-first-visible" style="display: table-cell;">Colleen Hurst</td>
+                        <td style="display: table-cell;">Javascript Developer</td>
+                        <td style="display: table-cell;">San</td>
+                        <td style="display: table-cell;">39</td>
+                        <td class="footable-last-visible" style="display: table-cell;">
+                           <span class="tag tag-default">Disabled</span>
+                        </td>
+                     </tr>
+                                <tr>
+                                    <td><a href="#" class="icon feather icon-edit"></a></td>
+                                    <td class="footable-first-visible" style="display: table-cell;">Colleen Hurst</td>
+                                    <td style="display: table-cell;">Javascript Developer</td>
+                                    <td style="display: table-cell;">San</td>
+                                    <td style="display: table-cell;">39</td>
+                                    <td class="footable-last-visible" style="display: table-cell;">
+                                        <span class="tag tag-default">Disabled</span>
+                                    </td>
+                                </tr>
                   </tbody>
                </table>
             </div>
          </div>
-         <button class="btn notifications btn-primary" data-type="success" data-from="top" data-align="right">success</button>
-         <a id="btnPurchaseOrder" onclick="UpdateRecord();" class="btn waves-effect waves-light btn-primary">Submit</a>
+                <button class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+         
          }
       </div>
    </div>
@@ -114,4 +142,12 @@
 @section Scripts
 {
 <script src="@Url.Content("../customjs/purchaseorder.js")"></script>
+<style>        
+.table thead th {
+    padding:1px;
+}
+.table tbody td {
+    padding:1px;
+}
+</style>
 }

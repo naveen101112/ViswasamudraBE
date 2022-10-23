@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets 
@@ -16,7 +17,13 @@ namespace ViswaSamudraUI.Providers.Assets
         public string AddPurchaseOrder(io.PurchaseOrder PoIoModel = null)
         {
             if (PoIoModel != null)
+            {
+                if (PoIoModel.Guid == Guid.Empty)
+                {
+                    return ch.PostRequest<io.PurchaseOrder>("purchaseOrder/CreatePO", PoIoModel);
+                }
                 return ch.PostRequest<io.PurchaseOrder>("purchaseOrder/UpdatePo", PoIoModel);
+            }
             else
                 return null;
         }

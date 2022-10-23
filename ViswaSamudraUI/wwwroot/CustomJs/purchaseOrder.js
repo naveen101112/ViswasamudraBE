@@ -52,12 +52,12 @@ $(document).ready(function () {
         var message = '';
         e.preventDefault();
         $.ajax({
-            url: 'PoUpdate',
+            url: 'PoModification',
             data: toJson(),
             type: 'Post',
             success: function (data) {
                 nType = 'success';          
-                message = 'Updated Successfully';
+                message = data;
                 notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, message)
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -69,8 +69,6 @@ $(document).ready(function () {
         });
     });
 });
-
-
 
 function CallAction(id) {
     $.ajax({
@@ -85,8 +83,6 @@ function CallAction(id) {
         }
     });
 }
-
-
 
 function toJson() {
     return PurchaseOrder = { Guid: $("#hdnGuid").val(), PurchaseOrderNo: $('#poNo').val(), PurchaseOrderDate: $('#poData').val(), ReceivedBy: $('#recivedBy').val(), ReceivedDate: $('#recivedDate').val() };

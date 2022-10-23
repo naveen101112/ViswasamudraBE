@@ -27,11 +27,15 @@ namespace ViswaSamudraUI.Controllers
 
         public async Task<IActionResult> PoGetDetailById(PurchaseOrder PoIoModel)
         {
+            if(PoIoModel.Guid == Guid.Empty)
+            {
+                return View("PoOps", PoIoModel);
+            }
             IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder(PoIoModel);
             return View("PoOps", poList.FirstOrDefault());
         }
 
-        public ActionResult PoUpdate(PurchaseOrder PoIoModel)
+        public ActionResult PoModification(PurchaseOrder PoIoModel)
         {
             String poStatus = purchaseOrder.AddPurchaseOrder(PoIoModel);
             return Content(poStatus);
