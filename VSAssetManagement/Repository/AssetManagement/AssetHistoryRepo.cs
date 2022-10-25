@@ -49,7 +49,7 @@ namespace VSManagement.Repository.AssetManagement
                     {
                         record.Id,
                         AssetID = record.AssetGuid,
-                        TagID = record.TagId,
+                        TagID = record.TagGuid,
                         Status = status.Description,
                         record.Guid
                     }).ToList();

@@ -52,12 +52,12 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult updateRecord([FromForm] io.Batch record)
         {
             Batch batch = repo.getById(record.Id, record.Guid);
-            batch.BatchName = record.BatchName;
+            batch.BatchDescription = record.BatchName;
             batch.BatchNo = record.BatchNo;
-            batch.AssetSize = record.AssetSize;
+            batch.AssetSpecification = record.AssetSize;
             batch.AssetType = record.AssetType;
             batch.PurchaseBatchMasterGuid = record.PurchaseBatchMasterGuid;
-            batch.Quantity = record.Quantity;
+            batch.Quantity = record.Quantity.Value;
             repo._context.Entry(batch).State = EntityState.Detached;
             int id = repo.update(batch);
             if (id == 0) return Conflict("Error updating record");

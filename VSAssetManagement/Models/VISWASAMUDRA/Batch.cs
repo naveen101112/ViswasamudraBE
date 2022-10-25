@@ -16,10 +16,10 @@ namespace VSManagement.Models.VISWASAMUDRA
 
         public int Id { get; set; }
         public string BatchNo { get; set; }
-        public string BatchName { get; set; }
-        public int? Quantity { get; set; }
+        public string BatchDescription { get; set; }
+        public int Quantity { get; set; }
         public string AssetType { get; set; }
-        public string AssetSize { get; set; }
+        public string AssetSpecification { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
@@ -27,6 +27,14 @@ namespace VSManagement.Models.VISWASAMUDRA
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
         public Guid PurchaseBatchMasterGuid { get; set; }
+        public string Uom { get; set; }
+        public int UseFrequency { get; set; }
+        public string UsageUom { get; set; }
+        public string BatchStatus { get; set; }
+        public string InvoiceNo { get; set; }
+        public DateTime InvoiceDate { get; set; }
+        public string ReceivedBy { get; set; }
+        public DateTime ReceivedDate { get; set; }
 
         public virtual PurchaseOrder PurchaseBatchMasterGu { get; set; }
         public virtual ICollection<Asset> Asset { get; set; }

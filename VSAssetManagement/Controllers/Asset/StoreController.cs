@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using VSManagement.Models.VISWASAMUDRA;
 using io = VSAssetManagement.IOModels;
 using VSManagement.Repository.AssetManagement;
+using System;
 
 namespace VSManagement.Controllers.AssetManagement
 {
@@ -22,7 +23,7 @@ namespace VSManagement.Controllers.AssetManagement
         }
 
         [HttpGet("{id}")]
-        public ActionResult getById(int id)
+        public ActionResult getById(Guid id)
         {
             io.Store record = JsonConvert.
                 DeserializeObject<io.Store>(JsonConvert.SerializeObject(repo.getById(id)));
@@ -33,7 +34,7 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpPost]
         public ActionResult createRecord([FromBody] io.Store record)
         {
-            int id = repo.createAsset(JsonConvert.
+            Guid id = repo.createAsset(JsonConvert.
                 DeserializeObject<Store>(JsonConvert.SerializeObject(record)));
             return Created($"/store/{id}", "Created Successfully.");
         }
@@ -48,10 +49,10 @@ namespace VSManagement.Controllers.AssetManagement
         }
 
         [HttpDelete("{id}")]
-        public ActionResult deleteRecord(int id)
+        public ActionResult deleteRecord(Guid id)
         {
             int count = repo.delete(id);
-            if (id == 0) return Conflict("Error deleting record");
+            //if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
         }
     }
