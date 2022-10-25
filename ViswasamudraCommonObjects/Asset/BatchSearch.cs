@@ -17,7 +17,6 @@ namespace VSAssetManagement.IOModels
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
         public Guid PurchaseBatchMasterGuid { get; set; }
-
         public string PurchaseOrderNo { get; set; }
         public DateTime? PurchaseOrderDate { get; set; }
         public string ReceivedBy { get; set; }

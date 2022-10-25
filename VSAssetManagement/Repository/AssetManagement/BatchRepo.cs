@@ -72,6 +72,7 @@ namespace VSManagement.Repository.AssetManagement
             {
                 result = result.Where(t => t.Guid == batch.Guid);
             }
+
             return result.ToList<dynamic>();
         }
 
