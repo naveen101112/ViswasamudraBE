@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using VSManagement.Models.VISWASAMUDRA;
+using mo=VSManagement.Models.VISWASAMUDRA;
 using io = VSAssetManagement.IOModels;
 using VSManagement.Repository.AssetManagement;
 using ViswasamudraCommonObjects.Util;
@@ -11,9 +11,9 @@ namespace VSManagement.Controllers.AssetManagement
     [ApiController]
     public class AssetController : ControllerBase
     {
-        AssetRepo repo = new AssetRepo(new VISWASAMUDRAContext());
-        AssetHistoryRepo historyRepo = new AssetHistoryRepo(new VISWASAMUDRAContext());
-        AssetOperationsRepo operationsRepo = new AssetOperationsRepo(new VISWASAMUDRAContext());
+        AssetRepo repo = new AssetRepo(new mo.VISWASAMUDRAContext());
+        AssetHistoryRepo historyRepo = new AssetHistoryRepo(new mo.VISWASAMUDRAContext());
+        AssetOperationsRepo operationsRepo = new AssetOperationsRepo(new mo.VISWASAMUDRAContext());
 
         #region Asset
         [HttpGet("asset")]
@@ -26,14 +26,6 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
-        [HttpGet("asset/blank")]
-        public ActionResult getById(int id)
-        {
-            Asset record = repo.getByOnlyId(id);
-            if (record == null) return NotFound();
-            return Ok(record);
-        }
-
         [HttpGet("asset/{id}")]
         public ActionResult getByIdEdit(int id)
         {
@@ -43,17 +35,17 @@ namespace VSManagement.Controllers.AssetManagement
         }
 
         [HttpPost("asset")]
-        public ActionResult createRecord([FromBody] io.Asset record)
+        public ActionResult createRecord([FromBody] mo.Asset record)
         {
             int id = repo.create(JsonConvert.
-                DeserializeObject<Asset>(JsonConvert.SerializeObject(record)));
+                DeserializeObject<mo.Asset>(JsonConvert.SerializeObject(record)));
             return Created($"/asset/{id}", "Created Successfully.");
         }
 
         [HttpPut("asset")]
-        public ActionResult updateRecord([FromForm] io.Asset record)
+        public ActionResult updateRecord([FromForm] mo.Asset record)
         {
-            Asset asset = repo.getById(record.Id, record.Guid);
+            mo.Asset asset = repo.getById(record.Id, record.Guid);
             asset.Code = record.Code;
             asset.Name = record.Name;
             asset.ProjectGuid = record.ProjectGuid;
@@ -94,7 +86,7 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpGet("assetHistory/{id}")]
         public ActionResult getByHistoryId(int id)
         {
-            AssetHistory record = historyRepo.getById(id);
+            mo.AssetHistory record = historyRepo.getById(id);
             if (record == null) return NotFound();
             return Ok(record);
         }
@@ -103,7 +95,7 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult createHistoryRecord([FromBody] io.Asset record)
         {
             int id = historyRepo.create(JsonConvert.
-                DeserializeObject<AssetHistory>(JsonConvert.SerializeObject(record)));
+                DeserializeObject<mo.AssetHistory>(JsonConvert.SerializeObject(record)));
             return Created($"/assetHistory/{id}", "Created Successfully.");
         }
 
@@ -111,7 +103,7 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult updateHistoryRecord([FromBody] io.Asset record)
         {
             int id = historyRepo.update(JsonConvert.
-                DeserializeObject<AssetHistory>(JsonConvert.SerializeObject(record)));
+                DeserializeObject<mo.AssetHistory>(JsonConvert.SerializeObject(record)));
             if (id == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
         }
@@ -145,7 +137,7 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpGet("assetOperations/{id}")]
         public ActionResult getByOperationId(int id)
         {
-            AssetOperations record = operationsRepo.getById(id);
+            mo.AssetOperations record = operationsRepo.getById(id);
             if (record == null) return NotFound();
             return Ok(record);
         }
@@ -154,7 +146,7 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult createOperationRecord([FromBody] io.Asset record)
         {
             int id = operationsRepo.create(JsonConvert.
-                DeserializeObject<AssetOperations>(JsonConvert.SerializeObject(record)));
+                DeserializeObject<mo.AssetOperations>(JsonConvert.SerializeObject(record)));
             return Created($"/assetHistory/{id}", "Created Successfully.");
         }
 
@@ -162,7 +154,7 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult updateOperationRecord([FromBody] io.Asset record)
         {
             int id = operationsRepo.update(JsonConvert.
-                DeserializeObject<AssetOperations>(JsonConvert.SerializeObject(record)));
+                DeserializeObject<mo.AssetOperations>(JsonConvert.SerializeObject(record)));
             if (id == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
         }

@@ -1,5 +1,5 @@
 ﻿@using System.Data
-@model IEnumerable<VSAssetManagement.IOModels.Batch>
+@model IEnumerable<VSAssetManagement.IOModels.BatchSearch>
 
 <div class="col-sm-12" style="padding:1px">
     <div class="card">
@@ -35,7 +35,10 @@
                             <th data-breakpoints="xs">Created Date Time</th>
                             <th data-breakpoints="xs">Last Updated By</th>
                             <th data-breakpoints="xs">Last Updated Date Time</th>
-                            <th data-breakpoints="xs">Record Status</th>
+                            <th data-breakpoints="xs">Purchase OrderNo</th>
+                            <th data-breakpoints="xs">Purchase OrderDate</th>
+                            <th data-breakpoints="xs">PO Received By</th>
+                            <th data-breakpoints="xs">PO Received Date</th>
                             <th data-breakpoints="xs" hidden>Guid</th>
                             <th data-breakpoints="xs" hidden>Purchase Batch Master Guid</th>
 
@@ -47,7 +50,7 @@
                         {
                         <tr>
                             <td>
-                               @Html.ActionLink("", "Ops","Batch", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                               @Html.ActionLink("", "BatchGetDetailById","Batch", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                             </td>
                                 <td>@Html.DisplayFor(modelItem=>item.Id)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
@@ -59,7 +62,10 @@
                                 <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.RecordStatus)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderNo)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderDate)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ReceivedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ReceivedDate)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.PurchaseBatchMasterGuid)</td>
                         </tr>

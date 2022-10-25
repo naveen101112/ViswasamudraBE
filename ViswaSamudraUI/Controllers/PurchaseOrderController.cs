@@ -21,13 +21,24 @@ namespace ViswaSamudraUI.Controllers
         PurchaseOrderProvider purchaseOrder = new PurchaseOrderProvider();
         public async Task<IActionResult> Index()
         {
-            IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAll();
+            IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder();
             return View(poList);
         }
 
-        public void Ops()
+        public async Task<IActionResult> PoGetDetailById(PurchaseOrder PoIoModel)
         {
-            Console.WriteLine("Test");
+            if (PoIoModel.Guid == Guid.Empty)
+            {
+                return View("PoOps", PoIoModel);
+            }
+            IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder(PoIoModel);
+            return View("PoOps", poList.FirstOrDefault());
+        }
+
+        public ActionResult PoModification(PurchaseOrder PoIoModel)
+        {
+            String poStatus = purchaseOrder.AddPurchaseOrder(PoIoModel);
+            return Content(poStatus);
         }
     }
 }

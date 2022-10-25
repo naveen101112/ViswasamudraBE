@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using System.Globalization;
 using VSAssetManagement;
+using io = VSAssetManagement.IOModels;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -19,7 +20,19 @@ namespace VSManagement.Repository.AssetManagement
         {
             return _context.PurchaseOrder.ToList();
         }
-
+        public List<PurchaseOrder> searchListQuery(io.PurchaseOrder po)
+        {
+            IQueryable<PurchaseOrder> query = _context.Set<PurchaseOrder>();
+            if (po.Guid != null)
+            {
+                query = query.Where(t => t.Guid == po.Guid);
+            }
+            if (po.ReceivedBy != null)
+            {
+                query = query.Where(t => t.ReceivedBy == po.ReceivedBy);
+            }
+            return query.ToList<PurchaseOrder>();
+        }
         public int create(PurchaseOrder record)
         {
             _context.PurchaseOrder.Add(record);

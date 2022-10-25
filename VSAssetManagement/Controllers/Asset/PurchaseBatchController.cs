@@ -23,6 +23,17 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
+        [HttpPost("batchsearch")]
+        public ActionResult Search([FromBody] io.Batch record)
+        {
+            var AssectModel = JsonConvert.
+                DeserializeObject<io.BatchSearch>(JsonConvert.SerializeObject(record));
+            List<io.BatchSearch> list =
+            JsonConvert.DeserializeObject<List<io.BatchSearch>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
+
+            return Ok(list);
+        }
+
         [HttpGet("blank")]
         public ActionResult getById(int id)
         {
@@ -48,7 +59,7 @@ namespace VSManagement.Controllers.AssetManagement
             return Created($"/project/{id}", "Created Successfully.");
         }
 
-        [HttpPut]
+        [HttpPost]
         public ActionResult updateRecord([FromForm] io.Batch record)
         {
             Batch batch = repo.getById(record.Id, record.Guid);
