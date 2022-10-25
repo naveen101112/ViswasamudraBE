@@ -1,4 +1,5 @@
 var tableFromJson = (tableObject) => {
+  
     let tableData = [];
     if(tableObject.jsonData){
         tableData = tableObject.jsonData;
@@ -21,6 +22,11 @@ var tableFromJson = (tableObject) => {
     var thead = table.createTHead();
     // Create table header row using the extracted headers above.
     var row = thead.insertRow(-1);
+    if(col.length && tableObject.editable){
+      let th = document.createElement("th");
+      th.innerHTML = 'Edit';
+      row.appendChild(th);
+    }
 
     for (let i = 0; i < col.length; i++) {
       let th = document.createElement("th");      // table header.
@@ -37,8 +43,12 @@ var tableFromJson = (tableObject) => {
     for (let i = 0; i < tableData.length; i++) {
         console.log(tableData);
         let row = tbody.insertRow(-1);
-        row.setAttribute('alt',tableData[i].id);
-        row.setAttribute('name','dataRow');
+        if(tableObject.editable){
+          let tabCell = row.insertCell(-1);
+          tabCell.setAttribute('alt',tableData[i].id);
+          tabCell.setAttribute('onclick','editForm(this)');
+          tabCell.innerHTML = '<i class="feather icon-edit"/>';
+        }
       for (let j = 0; j < col.length; j++) {
         let tabCell = row.insertCell(-1);
         tabCell.innerHTML = tableData[i][col[j]];

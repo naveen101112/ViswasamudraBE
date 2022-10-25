@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using VSManagement.Models.VISWASAMUDRA;
+using VSManagement.Repository.AssetManagement;
 using WebApi.Middleware;
 
 namespace VSAssetManagement
@@ -28,6 +30,8 @@ namespace VSAssetManagement
                     Version = "v1"
                 });
             });
+
+            StaticData.statusList = new StatusRepo(new VISWASAMUDRAContext()).getAllList();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

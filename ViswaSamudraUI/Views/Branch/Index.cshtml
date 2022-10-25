@@ -1,0 +1,67 @@
+﻿@using System.Data
+@model IEnumerable<VSManagement.IOModels.Branch>
+
+<div class="col-sm-12" style="padding:1px">
+    <div class="card">
+        <div class="card-header">
+            <h5>Batch</h5>
+            <div class="card-header-right">
+                <div class="btn-group card-option">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="feather icon-more-horizontal"></i>
+                    </button>
+                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                        <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                        <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding:2px 2px 2px 2px"> 
+            <div class="dt-responsive table-responsive">
+                <table id="simpletable" class="table table-striped table-bordered nowrap">            
+                <thead>
+                    <tr>
+                            <th>#</th>
+                            <th data-breakpoints="xs">Id</th>
+                            <th data-breakpoints="xs">Unique Id</th>
+                            <th data-breakpoints="xs">Zone UID</th>
+                            <th data-breakpoints="xs">Name</th>
+                            <th data-breakpoints="xs">Code</th>
+                            <th data-breakpoints="xs">Zone Code</th>
+                            <th data-breakpoints="xs">Created By</th>
+                            <th data-breakpoints="xs">Created Date</th>
+                            <th data-breakpoints="xs">Modified By</th>
+                            <th data-breakpoints="xs">Modified Date</th>
+
+                    </tr>
+                </thead>
+                <tbody>                 
+                    <tr>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                               @Html.ActionLink("", "Ops","Branch", new { guid=item.UniqueId  }, new {@class="feather icon-edit" })
+                            </td>
+                                <td>@Html.DisplayFor(modelItem=>item.Id)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.UniqueId)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ZoneUid)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Code)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ZoneCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedDate)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ModifiedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ModifiedDate)</td>
+                        </tr>
+                        }                    
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+

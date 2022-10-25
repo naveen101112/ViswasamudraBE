@@ -623,36 +623,7 @@
 
 <!-- footable Js -->
 <script src="../assets/plugins/footable/js/footable.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        // [ Foo-table ]
-        $('#demo-foo-filtering').footable({
-            "paging": {
-                "enabled": true
-            },
-			"filtering": {
-				"enabled": false
-			},
-            "sorting": {
-                "enabled": true
-            }
-        });
-
-		$('clickEvent').click(
-			function(){
-				console.log($(this).attr('alt'));
-				if($(this).attr('alt') == 'asset'){
-					params={
-						title:'Asset',
-						type:'asset'
-					}
-				}
-				onLoadData(params);
-			}
-		);
-    });
-</script>
+<script src="../CustomJs/defaultEvents.js"></script>
 
 
 </body>
