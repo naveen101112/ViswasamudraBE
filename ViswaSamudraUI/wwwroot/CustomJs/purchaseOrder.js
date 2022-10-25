@@ -70,20 +70,6 @@ $(document).ready(function () {
     });
 });
 
-function CallAction(id) {
-    $.ajax({
-        url: 'PoGetDetailById',
-        data: toJson(),
-        type: 'POST',
-        success: function (response) {
-          
-        },
-        error: function (e) {
-          
-        }
-    });
-}
-
 function toJson() {
     return PurchaseOrder = { Guid: $("#hdnGuid").val(), PurchaseOrderNo: $('#poNo').val(), PurchaseOrderDate: $('#poData').val(), ReceivedBy: $('#recivedBy').val(), ReceivedDate: $('#recivedDate').val() };
 };
