@@ -23,6 +23,17 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
+        [HttpPost("posearch")]
+        public ActionResult Search([FromBody] io.PurchaseOrder record)
+        {
+            var AssectModel = JsonConvert.
+                DeserializeObject<io.PurchaseOrder>(JsonConvert.SerializeObject(record));
+            List<io.PurchaseOrder> list =
+            JsonConvert.DeserializeObject<List<io.PurchaseOrder>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
+
+            return Ok(list);
+        }
+
         [HttpGet("{id}")]
         public ActionResult getById(int id)
         {
