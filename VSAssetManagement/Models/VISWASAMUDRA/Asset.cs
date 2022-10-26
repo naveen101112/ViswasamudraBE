@@ -28,6 +28,14 @@ namespace VSManagement.Models.VISWASAMUDRA
         public Guid ProjectGuid { get; set; }
         public Guid StoreGuid { get; set; }
         public Guid BatchGuid { get; set; }
+        public string TagId { get; set; }
+        public string AssetType { get; set; }
+        public string AssetSpecification { get; set; }
+        public string ProjectName { get; set; }
+        public string Store { get; set; }
+        public string Batch { get; set; }
+        public string FrequencyOfUse { get; set; }
+        public string UsageUom { get; set; }
 
         public virtual Batch BatchGu { get; set; }
         public virtual Project ProjectGu { get; set; }

@@ -11036,7 +11036,7 @@ body.layout-14 .pcoded-navbar.navbar-dark .navbar-popup:after {
 .custom-select,
 .form-control {
     background: #eff3f6;
-    padding: 10px 20px;
+    padding: 4px 7px;
     font-size: 14px;
     height: auto;
 }
@@ -11993,7 +11993,7 @@ table.dataTable tbody > tr.selected td.select-checkbox:after, table.dataTable tb
       Button css start
 ==========================  **/
 .btn {
-    padding: 10px 20px;
+    padding: 5px 20px;
     border-radius: 0.25rem;
     font-size: 14px;
     margin-bottom: 5px;
@@ -15783,29 +15783,4 @@ div.code-toolbar > .toolbar span:hover {
 
 .logo-thumb{
     width: 40px;
-}
-
-.h5-body{
-    margin-top:15px;
-}
-
-.body-add-record{
-
-}
-
-.add-new {
-    /*float: right;*/
-    height: 30px;
-    font-weight: bold;
-    font-size: 12px;
-    text-shadow: none;
-    min-width: 100px;
-    border-radius: 50px;
-    line-height: 7px;
-    background-color: #4680ff;
-    color:white;
-}
-
-.add-new i {
-    margin-right: 4px;
 }

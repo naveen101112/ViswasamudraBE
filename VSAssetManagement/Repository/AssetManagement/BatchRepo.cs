@@ -72,6 +72,7 @@ namespace VSManagement.Repository.AssetManagement
             {
                 result = result.Where(t => t.Guid == batch.Guid);
             }
+
             return result.ToList<dynamic>();
         }
 
@@ -94,10 +95,10 @@ namespace VSManagement.Repository.AssetManagement
                         record.Id,
                         PurchaseOrderID = record.PurchaseBatchMasterGuid,
                         record.BatchNo,
-                        Name = record.BatchName,
+                        Name = record.BatchDescription,
                         record.Quantity,
                         record.AssetType,
-                        record.AssetSize,
+                        record.AssetSpecification,
                         record.Guid
                     }).ToList();
 
@@ -112,10 +113,10 @@ namespace VSManagement.Repository.AssetManagement
                         record.Id,
                         PurchaseOrderID = record.PurchaseBatchMasterGuid,
                         record.BatchNo,
-                        Name = record.BatchName,
+                        Name = record.BatchDescription,
                         record.Quantity,
                         record.AssetType,
-                        record.AssetSize,
+                        record.AssetSpecification,
                         record.Guid
                     }).FirstOrDefault();
 

@@ -1,6 +1,7 @@
 ﻿using VSManagement.Models.VISWASAMUDRA;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -17,16 +18,16 @@ namespace VSManagement.Repository.AssetManagement
             return _context.Store.ToList();
         }
 
-        public int createAsset(Store record)
+        public Guid createAsset(Store record)
         {
             _context.Store.Add(record);
             _context.SaveChanges();
-            return record.Id;
+            return record.Guid;
         }
 
-        public Store getById(int id)
+        public Store getById(Guid id)
         {
-            return _context.Store.Where(a => a.Id == id).FirstOrDefault();
+            return _context.Store.Where(a => a.Guid == id).FirstOrDefault();
         }
 
         public int update(Store record)
@@ -35,7 +36,7 @@ namespace VSManagement.Repository.AssetManagement
             return _context.SaveChanges();
         }
 
-        public int delete(int id)
+        public int delete(Guid id)
         {
             _context.Store.Remove(getById(id));
             return _context.SaveChanges();

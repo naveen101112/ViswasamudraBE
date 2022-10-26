@@ -28,6 +28,8 @@ namespace VSManagement.Models.VISWASAMUDRA
         public string CompanyCode { get; set; }
         public string DeptCode { get; set; }
         public string UserCode { get; set; }
+        public string ProjectCode { get; set; }
+        public string CompanyName { get; set; }
 
         public virtual ICollection<Batch> Batch { get; set; }
     }

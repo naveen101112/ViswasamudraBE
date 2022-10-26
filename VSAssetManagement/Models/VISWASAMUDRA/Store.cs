@@ -14,11 +14,17 @@ namespace VSManagement.Models.VISWASAMUDRA
             Asset = new HashSet<Asset>();
         }
 
-        public int Id { get; set; }
         public string Name { get; set; }
-        public int MainStoreId { get; set; }
+        public int ParentStore { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
+        public string Code { get; set; }
+        public string Project { get; set; }
+        public string Incharge { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? CreatedDateTime { get; set; }
+        public string LastUpdatedBy { get; set; }
+        public DateTime? LastUpdatedDateTime { get; set; }
 
         public virtual ICollection<Asset> Asset { get; set; }
     }

@@ -4,8 +4,6 @@
     <div class="card">
         <div class="card-header">
             <h5>batch</h5>
-
-
         </div>
         <div class="card-body">
             @using (Html.BeginForm("", "", FormMethod.Post, new { style = "width:100%" }))
@@ -13,60 +11,81 @@
                 @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
                 @Html.AntiForgeryToken()
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Batch Number</label>
                             @Html.EditorFor(model => model.BatchNo, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order No",@id="poNo" } })
                             @Html.ValidationMessageFor(model => model.BatchNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Batch Name</label>
                             @Html.EditorFor(model => model.BatchName, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order Date",@id="poData" } })
                             @Html.ValidationMessageFor(model => model.BatchName, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Batch Number</label>
-                            @Html.EditorFor(model => model.BatchNo, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order No",@id="poNo" } })
-                            @Html.ValidationMessageFor(model => model.BatchNo, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Batch Name</label>
-                            @Html.EditorFor(model => model.BatchName, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order Date",@id="poData" } })
-                            @Html.ValidationMessageFor(model => model.BatchName, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Quantuty</label>
-                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control",@placeholder="Received By",@id="recivedBy" } })
+                            <label class="form-label">Quantity</label>
+                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order No",@id="poNo" } })
                             @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Asset Type</label>
                             @Html.EditorFor(model => model.AssetType, new { htmlAttributes = new { @class = "form-control",@placeholder="Received Date",@id="recivedDate" } })
                             @Html.ValidationMessageFor(model => model.AssetType, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Quantuty</label>
-                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control",@placeholder="Received By",@id="recivedBy" } })
-                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                            <label class="form-label">Purchase OrderNo</label>
+                            @Html.EditorFor(model => model.PurchaseOrderNo, new { htmlAttributes = new { @class = "form-control",@placeholder="Received By",@id="recivedBy" } })
+                            @Html.ValidationMessageFor(model => model.PurchaseOrderNo, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Purchase OrderDate</label>
+                            @Html.EditorFor(model => model.PurchaseOrderDate, new { htmlAttributes = new { @class = "form-control",@placeholder="Received Date",@id="recivedDate" } })
+                            @Html.ValidationMessageFor(model => model.PurchaseOrderDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">PO Received By</label>
+                            @Html.EditorFor(model => model.ReceivedBy, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order Date",@id="poData" } })
+                            @Html.ValidationMessageFor(model => model.ReceivedBy, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">PO Received Date</label>
+                            @Html.EditorFor(model => model.ReceivedDate, new { htmlAttributes = new { @class = "form-control",@placeholder="Received By",@id="recivedBy" } })
+                            @Html.ValidationMessageFor(model => model.ReceivedDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Asset Type</label>
                             @Html.EditorFor(model => model.AssetType, new { htmlAttributes = new { @class = "form-control",@placeholder="Received Date",@id="recivedDate" } })
                             @Html.ValidationMessageFor(model => model.AssetType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Created By</label>
+                            @Html.EditorFor(model => model.LastUpdatedBy, new { htmlAttributes = new { @class = "form-control",@placeholder="Received By",@id="recivedBy" } })
+                            @Html.ValidationMessageFor(model => model.LastUpdatedBy, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Updated On</label>
+                            @Html.EditorFor(model => model.LastUpdatedDateTime, new { htmlAttributes = new { @class = "form-control",@placeholder="Received Date",@id="recivedDate" } })
+                            @Html.ValidationMessageFor(model => model.LastUpdatedDateTime, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
