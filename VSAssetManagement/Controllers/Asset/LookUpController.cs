@@ -20,7 +20,7 @@ namespace VSManagement.Controllers.AssetManagement
         {
             List<io.LookupTypeValue> list =
                 JsonConvert.
-                DeserializeObject<List<io.LookupTypeValue>>(JsonConvert.SerializeObject(valueRepo.getLookUpDropDownById(id));
+                DeserializeObject<List<io.LookupTypeValue>>(JsonConvert.SerializeObject(valueRepo.getLookUpDropDownById(id)));
             return Ok(list);
         }
 

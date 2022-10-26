@@ -16,5 +16,6 @@ namespace VSAssetManagement.IOModels
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
+        public int Page { get; set; }
     }
 }

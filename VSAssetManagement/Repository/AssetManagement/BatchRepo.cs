@@ -50,10 +50,10 @@ namespace VSManagement.Repository.AssetManagement
                          {
                              x.Id,
                              x.BatchNo,
-                             x.BatchName,
+                             x.BatchDescription,
                              x.Quantity,
                              x.AssetType,
-                             x.AssetSize,
+                             x.AssetSpecification,
                              x.CreatedBy,
                              x.CreatedDateTime,
                              x.LastUpdatedBy,

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ViswaSamudraUI.Providers.Assets;
 using VSAssetManagement.IOModels;
 
@@ -13,5 +14,10 @@ namespace ViswaSamudraUI.Controllers
             IEnumerable<Project> list = provider.GetAll();
             return View(list);
 		}
+
+		public async Task<IActionResult> ProjectGetById(Project ProjectIoModel)
+        {
+
+        }
 	}
 }

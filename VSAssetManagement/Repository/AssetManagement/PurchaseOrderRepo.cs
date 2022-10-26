@@ -59,7 +59,7 @@ namespace VSManagement.Repository.AssetManagement
 
         public PurchaseOrder getById(int id, Guid guid)
         {
-            return _context.PurchaseOrder.Where(a => a.Id == id && a.Guid == guid).FirstOrDefault();
+            return _context.PurchaseOrder.Where(a => a.Id == id || a.Guid == guid).FirstOrDefault();
         }
 
         public PurchaseOrder getByOnlyId(int id)

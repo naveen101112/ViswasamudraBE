@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using io = VSAssetManagement.IOModels;
 
-namespace ViswaSamudraUI.Providers.Assets 
+namespace ViswaSamudraUI.Providers.Assets
 {
     public class PurchaseOrderProvider
     {

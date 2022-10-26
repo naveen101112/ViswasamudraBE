@@ -7,6 +7,8 @@
             <h5>Purchase Order</h5>
             <div class="card-header-right">
                 <div class="btn-group card-option">
+
+                    @Html.ActionLink("", "PoGetDetailById","PurchaseOrder", "", new {@style="margin-right: 10px;",@class="feather icon-plus-circle" })
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather icon-more-horizontal"></i>
                     </button>
@@ -32,8 +34,7 @@
                         <th data-breakpoints="xs">Created By</th>
                         <th data-breakpoints="xs">created DateTime</th>
                         <th data-breakpoints="xs">last Updated By</th>
-                        <th data-breakpoints="xs">last Updated On</th>
-                        <th data-breakpoints="xs">Record Status</th>                        
+                        <th data-breakpoints="xs">last Updated On</th>                   
                         <th data-breakpoints="xs" hidden> </th>
 
                     </tr>
@@ -44,7 +45,7 @@
                         {
                         <tr>
                             <td>
-                                @Html.ActionLink("", "Ops","PurchaseOrder", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                                @Html.ActionLink("", "PoGetDetailById","PurchaseOrder", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                             </td>
                             <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderNo)</td>
                             <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderDate)</td>
