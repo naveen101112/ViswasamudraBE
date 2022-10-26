@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 using VSAssetManagement.IOModels;
 using ViswaSamudraUI.Providers.Assets;
 
-namespace ViswaSamudraUI.Controllers
+namespace ViswaSamudraUI.Controllers.WINGS
 {
     public class PurchaseOrderController : Controller
     {
@@ -37,7 +37,7 @@ namespace ViswaSamudraUI.Controllers
 
         public ActionResult PoModification(PurchaseOrder PoIoModel)
         {
-            String poStatus = purchaseOrder.AddPurchaseOrder(PoIoModel);
+            string poStatus = purchaseOrder.AddPurchaseOrder(PoIoModel);
             return Content(poStatus);
         }
     }

@@ -14,18 +14,18 @@ using Newtonsoft.Json;
 using VSAssetManagement.IOModels;
 using ViswaSamudraUI.Providers.Assets;
 
-namespace ViswaSamudraUI.Controllers
+namespace ViswaSamudraUI.Controllers.WINGS
 {
     public class HomeController : Controller
     {
         PurchaseOrderProvider purchaseOrder = new PurchaseOrderProvider();
         public async Task<IActionResult> Index()
-        {            
-            IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder(); 
+        {
+            IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder();
             return View(poList);
         }
 
-        
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)

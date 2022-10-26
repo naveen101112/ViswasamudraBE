@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ViswaSamudraUI.Controllers
+namespace ViswaSamudraUI.Controllers.HRMS
 {
-    public class DashboardController : Controller
+    public class ReasonController : Controller
     {
         public IActionResult Index()
         {
