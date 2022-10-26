@@ -9,7 +9,7 @@ $(document).ready(function() {
         daysOfWeekHighlighted: "1"
     });
     // [ day-auto ]
-    $('#d_auto').datepicker({
+    $('.d_auto').datepicker({
         autoclose: true
     });
     // [ day-disable ]

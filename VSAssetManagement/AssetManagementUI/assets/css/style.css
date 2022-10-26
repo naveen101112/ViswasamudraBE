@@ -326,6 +326,7 @@ p.text-muted {
 .card .card-block,
   .card .card-body {
     padding: 20px 25px;
+    overflow: auto;
 }
 
 .card .card-block-big {

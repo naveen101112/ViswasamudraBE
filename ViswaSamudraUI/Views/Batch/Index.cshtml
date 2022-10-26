@@ -1,0 +1,79 @@
+﻿@using System.Data
+@model IEnumerable<VSAssetManagement.IOModels.BatchSearch>
+
+<div class="col-sm-12" style="padding:1px">
+    <div class="card">
+        <div class="card-header">
+            <h5>Batch</h5>
+            <div class="card-header-right">
+                <div class="btn-group card-option">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="feather icon-more-horizontal"></i>
+                    </button>
+                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                        <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                        <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding:2px 2px 2px 2px"> 
+            <div class="dt-responsive table-responsive">
+                <table id="simpletable" class="table table-striped table-bordered nowrap">            
+                <thead>
+                    <tr>
+                            <th>#</th>
+                            <th data-breakpoints="xs">Id</th>
+                            <th data-breakpoints="xs">Batch No</th>
+                            <th data-breakpoints="xs">Batch Name</th>
+                            <th data-breakpoints="xs">Quantity</th>
+                            <th data-breakpoints="xs">Asset Type</th>
+                            <th data-breakpoints="xs">Asset Size</th>
+                            <th data-breakpoints="xs">Created By</th>
+                            <th data-breakpoints="xs">Created Date Time</th>
+                            <th data-breakpoints="xs">Last Updated By</th>
+                            <th data-breakpoints="xs">Last Updated Date Time</th>
+                            <th data-breakpoints="xs">Purchase OrderNo</th>
+                            <th data-breakpoints="xs">Purchase OrderDate</th>
+                            <th data-breakpoints="xs">PO Received By</th>
+                            <th data-breakpoints="xs">PO Received Date</th>
+                            <th data-breakpoints="xs" hidden>Guid</th>
+                            <th data-breakpoints="xs" hidden>Purchase Batch Master Guid</th>
+
+                    </tr>
+                </thead>
+                <tbody>                 
+                    <tr>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                               @Html.ActionLink("", "BatchGetDetailById","Batch", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                            </td>
+                                <td>@Html.DisplayFor(modelItem=>item.Id)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.BatchName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Quantity)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.AssetType)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.AssetSize)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderNo)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderDate)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ReceivedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ReceivedDate)</td>
+                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
+                                <td hidden>@Html.DisplayFor(modelItem=>item.PurchaseBatchMasterGuid)</td>
+                        </tr>
+                        }                    
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+
