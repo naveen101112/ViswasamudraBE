@@ -20,7 +20,7 @@ namespace VSManagement.Repository.AssetManagement
 
         public Guid createAsset(Reason record)
         {
-            _context.Store.Add(Reason);
+            _context.Reason.Add(record);
             _context.SaveChanges();
             return record.Guid;
         }

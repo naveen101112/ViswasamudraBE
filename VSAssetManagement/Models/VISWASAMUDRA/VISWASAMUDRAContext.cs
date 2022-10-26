@@ -733,6 +733,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnName("CREATED_DATE_TIME")
                     .HasColumnType("datetime");
 
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
                     .HasMaxLength(20)
