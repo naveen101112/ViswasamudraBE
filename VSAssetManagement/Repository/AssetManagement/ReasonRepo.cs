@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using io = VSAssetManagement.IOModels;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -16,6 +17,16 @@ namespace VSManagement.Repository.AssetManagement
         public List<Reason> getAllList()
         {
             return _context.Reason.ToList();
+        }
+
+        public List<Reason> searchListQuery(io.Reason res)
+        {
+            IQueryable<Reason> query = _context.Set<Reason>();
+            if (res.Guid != null)
+            {
+                query = query.Where(t => t.Guid == res.Guid);
+            }
+            return query.ToList<Reason>();
         }
 
         public Guid createAsset(Reason record)

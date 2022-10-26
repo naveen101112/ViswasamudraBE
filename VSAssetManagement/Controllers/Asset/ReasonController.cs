@@ -22,6 +22,17 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
+        [HttpPost("reasonsearch")]
+        public ActionResult Search([FromBody] io.Reason record)
+        {
+            var AssectModel = JsonConvert.
+                DeserializeObject<io.Reason>(JsonConvert.SerializeObject(record));
+            List<io.Reason> list =
+            JsonConvert.DeserializeObject<List<io.Reason>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
+
+            return Ok(list);
+        }
+
         [HttpGet("{id}")]
         public ActionResult getById(Guid id)
         {
@@ -31,7 +42,7 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
-        [HttpPost]
+        [HttpPost("CreateResult")]
         public ActionResult createRecord([FromBody] io.Reason record)
         {
             Guid id = repo.createAsset(JsonConvert.
@@ -39,7 +50,7 @@ namespace VSManagement.Controllers.AssetManagement
             return Created($"/reason/{id}", "Created Successfully.");
         }
 
-        [HttpPut]
+        [HttpPost("UpdateResult")]
         public ActionResult updateRecord([FromBody] io.Reason record)
         {
             int id = repo.update(JsonConvert.
