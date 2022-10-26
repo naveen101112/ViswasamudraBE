@@ -31,7 +31,7 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(AssetOperations asset)
         {
-            _context.AssetOperations.Update(asset);
+            _context.AssetOperations.Update(asset).Property(x => x.Id).IsModified = false; 
             return _context.SaveChanges();
         }
 
