@@ -7,7 +7,7 @@ using VSManagement.Repository.AssetManagement;
 
 namespace VSManagement.Controllers.AssetManagement
 {
-    [Route("project")]
+    [Route("Project")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
@@ -39,7 +39,7 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Project record)
         {
             int id = repo.create(JsonConvert.
@@ -47,7 +47,7 @@ namespace VSManagement.Controllers.AssetManagement
             return Created($"/project/{id}", "Created Successfully.");
         }
 
-        [HttpPut]
+        [HttpPost("Update")]
         public ActionResult updateRecord([FromBody] io.Project record)
         {
             int id = repo.update(JsonConvert.
@@ -62,6 +62,17 @@ namespace VSManagement.Controllers.AssetManagement
             int count = repo.delete(id);
             if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
+        }
+
+        [HttpPost("search")]
+        public ActionResult Search([FromBody] io.Project record)
+        {
+            var AssectModel = JsonConvert.
+                DeserializeObject<io.Project>(JsonConvert.SerializeObject(record));
+            List<io.Project> list =
+            JsonConvert.DeserializeObject<List<io.Project>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
+
+            return Ok(list);
         }
 
         [HttpGet("grid")]

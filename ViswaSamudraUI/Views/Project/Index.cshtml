@@ -7,6 +7,7 @@
             <h5>Project</h5>
             <div class="card-header-right">
                 <div class="btn-group card-option">
+                    @Html.ActionLink("", "ProjectOps","Project", "", new {@style="margin-right: 10px;",@class="feather icon-plus-circle" })
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather icon-more-horizontal"></i>
                     </button>
@@ -57,9 +58,8 @@
                         {
                         <tr>
                             <td>
-                               @Html.ActionLink("", "Ops","Project", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                                @Html.ActionLink("", "ProjectOps","Project", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                             </td>
-                                <td>@Html.DisplayFor(modelItem=>item.Id)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Code)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Name)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Type)</td>

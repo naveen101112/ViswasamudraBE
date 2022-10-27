@@ -1,0 +1,71 @@
+﻿@using System.Data
+@model IEnumerable<VSAssetManagement.IOModels.Store>
+
+<div class="col-sm-12" style="padding:1px">
+    <div class="card">
+        <div class="card-header">
+            <h5>Store</h5>
+            <div class="card-header-right">
+                <div class="btn-group card-option">
+                    @Html.ActionLink("", "StoreOps","Store", "", new {@style="margin-right: 10px;",@class="feather icon-plus-circle" })
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="feather icon-more-horizontal"></i>
+                    </button>
+                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                        <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                        <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding:2px 2px 2px 2px"> 
+            <div class="dt-responsive table-responsive">
+                <table id="simpletable" class="table table-striped table-bordered nowrap">            
+                <thead>
+                    <tr>
+                            <th>#</th>
+                            <th data-breakpoints="xs">Id</th>
+                            <th data-breakpoints="xs">Name</th>
+                            <th data-breakpoints="xs">Parent Store</th>
+                            <th data-breakpoints="xs" hidden>Guid</th>
+                            <th data-breakpoints="xs">Code</th>
+                            <th data-breakpoints="xs">Project</th>
+                            <th data-breakpoints="xs">Incharge</th>
+                            <th data-breakpoints="xs">Incharge Mobile</th>
+                            <th data-breakpoints="xs">Created By</th>
+                            <th data-breakpoints="xs">Created Date Time</th>
+                            <th data-breakpoints="xs">Last Updated By</th>
+                            <th data-breakpoints="xs">Last Updated Date Time</th>
+                    </tr>
+                </thead>
+                <tbody>                 
+                    <tr>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                @Html.ActionLink("", "StoreOps","Store", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                            </td>
+                                <td>@Html.DisplayFor(modelItem=>item.Id)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ParentStore)</td>
+                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Code)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Project)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Incharge)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.InchargeMobile)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
+                        </tr>
+                        }                    
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+

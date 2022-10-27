@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VSAssetManagement;
+using io = VSAssetManagement.IOModels;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -32,7 +33,7 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(Project record)
         {
-            _context.Project.Update(record);
+            _context.Project.Update(record).Property(r => r.Id).IsModified = false;
             return _context.SaveChanges();
         }
 
@@ -86,6 +87,16 @@ namespace VSManagement.Repository.AssetManagement
                         record.AddressLine2,
                         record.Guid
                     }).FirstOrDefault();
+        }
+
+        public List<Project> searchListQuery(io.Project po)
+        {
+            IQueryable<Project> query = _context.Set<Project>();
+            if (po.Guid != null)
+            {
+                query = query.Where(t => t.Guid == po.Guid);
+            }
+            return query.ToList<Project>();
         }
     }
 }

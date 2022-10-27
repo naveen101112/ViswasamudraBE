@@ -14,3 +14,14 @@ Column Names Fetch:
 SELECT COLUMN_NAME--dbo.ToProperCase(COLUMN_NAME)
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = N'ZONES'
+
+
+                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+
+SELECT '<th data-breakpoints="xs">'+dbo.ToProperCase(replace(COLUMN_NAME,'_',' '))+'</th>'
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = N'STORE'
+
+SELECT '<td>@Html.DisplayFor(modelItem=>item.'+replace(dbo.ToProperCase(replace(COLUMN_NAME,'_',' ')),' ','')+')</td>'
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = N'STORE'

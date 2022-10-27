@@ -8,7 +8,7 @@ using System;
 
 namespace VSManagement.Controllers.AssetManagement
 {
-    [Route("store")]
+    [Route("Store")]
     [ApiController]
     public class StoreController : ControllerBase
     {
@@ -31,7 +31,7 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Store record)
         {
             Guid id = repo.createAsset(JsonConvert.
@@ -39,13 +39,24 @@ namespace VSManagement.Controllers.AssetManagement
             return Created($"/store/{id}", "Created Successfully.");
         }
 
-        [HttpPut]
+        [HttpPost("Update")]
         public ActionResult updateRecord([FromBody] io.Store record)
         {
             int id = repo.update(JsonConvert.
                 DeserializeObject<Store>(JsonConvert.SerializeObject(record)));
             if (id == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
+        }
+
+        [HttpPost("search")]
+        public ActionResult Search([FromBody] io.Store record)
+        {
+            var model = JsonConvert.
+                DeserializeObject<io.Store>(JsonConvert.SerializeObject(record));
+            List<io.Store> list =
+            JsonConvert.DeserializeObject<List<io.Store>>(JsonConvert.SerializeObject(repo.searchListQuery(model)));
+
+            return Ok(list);
         }
 
         [HttpDelete("{id}")]

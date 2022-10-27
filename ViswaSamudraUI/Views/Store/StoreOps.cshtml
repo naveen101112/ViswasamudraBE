@@ -1,0 +1,87 @@
+﻿@using System.Data
+@model VSAssetManagement.IOModels.Store    
+<div class="col-sm-12" style="padding:1px">
+   <div class="card">
+      <div class="card-header">
+         <h5>Store</h5>
+         <div class="card-header-right">
+                <div class="btn-group card-option">
+                    @Html.ActionLink("", "Index","Store", "", new {@style="margin-right: 10px;",@class="feather icon-x-circle" })
+                </div>
+            </div>
+      </div>
+      <div class="card-body">
+         @using (Html.BeginForm("", "", FormMethod.Post, new { style = "width:100%" }))
+         {
+         @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
+         @Html.AntiForgeryToken()
+         <div class="row">
+            <div class="col-md-4">
+               <div class="form-group">
+                  <label class="form-label">Store Code</label>                                                       
+                  @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control",@placeholder="Store Code",@id="Code" } })
+                  @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="form-group">
+                  <label class="form-label">Store Name</label> 
+                  @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",@placeholder="Store name",@id="Name" } })
+                  @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="form-group">
+                  <label class="form-label">Project</label>
+                  @Html.EditorFor(model => model.Project, new { htmlAttributes = new { @class = "form-control",@placeholder="Project",@id="Project" } })
+                  @Html.ValidationMessageFor(model => model.Project, "", new { @class = "text-danger" })
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="form-group">
+                  <label class="form-label">Parent Store</label>
+                  @Html.EditorFor(model => model.ParentStore, new { htmlAttributes = new { @class = "form-control",@placeholder="Parent Store",@id="ParentStore" } })
+                  @Html.ValidationMessageFor(model => model.ParentStore, "", new { @class = "text-danger" })
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="form-group">
+                  <label class="form-label">Store Incharge</label>
+                  @Html.EditorFor(model => model.Incharge, new { htmlAttributes = new { @class = "form-control",@placeholder="Store Incharge",@id="Incharge" } })
+                  @Html.ValidationMessageFor(model => model.Incharge, "", new { @class = "text-danger" })
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="form-group">
+                  <label class="form-label">Incharge Mobile</label>
+                  @Html.EditorFor(model => model.InchargeMobile, new { htmlAttributes = new { @class = "form-control",@placeholder="Incharge Mobile",@id="InchargeMobile" } })
+                  @Html.ValidationMessageFor(model => model.InchargeMobile, "", new { @class = "text-danger" })
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="form-group">
+                  <label class="form-label">DropDown Test</label>
+                  @Html.DropDownListFor(x => Model.Regions, new SelectList(Model.Regions, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Country"})
+        @Html.ValidationMessageFor(x => x.Regions, "", new { @class = "text-danger" })
+               </div>
+            </div>
+         </div>
+         
+         <button class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+         
+         }
+      </div>
+   </div>
+</div>
+@section Scripts
+{
+<script src="@Url.Content("../customjs/store.js")"></script>
+<style>        
+.table thead th {
+    padding:1px;
+}
+.table tbody td {
+    padding:1px;
+}
+</style>
+}
