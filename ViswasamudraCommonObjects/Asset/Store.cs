@@ -18,6 +18,5 @@ namespace VSAssetManagement.IOModels
         public string LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDateTime { get; set; }
         public int Id { get; set; }
-        public IEnumerable<string> Regions { get; set; }
     }
 }

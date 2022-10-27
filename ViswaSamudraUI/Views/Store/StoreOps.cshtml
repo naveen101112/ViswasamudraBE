@@ -58,13 +58,6 @@
                   @Html.ValidationMessageFor(model => model.InchargeMobile, "", new { @class = "text-danger" })
                </div>
             </div>
-            <div class="col-md-4">
-               <div class="form-group">
-                  <label class="form-label">DropDown Test</label>
-                  @Html.DropDownListFor(x => Model.Regions, new SelectList(Model.Regions, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Country"})
-        @Html.ValidationMessageFor(x => x.Regions, "", new { @class = "text-danger" })
-               </div>
-            </div>
          </div>
          
          <button class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>

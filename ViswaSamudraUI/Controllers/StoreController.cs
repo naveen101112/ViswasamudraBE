@@ -29,7 +29,6 @@ namespace ViswaSamudraUI.Controllers
             listTest.Add("B");
             listTest.Add("C");
             var l = list.FirstOrDefault();
-            l.Regions = listTest;
             return View(l);
         }
 
