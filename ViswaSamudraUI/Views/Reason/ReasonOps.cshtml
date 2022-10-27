@@ -1,0 +1,53 @@
+﻿@using System.Data
+@model VSAssetManagement.IOModels.Reason    
+<div class="col-sm-12" style="padding:1px">
+   <div class="card">
+      <div class="card-header">
+         <h5>Reason</h5>
+      </div>
+      <div class="card-body">
+         @using (Html.BeginForm("", "", FormMethod.Post, new { style = "width:100%" }))
+         {
+         @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
+         @Html.AntiForgeryToken()
+         <div class="row">
+            <div class="col-md-4">
+               <div class="form-group">
+                  <label class="form-label">Reason Name</label>
+                            @Html.EditorFor(model => model.ReasonName, new { htmlAttributes = new { @class = "form-control",@placeholder="Reason Name",@id="ReasonName" } })
+                            @Html.ValidationMessageFor(model => model.ReasonName, "", new { @class = "text-danger" })
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="form-group">
+                            <label class="form-label">Reason Code</label>
+                            @Html.EditorFor(model => model.ReasonCode, new { htmlAttributes = new { @class = "form-control",@placeholder="Reason Code",@id="ReasonCode" } })
+                            @Html.ValidationMessageFor(model => model.ReasonCode, "", new { @class = "text-danger" })
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="form-group">
+                            <label class="form-label">Reason Type</label>
+                            @Html.EditorFor(model => model.ReasonType, new { htmlAttributes = new { @class = "form-control",@placeholder="Reason Type",@id="ReasonType" } })
+                            @Html.ValidationMessageFor(model => model.ReasonType, "", new { @class = "text-danger" })
+               </div>
+            </div>
+         </div>      
+                <button class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+         
+         }
+      </div>
+   </div>
+</div>
+@section Scripts
+{
+<script src="@Url.Content("../customjs/reason.js")"></script>
+<style>        
+.table thead th {
+    padding:1px;
+}
+.table tbody td {
+    padding:1px;
+}
+</style>
+}

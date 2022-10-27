@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ViswaSamudraUI.Controllers
+namespace ViswaSamudraUI.Controllers.WINGS
 {
     public class DashboardController : Controller
     {

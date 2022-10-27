@@ -7,19 +7,19 @@ using ViswaSamudraUI.Providers.Assets;
 using VSAssetManagement.IOModels;
 using io = VSAssetManagement.IOModels;
 
-namespace ViswaSamudraUI.Controllers
+namespace ViswaSamudraUI.Controllers.WINGS
 {
-	public class BatchController : Controller
-	{
+    public class BatchController : Controller
+    {
         BatchProvider batchOrder = new BatchProvider();
-        io.BatchSearch BatchSearch = new io.BatchSearch();
+        BatchSearch BatchSearch = new BatchSearch();
         public IActionResult Index()
-		{
-            BatchSearch batchModel =new BatchSearch();
+        {
+            BatchSearch batchModel = new BatchSearch();
             BatchSearch.Id = 0;
-            IEnumerable<io.BatchSearch> list = batchOrder.GetAllBatches(BatchSearch);
+            IEnumerable<BatchSearch> list = batchOrder.GetAllBatches(BatchSearch);
             return View(list);
-		}
+        }
 
         public async Task<IActionResult> BatchGetDetailById(BatchSearch batchModel)
         {
@@ -33,7 +33,7 @@ namespace ViswaSamudraUI.Controllers
 
         public ActionResult BatchModification(Batch batchModel)
         {
-            String batchStatus = batchOrder.BatchModifications(batchModel);
+            string batchStatus = batchOrder.BatchModifications(batchModel);
             return Content(batchStatus);
         }
     }

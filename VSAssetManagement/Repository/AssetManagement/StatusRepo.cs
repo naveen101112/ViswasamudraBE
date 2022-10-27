@@ -31,7 +31,7 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(Status record)
         {
-            _context.Status.Update(record);
+            _context.Status.Update(record).Property(x => x.Id).IsModified = false; ;
             return _context.SaveChanges();
         }
 

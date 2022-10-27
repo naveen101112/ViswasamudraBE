@@ -33,7 +33,7 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(LookupTypeValue record)
         {
-            _context.Update(record);
+            _context.Update(record).Property(x => x.Id).IsModified = false; ;
             return _context.SaveChanges();
         }
 

@@ -28,6 +28,7 @@ namespace VSManagement.Models.VISWASAMUDRA
         public virtual DbSet<LookupTypeValue> LookupTypeValue { get; set; }
         public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
+        public virtual DbSet<Reason> Reason { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Store> Store { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
@@ -107,8 +108,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()
@@ -205,8 +205,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .IsRequired()
@@ -261,8 +260,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUdatedBy)
                     .IsRequired()
@@ -585,8 +583,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -674,8 +671,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedOnAdd()
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -716,6 +712,54 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnName("USER_CODE")
                     .HasMaxLength(10)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Reason>(entity =>
+            {
+                entity.HasKey(e => e.Guid);
+
+                entity.ToTable("REASON");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("CREATED_BY")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDateTime)
+                    .HasColumnName("CREATED_DATE_TIME")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.LastUpdatedBy)
+                    .HasColumnName("LAST_UPDATED_BY")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastUpdatedDateTime)
+                    .HasColumnName("LAST_UPDATED_DATE_TIME")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ReasonCode)
+                    .HasColumnName("REASON_CODE")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReasonName)
+                    .HasColumnName("REASON_NAME")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReasonType)
+                    .HasColumnName("REASON_TYPE")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
             });
 
             modelBuilder.Entity<Status>(entity =>

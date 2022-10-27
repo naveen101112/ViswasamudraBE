@@ -58,7 +58,7 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(Asset asset)
         {
-            _context.Asset.Update(asset);
+            _context.Asset.Update(asset).Property(x => x.Id).IsModified = false; 
             return _context.SaveChanges();
         }
 
