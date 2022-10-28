@@ -1,0 +1,5 @@
+﻿function SelectDropDown(type) {
+    $.ajax({
+        
+    });
+}

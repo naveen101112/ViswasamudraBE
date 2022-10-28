@@ -6,36 +6,34 @@
          <h5>Reason</h5>
       </div>
       <div class="card-body">
-         @using (Html.BeginForm("", "", FormMethod.Post, new { style = "width:100%" }))
-         {
+            <form id="reasonform">
          @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
          @Html.AntiForgeryToken()
          <div class="row">
             <div class="col-md-4">
                <div class="form-group">
-                  <label class="form-label">Reason Name</label>
-                            @Html.EditorFor(model => model.ReasonName, new { htmlAttributes = new { @class = "form-control",@placeholder="Reason Name",@id="ReasonName" } })
-                            @Html.ValidationMessageFor(model => model.ReasonName, "", new { @class = "text-danger" })
+                <label class="form-label">Reason Name</label>
+                <input type="text" class="form-control" asp-for="ReasonName" name="reason_name" placeholder="Reason Name" id="ReasonName">
                </div>
             </div>
             <div class="col-md-4">
                <div class="form-group">
-                            <label class="form-label">Reason Code</label>
-                            @Html.EditorFor(model => model.ReasonCode, new { htmlAttributes = new { @class = "form-control",@placeholder="Reason Code",@id="ReasonCode" } })
-                            @Html.ValidationMessageFor(model => model.ReasonCode, "", new { @class = "text-danger" })
+                <label class="form-label">Reason Code</label>
+                <input type="text" class="form-control" asp-for="ReasonCode" name="reason_code" placeholder="Reason Code" id="ReasonCode">
+                            
+                    
                </div>
             </div>
             <div class="col-md-4">
                <div class="form-group">
-                            <label class="form-label">Reason Type</label>
-                            @Html.EditorFor(model => model.ReasonType, new { htmlAttributes = new { @class = "form-control",@placeholder="Reason Type",@id="ReasonType" } })
-                            @Html.ValidationMessageFor(model => model.ReasonType, "", new { @class = "text-danger" })
+                <label class="form-label">Reason Type</label>
+                <input type="text" class="form-control" asp-for="ReasonType" name="reason_type" placeholder="Reason Tode" id="ReasonType">
                </div>
             </div>
          </div>      
-                <button class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
-         
-         }
+                <button type="submit" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+
+            </form>
       </div>
    </div>
 </div>

@@ -722,7 +722,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.Guid)
                     .HasColumnName("GUID")
-                    .ValueGeneratedNever();
+                    .HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
@@ -786,10 +786,6 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.ToTable("STORE");
 
-                entity.HasIndex(e => e.Name)
-                    .HasName("NAME_UNIQ_STORE")
-                    .IsUnique();
-
                 entity.Property(e => e.Guid)
                     .HasColumnName("GUID")
                     .HasDefaultValueSql("(newid())");
@@ -806,21 +802,13 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Incharge)
                     .HasColumnName("INCHARGE")
                     .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.InchargeMobile)
-                    .HasColumnName("INCHARGE_MOBILE")
-                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.LastUpdatedBy)
@@ -833,7 +821,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
-                    .IsRequired()
                     .HasColumnName("NAME")
                     .HasMaxLength(50)
                     .IsUnicode(false);
