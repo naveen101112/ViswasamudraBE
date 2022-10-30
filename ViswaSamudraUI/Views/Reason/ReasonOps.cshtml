@@ -20,14 +20,13 @@
                <div class="form-group">
                 <label class="form-label">Reason Code</label>
                 <input type="text" class="form-control" asp-for="ReasonCode" name="reason_code" placeholder="Reason Code" id="ReasonCode">
-                            
-                    
                </div>
             </div>
             <div class="col-md-4">
                <div class="form-group">
                 <label class="form-label">Reason Type</label>
-                <input type="text" class="form-control" asp-for="ReasonType" name="reason_type" placeholder="Reason Tode" id="ReasonType">
+                            <select class="form-control" name="reason_type" asp-items="@ViewBag.reasontype" asp-for="ReasonType">                      
+                    </select>
                </div>
             </div>
          </div>      

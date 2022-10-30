@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ViswaSamudraUI.Providers.Assets;
-using VSAssetManagement.IOModels;
-using io=VSAssetManagement.IOModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using io =VSAssetManagement.IOModels;
+using System.Text.RegularExpressions;
 
 
 namespace ViswaSamudraUI.Controllers.WINGS
@@ -13,8 +14,10 @@ namespace ViswaSamudraUI.Controllers.WINGS
     public class ReasonController : Controller
     {
         ReasonProvider reasonProvider = new ReasonProvider();
+        LookUpProvider lookUpProvider = new LookUpProvider();
+
         public IActionResult Index()
-        {
+        {            
             IEnumerable<io.Reason> reasonList = reasonProvider.GetAllReason();
             return View(reasonList);            
         }
@@ -22,10 +25,15 @@ namespace ViswaSamudraUI.Controllers.WINGS
         {
             if (resModel.Guid == Guid.Empty)
             {
+                ViewBag.reasontype = lookUpProvider.GetSelectList("RTY");
                 return View("ReasonOps", resModel);
             }
             IEnumerable<io.Reason> poList = reasonProvider.GetAllReason(resModel);
-            return View("ReasonOps", poList.FirstOrDefault());
+            var result = poList.FirstOrDefault();           
+            
+            ViewBag.reasontype = lookUpProvider.GetSelectList("RTY", result.ReasonType);
+
+            return View("ReasonOps", result);
         }
 
         public ActionResult ReasonModification(io.Reason resModel)

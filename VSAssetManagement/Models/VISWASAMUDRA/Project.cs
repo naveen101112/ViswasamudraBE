@@ -33,6 +33,10 @@ namespace VSManagement.Models.VISWASAMUDRA
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
+        public string CompanyCode { get; set; }
+        public string DeptCode { get; set; }
+        public string ProjectHead { get; set; }
+        public string UserCode { get; set; }
 
         public virtual ICollection<Asset> Asset { get; set; }
     }

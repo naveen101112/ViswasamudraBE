@@ -30,8 +30,8 @@
                             <th>Reason Name</th>
                             <th data-breakpoints="xs">Reason Code</th>
                             <th data-breakpoints="xs">Reason Type</th>                            
-                            <th data-breakpoints="xs">last Updated By</th>
-                            <th data-breakpoints="xs">last Updated On</th>
+                            <th data-breakpoints="xs">User</th>
+                            <th data-breakpoints="xs">Done On</th>
                             <th hidden></th>
                         </tr>
                     </thead>
@@ -45,7 +45,7 @@
                                 </td>
                                 <td>@Html.DisplayFor(modelItem=>item.ReasonName)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ReasonCode)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.ReasonType)</td>                         
+                                <td>@Html.DisplayFor(modelItem=>item.NAME)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>

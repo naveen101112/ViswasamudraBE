@@ -16,19 +16,21 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpGet]
         public ActionResult getAllList()
         {
+            io.Reason ReasonModel = new io.Reason();
+            ReasonModel.Id = 0;
             List<io.Reason> list =
                 JsonConvert.
-                DeserializeObject<List<io.Reason>>(JsonConvert.SerializeObject(repo.getAllList()));
+                DeserializeObject<List<io.Reason>>(JsonConvert.SerializeObject(repo.searchListQuery(ReasonModel)));
             return Ok(list);
         }
 
         [HttpPost("reasonsearch")]
         public ActionResult Search([FromBody] io.Reason record)
         {
-            var AssectModel = JsonConvert.
+            var ReasonModel = JsonConvert.
                 DeserializeObject<io.Reason>(JsonConvert.SerializeObject(record));
             List<io.Reason> list =
-            JsonConvert.DeserializeObject<List<io.Reason>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
+            JsonConvert.DeserializeObject<List<io.Reason>>(JsonConvert.SerializeObject(repo.searchListQuery(ReasonModel)));
 
             return Ok(list);
         }
@@ -45,7 +47,7 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpPost("CreateResult")]
         public ActionResult createRecord([FromBody] io.Reason record)
         {
-            Guid id = repo.createAsset(JsonConvert.
+            Guid id = repo.createReason(JsonConvert.
                 DeserializeObject<Reason>(JsonConvert.SerializeObject(record)));
             return Created($"/reason/{id}", "Created Successfully.");
         }

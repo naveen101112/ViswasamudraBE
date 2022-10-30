@@ -19,7 +19,7 @@
         spacing: 10,
         z_index: 999999,
         delay: 2500,
-        timer: 1000,
+        timer: 10000,
         url_target: '_blank',
         mouse_over: false,
         animate: {

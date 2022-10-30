@@ -9,7 +9,6 @@ namespace VSManagement.Models.VISWASAMUDRA
 {
     public partial class Reason
     {
-        public int Id { get; set; }
         public string ReasonCode { get; set; }
         public string ReasonName { get; set; }
         public string ReasonType { get; set; }
@@ -19,5 +18,6 @@ namespace VSManagement.Models.VISWASAMUDRA
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
+        public int Id { get; set; }
     }
 }

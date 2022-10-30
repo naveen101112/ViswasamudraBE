@@ -11107,7 +11107,7 @@ body.layout-14 .pcoded-navbar.navbar-dark .navbar-popup:after {
 /* input group End */
 /**====== Form Componant css end ======**/
 select.form-control:not([size]):not([multiple]) {
-    height: calc(2.55rem + 2px);
+    height: calc(2.55rem + -9px);  
 }
 
 .input-group-lg > .input-group-append > select.btn:not([size]):not([multiple]),

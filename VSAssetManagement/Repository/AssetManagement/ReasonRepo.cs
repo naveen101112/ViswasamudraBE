@@ -19,17 +19,36 @@ namespace VSManagement.Repository.AssetManagement
             return _context.Reason.ToList();
         }
 
-        public List<Reason> searchListQuery(io.Reason res)
+        public List<dynamic> searchListQuery(io.Reason res)
         {
             IQueryable<Reason> query = _context.Set<Reason>();
-            if (res.Guid != null)
+            if (res.Guid != Guid.Empty)
             {
                 query = query.Where(t => t.Guid == res.Guid);
             }
-            return query.ToList<Reason>();
+
+            IQueryable<LookupTypeValue> lquery = _context.Set<LookupTypeValue>();
+
+            var result = from x in query
+                         from y in lquery.Where(y => y.Code == x.ReasonType)
+                         select new
+                         {
+                             x.Id,
+                             x.ReasonName,
+                             x.ReasonCode,
+                             x.ReasonType,
+                             y.Name,
+                             x.CreatedBy,
+                             x.CreatedDateTime,
+                             x.LastUpdatedBy,
+                             x.LastUpdatedDateTime,
+                             x.RecordStatus,
+                             x.Guid,
+                         };
+            return result.ToList<dynamic>();
         }
 
-        public Guid createAsset(Reason record)
+        public Guid createReason(Reason record)
         {
             _context.Reason.Add(record);
             _context.SaveChanges();
@@ -43,7 +62,16 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(Reason record)
         {
-            _context.Reason.Update(record).Property(x => x.Id).IsModified = false; 
+            Reason OldRecord = getById(record.Guid);
+
+            Reason NewRecord= OldRecord;
+            NewRecord.ReasonCode= record.ReasonCode;
+            NewRecord.ReasonName = record.ReasonName;
+            NewRecord.ReasonType = record.ReasonType;
+            NewRecord.LastUpdatedDateTime = System.DateTime.Now;
+            NewRecord.LastUpdatedBy = record.LastUpdatedBy;
+
+            _context.Reason.Update(NewRecord).Property(x => x.Id).IsModified = false; 
             return _context.SaveChanges();
         }
 
