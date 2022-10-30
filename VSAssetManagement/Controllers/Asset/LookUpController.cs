@@ -15,12 +15,13 @@ namespace VSManagement.Controllers.AssetManagement
         LookUpRepo repo = new LookUpRepo(new VISWASAMUDRAContext());
         LookUpValueRepo valueRepo = new LookUpValueRepo(new VISWASAMUDRAContext());
 
-        [HttpGet("dropdown/{id}")]
-        public ActionResult getdropdownlist(Guid id)
+        [HttpGet("{code}")]
+        public ActionResult getdropdownlist(string code)
         {
+            return Ok(valueRepo.getLookUpDropDownByCode(code));
             List<io.LookupTypeValue> list =
                 JsonConvert.
-                DeserializeObject<List<io.LookupTypeValue>>(JsonConvert.SerializeObject(valueRepo.getLookUpDropDownById(id)));
+                DeserializeObject<List<io.LookupTypeValue>>(JsonConvert.SerializeObject(valueRepo.getLookUpDropDownByCode(code)));
             return Ok(list);
         }
 
@@ -34,13 +35,15 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult getById(Guid id)
+        [HttpPost("search")]
+        public ActionResult Search([FromBody] io.LookupType record)
         {
-            io.LookupType record = JsonConvert.
-                DeserializeObject<io.LookupType>(JsonConvert.SerializeObject(repo.getByGuid(id)));
-            if (record == null) return NotFound();
-            return Ok(record);
+            var model = JsonConvert.
+                DeserializeObject<LookupType>(JsonConvert.SerializeObject(record));
+            List<io.LookupType> list =
+            JsonConvert.DeserializeObject<List<io.LookupType>>(JsonConvert.SerializeObject(repo.searchListQuery(model)));
+
+            return Ok(list);
         }
 
         [HttpPost]
@@ -79,13 +82,15 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
-        [HttpGet("value/{id}")]
-        public ActionResult getValueById(Guid id)
+        [HttpPost("value/search")]
+        public ActionResult ValueSearch([FromBody] io.LookupTypeValue record)
         {
-            io.LookupTypeValue record = JsonConvert.
-                DeserializeObject<io.LookupTypeValue>(JsonConvert.SerializeObject(valueRepo.getByGuid(id)));
-            if (record == null) return NotFound();
-            return Ok(record);
+            var model = JsonConvert.
+                DeserializeObject<LookupTypeValue>(JsonConvert.SerializeObject(record));
+            List<io.LookupTypeValue> list =
+            JsonConvert.DeserializeObject<List<io.LookupTypeValue>>(JsonConvert.SerializeObject(valueRepo.searchListQuery(model)));
+
+            return Ok(list);
         }
 
         [HttpPost("value")]

@@ -53,6 +53,16 @@ namespace VSManagement.Repository.AssetManagement
             return _context.LookupTypeValue.Where(a => a.Guid == guid).FirstOrDefault();
         }
 
+        public List<LookupTypeValue> searchListQuery(LookupTypeValue record)
+        {
+            IQueryable<LookupTypeValue> query = _context.Set<LookupTypeValue>();
+            if (record.Guid != null)
+            {
+                query = query.Where(t => t.Guid == record.Guid);
+            }
+            return query.ToList<LookupTypeValue>();
+        }
+
         public dynamic getLookUpDropDownById(Guid id)
         {
             return (from value in _context.LookupTypeValue
@@ -67,6 +77,23 @@ namespace VSManagement.Repository.AssetManagement
                          value.Code,
                          value.Name
                      }
+             );
+        }
+
+        public dynamic getLookUpDropDownByCode(string code)
+        {
+            return (from value in _context.LookupTypeValue
+                    join lookup in _context.LookupType
+                    on value.LookupTypeId equals lookup.Guid
+                    where lookup.Code == code
+                       && lookup.RecordStatus == 1
+                       && value.RecordStatus == 1
+                    select new
+                    {
+                        value.Guid,
+                        value.Code,
+                        value.Name
+                    }
              );
         }
     }

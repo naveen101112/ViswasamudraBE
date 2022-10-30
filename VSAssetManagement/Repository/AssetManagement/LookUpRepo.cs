@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using Microsoft.EntityFrameworkCore;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -51,6 +50,21 @@ namespace VSManagement.Repository.AssetManagement
         public LookupType getById(int id, Guid guid)
         {
             return _context.LookupType.Where(a => a.Id == id && a.Guid == guid).FirstOrDefault();
+        }
+
+        public Guid getIdByCode(string code)
+        {
+            return _context.LookupType.Where(a => a.Code == code).FirstOrDefault().Guid;
+        }
+
+        public List<LookupType> searchListQuery(LookupType record)
+        {
+            IQueryable<LookupType> query = _context.Set<LookupType>();
+            if (record.Guid != null)
+            {
+                query = query.Where(t => t.Guid == record.Guid);
+            }
+            return query.ToList<LookupType>();
         }
     }
 }

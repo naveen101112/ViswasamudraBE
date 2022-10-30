@@ -407,6 +407,10 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.ToTable("LOOKUP_TYPE");
 
+                entity.HasIndex(e => e.Code)
+                    .HasName("IX_LOOKUP_TYPE")
+                    .IsUnique();
+
                 entity.Property(e => e.Guid)
                     .HasColumnName("GUID")
                     .HasDefaultValueSql("(newid())");
@@ -451,7 +455,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.RecordStatus)
                     .HasColumnName("RECORD_STATUS")
-                    .HasDefaultValueSql("((0))");
+                    .HasDefaultValueSql("((1))");
             });
 
             modelBuilder.Entity<LookupTypeValue>(entity =>
@@ -459,6 +463,10 @@ namespace VSManagement.Models.VISWASAMUDRA
                 entity.HasKey(e => e.Guid);
 
                 entity.ToTable("LOOKUP_TYPE_VALUE");
+
+                entity.HasIndex(e => e.Code)
+                    .HasName("IX_LOOKUP_TYPE_VALUE")
+                    .IsUnique();
 
                 entity.Property(e => e.Guid)
                     .HasColumnName("GUID")
@@ -506,7 +514,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.RecordStatus)
                     .HasColumnName("RECORD_STATUS")
-                    .HasDefaultValueSql("((0))");
+                    .HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.LookupType)
                     .WithMany(p => p.LookupTypeValue)
