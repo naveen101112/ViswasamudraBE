@@ -26,6 +26,7 @@ namespace VSManagement.Models.VISWASAMUDRA
         public string LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDateTime { get; set; }
         public int Id { get; set; }
+        public string InchargeMobile { get; set; }
 
         public virtual ICollection<Asset> Asset { get; set; }
     }

@@ -552,11 +552,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CompanyCode)
-                    .HasColumnName("COMPANY_CODE")
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.CreateDateTime)
                     .HasColumnName("CREATE_DATE_TIME")
                     .HasColumnType("datetime")
@@ -565,11 +560,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.DeptCode)
-                    .HasColumnName("DEPT_CODE")
-                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.EndDate)
@@ -601,11 +591,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ProjectHead)
-                    .HasColumnName("PROJECT_HEAD")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.ProjectSiteHead)
                     .HasColumnName("PROJECT_SITE_HEAD")
                     .HasMaxLength(50)
@@ -625,11 +610,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                 entity.Property(e => e.Type)
                     .HasColumnName("TYPE")
                     .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UserCode)
-                    .HasColumnName("USER_CODE")
-                    .HasMaxLength(10)
                     .IsUnicode(false);
             });
 
@@ -716,13 +696,9 @@ namespace VSManagement.Models.VISWASAMUDRA
 
             modelBuilder.Entity<Reason>(entity =>
             {
-                entity.HasKey(e => e.Guid);
+                entity.HasNoKey();
 
                 entity.ToTable("REASON");
-
-                entity.Property(e => e.Guid)
-                    .HasColumnName("GUID")
-                    .HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
@@ -733,7 +709,11 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnName("CREATED_DATE_TIME")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.Property(e => e.Guid).HasColumnName("GUID");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -786,6 +766,10 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.ToTable("STORE");
 
+                entity.HasIndex(e => e.Name)
+                    .HasName("NAME_UNIQ_STORE")
+                    .IsUnique();
+
                 entity.Property(e => e.Guid)
                     .HasColumnName("GUID")
                     .HasDefaultValueSql("(newid())");
@@ -802,13 +786,21 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Incharge)
                     .HasColumnName("INCHARGE")
                     .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InchargeMobile)
+                    .HasColumnName("INCHARGE_MOBILE")
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.LastUpdatedBy)
@@ -821,6 +813,7 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasColumnName("NAME")
                     .HasMaxLength(50)
                     .IsUnicode(false);
