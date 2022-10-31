@@ -27,10 +27,6 @@ namespace VSManagement.Repository.AssetManagement
             {
                 query = query.Where(t => t.Guid == po.Guid);
             }
-            if (po.ReceivedBy != null)
-            {
-                query = query.Where(t => t.ReceivedBy == po.ReceivedBy);
-            }
             return query.ToList<PurchaseOrder>();
         }
         public int create(PurchaseOrder record)
@@ -50,8 +46,6 @@ namespace VSManagement.Repository.AssetManagement
                         id = record.Id,
                         record.PurchaseOrderNo,
                         PurchaseOrderDate = StaticData.getDateString(record.PurchaseOrderDate.Value),
-                        record.ReceivedBy,
-                        ReceivedDate = StaticData.getDateString(record.ReceivedDate.Value),
                         record.Guid
                     }
                     ).FirstOrDefault();
@@ -87,8 +81,6 @@ namespace VSManagement.Repository.AssetManagement
                         record.Id,
                         OrderNo = record.PurchaseOrderNo,
                         OrderDate = StaticData.getDateString(record.PurchaseOrderDate.Value),
-                        record.ReceivedBy,
-                        ReceivedDate = StaticData.getDateString(record.ReceivedDate.Value),
                         record.Guid
                     }).ToList();
 

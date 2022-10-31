@@ -80,12 +80,12 @@ namespace VSManagement.Repository.AssetManagement
                     select new
                     {
                         asset.Id,
-                        asset.Code,
-                        asset.Name,
+                        asset.AssetCode,
+                        asset.AssetName,
                         asset.CompanyName,
-                        asset.ProjectGuid,
-                        asset.StoreGuid,
-                        asset.BatchGuid,
+                        asset.ProjectCode,
+                        asset.Store,
+                        asset.BatchNo,
                         asset.Guid
                     }).FirstOrDefault();
         }
@@ -96,12 +96,12 @@ namespace VSManagement.Repository.AssetManagement
                     select new
                     {
                         asset.Id,
-                        asset.Code,
-                        asset.Name,
+                        asset.AssetCode,
+                        asset.AssetName,
                         asset.CompanyName,
-                        asset.ProjectGuid,
-                        asset.StoreGuid,
-                        asset.BatchGuid,
+                        asset.ProjectCode,
+                        asset.Store,
+                        asset.BatchNo,
                         asset.Guid
                     }).ToList();
         }

@@ -9,11 +9,6 @@ namespace VSManagement.Models.VISWASAMUDRA
 {
     public partial class Store
     {
-        public Store()
-        {
-            Asset = new HashSet<Asset>();
-        }
-
         public string Name { get; set; }
         public int ParentStore { get; set; }
         public int RecordStatus { get; set; }
@@ -26,7 +21,6 @@ namespace VSManagement.Models.VISWASAMUDRA
         public string LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDateTime { get; set; }
         public int Id { get; set; }
-
-        public virtual ICollection<Asset> Asset { get; set; }
+        public string InchargeMobile { get; set; }
     }
 }

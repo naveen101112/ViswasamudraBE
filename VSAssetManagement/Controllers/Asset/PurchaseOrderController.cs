@@ -56,8 +56,6 @@ namespace VSManagement.Controllers.AssetManagement
             PurchaseOrder order = repo.getById(record.Id, record.Guid);
             order.PurchaseOrderNo = record.PurchaseOrderNo.ToString();
             order.PurchaseOrderDate = record.PurchaseOrderDate;
-            order.ReceivedBy = record.ReceivedBy.ToString();
-            order.ReceivedDate = record.ReceivedDate;
             int id = repo.update(order);
             if (id == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");

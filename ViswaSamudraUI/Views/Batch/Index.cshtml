@@ -27,10 +27,10 @@
                             <th>#</th>
                             <th data-breakpoints="xs">Id</th>
                             <th data-breakpoints="xs">Batch No</th>
-                            <th data-breakpoints="xs">Batch Name</th>
-                            <th data-breakpoints="xs">Quantity</th>
+                            <th data-breakpoints="xs">Batch Description</th>
+                            <th data-breakpoints="xs">Batch Quantity</th>
                             <th data-breakpoints="xs">Asset Type</th>
-                            <th data-breakpoints="xs">Asset Size</th>
+                            <th data-breakpoints="xs">Asset Specification</th>
                             <th data-breakpoints="xs">Created By</th>
                             <th data-breakpoints="xs">Created Date Time</th>
                             <th data-breakpoints="xs">Last Updated By</th>
@@ -40,7 +40,7 @@
                             <th data-breakpoints="xs">PO Received By</th>
                             <th data-breakpoints="xs">PO Received Date</th>
                             <th data-breakpoints="xs" hidden>Guid</th>
-                            <th data-breakpoints="xs" hidden>Purchase Batch Master Guid</th>
+                            <th data-breakpoints="xs" hidden>Purchase Order ID</th>
 
                     </tr>
                 </thead>
@@ -54,10 +54,10 @@
                             </td>
                                 <td>@Html.DisplayFor(modelItem=>item.Id)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.BatchName)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Quantity)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.BatchDescription)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.BatchQuantity)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.AssetType)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.AssetSize)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.AssetSpecification)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
@@ -67,7 +67,7 @@
                                 <td>@Html.DisplayFor(modelItem=>item.ReceivedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ReceivedDate)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.PurchaseBatchMasterGuid)</td>
+                                <td hidden>@Html.DisplayFor(modelItem=>item.PurchaseOrderId)</td>
                         </tr>
                         }                    
                 </tbody>

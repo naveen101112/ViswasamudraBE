@@ -27,20 +27,6 @@
                   @Html.ValidationMessageFor(model => model.PurchaseOrderDate, "", new { @class = "text-danger" })
                </div>
             </div>
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label class="form-label">Received By</label>
-                  @Html.EditorFor(model => model.ReceivedBy, new { htmlAttributes = new { @class = "form-control",@placeholder="Received By",@id="recivedBy" } })
-                  @Html.ValidationMessageFor(model => model.ReceivedBy, "", new { @class = "text-danger" })
-               </div>
-            </div>
-            <div class="col-md-6">
-               <div class="form-group">
-                  <label class="form-label">Received Date</label>
-                  @Html.EditorFor(model => model.ReceivedDate, new { htmlAttributes = new { @class = "form-control",@placeholder="Received Date",@id="recivedDate" } })
-                  @Html.ValidationMessageFor(model => model.PurchaseOrderNo, "", new { @class = "text-danger" })
-               </div>
-            </div>
          </div>
          <div class="card" style="margin-top: 0px;box-shadow:none">
             <div class="card-header" id="headingOne" style="padding: 3px 0px;">

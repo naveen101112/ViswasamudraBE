@@ -9,7 +9,7 @@ namespace ViswaSamudraUI.Providers.Assets
         CommonHelper ch = new CommonHelper();
         public IEnumerable<io.BatchSearch> GetAllBatches(io.BatchSearch BatchModel)
         {
-            return (IEnumerable<io.BatchSearch>)ch.GetDetailsRequest<io.BatchSearch>("Batch/batchsearch", BatchModel);
+            return (IEnumerable<io.BatchSearch>)ch.GetDetailsRequest<io.BatchSearch>("batch/batchsearch", BatchModel);
         }
 
         public string BatchModifications(io.Batch BatchModel = null)

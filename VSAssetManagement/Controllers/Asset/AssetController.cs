@@ -46,11 +46,11 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult updateRecord([FromForm] mo.Asset record)
         {
             mo.Asset asset = repo.getById(record.Id, record.Guid);
-            asset.Code = record.Code;
-            asset.Name = record.Name;
-            asset.ProjectGuid = record.ProjectGuid;
-            asset.StoreGuid = record.StoreGuid;
-            asset.BatchGuid = record.BatchGuid;
+            asset.AssetCode = record.AssetCode;
+            asset.AssetName = record.AssetName;
+            asset.ProjectCode = record.ProjectCode;
+            asset.Store = record.Store;
+            asset.BatchNo = record.BatchNo;
             asset.CompanyName = record.CompanyName;
             int id = repo.update(asset);
             if (id == 0) return Conflict("Error updating record");

@@ -16,10 +16,8 @@ namespace VSManagement.Models.VISWASAMUDRA
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
-        public Guid AssetGuid { get; set; }
+        public string AssetId { get; set; }
         public Guid Guid { get; set; }
-        public Guid TagGuid { get; set; }
-
-        public virtual Asset AssetGu { get; set; }
+        public string TagId { get; set; }
     }
 }

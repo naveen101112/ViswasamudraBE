@@ -21,15 +21,15 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Batch Name</label>
-                            @Html.EditorFor(model => model.BatchName, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order Date",@id="poData" } })
-                            @Html.ValidationMessageFor(model => model.BatchName, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.BatchDescription, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order Date",@id="poData" } })
+                            @Html.ValidationMessageFor(model => model.BatchDescription, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Quantity</label>
-                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order No",@id="poNo" } })
-                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.BatchQuantity, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order No",@id="poNo" } })
+                            @Html.ValidationMessageFor(model => model.BatchQuantity, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-4">
