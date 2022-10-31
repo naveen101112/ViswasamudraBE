@@ -69,8 +69,8 @@ namespace VSManagement.Repository.AssetManagement
                      join lookup in _context.LookupType
                      on value.LookupTypeId equals lookup.Guid
                      where lookup.Guid == id 
-                        && lookup.RecordStatus == 1
-                        && value.RecordStatus == 1
+                        && lookup.RecordStatus != 1
+                        && value.RecordStatus != 1
                      select new
                      {
                          value.Guid,

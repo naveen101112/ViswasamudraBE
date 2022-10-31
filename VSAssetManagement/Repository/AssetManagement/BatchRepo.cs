@@ -39,6 +39,46 @@ namespace VSManagement.Repository.AssetManagement
             return _context.SaveChanges();
         }
 
+        public List<dynamic> GetAllWithPO()
+        {
+            IQueryable<mo.Batch> Batchquery = _context.Set<mo.Batch>();
+            IQueryable<mo.PurchaseOrder> POquery = _context.Set<mo.PurchaseOrder>();
+
+            var result = from x in Batchquery
+                         from y in POquery.Where(y => y.Id == x.PurchaseOrderId)
+                         select new
+                         {
+                             x.Id,
+                             x.BatchNo,
+                             x.BatchDescription,
+                             x.BatchQuantity,
+                             x.AssetType,
+                             x.AssetSpecification,
+                             x.CreatedBy,
+                             x.CreatedDateTime,
+                             x.LastUpdatedBy,
+                             x.LastUpdatedDateTime,
+                             x.RecordStatus,
+                             x.Guid,
+                             x.Uom,
+                             x.StructureSubType,
+                             x.StructureType,
+                             x.BatchStatus,
+                             x.UsageUom,
+                             x.UseFrequency,
+                             x.InvoiceNo,
+                             x.InvoiceDate,
+                             x.ReceivedBy,
+                             x.ReceivedDate,
+                             x.PurchaseOrderId,
+                             y.PurchaseOrderNo,
+                             y.PurchaseOrderDate
+
+                         };
+
+            return result.ToList<dynamic>();
+        }
+
         public List<dynamic> searchListQuery(io.BatchSearch batch)
         {
             IQueryable<mo.Batch> Batchquery = _context.Set<mo.Batch>();
@@ -60,6 +100,16 @@ namespace VSManagement.Repository.AssetManagement
                              x.LastUpdatedDateTime,
                              x.RecordStatus,
                              x.Guid,
+                             x.Uom,
+                             x.StructureSubType,
+                             x.StructureType,
+                             x.BatchStatus,
+                             x.UsageUom,
+                             x.UseFrequency,
+                             x.InvoiceNo,
+                             x.InvoiceDate,
+                             x.ReceivedBy,
+                             x.ReceivedDate,
                              x.PurchaseOrderId,
                              y.PurchaseOrderNo,
                              y.PurchaseOrderDate
@@ -80,9 +130,9 @@ namespace VSManagement.Repository.AssetManagement
             return _context.SaveChanges();
         }
 
-        public mo.Batch getById(int id, Guid guid)
+        public mo.Batch getById(Guid guid)
         {
-            return _context.Batch.Where(a => a.Id == id && a.Guid == guid).FirstOrDefault();
+            return _context.Batch.Where(a =>a.Guid == guid).FirstOrDefault();
         }
 
         public IEnumerable<dynamic> getDataGrid()

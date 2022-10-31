@@ -81,5 +81,5 @@
 });
 
 function toJson() {
-    return Project = { Guid: $("#hdnGuid").val(), Code: $('#code').val(), Name: $('#name').val(), Type: $('#type').val(), StartDate: $('#start_date').val(), EndDate: $('#end_date').val(), ProjectSiteHead: $('#project_site_head').val(), SiteHeadMobile: $('#site_head_mobile').val(), GstinNo: $('#gstin_no').val(), CityTown: $('#city_town').val(), AddressLine1: $('#address_line_1').val(), AddressLine2: $('#address_line_2').val(), CompanyCode: $('#company_code').val(), DeptCode: $('#dept_code').val(), ProjectHead: $('#project_head').val(), UserCode: $('#user_code').val() };
+    return Project = { Guid: $("#hdnGuid").val(), ProjectCode: $('#ProjectCode').val(), ProjectName: $('#ProjectName').val(), ProjectType: $('#ProjectType').val(), ProjectStartDate: $('#ProjectStartDate').val(), ProjectEndDate: $('#ProjectEndDate').val(), ProjectSiteHead: $('#ProjectSiteHead').val(), SiteHeadMobile: $('#sSiteHeadMobile').val(), GstinNo: $('#GstinNo').val(), CityTown: $('#CityTown').val(), AddressLine1: $('#AddressLine1').val(), AddressLine2: $('#AddressLine2').val() };
 };

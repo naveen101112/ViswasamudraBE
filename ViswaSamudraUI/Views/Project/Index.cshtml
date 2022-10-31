@@ -27,12 +27,12 @@
                     <tr>
                             <th>#</th>
                             <th data-breakpoints="xs">Id</th>
-                            <th data-breakpoints="xs">Code</th>
-                            <th data-breakpoints="xs">Name</th>
-                            <th data-breakpoints="xs">Type</th>
+                            <th data-breakpoints="xs">Project Code</th>
+                            <th data-breakpoints="xs">Project Name</th>
+                            <th data-breakpoints="xs">Project Type</th>
                             <th data-breakpoints="xs">Client Name</th>
-                            <th data-breakpoints="xs">Start Date</th>
-                            <th data-breakpoints="xs">End Date</th>
+                            <th data-breakpoints="xs">Project Start Date</th>
+                            <th data-breakpoints="xs">Project End Date</th>
                             <th data-breakpoints="xs">Project Site Head</th>
                             <th data-breakpoints="xs">Site Head Mobile</th>
                             <th data-breakpoints="xs">Gstin No</th>
@@ -56,12 +56,13 @@
                             <td>
                                 @Html.ActionLink("", "ProjectOps","Project", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                             </td>
-                                <td>@Html.DisplayFor(modelItem=>item.Code)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Name)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Type)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Id)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ProjectCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ProjectName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ProjectType)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ClientName)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.StartDate)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.EndDate)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ProjectStartDate)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ProjectEndDate)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ProjectSiteHead)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.SiteHeadMobile)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.GstinNo)</td>

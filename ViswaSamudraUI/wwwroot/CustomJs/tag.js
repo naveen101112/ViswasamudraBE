@@ -12,7 +12,7 @@
         var message = '';
         
 		// [ Initialize validation ]
-        $('#storeform').validate({
+        $('#tagform').validate({
             ignore: '.ignore, .select2-input',
             focusInvalid: false,
             rules: {
@@ -22,17 +22,8 @@
                 'Name': {
                     required: true,
                 },
-                'Project': {
+                'Status': {
                     required: true,
-                },
-				'ParentStore': {
-                    required: false,                    
-                },
-                'Incharge': {
-                    required: false,
-                },
-                'InchargeMobile': {
-                    required: false,
                 }
             },
 
@@ -66,20 +57,20 @@
             }
         });
 		
-		if($('#storeform').valid()){
+		if($('#tagform').valid()){
 			$.ajax({
-				url: 'StoreModification',
+				url: 'TagModification',
 				data: toJson(),
 				type: 'Post',
 				success: function (data) {
 					nType = 'success';
 					message = data;
-					notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#Code').val() + ' - ' + $('#Name').val() + ' : Updated Successfully', " Store ");
+                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#Code').val() + ' - ' + $('#Name').val() + ' : Updated Successfully', " Tag ");
 				},
 				error: function (xhr, ajaxOptions, thrownError) {
 					nType = 'danger';
 					message = 'Error In Updation';
-					notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Store ")
+					notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Tag ")
 				},
 
 			});
@@ -88,5 +79,5 @@
 });
 
 function toJson() {
-    return Project = { Guid: $("#hdnGuid").val(), Code: $('#Code').val(), Name: $('#Name').val(), InchargeMobile: $('#InchargeMobile').val(), Incharge: $('#Incharge').val(), ParentStore: $('#ParentStore').val(), Project: $('#Project').val() };
+    return Project = { Guid: $("#hdnGuid").val(), Code: $('#Code').val(), Name: $('#Name').val(), Status: $('#Status').val() };
 };

@@ -7,6 +7,7 @@
             <h5>Tag</h5>
             <div class="card-header-right">
                 <div class="btn-group card-option">
+                    @Html.ActionLink("", "TagOps","Tag", "", new {@style="margin-right: 10px;",@class="feather icon-plus-circle" })
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather icon-more-horizontal"></i>
                     </button>
@@ -35,9 +36,6 @@
                             <th data-breakpoints="xs">Last Updated Date Time</th>
                             <th data-breakpoints="xs">Record Status</th>
                             <th data-breakpoints="xs" hidden>Guid</th>
-                            <th data-breakpoints="xs">Company Code</th>
-                            <th data-breakpoints="xs">Dept Code</th>
-                            <th data-breakpoints="xs">User Code</th>
 
                     </tr>
                 </thead>
@@ -47,7 +45,7 @@
                         {
                         <tr>
                             <td>
-                               @Html.ActionLink("", "Ops","Tag", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                               @Html.ActionLink("", "TagOps","Tag", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                             </td>
                                 <td>@Html.DisplayFor(modelItem=>item.Id)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Code)</td>
@@ -58,10 +56,7 @@
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.RecordStatus)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Guid)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CompanyCode)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.DeptCode)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.UserCode)</td>
+                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
                         </tr>
                         }                    
                 </tbody>

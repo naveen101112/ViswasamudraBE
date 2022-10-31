@@ -36,18 +36,18 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Tag record)
         {
             int id = repo.create(JsonConvert.
                 DeserializeObject<Tag>(JsonConvert.SerializeObject(record)));
-            return Created($"/project/{id}", "Created Successfully.");
+            return Created($"/tag/{id}", "Created Successfully.");
         }
 
-        [HttpPut]
-        public ActionResult updateRecord([FromForm] io.Tag record)
+        [HttpPost("Update")]
+        public ActionResult updateRecord([FromBody] io.Tag record)
         {
-            Tag tag = repo.getById(record.Id, record.Guid);
+            Tag tag = repo.getById(record.Guid);
             tag.Name = record.Name;
             tag.Code = record.Code;
             tag.Status = record.Status;
@@ -62,6 +62,17 @@ namespace VSManagement.Controllers.AssetManagement
             int count = repo.delete(id);
             if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
+        }
+
+        [HttpPost("search")]
+        public ActionResult Search([FromBody] io.Tag record)
+        {
+            var model = JsonConvert.
+                DeserializeObject<Tag>(JsonConvert.SerializeObject(record));
+            List<io.Tag> list =
+            JsonConvert.DeserializeObject<List<io.Tag>>(JsonConvert.SerializeObject(repo.searchListQuery(model)));
+
+            return Ok(list);
         }
     }
 }

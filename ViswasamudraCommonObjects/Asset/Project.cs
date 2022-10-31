@@ -4,14 +4,13 @@ namespace VSAssetManagement.IOModels
 {
     public class Project
     {
-
         public int Id { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
+        public string ProjectCode { get; set; }
+        public string ProjectName { get; set; }
+        public string ProjectType { get; set; }
         public string ClientName { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateTime? ProjectStartDate { get; set; }
+        public DateTime? ProjectEndDate { get; set; }
         public string ProjectSiteHead { get; set; }
         public string SiteHeadMobile { get; set; }
         public string GstinNo { get; set; }

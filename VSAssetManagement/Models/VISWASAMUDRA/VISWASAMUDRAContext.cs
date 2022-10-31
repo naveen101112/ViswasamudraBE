@@ -668,9 +668,13 @@ namespace VSManagement.Models.VISWASAMUDRA
 
             modelBuilder.Entity<Reason>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.Guid);
 
                 entity.ToTable("REASON");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
@@ -679,13 +683,10 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.Guid).HasColumnName("GUID");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
                     .HasColumnName("LAST_UPDATED_BY")
@@ -694,9 +695,11 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.ReasonCode)
+                    .IsRequired()
                     .HasColumnName("REASON_CODE")
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -711,7 +714,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
             });
 
             modelBuilder.Entity<Status>(entity =>

@@ -12,28 +12,27 @@
         var message = '';
         
 		// [ Initialize validation ]
-        $('#storeform').validate({
+        $('#batchform').validate({
             ignore: '.ignore, .select2-input',
             focusInvalid: false,
             rules: {
-                'Code': {
-                    required: true,                    
-                },
-                'Name': {
-                    required: true,
-                },
-                'Project': {
-                    required: true,
-                },
-				'ParentStore': {
-                    required: false,                    
-                },
-                'Incharge': {
-                    required: false,
-                },
-                'InchargeMobile': {
-                    required: false,
-                }
+                "BatchNo": { required: true, },
+                "BatchDescription": { required: false, },
+                "Quantity": { required: true, },
+                "AssetType": { required: true, },
+                "AssetSpecification": { required: true, },
+                "RecordStatus": { required: true, },
+                "PurchaseBatchMasterGuid": { required: true, },
+                "Uom": { required: true, },
+                "UseFrequency": { required: true, },
+                "UsageUom": { required: true, },
+                "BatchStatus": { required: true, },
+                "InvoiceNo": { required: true, },
+                "InvoiceDate": { required: true, },
+                "ReceivedBy": { required: true, },
+                "ReceivedDate": { required: true, },
+                "StructureType": { required: true, },
+                "StructureSubType": { required: true, }
             },
 
             // Errors //
@@ -66,20 +65,20 @@
             }
         });
 		
-		if($('#storeform').valid()){
+		if($('#batchform').valid()){
 			$.ajax({
-				url: 'StoreModification',
+				url: 'BatchModification',
 				data: toJson(),
 				type: 'Post',
 				success: function (data) {
 					nType = 'success';
 					message = data;
-					notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#Code').val() + ' - ' + $('#Name').val() + ' : Updated Successfully', " Store ");
+                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#BatchNo').val() + ' - ' + $('#BatchDescription').val() + ' : Updated Successfully', " Batch ");
 				},
 				error: function (xhr, ajaxOptions, thrownError) {
 					nType = 'danger';
 					message = 'Error In Updation';
-					notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Store ")
+                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Batch ")
 				},
 
 			});
@@ -88,5 +87,5 @@
 });
 
 function toJson() {
-    return Project = { Guid: $("#hdnGuid").val(), Code: $('#Code').val(), Name: $('#Name').val(), InchargeMobile: $('#InchargeMobile').val(), Incharge: $('#Incharge').val(), ParentStore: $('#ParentStore').val(), Project: $('#Project').val() };
+    return Project = { Guid: $("#hdnGuid").val(), BatchNo: $("#BatchNo").val(), BatchDescription: $("#BatchDescription").val(), Quantity: $("#BatchQuantity").val(), AssetType: $("#AssetType").val(), AssetSpecification: $("#AssetSpecification").val(), PurchaseOrderId: $("#PurchaseOrderId").val(), Uom: $("#Uom").val(), UseFrequency: $("#UseFrequency").val(), UsageUom: $("#UsageUom").val(), BatchStatus: $("#BatchStatus").val(), InvoiceNo: $("#InvoiceNo").val(), InvoiceDate: $("#InvoiceDate").val(), ReceivedBy: $("#ReceivedBy").val(), ReceivedDate: $("#ReceivedDate").val(), StructureType: $("#StructureType").val(), StructureSubType: $("#StructureSubType").val() };
 };

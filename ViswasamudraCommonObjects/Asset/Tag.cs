@@ -15,8 +15,5 @@ namespace VSAssetManagement.IOModels
         public DateTime LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
-        public string CompanyCode { get; set; }
-        public string DeptCode { get; set; }
-        public string UserCode { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
-        [HttpPost("batchsearch")]
+        [HttpPost("search")]
         public ActionResult Search([FromBody] io.BatchSearch record)
         {
             var AssectModel = JsonConvert.
@@ -31,6 +31,14 @@ namespace VSManagement.Controllers.AssetManagement
             List<io.BatchSearch> list =
             JsonConvert.DeserializeObject<List<io.BatchSearch>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
 
+            return Ok(list);
+        }
+
+        [HttpGet("all")]
+        public ActionResult GetAll()
+        {
+            List<io.BatchSearch> list =
+            JsonConvert.DeserializeObject<List<io.BatchSearch>>(JsonConvert.SerializeObject(repo.GetAllWithPO()));
             return Ok(list);
         }
 
@@ -51,18 +59,18 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Batch record)
         {
             int id = repo.create(JsonConvert.
                 DeserializeObject<Batch>(JsonConvert.SerializeObject(record)));
-            return Created($"/project/{id}", "Created Successfully.");
+            return Created($"/batch/{id}", "Created Successfully.");
         }
 
-        [HttpPost]
-        public ActionResult updateRecord([FromForm] io.Batch record)
+        [HttpPost("Update")]
+        public ActionResult updateRecord([FromBody] io.Batch record)
         {
-            Batch batch = repo.getById(record.Id, record.Guid);
+            Batch batch = repo.getById(record.Guid);
             batch.BatchDescription = record.BatchDescription;
             batch.BatchNo = record.BatchNo;
             batch.AssetSpecification = record.AssetSpecification;

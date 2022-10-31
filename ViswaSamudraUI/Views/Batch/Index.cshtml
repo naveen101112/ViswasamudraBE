@@ -7,6 +7,7 @@
             <h5>Batch</h5>
             <div class="card-header-right">
                 <div class="btn-group card-option">
+                    @Html.ActionLink("", "BatchOps","Batch", "", new {@style="margin-right: 10px;",@class="feather icon-plus-circle" })
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather icon-more-horizontal"></i>
                     </button>
@@ -31,16 +32,20 @@
                             <th data-breakpoints="xs">Batch Quantity</th>
                             <th data-breakpoints="xs">Asset Type</th>
                             <th data-breakpoints="xs">Asset Specification</th>
-                            <th data-breakpoints="xs">Created By</th>
-                            <th data-breakpoints="xs">Created Date Time</th>
-                            <th data-breakpoints="xs">Last Updated By</th>
-                            <th data-breakpoints="xs">Last Updated Date Time</th>
                             <th data-breakpoints="xs">Purchase OrderNo</th>
                             <th data-breakpoints="xs">Purchase OrderDate</th>
+                            <th data-breakpoints="xs">Uom</th>
+                            <th data-breakpoints="xs">Usage Uom</th>
+                            <th data-breakpoints="xs">Invoice No</th>
+                            <th data-breakpoints="xs">Invoice Date</th>
                             <th data-breakpoints="xs">PO Received By</th>
                             <th data-breakpoints="xs">PO Received Date</th>
                             <th data-breakpoints="xs" hidden>Guid</th>
                             <th data-breakpoints="xs" hidden>Purchase Order ID</th>
+                            <th data-breakpoints="xs">Created By</th>
+                            <th data-breakpoints="xs">Created Date Time</th>
+                            <th data-breakpoints="xs">Last Updated By</th>
+                            <th data-breakpoints="xs">Last Updated Date Time</th>
 
                     </tr>
                 </thead>
@@ -50,7 +55,7 @@
                         {
                         <tr>
                             <td>
-                               @Html.ActionLink("", "BatchGetDetailById","Batch", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                               @Html.ActionLink("", "BatchOps","Batch", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                             </td>
                                 <td>@Html.DisplayFor(modelItem=>item.Id)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
@@ -58,16 +63,20 @@
                                 <td>@Html.DisplayFor(modelItem=>item.BatchQuantity)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.AssetType)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.AssetSpecification)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderNo)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderDate)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Uom)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.UsageUom)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.InvoiceNo)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.InvoiceDate)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ReceivedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ReceivedDate)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.PurchaseOrderId)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
                         </tr>
                         }                    
                 </tbody>

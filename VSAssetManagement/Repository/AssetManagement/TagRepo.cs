@@ -60,9 +60,9 @@ namespace VSManagement.Repository.AssetManagement
             return record.Id;
         }
 
-        public Tag getById(int id, Guid guid)
+        public Tag getById(Guid guid)
         {
-            return _context.Tag.Where(a => a.Id == id && a.Guid == guid).FirstOrDefault();
+            return _context.Tag.Where(a => a.Guid == guid).FirstOrDefault();
         }
 
         public Tag getByOnlyId(int id)
@@ -95,6 +95,16 @@ namespace VSManagement.Repository.AssetManagement
         {
             _context.Tag.Remove(getByOnlyId(id));
             return _context.SaveChanges();
+        }
+
+        public List<Tag> searchListQuery(Tag request)
+        {
+            IQueryable<Tag> query = _context.Set<Tag>();
+            if (request.Guid != null)
+            {
+                query = query.Where(t => t.Guid == request.Guid);
+            }
+            return query.ToList<Tag>();
         }
     }
 }

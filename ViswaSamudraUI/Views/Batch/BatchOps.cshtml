@@ -3,102 +3,157 @@
 <div class="col-sm-12" style="padding:1px">
     <div class="card">
         <div class="card-header">
-            <h5>batch</h5>
-        </div>
+         <h5>Batch Operation</h5>
+         <div class="card-header-right">
+                <div class="btn-group card-option">
+                    @Html.ActionLink("", "Index","Batch", "", new {@style="margin-right: 10px;",@class="feather icon-x-circle" })
+                </div>
+            </div>
+      </div>
         <div class="card-body">
-            @using (Html.BeginForm("", "", FormMethod.Post, new { style = "width:100%" }))
-            {
+            <form id="batchform">
                 @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
                 @Html.AntiForgeryToken()
+                <div class="col-md-12">
+                    <div class="card" style="margin-top: 0px;padding:0px;box-shadow:none">
+                        <div class="card-header border-0" style="margin-top: 0px;padding:0px;margin-top: 1px;">
+                            <label class="form-label">Purchase Otder</label>
+                            <div class="input-group" style="width:333px">
+                                <select class="custom-select form-group" id="inputGroupSelect04" style="width:200px">
+                                    <option selected="">Choose...</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn waves-effect waves-light btn-primary feather icon-plus" type="button" data-toggle="collapse" aria-controls="collapseExample" data-target="#collapseExample"></button>
+                                </div>
+                            </div>                                
+                               
+                        </div>
+                        <div class="collapse" id="collapseExample" style="">
+                            <div class="card-body">
+                                <p class="mb-0">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                                    proident.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Batch Number</label>
-                            @Html.EditorFor(model => model.BatchNo, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order No",@id="poNo" } })
-                            @Html.ValidationMessageFor(model => model.BatchNo, "", new { @class = "text-danger" })
+                            <input type="text" class="form-control" asp-for="BatchNo" name="BatchNo" placeholder="Batch Number" id="BatchNo">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Batch Name</label>
-                            @Html.EditorFor(model => model.BatchDescription, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order Date",@id="poData" } })
-                            @Html.ValidationMessageFor(model => model.BatchDescription, "", new { @class = "text-danger" })
+                            <label class="form-label">Batch Description</label>
+                            <input type="text" class="form-control" asp-for="BatchDescription" name="BatchDescription" placeholder="Batch Description" id="BatchDescription">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Quantity</label>
-                            @Html.EditorFor(model => model.BatchQuantity, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order No",@id="poNo" } })
-                            @Html.ValidationMessageFor(model => model.BatchQuantity, "", new { @class = "text-danger" })
+                            <label class="form-label">Purchase Order Id</label>
+                            <input type="text" class="form-control" asp-for="PurchaseOrderId" name="PurchaseOrderId" placeholder="Purchase Order Id" id="PurchaseOrderId">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Asset Type</label>
-                            @Html.EditorFor(model => model.AssetType, new { htmlAttributes = new { @class = "form-control",@placeholder="Received Date",@id="recivedDate" } })
-                            @Html.ValidationMessageFor(model => model.AssetType, "", new { @class = "text-danger" })
+                            <label class="form-label">Structure Type</label>
+                            <select class="form-control" name="StructureType" asp-items="@ViewBag.StructureType" asp-for="StructureType">
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Purchase OrderNo</label>
-                            @Html.EditorFor(model => model.PurchaseOrderNo, new { htmlAttributes = new { @class = "form-control",@placeholder="Received By",@id="recivedBy" } })
-                            @Html.ValidationMessageFor(model => model.PurchaseOrderNo, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Purchase OrderDate</label>
-                            @Html.EditorFor(model => model.PurchaseOrderDate, new { htmlAttributes = new { @class = "form-control",@placeholder="Received Date",@id="recivedDate" } })
-                            @Html.ValidationMessageFor(model => model.PurchaseOrderDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">PO Received By</label>
-                            @Html.EditorFor(model => model.ReceivedBy, new { htmlAttributes = new { @class = "form-control",@placeholder="Purchase Order Date",@id="poData" } })
-                            @Html.ValidationMessageFor(model => model.ReceivedBy, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">PO Received Date</label>
-                            @Html.EditorFor(model => model.ReceivedDate, new { htmlAttributes = new { @class = "form-control",@placeholder="Received By",@id="recivedBy" } })
-                            @Html.ValidationMessageFor(model => model.ReceivedDate, "", new { @class = "text-danger" })
+                            <label class="form-label">Structure Sub Type</label>
+                            <select class="form-control" name="StructureSubType" asp-items="@ViewBag.StructureSubType" asp-for="StructureSubType">
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Asset Type</label>
-                            @Html.EditorFor(model => model.AssetType, new { htmlAttributes = new { @class = "form-control",@placeholder="Received Date",@id="recivedDate" } })
-                            @Html.ValidationMessageFor(model => model.AssetType, "", new { @class = "text-danger" })
+                            <select class="form-control" name="AssetType" asp-items="@ViewBag.AssetType" asp-for="AssetType">
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Created By</label>
-                            @Html.EditorFor(model => model.LastUpdatedBy, new { htmlAttributes = new { @class = "form-control",@placeholder="Received By",@id="recivedBy" } })
-                            @Html.ValidationMessageFor(model => model.LastUpdatedBy, "", new { @class = "text-danger" })
+                            <label class="form-label">Asset Specification</label>
+                            <select class="form-control" name="AssetSpecification" asp-items="@ViewBag.AssetSpecification" asp-for="AssetSpecification">
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Updated On</label>
-                            @Html.EditorFor(model => model.LastUpdatedDateTime, new { htmlAttributes = new { @class = "form-control",@placeholder="Received Date",@id="recivedDate" } })
-                            @Html.ValidationMessageFor(model => model.LastUpdatedDateTime, "", new { @class = "text-danger" })
+                            <label class="form-label">Batch Quantity</label>
+                            <input type="text" class="form-control" asp-for="BatchQuantity" name="BatchQuantity" placeholder="Batch Quantity" id="BatchQuantity">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">UOM</label>
+                            <select class="form-control" name="Uom" asp-items="@ViewBag.Uom" asp-for="Uom">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Use Frequency</label>
+                            <input type="text" class="form-control" asp-for="UseFrequency" name="UseFrequency" placeholder="Use Frequency" id="UseFrequency">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Usage Uom</label>
+                            <input type="text" class="form-control" asp-for="UsageUom" name="UsageUom" placeholder="UsageUom" id="UsageUom">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Batch Status</label>
+                            <input type="text" class="form-control" asp-for="BatchStatus" name="BatchStatus" placeholder="Batch Status" id="BatchStatus">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Invoice No</label>
+                            <input type="text" class="form-control" asp-for="InvoiceNo" name="InvoiceNo" placeholder="Invoice No" id="InvoiceNo">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Invoice Date</label>
+                            <input type="text" class="form-control" asp-for="InvoiceDate" name="InvoiceDate" placeholder="Invoice Date" id="InvoiceDate">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Received By</label>
+                            <input type="text" class="form-control" asp-for="ReceivedBy" name="ReceivedBy" placeholder="Received By" id="ReceivedBy">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Received Date</label>
+                            <input type="text" class="form-control" asp-for="ReceivedDate" name="ReceivedDate" placeholder="Received Date" id="ReceivedDate">
                         </div>
                     </div>
                 </div>
                
-                <button class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+                <button type="submit" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
 
-            }
+            </form>
         </div>
     </div>
 </div>
 @section Scripts
     {
-    <script src="@Url.Content("../customjs/purchaseorder.js")"></script>
+    <script src="@Url.Content("../customjs/batch.js")"></script>
     <style>
         .table thead th {
             padding: 1px;
