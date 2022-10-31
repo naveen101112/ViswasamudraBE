@@ -11101,7 +11101,7 @@ body.layout-14 .pcoded-navbar.navbar-dark .navbar-popup:after {
 }
 
 .custom-select {
-    height: calc(2.25rem + 9px);
+    height: calc(2.25rem + -4px);
 }
 
 /* input group End */
