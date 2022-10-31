@@ -24,7 +24,7 @@ namespace VSManagement.Controllers.AssetManagement
         }
 
         [HttpPost("batchsearch")]
-        public ActionResult Search([FromBody] io.Batch record)
+        public ActionResult Search([FromBody] io.BatchSearch record)
         {
             var AssectModel = JsonConvert.
                 DeserializeObject<io.BatchSearch>(JsonConvert.SerializeObject(record));
@@ -63,12 +63,22 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult updateRecord([FromForm] io.Batch record)
         {
             Batch batch = repo.getById(record.Id, record.Guid);
-            batch.BatchDescription = record.BatchName;
+            batch.BatchDescription = record.BatchDescription;
             batch.BatchNo = record.BatchNo;
-            batch.AssetSpecification = record.AssetSize;
+            batch.AssetSpecification = record.AssetSpecification;
             batch.AssetType = record.AssetType;
-            batch.PurchaseBatchMasterGuid = record.PurchaseBatchMasterGuid;
-            batch.Quantity = record.Quantity.Value;
+            batch.PurchaseOrderId = record.PurchaseOrderId;
+            batch.BatchQuantity = record.BatchQuantity;
+            batch.BatchStatus = record.BatchStatus;
+            batch.InvoiceNo= record.InvoiceNo;
+            batch.InvoiceDate = record.InvoiceDate;
+            batch.ReceivedDate = record.ReceivedDate;
+            batch.ReceivedBy = record.ReceivedBy;
+            batch.StructureType = record.StructureType;
+            batch.UseFrequency = record.UseFrequency;
+            batch.StructureSubType = record.StructureSubType;
+            batch.UsageUom = record.UsageUom;
+            batch.Uom = record.Uom;
             repo._context.Entry(batch).State = EntityState.Detached;
             int id = repo.update(batch);
             if (id == 0) return Conflict("Error updating record");

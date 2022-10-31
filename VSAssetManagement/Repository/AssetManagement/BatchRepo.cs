@@ -45,13 +45,13 @@ namespace VSManagement.Repository.AssetManagement
             IQueryable<mo.PurchaseOrder> POquery = _context.Set<mo.PurchaseOrder>();
 
             var result = from x in Batchquery
-                         from y in POquery.Where(y => y.Guid == x.PurchaseBatchMasterGuid)
+                         from y in POquery.Where(y => y.Id == x.PurchaseOrderId)
                          select new
                          {
                              x.Id,
                              x.BatchNo,
                              x.BatchDescription,
-                             x.Quantity,
+                             x.BatchQuantity,
                              x.AssetType,
                              x.AssetSpecification,
                              x.CreatedBy,
@@ -60,11 +60,9 @@ namespace VSManagement.Repository.AssetManagement
                              x.LastUpdatedDateTime,
                              x.RecordStatus,
                              x.Guid,
-                             x.PurchaseBatchMasterGuid,
+                             x.PurchaseOrderId,
                              y.PurchaseOrderNo,
-                             y.PurchaseOrderDate,
-                             y.ReceivedBy,
-                             y.ReceivedDate
+                             y.PurchaseOrderDate
 
                          };
 
@@ -93,10 +91,10 @@ namespace VSManagement.Repository.AssetManagement
                     select new
                     {
                         record.Id,
-                        PurchaseOrderID = record.PurchaseBatchMasterGuid,
+                        PurchaseOrderID = record.PurchaseOrderId,
                         record.BatchNo,
                         Name = record.BatchDescription,
-                        record.Quantity,
+                        record.BatchQuantity,
                         record.AssetType,
                         record.AssetSpecification,
                         record.Guid
@@ -111,10 +109,10 @@ namespace VSManagement.Repository.AssetManagement
                     select new
                     {
                         record.Id,
-                        PurchaseOrderID = record.PurchaseBatchMasterGuid,
+                        PurchaseOrderID = record.PurchaseOrderId,
                         record.BatchNo,
                         Name = record.BatchDescription,
-                        record.Quantity,
+                        record.BatchQuantity,
                         record.AssetType,
                         record.AssetSpecification,
                         record.Guid

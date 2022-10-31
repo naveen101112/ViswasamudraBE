@@ -48,8 +48,8 @@ namespace VSManagement.Repository.AssetManagement
                     select new
                     {
                         record.Id,
-                        AssetID = record.AssetGuid,
-                        TagID = record.TagGuid,
+                        AssetID = record.AssetId,
+                        TagID = record.TagId,
                         Status = status.Description,
                         record.Guid
                     }).ToList();

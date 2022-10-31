@@ -9,15 +9,10 @@ namespace VSManagement.Models.VISWASAMUDRA
 {
     public partial class Batch
     {
-        public Batch()
-        {
-            Asset = new HashSet<Asset>();
-        }
-
         public int Id { get; set; }
         public string BatchNo { get; set; }
         public string BatchDescription { get; set; }
-        public int Quantity { get; set; }
+        public int BatchQuantity { get; set; }
         public string AssetType { get; set; }
         public string AssetSpecification { get; set; }
         public string CreatedBy { get; set; }
@@ -26,7 +21,6 @@ namespace VSManagement.Models.VISWASAMUDRA
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
-        public Guid PurchaseBatchMasterGuid { get; set; }
         public string Uom { get; set; }
         public int UseFrequency { get; set; }
         public string UsageUom { get; set; }
@@ -35,8 +29,8 @@ namespace VSManagement.Models.VISWASAMUDRA
         public DateTime InvoiceDate { get; set; }
         public string ReceivedBy { get; set; }
         public DateTime ReceivedDate { get; set; }
-
-        public virtual PurchaseOrder PurchaseBatchMasterGu { get; set; }
-        public virtual ICollection<Asset> Asset { get; set; }
+        public string StructureType { get; set; }
+        public string StructureSubType { get; set; }
+        public int? PurchaseOrderId { get; set; }
     }
 }

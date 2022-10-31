@@ -26,7 +26,6 @@ namespace VSManagement.Repository.AssetManagement
                     {
                         CreatedDateTime = tag.CreatedDateTime,
                         LastUpdatedDateTime = tag.LastUpdatedDateTime,
-                        AssetOperations = tag.AssetOperations,
                         Code = tag.Code,
                         CreatedBy = tag.CreatedBy,
                         Guid = tag.Guid,

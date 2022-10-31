@@ -9,11 +9,6 @@ namespace VSManagement.Models.VISWASAMUDRA
 {
     public partial class Tag
     {
-        public Tag()
-        {
-            AssetOperations = new HashSet<AssetOperations>();
-        }
-
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -24,10 +19,5 @@ namespace VSManagement.Models.VISWASAMUDRA
         public DateTime LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
-        public string CompanyCode { get; set; }
-        public string DeptCode { get; set; }
-        public string UserCode { get; set; }
-
-        public virtual ICollection<AssetOperations> AssetOperations { get; set; }
     }
 }
