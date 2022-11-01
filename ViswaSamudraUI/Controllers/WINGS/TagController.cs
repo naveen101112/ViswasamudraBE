@@ -11,6 +11,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
     public class TagController : Controller
     {
         TagProvider provider = new TagProvider();
+        LookUpProvider lookUpProvider = new LookUpProvider();
         public IActionResult Index()
         {
             IEnumerable<Tag> list = provider.GetAll();
@@ -21,11 +22,13 @@ namespace ViswaSamudraUI.Controllers.WINGS
         {
             if (ioModel.Guid == Guid.Empty)
             {
+                ViewBag.Status = lookUpProvider.GetSelectList("TST");
                 return View(ioModel);
             }
             IEnumerable<Tag> list = provider.GetAllTag(ioModel);
-            var l = list.FirstOrDefault();
-            return View(l);
+            var tag = list.FirstOrDefault();
+            ViewBag.Status = lookUpProvider.GetSelectList("TST", tag.Status);
+            return View(tag);
         }
 
         public ActionResult TagModification(Tag model)

@@ -85,5 +85,11 @@ namespace VSManagement.Repository.AssetManagement
                     }).ToList();
 
         }
+
+        public List<PurchaseOrder> getDropDown()
+        {
+            return (from po in _context.PurchaseOrder
+                    select new PurchaseOrder { PurchaseOrderNo=po.PurchaseOrderNo }).ToList();
+        }
     }
 }

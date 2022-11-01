@@ -30,7 +30,8 @@
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">Project Type</label>
-                      <input type="text" class="form-control" asp-for="ProjectType" name="ProjectType" placeholder="Project Type" id="ProjectType">
+                      <select class="form-control" asp-items="@ViewBag.ProjectType" asp-for="ProjectType">                      
+                      </select>
                    </div>
                 </div>
                 <div class="col-md-4">

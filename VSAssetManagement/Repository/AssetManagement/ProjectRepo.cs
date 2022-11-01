@@ -98,5 +98,11 @@ namespace VSManagement.Repository.AssetManagement
             }
             return query.ToList<Project>();
         }
+
+        public List<Project> getDropDown()
+        {
+            return (from project in _context.Project
+                    select new Project { ProjectCode = project.ProjectCode, ProjectName = project.ProjectName }).ToList();
+        }
     }
 }

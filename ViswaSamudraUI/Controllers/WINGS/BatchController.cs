@@ -13,11 +13,20 @@ namespace ViswaSamudraUI.Controllers.WINGS
     {
         BatchProvider batchOrder = new BatchProvider();
         LookUpProvider lookUpProvider = new LookUpProvider();
+        PurchaseOrderProvider purchaseOrderProvider = new PurchaseOrderProvider();
+        ProjectProvider projectProvider = new ProjectProvider();
+        StoreProvider storeProvider = new StoreProvider();
         public IActionResult Index()
         {
             BatchSearch batchModel = new BatchSearch();
             IEnumerable<BatchSearch> list = batchOrder.GetAll();
             return View(list);
+        }
+
+        public ActionResult POModification(PurchaseOrder PO)
+        {
+            string PoStatus = purchaseOrderProvider.AddPurchaseOrder(PO);
+            return Content(PoStatus);
         }
 
         public async Task<IActionResult> BatchOps(BatchSearch model)
@@ -29,6 +38,11 @@ namespace ViswaSamudraUI.Controllers.WINGS
                 ViewBag.AssetType = lookUpProvider.GetSelectList("ATY");
                 ViewBag.AssetSpecification = lookUpProvider.GetSelectList("ATS");
                 ViewBag.Uom = lookUpProvider.GetSelectList("UOM");
+                ViewBag.UsageUom = lookUpProvider.GetUsageUomList();
+                ViewBag.Users = lookUpProvider.GetTempUserData();
+                ViewBag.PurchaseOrderNo = purchaseOrderProvider.GetSelectList();
+                ViewBag.PurchaseProject = projectProvider.GetSelectList();
+                ViewBag.PurchaseStore = storeProvider.GetSelectList(0);
                 return View(model);
             }
             IEnumerable<BatchSearch> BatchList = batchOrder.GetAllBatches(model);
@@ -39,6 +53,11 @@ namespace ViswaSamudraUI.Controllers.WINGS
             ViewBag.AssetType = lookUpProvider.GetSelectList("ATY", result.AssetType);
             ViewBag.AssetSpecification = lookUpProvider.GetSelectList("ATS", result.AssetSpecification);
             ViewBag.Uom = lookUpProvider.GetSelectList("UOM", result.Uom);
+            ViewBag.UsageUom = lookUpProvider.GetUsageUomList();
+            ViewBag.Users = lookUpProvider.GetTempUserData();
+            ViewBag.PurchaseOrderNo = purchaseOrderProvider.GetSelectList(result.PurchaseOrderNo);
+            ViewBag.PurchaseProject = projectProvider.GetSelectList(result.PurchaseProject);
+            ViewBag.PurchaseStore = storeProvider.GetSelectList(0, result.PurchaseStore);
             return View(result);
         }
 

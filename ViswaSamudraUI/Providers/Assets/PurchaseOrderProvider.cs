@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -26,6 +28,29 @@ namespace ViswaSamudraUI.Providers.Assets
             }
             else
                 return null;
+        }
+
+        public IEnumerable<io.PurchaseOrder> GetDropDown()
+        {
+            return (IEnumerable<io.PurchaseOrder>)ch.GetRequest<io.PurchaseOrder>("purchaseOrder/combo");
+        }
+
+        public List<SelectListItem> GetSelectList(string SelectedValue = null)
+        {
+            SelectListItem selListItem = new SelectListItem() { Value = "", Text = "" };
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(selListItem);
+
+            foreach (var x in GetDropDown().Select(i => new { i.PurchaseOrderNo }))
+            {
+                if (SelectedValue != null && x.PurchaseOrderNo == SelectedValue)
+                    selListItem = new SelectListItem() { Value = x.PurchaseOrderNo, Text = x.PurchaseOrderNo, Selected = true };
+                else
+                    selListItem = new SelectListItem() { Value = x.PurchaseOrderNo, Text = x.PurchaseOrderNo };
+
+                newList.Add(selListItem);
+            }
+            return newList;
         }
     }
 }

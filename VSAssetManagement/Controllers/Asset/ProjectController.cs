@@ -80,5 +80,14 @@ namespace VSManagement.Controllers.AssetManagement
         {
             return Ok(repo.getDataGrid());
         }
+
+        [HttpGet("combo")]
+        public ActionResult getDropDown()
+        {
+            List<io.Project> record = JsonConvert.
+                DeserializeObject<List<io.Project>>(JsonConvert.SerializeObject(repo.getDropDown()));
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
     }
 }

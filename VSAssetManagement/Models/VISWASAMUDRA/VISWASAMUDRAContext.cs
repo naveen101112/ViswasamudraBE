@@ -795,7 +795,11 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ParentStore).HasColumnName("PARENT_STORE");
+                entity.Property(e => e.ParentStore)
+                    .IsRequired()
+                    .HasColumnName("PARENT_STORE")
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Project)
                     .HasColumnName("PROJECT")

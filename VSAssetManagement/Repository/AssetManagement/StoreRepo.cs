@@ -31,6 +31,13 @@ namespace VSManagement.Repository.AssetManagement
             return _context.Store.Where(a => a.Guid == id).FirstOrDefault();
         }
 
+        public List<Store> getDropDown(int id)
+        {
+            return (from store in _context.Store
+                    where store.Id != id
+                    select new Store { Code=store.Code, Name = store.Name}).ToList();
+        }
+
         public int update(Store record)
         {
             _context.Store.Update(record).Property(r => r.Id).IsModified = false;

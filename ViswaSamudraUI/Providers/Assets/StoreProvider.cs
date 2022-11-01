@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -18,6 +20,29 @@ namespace ViswaSamudraUI.Providers.Assets
         public IEnumerable<io.Store> GetAll()
         {
             return (IEnumerable<io.Store>)ch.GetRequest<io.Store>("Store");
+        }
+
+        public IEnumerable<io.Store> GetDropDown(int id)
+        {
+            return (IEnumerable<io.Store>)ch.GetRequest<io.Store>("Store/combo?id="+id);
+        }
+
+        public List<SelectListItem> GetSelectList(int id, string SelectedValue = null)
+        {
+            SelectListItem selListItem = new SelectListItem() { Value = "", Text = "" };
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(selListItem);
+
+            foreach (var x in GetDropDown(id).Select(i => new { i.Name, i.Code }))
+            {
+                if (SelectedValue != null && x.Code == SelectedValue)
+                    selListItem = new SelectListItem() { Value = x.Code, Text = x.Name, Selected = true };
+                else
+                    selListItem = new SelectListItem() { Value = x.Code, Text = x.Name };
+
+                newList.Add(selListItem);
+            }
+            return newList;
         }
 
         public string Add(io.Store model = null)

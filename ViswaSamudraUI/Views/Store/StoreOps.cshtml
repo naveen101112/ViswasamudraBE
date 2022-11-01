@@ -30,13 +30,15 @@
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Project</label>
-					  <input type="text" class="form-control" asp-for="Project" name="Project" placeholder="Project" id="Project">
+					  <select class="form-control" asp-items="@ViewBag.Project" asp-for="Project">
+					  </select>
 				   </div>
 				</div>
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Parent Store</label>
-					  <input type="text" class="form-control" asp-for="ParentStore" name="ParentStore" placeholder="ParentStore" id="ParentStore">
+					  <select class="form-control" asp-items="@ViewBag.ParentStore" asp-for="ParentStore">
+					  </select>
 				   </div>
 				</div>
 				<div class="col-md-4">

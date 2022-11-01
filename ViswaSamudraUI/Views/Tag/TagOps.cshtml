@@ -30,7 +30,8 @@
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Tag Status</label>
-					  <input type="text" class="form-control" asp-for="Status" name="Status" placeholder="Status" id="Status">
+					  <select class="form-control" asp-items="@ViewBag.Status" asp-for="Status">                      
+					  </select>
 				   </div>
 				</div>
 			 </div>

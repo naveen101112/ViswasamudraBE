@@ -56,6 +56,11 @@ namespace VSManagement.Controllers.AssetManagement
             PurchaseOrder order = repo.getById(record.Id, record.Guid);
             order.PurchaseOrderNo = record.PurchaseOrderNo.ToString();
             order.PurchaseOrderDate = record.PurchaseOrderDate;
+            order.PurchaseStore = record.PurchaseStore;
+            order.PurchaseProject = record.PurchaseProject;
+            order.CompanyName = record.CompanyName;
+            order.LastUpdatedBy = "User";
+            order.LastUpdatedDateTime = System.DateTime.Now;
             int id = repo.update(order);
             if (id == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
@@ -73,6 +78,15 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult getDataGrid()
         {
             return Ok(repo.getDataGrid());
+        }
+
+        [HttpGet("combo")]
+        public ActionResult getDropDown()
+        {
+            List<io.PurchaseOrder> record = JsonConvert.
+                DeserializeObject<List<io.PurchaseOrder>>(JsonConvert.SerializeObject(repo.getDropDown()));
+            if (record == null) return NotFound();
+            return Ok(record);
         }
     }
 }

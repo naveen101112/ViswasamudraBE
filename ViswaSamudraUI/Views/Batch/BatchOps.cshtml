@@ -11,22 +11,16 @@
             </div>
       </div>
         <div class="card-body">
-            <form id="batchform">
-                @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
-                @Html.AntiForgeryToken()
+            <form id="poform">
                 <div class="col-md-12">
                     <div class="card" style="margin-top: 0px;padding:0px;box-shadow:none">
                         <div class="card-header border-0" style="margin-top: 0px;padding:0px;margin-top: 1px;">
-                            <label class="form-label">Purchase Otder</label>
+                            <label class="form-label">Purchase Order</label>
                             <div class="input-group" style="width:333px">
-                                <select class="custom-select form-group" id="inputGroupSelect04" style="width:200px">
-                                    <option selected="">Choose...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="custom-select form-group" asp-items="@ViewBag.PurchaseOrderNo" style="width:200px" asp-for="PurchaseOrderNo">
                                 </select>
                                 <div class="input-group-append">
-                                    <button class="btn waves-effect waves-light btn-primary feather icon-plus" type="button" data-toggle="collapse" aria-controls="collapseExample" data-target="#collapseExample"></button>
+                                    <button class="btn waves-effect waves-light btn-primary feather icon-plus" id="opsbutton" type="button" data-toggle="collapse" aria-controls="collapseExample" data-target="#collapseExample"></button>
                                 </div>
                             </div>                                
                                
@@ -34,13 +28,52 @@
                         <div class="collapse" id="collapseExample" style="">
                             <div class="card-body">
                                 <p class="mb-0">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                                    proident.
+                                    <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Purchase Order Number</label>
+                                            <input type="text" class="form-control" asp-for="PurchaseOrderNo" placeholder="Purchase Order Number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Purchase Order Date</label>
+                                            <input class="form-control" asp-for="PurchaseOrderDate" placeholder="Purchase Order Date">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Purchase Store</label>
+                                            <select class="form-control" asp-items="@ViewBag.PurchaseStore" asp-for="PurchaseStore">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Purchase Project</label>
+                                            <select class="form-control" asp-items="@ViewBag.PurchaseProject" asp-for="PurchaseProject">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Company Name</label>
+                                            <input type="text" class="form-control" asp-for="CompanyName" placeholder="Company Name">
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <button type="submit" id="POButton"  class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+                                    
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
+          </form>
+
+            <form id="batchform">
+                @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
+                @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -97,7 +130,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">UOM</label>
-                            <select class="form-control" name="Uom" asp-items="@ViewBag.Uom" asp-for="Uom">
+                            <select class="form-control" asp-items="@ViewBag.Uom" asp-for="Uom">
                             </select>
                         </div>
                     </div>
@@ -110,7 +143,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Usage Uom</label>
-                            <input type="text" class="form-control" asp-for="UsageUom" name="UsageUom" placeholder="UsageUom" id="UsageUom">
+                            <select class="form-control" asp-items="@ViewBag.UsageUom" asp-for="UsageUom">
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -134,13 +168,14 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Received By</label>
-                            <input type="text" class="form-control" asp-for="ReceivedBy" name="ReceivedBy" placeholder="Received By" id="ReceivedBy">
+                            <select class="form-control" asp-items="@ViewBag.Users" asp-for="ReceivedBy">
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Received Date</label>
-                            <input type="text" class="form-control" asp-for="ReceivedDate" name="ReceivedDate" placeholder="Received Date" id="ReceivedDate">
+                            <input class="form-control" asp-for="ReceivedDate" name="ReceivedDate" placeholder="Received Date" id="ReceivedDate">
                         </div>
                     </div>
                 </div>

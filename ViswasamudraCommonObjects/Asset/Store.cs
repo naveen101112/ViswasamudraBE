@@ -6,7 +6,7 @@ namespace VSAssetManagement.IOModels
     public class Store
     {
         public string Name { get; set; }
-        public int ParentStore { get; set; }
+        public string ParentStore { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
         public string Code { get; set; }

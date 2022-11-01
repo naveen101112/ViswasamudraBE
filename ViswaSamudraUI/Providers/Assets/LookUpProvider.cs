@@ -32,6 +32,26 @@ namespace ViswaSamudraUI.Providers.Assets
             }
             return newList;
         }
+
+        public List<SelectListItem> GetUsageUomList()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem() { Value = "", Text = "" });
+            list.Add(new SelectListItem() { Value = "Times", Text = "Times" });
+            list.Add(new SelectListItem() { Value = "Days", Text = "Days" });
+            list.Add(new SelectListItem() { Value = "Years", Text = "Years" });
+            return list;
+        }
+
+        public List<SelectListItem> GetTempUserData()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem() { Value = "", Text = "" });
+            list.Add(new SelectListItem() { Value = "User1", Text = "User1" });
+            list.Add(new SelectListItem() { Value = "Admin", Text = "Admin" });
+            list.Add(new SelectListItem() { Value = "User2", Text = "User2" });
+            return list;
+        }
     }
 
 }

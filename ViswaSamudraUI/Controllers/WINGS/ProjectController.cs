@@ -11,6 +11,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
     public class ProjectController : Controller
     {
         ProjectProvider provider = new ProjectProvider();
+        LookUpProvider lookUpProvider = new LookUpProvider();
         public IActionResult Index()
         {
             IEnumerable<Project> list = provider.GetAll();
@@ -21,10 +22,12 @@ namespace ViswaSamudraUI.Controllers.WINGS
         {
             if (ProjectIoModel.Guid == Guid.Empty)
             {
+                ViewBag.ProjectType = lookUpProvider.GetSelectList("PTY");
                 return View(ProjectIoModel);
             }
-            IEnumerable<Project> poList = provider.GetAllProject(ProjectIoModel);
-            return View(poList.FirstOrDefault());
+            var result = provider.GetAllProject(ProjectIoModel).FirstOrDefault();
+            ViewBag.ProjectType = lookUpProvider.GetSelectList("PTY", result.ProjectType);
+            return View(result);
         }
 
         public ActionResult ProjectModification(Project model)

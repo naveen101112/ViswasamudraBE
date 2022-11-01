@@ -31,6 +31,15 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
+        [HttpGet("combo")]
+        public ActionResult getDropDown([FromQuery] int id)
+        {
+            List<io.Store> record = JsonConvert.
+                DeserializeObject<List<io.Store>>(JsonConvert.SerializeObject(repo.getDropDown(id)));
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
+
         [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Store record)
         {
