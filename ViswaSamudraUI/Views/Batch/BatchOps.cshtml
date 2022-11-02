@@ -17,7 +17,7 @@
                         <div class="card-header border-0" style="margin-top: 0px;padding:0px;margin-top: 1px;">
                             <label class="form-label">Purchase Order</label>
                             <div class="input-group" style="width:333px">
-                                <select class="custom-select form-group" asp-items="@ViewBag.PurchaseOrderNo" style="width:200px" asp-for="PurchaseOrderNo">
+                                <select class="custom-select form-group" asp-items="@ViewBag.PurchaseOrderNo" style="width:200px" asp-for="PurchaseOrderId">
                                 </select>
                                 <div class="input-group-append">
                                     <button class="btn waves-effect waves-light btn-primary feather icon-plus" id="opsbutton" type="button" data-toggle="collapse" aria-controls="collapseExample" data-target="#collapseExample"></button>
@@ -85,12 +85,6 @@
                         <div class="form-group">
                             <label class="form-label">Batch Description</label>
                             <input type="text" class="form-control" asp-for="BatchDescription" name="BatchDescription" placeholder="Batch Description" id="BatchDescription">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Purchase Order Id</label>
-                            <input type="text" class="form-control" asp-for="PurchaseOrderId" name="PurchaseOrderId" placeholder="Purchase Order Id" id="PurchaseOrderId">
                         </div>
                     </div>
                     <div class="col-md-4">

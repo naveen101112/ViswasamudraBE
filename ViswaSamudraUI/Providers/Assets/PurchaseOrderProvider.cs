@@ -41,12 +41,12 @@ namespace ViswaSamudraUI.Providers.Assets
             List<SelectListItem> newList = new List<SelectListItem>();
             newList.Add(selListItem);
 
-            foreach (var x in GetDropDown().Select(i => new { i.PurchaseOrderNo }))
+            foreach (var x in GetDropDown().Select(i => new { i.Id, i.PurchaseOrderNo }))
             {
-                if (SelectedValue != null && x.PurchaseOrderNo == SelectedValue)
-                    selListItem = new SelectListItem() { Value = x.PurchaseOrderNo, Text = x.PurchaseOrderNo, Selected = true };
+                if (SelectedValue != null && x.Id.ToString() == SelectedValue)
+                    selListItem = new SelectListItem() { Value = x.Id.ToString(), Text = x.PurchaseOrderNo, Selected = true };
                 else
-                    selListItem = new SelectListItem() { Value = x.PurchaseOrderNo, Text = x.PurchaseOrderNo };
+                    selListItem = new SelectListItem() { Value = x.Id.ToString(), Text = x.PurchaseOrderNo };
 
                 newList.Add(selListItem);
             }

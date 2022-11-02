@@ -55,11 +55,13 @@ namespace VSManagement.Controllers.AssetManagement
         }
 
         [HttpPut]
-        public ActionResult updateRecord([FromBody] io.LookupType record)
+        public ActionResult updateRecord([FromBody] io.LookupType request)
         {
-            int id = repo.update(JsonConvert.
-                DeserializeObject<LookupType>(JsonConvert.SerializeObject(record)));
-            if (id == 0) return Conflict("Error updating record");
+            LookupType record = repo.getByGuid(request.Guid);
+            record.Code = request.Code;
+            record.Name = request.Name;
+            int count = repo.update(record);
+            if (count == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
         }
 
@@ -102,11 +104,14 @@ namespace VSManagement.Controllers.AssetManagement
         }
 
         [HttpPut("value")]
-        public ActionResult updateValueRecord([FromBody] io.LookupTypeValue record)
+        public ActionResult updateValueRecord([FromBody] io.LookupTypeValue request)
         {
-            int id = valueRepo.update(JsonConvert.
-                DeserializeObject<LookupTypeValue>(JsonConvert.SerializeObject(record)));
-            if (id == 0) return Conflict("Error updating record");
+            LookupTypeValue record = valueRepo.getByGuid(request.Guid);
+            record.Code = request.Code;
+            record.LookupTypeId = request.LookupTypeId;
+            record.Name = request.Name;
+            int count = valueRepo.update(record);
+            if (count == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
         }
 

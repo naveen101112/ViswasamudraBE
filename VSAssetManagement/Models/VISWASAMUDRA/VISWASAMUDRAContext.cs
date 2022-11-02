@@ -108,7 +108,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
-                    .IsRequired()
                     .HasColumnName("LAST_UPDATED_BY")
                     .HasMaxLength(20)
                     .IsUnicode(false);
@@ -124,7 +123,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Store)
                     .IsRequired()
@@ -185,7 +186,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
-                    .IsRequired()
                     .HasColumnName("LAST_UPDATED_BY")
                     .HasMaxLength(20)
                     .IsUnicode(false);
@@ -195,7 +195,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.TagId)
                     .IsRequired()
@@ -242,7 +244,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUdatedBy)
-                    .IsRequired()
                     .HasColumnName("LAST_UDATED_BY")
                     .HasMaxLength(20)
                     .IsUnicode(false);
@@ -252,7 +253,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.ReferenceOperationId)
                     .HasColumnName("REFERENCE_OPERATION_ID")
@@ -354,7 +357,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnName("RECEIVED_DATE")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.StructureSubType)
                     .HasColumnName("STRUCTURE_SUB_TYPE")
@@ -417,7 +422,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
-                    .IsRequired()
                     .HasColumnName("LAST_UPDATED_BY")
                     .HasMaxLength(20)
                     .IsUnicode(false);
@@ -474,7 +478,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
-                    .IsRequired()
                     .HasColumnName("LAST_UPDATED_BY")
                     .HasMaxLength(20)
                     .IsUnicode(false);
@@ -596,7 +599,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.SiteHeadMobile)
                     .HasColumnName("SITE_HEAD_MOBILE")
@@ -663,7 +668,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(5)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
             });
 
             modelBuilder.Entity<Reason>(entity =>
@@ -806,7 +813,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(5)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
             });
 
             modelBuilder.Entity<Tag>(entity =>
@@ -841,7 +850,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.LastUpdatedBy)
-                    .IsRequired()
                     .HasColumnName("LAST_UPDATED_BY")
                     .HasMaxLength(20)
                     .IsUnicode(false);
@@ -857,13 +865,19 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Status)
                     .HasColumnName("STATUS")
                     .HasMaxLength(15)
                     .IsUnicode(false);
             });
+
+            modelBuilder.HasSequence("ASSET_ID_GEN")
+                .HasMin(1)
+                .HasMax(9999);
 
             OnModelCreatingPartial(modelBuilder);
         }

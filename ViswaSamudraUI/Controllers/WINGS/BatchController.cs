@@ -55,7 +55,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
             ViewBag.Uom = lookUpProvider.GetSelectList("UOM", result.Uom);
             ViewBag.UsageUom = lookUpProvider.GetUsageUomList();
             ViewBag.Users = lookUpProvider.GetTempUserData();
-            ViewBag.PurchaseOrderNo = purchaseOrderProvider.GetSelectList(result.PurchaseOrderNo);
+            ViewBag.PurchaseOrderNo = purchaseOrderProvider.GetSelectList(result.PurchaseOrderId.ToString());
             ViewBag.PurchaseProject = projectProvider.GetSelectList(result.PurchaseProject);
             ViewBag.PurchaseStore = storeProvider.GetSelectList(0, result.PurchaseStore);
             return View(result);
