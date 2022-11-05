@@ -45,7 +45,7 @@ namespace VSManagement.Repository.AssetManagement
             IQueryable<mo.PurchaseOrder> POquery = _context.Set<mo.PurchaseOrder>();
 
             var result = from x in Batchquery
-                         from y in POquery.Where(y => y.Id == x.PurchaseOrderId)
+                         from y in POquery.Where(y => y.Guid == x.PurchaseOrderId)
                          select new
                          {
                              x.Id,
@@ -85,7 +85,7 @@ namespace VSManagement.Repository.AssetManagement
             IQueryable<mo.PurchaseOrder> POquery = _context.Set<mo.PurchaseOrder>();
 
             var result = from x in Batchquery
-                         from y in POquery.Where(y => y.Id == x.PurchaseOrderId)
+                         from y in POquery.Where(y => y.Guid == x.PurchaseOrderId)
                          select new
                          {
                              x.Id,

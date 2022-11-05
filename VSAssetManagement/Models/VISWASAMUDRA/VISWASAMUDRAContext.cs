@@ -327,17 +327,9 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.StructureType).HasColumnName("STRUCTURE_TYPE");
 
-                entity.Property(e => e.Uom)
-                    .IsRequired()
-                    .HasColumnName("UOM")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.Uom).HasColumnName("UOM");
 
-                entity.Property(e => e.UsageUom)
-                    .IsRequired()
-                    .HasColumnName("USAGE_UOM")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.UsageUom).HasColumnName("USAGE_UOM");
 
                 entity.Property(e => e.UseFrequency).HasColumnName("USE_FREQUENCY");
             });

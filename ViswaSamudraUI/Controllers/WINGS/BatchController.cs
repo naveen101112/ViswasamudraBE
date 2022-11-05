@@ -49,16 +49,16 @@ namespace ViswaSamudraUI.Controllers.WINGS
             IEnumerable<BatchSearch> BatchList = batchOrder.GetAllBatches(model);
             var result = BatchList.FirstOrDefault();
 
-            ViewBag.StructureType = lookUpProvider.GetSelectList("STY", result.StructureType);
-            ViewBag.StructureSubType = lookUpProvider.GetSelectList("SST", result.StructureSubType);
-            ViewBag.AssetType = lookUpProvider.GetSelectList("ATY", result.AssetType);
-            ViewBag.AssetSpecification = lookUpProvider.GetSelectList("ATS", result.AssetSpecification);
-            ViewBag.Uom = lookUpProvider.GetSelectList("UOM", result.Uom);
+            ViewBag.StructureType = lookUpProvider.GetSelectList("STY", result.StructureType.ToString());
+            ViewBag.StructureSubType = lookUpProvider.GetSelectList("SST", result.StructureSubType.ToString());
+            ViewBag.AssetType = lookUpProvider.GetSelectList("ATY", result.AssetType.ToString());
+            ViewBag.AssetSpecification = lookUpProvider.GetSelectList("ATS", result.AssetSpecification.ToString());
+            ViewBag.Uom = lookUpProvider.GetSelectList("UOM", result.Uom.ToString());
             ViewBag.UsageUom = lookUpProvider.GetUsageUomList();
             ViewBag.Users = lookUpProvider.GetTempUserData();
             ViewBag.PurchaseOrderNo = purchaseOrderProvider.GetSelectList(result.PurchaseOrderId.ToString());
-            ViewBag.PurchaseProject = projectProvider.GetSelectList(result.PurchaseProject);
-            ViewBag.PurchaseStore = storeProvider.GetSelectList(0, result.PurchaseStore);
+            ViewBag.PurchaseProject = projectProvider.GetSelectList(result.PurchaseProject.ToString());
+            ViewBag.PurchaseStore = storeProvider.GetSelectList(0, result.PurchaseStore.ToString());
             return View(result);
         }
 

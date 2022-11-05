@@ -12,10 +12,5 @@ namespace VSManagement.Repository.AssetManagement
         {
             _context = context;
         }
-
-        public List<Status> getStatusListForType(Pagination page)
-        {
-            return _context.Status.Where(s => s.Type.ToUpper() == page.searchParam.ToUpper()).ToList();
-        }
     }
 }

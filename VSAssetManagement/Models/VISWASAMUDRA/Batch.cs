@@ -21,9 +21,9 @@ namespace VSManagement.Models.VISWASAMUDRA
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
-        public string Uom { get; set; }
-        public int UseFrequency { get; set; }
-        public string UsageUom { get; set; }
+        public Guid? Uom { get; set; }
+        public int? UseFrequency { get; set; }
+        public Guid? UsageUom { get; set; }
         public string BatchStatus { get; set; }
         public string InvoiceNo { get; set; }
         public DateTime InvoiceDate { get; set; }
