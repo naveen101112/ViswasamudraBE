@@ -1,12 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
-using Newtonsoft.Json;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using System.Data;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+using ViswaSamudraUI.Models;
 
 namespace ViswaSamudraUI
 {
@@ -63,7 +60,7 @@ namespace ViswaSamudraUI
             }
         }
 
-        public String PostRequest<T>(String Route, T PoIoModel)
+        public ResponseBody PostRequest<T>(String Route, T PoIoModel)
         {
             String Status = null;
             using (var client = new HttpClient())
@@ -75,13 +72,17 @@ namespace ViswaSamudraUI
                 var getdata = postTask.Result;
                 if (getdata.IsSuccessStatusCode)
                 {
-                    Status = getdata.Content.ReadAsStringAsync().Result;
+                    return new ResponseBody() { Status = true, Message = getdata.Content.ReadAsStringAsync().Result };
                 }
                 else
                 {
                     Console.WriteLine("Error");
+                    var responseContent = getdata.Content == null ?  "NoContent"
+                    : getdata.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                    //throw new HttpRequestException($"{getdata.StatusCode} (ReasonPhrase: {getdata.ReasonPhrase}, Content: {responseContent})");
+                    return new ResponseBody() { Status = false, Message = responseContent };
+
                 }
-                return Status;
             }
         }
 

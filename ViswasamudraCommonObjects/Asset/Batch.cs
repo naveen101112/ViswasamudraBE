@@ -24,8 +24,8 @@ namespace VSAssetManagement.IOModels
         public string UsageUom { get; set; }
         public string BatchStatus { get; set; }
         public string InvoiceNo { get; set; }
-        public DateTime InvoiceDate { get; set; }
+        public DateTime InvoiceDate { get; set; } = DateTime.Now;
         public string ReceivedBy { get; set; }
-        public DateTime ReceivedDate { get; set; }
+        public DateTime ReceivedDate { get; set; } = DateTime.Now;
     }
 }

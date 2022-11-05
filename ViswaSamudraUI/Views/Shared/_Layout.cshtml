@@ -32,6 +32,7 @@
 	<link rel="stylesheet" href="../assets/css/style.css">
 	<!-- data tables css -->
 	<link rel="stylesheet" href="../assets/plugins/data-tables/css/datatables.min.css">
+	<link rel="stylesheet" href="../assets/css/custom.css" />
 
 	<!-- vendor css -->
 	<link rel="stylesheet" href="../assets/css/style.css">
@@ -80,16 +81,16 @@
 					<li class="nav-item pcoded-menu-caption">
 						<label>Operations</label>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<li class="nav-item pcoded-hasmenu" id="wingz-link">
 						<a href="#!" class="nav-link waves-effect waves-light"><span class="pcoded-micon"><i class="feather icon-package"></i></span><span class="pcoded-mtext">Wingz</span></a>
 						<ul class="pcoded-submenu">							
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="PurchaseOrder" asp-action="index">Purchace Order</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Batch" asp-action="index">Batch</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Asset" asp-action="index">Asset</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Project" asp-action="index">Project</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Tag" asp-action="index">Tag</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Reason" asp-action="index">Reason</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Store" asp-action="index">Store</a></li>
+							<li class="" id="po-link"><a class="waves-effect" asp-area="" asp-controller="PurchaseOrder" asp-action="index">Purchace Order</a></li>
+							<li class="" id="batch-link"><a class="waves-effect" asp-area="" asp-controller="Batch" asp-action="index">Batch</a></li>
+							<li class="" id="asset-link"><a class="waves-effect" asp-area="" asp-controller="Asset" asp-action="index">Asset</a></li>
+							<li class="" id="project-link"><a class="waves-effect" asp-area="" asp-controller="Project" asp-action="index">Project</a></li>
+							<li class="" id="tag-link"><a class="waves-effect" asp-area="" asp-controller="Tag" asp-action="index">Tag</a></li>
+							<li class="" id="reason-link"><a class="waves-effect" asp-area="" asp-controller="Reason" asp-action="index">Reason</a></li>
+							<li class="" id="store-link"><a class="waves-effect" asp-area="" asp-controller="Store" asp-action="index">Store</a></li>
 						</ul>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
@@ -305,8 +306,12 @@
 		<!-- notification Js -->
 	<script src="../assets/plugins/notification/js/bootstrap-growl.min.js"></script>
 	<script src="~/customjs/growlnotification.js"></script>
-
+	<script src="../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
 </body>
+	<div class="loader" style="display:none">
+		<span style="position: absolute;color: black;font-weight: 900;" id="loader-message">Please wait.....</span>
+		<div class="spinner-border" style="width: 18rem;height: 18rem;color: black;" role="status">
+			<span class="sr-only" style="color: black;">Loading...</span>
+		</div>
+	</div>
 </html>
-
-

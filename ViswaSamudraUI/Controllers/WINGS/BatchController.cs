@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ViswaSamudraUI.Models;
 using ViswaSamudraUI.Providers.Assets;
 using VSAssetManagement.IOModels;
 using io = VSAssetManagement.IOModels;
@@ -25,8 +26,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public ActionResult POModification(PurchaseOrder PO)
         {
-            string PoStatus = purchaseOrderProvider.AddPurchaseOrder(PO);
-            return Content(PoStatus);
+            return Ok(purchaseOrderProvider.AddPurchaseOrder(PO));
+            //return Content(PoStatus);
         }
 
         public async Task<IActionResult> BatchOps(BatchSearch model)
@@ -63,8 +64,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public ActionResult BatchModification(Batch batchModel)
         {
-            string batchStatus = batchOrder.BatchModifications(batchModel);
-            return Content(batchStatus);
+            ResponseBody batchStatus = batchOrder.BatchModifications(batchModel);
+            return Ok(batchStatus);
         }
     }
 }

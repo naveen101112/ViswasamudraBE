@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ViswaSamudraUI.Models;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -14,7 +15,7 @@ namespace ViswaSamudraUI.Providers.Assets
             else
                 return (IEnumerable<io.Reason>)ch.GetDetailsRequest<io.Reason>("reason/reasonsearch", PoIoModel);
         }
-        public string AddReason(io.Reason PoIoModel = null)
+        public ResponseBody AddReason(io.Reason PoIoModel = null)
         {
             if (PoIoModel != null)
             {

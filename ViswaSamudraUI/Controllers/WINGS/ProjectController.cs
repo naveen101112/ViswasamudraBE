@@ -32,8 +32,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public ActionResult ProjectModification(Project model)
         {
-            String status = provider.Add(model);
-            return Content(status);
+            return Ok(provider.Add(model));
+            //return Content(status);
         }
     }
 }

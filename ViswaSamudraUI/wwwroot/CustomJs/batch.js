@@ -1,7 +1,26 @@
 ﻿$(document).ready(function () {
+
+    $("#PurchaseOrderId").change(function () {
+        if ($(this).val() == '' || $(this).val() < 1) {
+            $("#PurchaseOrderId").addClass('is-invalid');
+            $("#PurchaseOrderId").focus();
+            $("#PurchaseOrderId").blur();
+        } else {
+            $("#PurchaseOrderId").removeClass('is-invalid');
+        }
+    });
+
     // [ notification-button ]
     $('#batchButton').on('click', function (e) {
         e.preventDefault();
+        var poId = $("#PurchaseOrderId").val();
+        if (poId == null || poId == undefined || poId == '') {
+            //swal("Please select Purchase Order to proceed..", "Purchase Order Batch Save", "error");
+            $("#PurchaseOrderId").addClass('is-invalid');
+            $("#PurchaseOrderId").focus();
+            $("#PurchaseOrderId").blur();
+            return false;
+        }
 
         var nFrom = $(this).attr('data-from');
         var nAlign = $(this).attr('data-align');
@@ -66,16 +85,26 @@
         });
 
         if ($('#batchform').valid()) {
+            openLoader('Saving Purchase Order Batch details.....');
             $.ajax({
                 url: 'BatchModification',
                 data: toJson(),
                 type: 'Post',
                 success: function (data) {
-                    nType = 'success';
-                    message = data;
-                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#BatchNo').val() + ' - ' + $('#BatchDescription').val() + ' : Updated Successfully', " Batch ");
+                    closeLoader();
+                    if (data?.status) {
+                        nType = 'success';
+                        message = data;
+                        let mode = $("#hdnGuid").val().replaceAll('-', '') == 0 ? 'Created' : 'Updated';
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#BatchNo').val() + ' - ' + $('#BatchDescription').val() + ' : '+mode+' Successfully', " Batch ");
+                    } else {
+                        nType = 'danger';
+                        message = data?.message ? data?.message : 'Error saving';
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Error saving", " Batch ");
+                    }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
+                    closeLoader();
                     nType = 'danger';
                     message = 'Error In Updation';
                     notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Batch ")
@@ -139,23 +168,32 @@
         });
 
         if ($('#poform').valid()) {
+            openLoader('Saving Purchase Order details.....');
             $.ajax({
                 url: 'POModification',
                 data: toPOJson(),
                 type: 'Post',
                 success: function (data) {
-                    $('#PurchaseOrderNo').append(new Option($('#PurchaseOrderNo').val(), $('#PurchaseOrderNo').val()));
-                    $("#PurchaseOrderNo").val($('#PurchaseOrderNo').val());
-                    $('#opsbutton').click();
-                    clearall();
-                    nType = 'success';
-                    message = data;
-                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#PurchaseOrderNo').val() + ' : Created Successfully', " Purchase Order ");
+                    closeLoader();
+                    if (data?.status) {
+                        $('#PurchaseOrderNo').append(new Option($('#PurchaseOrderNo').val(), $('#PurchaseOrderNo').val()));
+                        $("#PurchaseOrderNo").val($('#PurchaseOrderNo').val());
+                        $('#opsbutton').click();
+                        clearall();
+                        nType = 'success';
+                        message = data?.message;
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#PurchaseOrderNo').val() + ' : Created Successfully', " Purchase Order ");
+                    } else {
+                        nType = 'danger';
+                        message = data?.message;
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Batch ");
+                    }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     nType = 'danger';
                     message = 'Error In Updation';
-                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Batch ")
+                    closeLoader();
+                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Batch ");
                 },
 
             });
@@ -164,7 +202,7 @@
 });
 
 function toJson() {
-    return Project = { Guid: $("#hdnGuid").val(), BatchNo: $("#BatchNo").val(), BatchDescription: $("#BatchDescription").val(), Quantity: $("#BatchQuantity").val(), AssetType: $("#AssetType").val(), AssetSpecification: $("#AssetSpecification").val(), PurchaseOrderId: $("#PurchaseOrderId").val(), Uom: $("#Uom").val(), UseFrequency: $("#UseFrequency").val(), UsageUom: $("#UsageUom").val(), BatchStatus: $("#BatchStatus").val(), InvoiceNo: $("#InvoiceNo").val(), InvoiceDate: $("#InvoiceDate").val(), ReceivedBy: $("#ReceivedBy").val(), ReceivedDate: $("#ReceivedDate").val(), StructureType: $("#StructureType").val(), StructureSubType: $("#StructureSubType").val() };
+    return Batch = { Guid: $("#hdnGuid").val(), BatchNo: $("#BatchNo").val(), BatchDescription: $("#BatchDescription").val(), Quantity: $("#BatchQuantity").val(), AssetType: $("#AssetType").val(), AssetSpecification: $("#AssetSpecification").val(), PurchaseOrderId: $("#PurchaseOrderId").val(), Uom: $("#Uom").val(), UseFrequency: $("#UseFrequency").val(), UsageUom: $("#UsageUom").val(), BatchStatus: $("#BatchStatus").val(), InvoiceNo: $("#InvoiceNo").val(), InvoiceDate: $("#InvoiceDate").val(), ReceivedBy: $("#ReceivedBy").val(), ReceivedDate: $("#ReceivedDate").val(), StructureType: $("#StructureType").val(), StructureSubType: $("#StructureSubType").val() };
 };
 
 function toPOJson() {
@@ -178,3 +216,7 @@ function clearall() {
     $("#PurchaseProject").val('');
     $("#CompanyName").val('');
 }
+
+$(window).on('load', function () {
+    setActiveMenu('wingz', 'batch');
+});

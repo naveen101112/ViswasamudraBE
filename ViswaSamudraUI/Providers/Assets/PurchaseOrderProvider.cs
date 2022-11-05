@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViswaSamudraUI.Models;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -16,7 +17,7 @@ namespace ViswaSamudraUI.Providers.Assets
             else
                 return (IEnumerable<io.PurchaseOrder>)ch.GetDetailsRequest<io.PurchaseOrder>("purchaseOrder/posearch", PoIoModel);
         }
-        public string AddPurchaseOrder(io.PurchaseOrder PoIoModel = null)
+        public ResponseBody AddPurchaseOrder(io.PurchaseOrder PoIoModel = null)
         {
             if (PoIoModel != null)
             {

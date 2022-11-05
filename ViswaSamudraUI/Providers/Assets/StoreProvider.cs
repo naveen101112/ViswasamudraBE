@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViswaSamudraUI.Models;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -45,7 +46,7 @@ namespace ViswaSamudraUI.Providers.Assets
             return newList;
         }
 
-        public string Add(io.Store model = null)
+        public ResponseBody Add(io.Store model = null)
         {
             if (model != null)
             {

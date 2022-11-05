@@ -37,8 +37,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public ActionResult PoModification(PurchaseOrder PoIoModel)
         {
-            string poStatus = purchaseOrder.AddPurchaseOrder(PoIoModel);
-            return Content(poStatus);
+            return Ok(purchaseOrder.AddPurchaseOrder(PoIoModel));
+            //return Content(poStatus);
         }
     }
 }

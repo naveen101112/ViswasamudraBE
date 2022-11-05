@@ -35,8 +35,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public ActionResult StoreModification(Store model)
         {
-            string status = provider.Add(model);
-            return Content(status);
+            return Ok(provider.Add(model));
+            //return Content(status);
         }
     }
 }

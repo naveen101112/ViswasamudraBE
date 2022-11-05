@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ViswaSamudraUI.Models;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -16,7 +17,7 @@ namespace ViswaSamudraUI.Providers.Assets
             return (IEnumerable<io.BatchSearch>)ch.GetDetailsRequest<io.BatchSearch>("batch/search", BatchModel);
         }
 
-        public string BatchModifications(io.Batch BatchModel = null)
+        public ResponseBody BatchModifications(io.Batch BatchModel = null)
         {
             if (BatchModel != null)
             {

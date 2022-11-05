@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using VSManagement.Models.VISWASAMUDRA;
 using io = VSAssetManagement.IOModels;
 using VSManagement.Repository.AssetManagement;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace VSManagement.Controllers.AssetManagement
 {
@@ -62,9 +64,16 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Batch record)
         {
-            int id = repo.create(JsonConvert.
-                DeserializeObject<Batch>(JsonConvert.SerializeObject(record)));
-            return Created($"/batch/{id}", "Created Successfully.");
+            try
+            {
+                int id = repo.create(JsonConvert.
+                    DeserializeObject<Batch>(JsonConvert.SerializeObject(record)));
+                if(id == 0) return Conflict("Error while creating batch.");
+                return Created($"/batch/{id}", "Created Successfully.");
+            }catch(Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,"Error while creating batch");
+            }
         }
 
         [HttpPost("Update")]

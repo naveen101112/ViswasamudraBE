@@ -38,8 +38,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public ActionResult ReasonModification(io.Reason resModel)
         {
-            string poStatus = reasonProvider.AddReason(resModel);
-            return Content(poStatus);
+            return Ok(reasonProvider.AddReason(resModel));
+            //return Content(poStatus);
         }
     }
 }

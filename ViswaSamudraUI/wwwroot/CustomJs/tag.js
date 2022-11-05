@@ -62,10 +62,16 @@
 				url: 'TagModification',
 				data: toJson(),
 				type: 'Post',
-				success: function (data) {
-					nType = 'success';
-					message = data;
-                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#Code').val() + ' - ' + $('#Name').val() + ' : Updated Successfully', " Tag ");
+                success: function (data) {
+                    if (data?.status) {
+                        nType = 'success';
+                        message = data?.message;
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#Code').val() + ' - ' + $('#Name').val() + ' : Updated Successfully', " Tag ");
+                    } else {
+                        nType = 'danger';
+                        message = data?.message;
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Tag ");
+                    }
 				},
 				error: function (xhr, ajaxOptions, thrownError) {
 					nType = 'danger';

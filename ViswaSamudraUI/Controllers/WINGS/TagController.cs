@@ -33,8 +33,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public ActionResult TagModification(Tag model)
         {
-            string status = provider.Add(model);
-            return Content(status);
+            return Ok(provider.Add(model));
+            //return Content(status);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViswaSamudraUI.Models;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -22,7 +23,7 @@ namespace ViswaSamudraUI.Providers.Assets
             return (IEnumerable<io.Project>)ch.GetRequest<io.Project>("Project");
         }
 
-        public string Add(io.Project model = null)
+        public ResponseBody Add(io.Project model = null)
         {
             if (model != null)
             {

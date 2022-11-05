@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ViswaSamudraUI.Models;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -20,7 +21,7 @@ namespace ViswaSamudraUI.Providers.Assets
                 return (IEnumerable<io.Tag>)ch.GetDetailsRequest<io.Tag>("tag/search", model);
         }
 
-        public string Add(io.Tag model = null)
+        public ResponseBody Add(io.Tag model = null)
         {
             if (model != null)
             {

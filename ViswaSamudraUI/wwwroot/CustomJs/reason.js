@@ -64,9 +64,15 @@
                 data: toJson(),
                 type: 'Post',
                 success: function (data) {
-                    nType = 'success';
-                    message = data;
-                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#ReasonCode').val() + ' - ' + $('#ReasonName').val() + ' : '+ message, " Reason ")
+                    if (data?.status) {
+                        nType = 'success';
+                        message = data?.message;
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#ReasonCode').val() + ' - ' + $('#ReasonName').val() + ' : ' + message, " Reason ");
+                    } else {
+                        nType = 'danger';
+                        message = data?.message;
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Reason ");
+                    }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     nType = 'danger';
