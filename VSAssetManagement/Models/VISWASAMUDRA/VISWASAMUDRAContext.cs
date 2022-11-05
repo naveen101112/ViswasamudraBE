@@ -29,7 +29,6 @@ namespace VSManagement.Models.VISWASAMUDRA
         public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
         public virtual DbSet<Reason> Reason { get; set; }
-        public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Store> Store { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
 
@@ -68,22 +67,14 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.AssetSpecification)
-                    .IsRequired()
-                    .HasColumnName("ASSET_SPECIFICATION")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.AssetSpecification).HasColumnName("ASSET_SPECIFICATION");
 
-                entity.Property(e => e.AssetType)
-                    .IsRequired()
-                    .HasColumnName("ASSET_TYPE")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.AssetType).HasColumnName("ASSET_TYPE");
 
                 entity.Property(e => e.BatchNo)
                     .IsRequired()
                     .HasColumnName("BATCH_NO")
-                    .HasMaxLength(4)
+                    .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CompanyName)
@@ -96,7 +87,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .IsRequired()
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
@@ -114,39 +106,21 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime");
 
-                entity.Property(e => e.ProjectCode)
-                    .IsRequired()
-                    .HasColumnName("PROJECT_CODE")
-                    .HasMaxLength(4)
-                    .IsUnicode(false);
+                entity.Property(e => e.ProjectCode).HasColumnName("PROJECT_CODE");
 
                 entity.Property(e => e.RecordStatus)
                     .HasColumnName("RECORD_STATUS")
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Store)
-                    .IsRequired()
-                    .HasColumnName("STORE")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.Store).HasColumnName("STORE");
 
-                entity.Property(e => e.StructureSubType)
-                    .HasColumnName("STRUCTURE_SUB_TYPE")
-                    .HasMaxLength(3)
-                    .IsUnicode(false);
+                entity.Property(e => e.StructureSubType).HasColumnName("STRUCTURE_SUB_TYPE");
 
-                entity.Property(e => e.StructureType)
-                    .HasColumnName("STRUCTURE_TYPE")
-                    .HasMaxLength(3)
-                    .IsUnicode(false);
+                entity.Property(e => e.StructureType).HasColumnName("STRUCTURE_TYPE");
 
-                entity.Property(e => e.TagId)
-                    .HasColumnName("TAG_ID")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.TagId).HasColumnName("TAG_ID");
             });
 
             modelBuilder.Entity<AssetHistory>(entity =>
@@ -159,11 +133,7 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnName("GUID")
                     .HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.AssetId)
-                    .IsRequired()
-                    .HasColumnName("ASSET_ID")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.AssetId).HasColumnName("ASSET_ID");
 
                 entity.Property(e => e.AssetStatus)
                     .HasColumnName("ASSET_STATUS")
@@ -174,7 +144,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .IsRequired()
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
@@ -192,8 +163,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.RecordStatus)
                     .HasColumnName("RECORD_STATUS")
@@ -232,7 +202,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .IsRequired()
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
@@ -250,8 +221,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.LastUpdatedTime)
                     .HasColumnName("LAST_UPDATED_TIME")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.RecordStatus)
                     .HasColumnName("RECORD_STATUS")
@@ -280,17 +250,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnName("GUID")
                     .HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.AssetSpecification)
-                    .IsRequired()
-                    .HasColumnName("ASSET_SPECIFICATION")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.AssetSpecification).HasColumnName("ASSET_SPECIFICATION");
 
-                entity.Property(e => e.AssetType)
-                    .IsRequired()
-                    .HasColumnName("ASSET_TYPE")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.AssetType).HasColumnName("ASSET_TYPE");
 
                 entity.Property(e => e.BatchDescription)
                     .HasColumnName("BATCH_DESCRIPTION")
@@ -314,7 +276,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
@@ -342,8 +305,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.PurchaseOrderId).HasColumnName("PURCHASE_ORDER_ID");
 
@@ -361,15 +323,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnName("RECORD_STATUS")
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.StructureSubType)
-                    .HasColumnName("STRUCTURE_SUB_TYPE")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+                entity.Property(e => e.StructureSubType).HasColumnName("STRUCTURE_SUB_TYPE");
 
-                entity.Property(e => e.StructureType)
-                    .HasColumnName("STRUCTURE_TYPE")
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
+                entity.Property(e => e.StructureType).HasColumnName("STRUCTURE_TYPE");
 
                 entity.Property(e => e.Uom)
                     .IsRequired()
@@ -392,10 +348,6 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.ToTable("LOOKUP_TYPE");
 
-                entity.HasIndex(e => e.Code)
-                    .HasName("IX_LOOKUP_TYPE")
-                    .IsUnique();
-
                 entity.Property(e => e.Guid)
                     .HasColumnName("GUID")
                     .HasDefaultValueSql("(newid())");
@@ -410,7 +362,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .IsRequired()
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
@@ -428,8 +381,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -448,10 +400,6 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.ToTable("LOOKUP_TYPE_VALUE");
 
-                entity.HasIndex(e => e.Code)
-                    .HasName("IX_LOOKUP_TYPE_VALUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Guid)
                     .HasColumnName("GUID")
                     .HasDefaultValueSql("(newid())");
@@ -466,7 +414,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .IsRequired()
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
@@ -484,8 +433,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.LookupTypeId).HasColumnName("LOOKUP_TYPE_ID");
 
@@ -512,22 +460,18 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.ToTable("PROJECT");
 
-                entity.HasIndex(e => e.ProjectCode)
-                    .HasName("IX_PROJECT")
-                    .IsUnique();
-
                 entity.Property(e => e.Guid)
                     .HasColumnName("GUID")
                     .HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.AddressLine1)
                     .HasColumnName("ADDRESS_LINE_1")
-                    .HasMaxLength(50)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.AddressLine2)
                     .HasColumnName("ADDRESS_LINE_2")
-                    .HasMaxLength(50)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CityTown)
@@ -537,7 +481,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.ClientName)
                     .HasColumnName("CLIENT_NAME")
-                    .HasMaxLength(30)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CreateDateTime)
@@ -548,7 +492,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.GstinNo)
                     .HasColumnName("GSTIN_NO")
@@ -582,7 +527,7 @@ namespace VSManagement.Models.VISWASAMUDRA
                 entity.Property(e => e.ProjectName)
                     .IsRequired()
                     .HasColumnName("PROJECT_NAME")
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ProjectSiteHead)
@@ -628,7 +573,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
@@ -646,8 +592,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.PurchaseOrderDate)
                     .HasColumnName("PURCHASE_ORDER_DATE")
@@ -658,15 +603,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PurchaseProject)
-                    .HasColumnName("PURCHASE_PROJECT")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.PurchaseProject).HasColumnName("PURCHASE_PROJECT");
 
-                entity.Property(e => e.PurchaseStore)
-                    .HasColumnName("PURCHASE_STORE")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.PurchaseStore).HasColumnName("PURCHASE_STORE");
 
                 entity.Property(e => e.RecordStatus)
                     .HasColumnName("RECORD_STATUS")
@@ -686,7 +625,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
@@ -702,8 +642,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.ReasonCode)
                     .IsRequired()
@@ -724,24 +663,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                 entity.Property(e => e.RecordStatus)
                     .HasColumnName("RECORD_STATUS")
                     .HasDefaultValueSql("((1))");
-            });
-
-            modelBuilder.Entity<Status>(entity =>
-            {
-                entity.ToTable("STATUS");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasColumnName("DESCRIPTION")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Type)
-                    .HasColumnName("TYPE")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Store>(entity =>
@@ -766,7 +687,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
@@ -802,16 +724,9 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ParentStore)
-                    .IsRequired()
-                    .HasColumnName("PARENT_STORE")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.ParentStore).HasColumnName("PARENT_STORE");
 
-                entity.Property(e => e.Project)
-                    .HasColumnName("PROJECT")
-                    .HasMaxLength(5)
-                    .IsUnicode(false);
+                entity.Property(e => e.Project).HasColumnName("PROJECT");
 
                 entity.Property(e => e.RecordStatus)
                     .HasColumnName("RECORD_STATUS")
@@ -838,7 +753,8 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .IsRequired()
                     .HasColumnName("CREATED_BY")
                     .HasMaxLength(20)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
 
                 entity.Property(e => e.CreatedDateTime)
                     .HasColumnName("CREATED_DATE_TIME")
@@ -856,8 +772,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.LastUpdatedDateTime)
                     .HasColumnName("LAST_UPDATED_DATE_TIME")
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -874,10 +789,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasMaxLength(15)
                     .IsUnicode(false);
             });
-
-            modelBuilder.HasSequence("ASSET_ID_GEN")
-                .HasMin(1)
-                .HasMax(9999);
 
             OnModelCreatingPartial(modelBuilder);
         }

@@ -10,11 +10,11 @@ namespace VSManagement.Models.VISWASAMUDRA
     public partial class Store
     {
         public string Name { get; set; }
-        public string ParentStore { get; set; }
+        public Guid? ParentStore { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
         public string Code { get; set; }
-        public string Project { get; set; }
+        public Guid? Project { get; set; }
         public string Incharge { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDateTime { get; set; }

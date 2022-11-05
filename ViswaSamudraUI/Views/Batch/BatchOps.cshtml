@@ -185,6 +185,11 @@
     {
     <script src="@Url.Content("../customjs/batch.js")"></script>
     <script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'batch');
+        });
+    </script>
     <style>
         .table thead th {
             padding: 1px;

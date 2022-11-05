@@ -13,8 +13,8 @@ namespace VSManagement.Models.VISWASAMUDRA
         public string BatchNo { get; set; }
         public string BatchDescription { get; set; }
         public int BatchQuantity { get; set; }
-        public string AssetType { get; set; }
-        public string AssetSpecification { get; set; }
+        public Guid AssetType { get; set; }
+        public Guid AssetSpecification { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
@@ -29,8 +29,8 @@ namespace VSManagement.Models.VISWASAMUDRA
         public DateTime InvoiceDate { get; set; }
         public string ReceivedBy { get; set; }
         public DateTime ReceivedDate { get; set; }
-        public string StructureType { get; set; }
-        public string StructureSubType { get; set; }
-        public int? PurchaseOrderId { get; set; }
+        public Guid? StructureType { get; set; }
+        public Guid? StructureSubType { get; set; }
+        public Guid? PurchaseOrderId { get; set; }
     }
 }

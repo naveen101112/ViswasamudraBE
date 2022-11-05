@@ -21,7 +21,6 @@ namespace VSManagement.Repository.AssetManagement
         public IEnumerable<Tag> getAllListLinq()
         {
             return (from tag in _context.Tag
-                    join status in _context.Status on tag.Status equals status.Id.ToString()
                     select new Tag
                     {
                         CreatedDateTime = tag.CreatedDateTime,
@@ -32,8 +31,7 @@ namespace VSManagement.Repository.AssetManagement
                         Id = tag.Id,
                         LastUpdatedBy = tag.LastUpdatedBy,
                         Name = tag.Name,
-                        RecordStatus = tag.RecordStatus,
-                        Status = status.Description
+                        RecordStatus = tag.RecordStatus
                     }).ToList();
 
         }
@@ -41,12 +39,10 @@ namespace VSManagement.Repository.AssetManagement
         public IEnumerable<dynamic> getDataGrid()
         {
             return (from tag in _context.Tag
-                    join status in _context.Status on tag.Status equals status.Id.ToString()
                     select new
                     {
                         tag.Id,
                         tag.Code,
-                        Status = status.Description,
                         tag.Name,
                         tag.Guid
                     }).ToList();
@@ -73,13 +69,11 @@ namespace VSManagement.Repository.AssetManagement
         public dynamic getByIdEdit(int id)
         {
             return (from record in _context.Tag
-                    join status in _context.Status on record.Status equals status.Id.ToString()
                     where record.Id == id
                     select new
                     {
                         record.Id,
                         record.Code,
-                        Status = status.Description,
                         record.Name,
                         record.Guid
                     }).FirstOrDefault();

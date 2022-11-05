@@ -8,8 +8,6 @@ namespace VSAssetManagement
 {
     public static class StaticData
     {
-        public static List<Status> statusList { get; set; }
-
         public static IConfiguration appSettings;
 
         public static string getDateString(DateTime date)

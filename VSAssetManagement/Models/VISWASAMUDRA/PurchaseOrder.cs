@@ -12,8 +12,8 @@ namespace VSManagement.Models.VISWASAMUDRA
         public int Id { get; set; }
         public string PurchaseOrderNo { get; set; }
         public DateTime? PurchaseOrderDate { get; set; }
-        public string PurchaseStore { get; set; }
-        public string PurchaseProject { get; set; }
+        public Guid? PurchaseStore { get; set; }
+        public Guid? PurchaseProject { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }

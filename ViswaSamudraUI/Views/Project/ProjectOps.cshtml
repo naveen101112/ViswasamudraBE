@@ -18,68 +18,74 @@
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">Project Code</label>                                                       
-                      <input  class="form-control" asp-for="ProjectCode" name="ProjectCode" placeholder="Project Code" id="ProjectCode">
+                      <input class="form-control" asp-for="ProjectCode" placeholder="Project Code" maxlength="4">
                    </div>
                 </div>
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">Project Name</label> 
-                      <input  class="form-control" asp-for="ProjectName" name="ProjectName" placeholder="Project Name" id="ProjectName">
+                      <input class="form-control" asp-for="ProjectName" placeholder="Project Name" maxlength="50">
                    </div>
                 </div>
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">Project Type</label>
-                      <select class="form-control" asp-items="@ViewBag.ProjectType" asp-for="ProjectType">                      
+                      <select class="form-control" asp-items="@ViewBag.ProjectType" asp-for="ProjectType">
                       </select>
                    </div>
                 </div>
                 <div class="col-md-4">
                    <div class="form-group">
+                      <label class="form-label">Client Name</label> 
+                      <input class="form-control" asp-for="ClientName" placeholder="Client Name" maxlength="100">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
                       <label class="form-label">Project Start Date</label>
-                      <input  class="form-control" asp-for="ProjectStartDate" name="ProjectStartDate" placeholder="Project Start Date" id="ProjectStartDate">
+                      <input class="form-control" asp-for="ProjectStartDate" placeholder="Project Start Date">
                    </div>
                 </div>
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">End Date</label>
-                      <input  class="form-control" asp-for="ProjectEndDate" name="ProjectEndDate" placeholder="Project End Date" id="ProjectEndDate">
+                      <input class="form-control" asp-for="ProjectEndDate" placeholder="Project End Date">
                    </div>
                 </div>
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">Project Site Head</label>
-                      <input  class="form-control" asp-for="ProjectSiteHead" name="ProjectSiteHead" placeholder="Project Site Head" id="ProjectSiteHead">
+                      <input class="form-control" asp-for="ProjectSiteHead" placeholder="Project Site Head" maxlength="30">
                    </div>
                 </div>
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">Site Head Mobile</label>
-                      <input  class="form-control" asp-for="SiteHeadMobile" name="SiteHeadMobile" placeholder="Site Head Mobile" id="SiteHeadMobile">
+                      <input class="form-control" asp-for="SiteHeadMobile" placeholder="Site Head Mobile" maxlength="12">
                    </div>
                 </div>
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">GSTIN No</label>
-                      <input  class="form-control" asp-for="GstinNo" name="GstinNo" placeholder="GSTIN No" id="GstinNo">
+                      <input  class="form-control" asp-for="GstinNo" placeholder="GSTIN No" maxlength="20">
                    </div>
                 </div>
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">CITY/TOWN</label>
-                      <input  class="form-control" asp-for="CityTown" name="CityTown" placeholder="City/Town" id="CityTown">
+                      <input class="form-control" asp-for="CityTown" placeholder="City/Town" maxlength="30">
                    </div>
                 </div>
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">Address Line 1</label>
-                      <input  class="form-control" asp-for="AddressLine1" name="AddressLine1" placeholder="Address Line 1" id="AddressLine1">
+                      <input class="form-control" asp-for="AddressLine1" placeholder="Address Line 1" maxlength="100">
                    </div>
                 </div>
                 <div class="col-md-4">
                    <div class="form-group">
                       <label class="form-label">Address Line 2</label>
-                      <input  class="form-control" asp-for="AddressLine2" name="AddressLine2" placeholder="Address Line 2" id="AddressLine2">
+                      <input class="form-control" asp-for="AddressLine2" placeholder="Address Line 2" maxlength="100">
                    </div>
                 </div>
              </div>
@@ -92,7 +98,13 @@
 </div>
 @section Scripts
 {
-<script src="@Url.Content("../customjs/project.js")"></script>
+    <script src="@Url.Content("../customjs/project.js")"></script>
+    <script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'project');
+        });
+    </script>
 <style>        
 .table thead th {
     padding:1px;

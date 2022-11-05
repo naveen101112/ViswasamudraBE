@@ -1,5 +1,9 @@
 ﻿$(document).ready(function () {
 
+    $("#opsbutton").click(function () {
+        $("#PurchaseOrderId").removeClass('is-invalid');
+    });
+
     $("#PurchaseOrderId").change(function () {
         if ($(this).val() == '' || $(this).val() < 1) {
             $("#PurchaseOrderId").addClass('is-invalid');
@@ -96,10 +100,12 @@
                         nType = 'success';
                         message = data;
                         let mode = $("#hdnGuid").val().replaceAll('-', '') == 0 ? 'Created' : 'Updated';
-                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#BatchNo').val() + ' - ' + $('#BatchDescription').val() + ' : '+mode+' Successfully', " Batch ");
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#BatchNo').val() + ' - ' + $('#BatchDescription').val() + ' : ' + mode + ' Successfully', " Batch ");
+                        window.location.replace('/batch');
                     } else {
                         nType = 'danger';
                         message = data?.message ? data?.message : 'Error saving';
+                        console.error("Error saving batch details:",data);
                         notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Error saving", " Batch ");
                     }
                 },
@@ -202,7 +208,7 @@
 });
 
 function toJson() {
-    return Batch = { Guid: $("#hdnGuid").val(), BatchNo: $("#BatchNo").val(), BatchDescription: $("#BatchDescription").val(), Quantity: $("#BatchQuantity").val(), AssetType: $("#AssetType").val(), AssetSpecification: $("#AssetSpecification").val(), PurchaseOrderId: $("#PurchaseOrderId").val(), Uom: $("#Uom").val(), UseFrequency: $("#UseFrequency").val(), UsageUom: $("#UsageUom").val(), BatchStatus: $("#BatchStatus").val(), InvoiceNo: $("#InvoiceNo").val(), InvoiceDate: $("#InvoiceDate").val(), ReceivedBy: $("#ReceivedBy").val(), ReceivedDate: $("#ReceivedDate").val(), StructureType: $("#StructureType").val(), StructureSubType: $("#StructureSubType").val() };
+    return Batch = { Guid: $("#hdnGuid").val(), BatchNo: $("#BatchNo").val(), BatchDescription: $("#BatchDescription").val(), BatchQuantity: $("#BatchQuantity").val(), AssetType: $("#AssetType").val(), AssetSpecification: $("#AssetSpecification").val(), PurchaseOrderId: $("#PurchaseOrderId").val(), Uom: $("#Uom").val(), UseFrequency: $("#UseFrequency").val(), UsageUom: $("#UsageUom").val(), BatchStatus: $("#BatchStatus").val(), InvoiceNo: $("#InvoiceNo").val(), InvoiceDate: $("#InvoiceDate").val(), ReceivedBy: $("#ReceivedBy").val(), ReceivedDate: $("#ReceivedDate").val(), StructureType: $("#StructureType").val(), StructureSubType: $("#StructureSubType").val(), CreatedBy: 'SYSTEM' };
 };
 
 function toPOJson() {
@@ -216,7 +222,3 @@ function clearall() {
     $("#PurchaseProject").val('');
     $("#CompanyName").val('');
 }
-
-$(window).on('load', function () {
-    setActiveMenu('wingz', 'batch');
-});

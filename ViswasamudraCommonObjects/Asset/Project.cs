@@ -9,8 +9,8 @@ namespace VSAssetManagement.IOModels
         public string ProjectName { get; set; }
         public string ProjectType { get; set; }
         public string ClientName { get; set; }
-        public DateTime? ProjectStartDate { get; set; }
-        public DateTime? ProjectEndDate { get; set; }
+        public DateTime? ProjectStartDate { get; set; } = DateTime.Now;
+        public DateTime? ProjectEndDate { get; set; } = DateTime.Now;
         public string ProjectSiteHead { get; set; }
         public string SiteHeadMobile { get; set; }
         public string GstinNo { get; set; }

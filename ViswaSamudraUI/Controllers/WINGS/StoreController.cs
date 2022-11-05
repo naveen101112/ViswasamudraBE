@@ -29,7 +29,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
             IEnumerable<Store> list = provider.GetAllStore(ioModel);
             var result = list.FirstOrDefault();
             ViewBag.ParentStore = provider.GetSelectList(result.Id, result.ParentStore);
-            ViewBag.Project = projectProvider.GetSelectList(result.Project);
+            ViewBag.Project = projectProvider.GetSelectList(result.Guid.ToString());
             return View(result);
         }
 

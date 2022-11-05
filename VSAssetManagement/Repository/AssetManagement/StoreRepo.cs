@@ -35,7 +35,7 @@ namespace VSManagement.Repository.AssetManagement
         {
             return (from store in _context.Store
                     where store.Id != id
-                    select new Store { Code=store.Code, Name = store.Name}).ToList();
+                    select new Store { Code=store.Code, Name = store.Name, Guid=store.Guid }).ToList();
         }
 
         public int update(Store record)

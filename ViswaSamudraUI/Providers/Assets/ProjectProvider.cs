@@ -48,12 +48,12 @@ namespace ViswaSamudraUI.Providers.Assets
             List<SelectListItem> newList = new List<SelectListItem>();
             newList.Add(selListItem);
 
-            foreach (var x in GetDropDown().Select(i => new { i.ProjectName, i.ProjectCode }))
+            foreach (var x in GetDropDown().Select(i => new { i.ProjectName, i.ProjectCode, i.Guid }))
             {
-                if (SelectedValue != null && x.ProjectCode == SelectedValue)
-                    selListItem = new SelectListItem() { Value = x.ProjectCode, Text = x.ProjectName, Selected = true };
+                if (SelectedValue != null && x.Guid.ToString() == SelectedValue)
+                    selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.ProjectName, Selected = true };
                 else
-                    selListItem = new SelectListItem() { Value = x.ProjectCode, Text = x.ProjectName };
+                    selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.ProjectName };
 
                 newList.Add(selListItem);
             }

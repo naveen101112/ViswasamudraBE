@@ -19,13 +19,13 @@ namespace VSManagement.Models.VISWASAMUDRA
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
-        public string ProjectCode { get; set; }
-        public string StructureType { get; set; }
-        public string TagId { get; set; }
-        public string AssetType { get; set; }
-        public string AssetSpecification { get; set; }
-        public string Store { get; set; }
+        public Guid ProjectCode { get; set; }
+        public Guid? StructureType { get; set; }
+        public Guid? TagId { get; set; }
+        public Guid AssetType { get; set; }
+        public Guid AssetSpecification { get; set; }
+        public Guid Store { get; set; }
         public string BatchNo { get; set; }
-        public string StructureSubType { get; set; }
+        public Guid? StructureSubType { get; set; }
     }
 }

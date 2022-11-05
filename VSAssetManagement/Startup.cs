@@ -30,8 +30,6 @@ namespace VSAssetManagement
                     Version = "v1"
                 });
             });
-
-            StaticData.statusList = new StatusRepo(new VISWASAMUDRAContext()).getAllList();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

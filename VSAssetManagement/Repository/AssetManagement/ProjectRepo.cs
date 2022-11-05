@@ -102,7 +102,7 @@ namespace VSManagement.Repository.AssetManagement
         public List<Project> getDropDown()
         {
             return (from project in _context.Project
-                    select new Project { ProjectCode = project.ProjectCode, ProjectName = project.ProjectName }).ToList();
+                    select new Project { ProjectCode = project.ProjectCode, ProjectName = project.ProjectName, Guid = project.Guid, Id=project.Id }).ToList();
         }
     }
 }
