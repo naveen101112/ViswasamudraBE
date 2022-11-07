@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using ViswaSamudraUI.Models;
+using VSAssetManagement.IOModels;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -13,6 +16,19 @@ namespace ViswaSamudraUI.Providers.Assets
         public IEnumerable<io.LookupTypeValue> GetAllLookup(string lookUpType)
         {
             return (IEnumerable<io.LookupTypeValue>)ch.GetRequest<io.LookupTypeValue>("lookup/"+ lookUpType);
+        }
+
+        public IEnumerable<io.LookupType> GetLookupData(LookupType lookupType)
+        {
+           
+            return (IEnumerable<io.LookupType>)ch.GetDetailsRequest<io.LookupType>("lookup/search", lookupType);
+        }
+
+
+        public IEnumerable<io.LookupTypeValue> GetLookupValue(LookupTypeValue lookupTypevalue)
+        {
+            
+            return (IEnumerable<io.LookupTypeValue>)ch.GetDetailsRequest<io.LookupTypeValue>("lookup/value/search", lookupTypevalue);
         }
 
         public List<SelectListItem> GetSelectList(string code, string SelectedValue=null)
@@ -31,6 +47,20 @@ namespace ViswaSamudraUI.Providers.Assets
                 newList.Add(selListItem);
             }
             return newList;
+        }
+
+        public ResponseBody Add(io.LookupType model = null)
+        {
+            if (model != null)
+            {
+                if (model.Guid == Guid.Empty)
+                {
+                    return ch.PostRequest<io.LookupType>("LookUp/Create", model);
+                }
+                return ch.PostRequest<io.LookupType>("LookUp/Update", model);
+            }
+            else
+                return null;
         }
 
         public List<SelectListItem> GetUsageUomList()

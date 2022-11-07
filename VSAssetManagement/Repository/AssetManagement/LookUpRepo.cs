@@ -20,6 +20,8 @@ namespace VSManagement.Repository.AssetManagement
 
         public Guid create(LookupType record)
         {
+            record.CreatedDateTime = DateTime.Now;
+            record.LastUpdatedDateTime = DateTime.Now;
             _context.LookupType.Add(record);
             _context.SaveChanges();
             return record.Guid;
@@ -59,12 +61,13 @@ namespace VSManagement.Repository.AssetManagement
 
         public List<LookupType> searchListQuery(LookupType record)
         {
-            IQueryable<LookupType> query = _context.Set<LookupType>();
-            if (record.Guid != null)
+            IQueryable<LookupType> query = _context.Set<LookupType>().OrderByDescending(x => x.Id);
+            if (record.Guid != Guid.Empty)
             {
                 query = query.Where(t => t.Guid == record.Guid);
             }
-            return query.ToList<LookupType>();
+
+            return query.Where(t => t.RecordStatus == record.RecordStatus).ToList<LookupType>();
         }
     }
 }

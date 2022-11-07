@@ -60,7 +60,11 @@ namespace VSManagement.Repository.AssetManagement
             {
                 query = query.Where(t => t.Guid == record.Guid);
             }
-            return query.ToList<LookupTypeValue>();
+            if (record.LookupTypeId != null)
+            {
+                query = query.Where(t => t.LookupTypeId == record.LookupTypeId);
+            }
+            return query.Where(t => t.RecordStatus == record.RecordStatus).ToList<LookupTypeValue>();
         }
 
         public dynamic getLookUpDropDownById(Guid id)

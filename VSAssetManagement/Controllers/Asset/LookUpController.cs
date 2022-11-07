@@ -38,28 +38,42 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpPost("search")]
         public ActionResult Search([FromBody] io.LookupType record)
         {
-            var model = JsonConvert.
-                DeserializeObject<LookupType>(JsonConvert.SerializeObject(record));
-            List<io.LookupType> list =
-            JsonConvert.DeserializeObject<List<io.LookupType>>(JsonConvert.SerializeObject(repo.searchListQuery(model)));
+            try
+            {
+                record.RecordStatus = 1;
+                var model = JsonConvert.
+                    DeserializeObject<LookupType>(JsonConvert.SerializeObject(record));
+                List<io.LookupType> list =
+                JsonConvert.DeserializeObject<List<io.LookupType>>(JsonConvert.SerializeObject(repo.searchListQuery(model)));
 
-            return Ok(list);
+                return Ok(list);
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.LookupType record)
         {
+            record.RecordStatus= 1;
             Guid id = repo.create(JsonConvert.
                 DeserializeObject<LookupType>(JsonConvert.SerializeObject(record)));
             return Created($"/lookup/{id}", "Created Successfully.");
         }
 
-        [HttpPut]
+        [HttpPost("Update")]
         public ActionResult updateRecord([FromBody] io.LookupType request)
         {
             LookupType record = repo.getByGuid(request.Guid);
             record.Code = request.Code;
             record.Name = request.Name;
+            record.RecordStatus = record.RecordStatus;
+            if(record.CreatedDateTime!=null)
+                request.CreatedDateTime = record.CreatedDateTime;
+            record.LastUpdatedDateTime = DateTime.Now;
+            record.LastUpdatedBy = "System";
             int count = repo.update(record);
             if (count == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
@@ -87,6 +101,7 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpPost("value/search")]
         public ActionResult ValueSearch([FromBody] io.LookupTypeValue record)
         {
+            record.RecordStatus = 1;
             var model = JsonConvert.
                 DeserializeObject<LookupTypeValue>(JsonConvert.SerializeObject(record));
             List<io.LookupTypeValue> list =
