@@ -30,8 +30,10 @@
                             <th>Reason Name</th>
                             <th data-breakpoints="xs">Reason Code</th>
                             <th data-breakpoints="xs">Reason Type</th>                            
-                            <th data-breakpoints="xs">User</th>
-                            <th data-breakpoints="xs">Done On</th>
+                            <th data-breakpoints="xs">Created By</th>
+                            <th data-breakpoints="xs">Created Date Time</th>
+                            <th data-breakpoints="xs">Last Updated By</th>
+                            <th data-breakpoints="xs">Last Updated Date Time</th>
                             <th hidden></th>
                         </tr>
                     </thead>
@@ -46,6 +48,8 @@
                                 <td>@Html.DisplayFor(modelItem=>item.ReasonName)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ReasonCode)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ReasonType)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
@@ -58,3 +62,9 @@
         </div>
     </div>
 </div>
+<script src="@Url.Content("../customjs/util.js")"></script>
+<script>
+    $(window).on('load', function () {
+        setActiveMenu('wingz', 'reason');
+    });
+</script>

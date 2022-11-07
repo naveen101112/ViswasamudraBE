@@ -23,7 +23,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
         }
         public async Task<IActionResult> ReasonGetDetailById(io.Reason resModel)
         {
-            if (resModel.Guid == Guid.Empty)
+            if (resModel.Guid == Guid.Empty || resModel.Guid == null)
             {
                 ViewBag.reasontype = lookUpProvider.GetSelectList("RTY");
                 return View("ReasonOps", resModel);

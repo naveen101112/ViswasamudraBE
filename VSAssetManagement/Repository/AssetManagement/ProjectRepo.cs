@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using VSAssetManagement;
 using io = VSAssetManagement.IOModels;
+using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -14,9 +16,35 @@ namespace VSManagement.Repository.AssetManagement
             _context = context;
         }
 
-        public List<Project> getAllList()
+        public List<io.Project> getAllList()
         {
-            return _context.Project.ToList();
+            //return _context.Project.ToList();
+            IQueryable<Project> prjQuery = _context.Set<Project>();
+            var result = from x in prjQuery
+                         select new io.Project
+                         {
+                             Id = x.Id,
+                             ProjectName = x.ProjectName,
+                             ProjectCode = x.ProjectCode,
+                             ProjectType = string.IsNullOrEmpty(x.ProjectType.ToString()) ? "" : _context.LookupTypeValue.Where(l=>l.Guid == x.ProjectType).FirstOrDefault().Name,
+                             ClientName = x.ClientName,
+                             ProjectStartDate = x.ProjectStartDate,
+                             ProjectEndDate = x.ProjectEndDate,
+                             ProjectSiteHead = x.ProjectSiteHead,
+                             SiteHeadMobile = x.SiteHeadMobile,
+                             GstinNo = x.GstinNo,
+                             CityTown = x.CityTown,
+                             AddressLine1 = x.AddressLine1,
+                             AddressLine2 = x.AddressLine2,
+                             CreatedBy = x.CreatedBy,
+                             CreatedDateTime = x.CreatedDateTime,
+                             LastUpdatedBy = x.LastUpdatedBy,
+                             LastUpdatedDateTime = x.LastUpdatedDateTime,
+                             Guid = x.Guid
+
+                         };
+
+            return result.ToList();
         }
 
         public int create(Project record)
@@ -31,8 +59,18 @@ namespace VSManagement.Repository.AssetManagement
             return _context.Project.Where(a => a.Id == id).FirstOrDefault();
         }
 
+        public Project getByGUId(Guid id)
+        {
+            return _context.Project.AsNoTracking().Where(a => a.Guid == id).FirstOrDefault();
+        }
+
         public int update(Project record)
         {
+            Project exist = getByGUId(record.Guid);
+            record.CreatedBy = exist.CreatedBy;
+            record.CreatedDateTime = exist.CreatedDateTime;
+            record.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
+            record.LastUpdatedDateTime = System.DateTime.Now;
             _context.Project.Update(record).Property(r => r.Id).IsModified = false;
             return _context.SaveChanges();
         }

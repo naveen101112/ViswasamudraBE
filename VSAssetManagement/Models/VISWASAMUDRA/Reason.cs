@@ -11,7 +11,7 @@ namespace VSManagement.Models.VISWASAMUDRA
     {
         public string ReasonCode { get; set; }
         public string ReasonName { get; set; }
-        public string ReasonType { get; set; }
+        public Guid? ReasonType { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }

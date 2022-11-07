@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using VSManagement.Models.VISWASAMUDRA;
 using io = VSAssetManagement.IOModels;
 using VSManagement.Repository.AssetManagement;
+using System;
 
 namespace VSManagement.Controllers.AssetManagement
 {
@@ -50,7 +51,7 @@ namespace VSManagement.Controllers.AssetManagement
             Tag tag = repo.getById(record.Guid);
             tag.Name = record.Name;
             tag.Code = record.Code;
-            tag.Status = record.Status;
+            tag.Status = new Guid(record.Status);
             int id = repo.update(tag);
             if (id == 0) return Conflict("Error updating record");
             return Ok(new { status = "success" });

@@ -18,7 +18,7 @@ namespace VSAssetManagement.IOModels
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime? CreateDateTime { get; set; }
+        public DateTime? CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }

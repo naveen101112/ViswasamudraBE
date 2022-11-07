@@ -59,25 +59,29 @@
 
 
         if ($('#reasonform').valid()) {
+            openLoader('Saving Reason details.....');
             $.ajax({
                 url: 'ReasonModification',
                 data: toJson(),
                 type: 'Post',
                 success: function (data) {
+                    closeLoader();
                     if (data?.status) {
                         nType = 'success';
                         message = data?.message;
-                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#ReasonCode').val() + ' - ' + $('#ReasonName').val() + ' : ' + message, " Reason ");
+                        let mode = $("#hdnGuid").val().replaceAll('-', '') == 0 ? 'Created' : 'Updated';
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#ReasonCode').val() + ' - ' + $('#ReasonName').val() + ' : ' + mode + " successfully.", " Reason ");
                     } else {
                         nType = 'danger';
                         message = data?.message;
-                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Reason ");
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,"Error saving", " Reason ");
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
+                    closeLoader();
                     nType = 'danger';
                     message = 'Error In Updation';
-                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, message," Reason ")
+                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, message, "Error saving"," Reason ")
                 },
 
             });

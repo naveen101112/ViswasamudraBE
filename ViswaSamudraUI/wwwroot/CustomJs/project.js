@@ -15,9 +15,9 @@
             ignore: '.ignore, .select2-input',
             focusInvalid: false,
             rules: {
-                'Code': { required: true, },
-                'Name': { required: true, },
-                'Type': { required: true, },
+                'ProjectCode': { required: true, },
+                'ProjectName': { required: true, },
+                'ProjectType': { required: true, },
                 'ClientName': { required: false, },
                 'StartDate': { required: false, },
                 'EndDate': { required: false, },
@@ -72,7 +72,7 @@
                         message = data?.message;
                         let mode = $("#hdnGuid").val().replaceAll('-', '') == 0 ? 'Created' : 'Updated';
                         notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#ProjectCode').val() + ' - ' + $('#ProjectName').val() + ' : ' + mode + " successfully.", " Project ");
-                        window.location.replace('/project');
+                        //window.location.replace('/project');
                     } else {
                         nType = 'danger';
                         message = data?.message ? data?.message : 'Error saving';

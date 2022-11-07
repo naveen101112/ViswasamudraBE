@@ -12,7 +12,7 @@ namespace VSManagement.Models.VISWASAMUDRA
         public int Id { get; set; }
         public string ProjectCode { get; set; }
         public string ProjectName { get; set; }
-        public string ProjectType { get; set; }
+        public Guid? ProjectType { get; set; }
         public string ClientName { get; set; }
         public DateTime? ProjectStartDate { get; set; }
         public DateTime? ProjectEndDate { get; set; }
@@ -23,7 +23,7 @@ namespace VSManagement.Models.VISWASAMUDRA
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime? CreateDateTime { get; set; }
+        public DateTime? CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }

@@ -1,5 +1,5 @@
 ﻿@using System.Data
-@model VSAssetManagement.IOModels.Store    
+@model VSAssetManagement.IOModels.Store
 <div class="col-sm-12" style="padding:1px">
    <div class="card">
       <div class="card-header">
@@ -18,13 +18,13 @@
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Store Code</label>
-					  <input class="form-control" asp-for="Code" name="Code" placeholder="Store Code" id="Code">
+					  <input class="form-control" disabled asp-for="Code" placeholder="Auto Generated">
 				   </div>
 				</div>
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Store Name</label>
-					  <input class="form-control" asp-for="Name" name="Name" placeholder="Store Name" id="Name">
+					  <input class="form-control" asp-for="Name" placeholder="Store Name" maxlength="50">
 				   </div>
 				</div>
 				<div class="col-md-4">
@@ -44,13 +44,13 @@
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Store Incharge</label>
-					  <input class="form-control" asp-for="Incharge" name="Incharge" placeholder="Incharge" id="Incharge">
+					  <input class="form-control" asp-for="Incharge" placeholder="Incharge" maxlength="50">
 				   </div>
 				</div>
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Incharge Mobile</label>
-					  <input class="form-control" asp-for="InchargeMobile" name="InchargeMobile" placeholder="InchargeMobile" id="InchargeMobile">
+					  <input class="form-control" asp-for="InchargeMobile" maxlength="12" placeholder="Incharge Mobile">
 				   </div>
 				</div>
 			 </div>
@@ -62,7 +62,14 @@
 </div>
 @section Scripts
 {
-<script src="@Url.Content("../customjs/store.js")"></script>
+	<script src="@Url.Content("../customjs/store.js")"></script>
+	<script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'store');
+        });
+		closeLoader();
+    </script>
 <style>        
     .table thead th {
         padding:1px;

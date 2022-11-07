@@ -1,5 +1,10 @@
 ﻿$(document).ready(function () {
     // [ notification-button ]
+
+    $('#loadRecord').click(function () {
+        openLoader("Loading details...");
+    });
+
     $('.notifications.btn').on('click', function (e) {
         e.preventDefault();
 		
@@ -66,23 +71,27 @@
             }
         });
 		
-		if($('#storeform').valid()){
+        if ($('#storeform').valid()) {
+            openLoader('Saving Store details.....');
 			$.ajax({
 				url: 'StoreModification',
 				data: toJson(),
 				type: 'Post',
                 success: function (data) {
+                    closeLoader();
                     if (data?.status) {
                         nType = 'success';
                         message = data?.message;
-                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#Code').val() + ' - ' + $('#Name').val() + ' : Updated Successfully', " Store ");
+                        let mode = $("#hdnGuid").val().replaceAll('-', '') == 0 ? 'Created' : 'Updated';
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#Code').val() + ' - ' + $('#Name').val() + ' : ' + mode + ' Successfully', " Store ");
                     } else {
                         nType = 'danger';
                         message = data?.message;
                         notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Store ");
                     }
 				},
-				error: function (xhr, ajaxOptions, thrownError) {
+                error: function (xhr, ajaxOptions, thrownError) {
+                    closeLoader();
 					nType = 'danger';
 					message = 'Error In Updation';
 					notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Store ")

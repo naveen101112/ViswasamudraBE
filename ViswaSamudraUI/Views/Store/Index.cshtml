@@ -68,4 +68,10 @@
         </div>
     </div>
 </div>
-
+    <script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'store');
+        });
+		closeLoader();
+    </script>

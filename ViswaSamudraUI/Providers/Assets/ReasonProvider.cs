@@ -19,7 +19,7 @@ namespace ViswaSamudraUI.Providers.Assets
         {
             if (PoIoModel != null)
             {
-                if (PoIoModel.Guid == Guid.Empty)
+                if (PoIoModel.Guid == Guid.Empty || PoIoModel.Guid == null)
                 {
                     return ch.PostRequest<io.Reason>("reason/CreateResult", PoIoModel);
                 }

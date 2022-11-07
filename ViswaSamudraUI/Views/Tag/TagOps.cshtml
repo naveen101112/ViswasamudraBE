@@ -18,13 +18,13 @@
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Tag Code</label>
-					  <input class="form-control" asp-for="Code" name="Code" placeholder="Tag Code" id="Code">
+					  <input class="form-control" asp-for="Code" placeholder="Tag Code">
 				   </div>
 				</div>
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Tag Name</label>
-					  <input class="form-control" asp-for="Name" name="Name" placeholder="Tag Name" id="Name">
+					  <input class="form-control" asp-for="Name" placeholder="Tag Name" maxlength="50">
 				   </div>
 				</div>
 				<div class="col-md-4">
@@ -43,7 +43,13 @@
 </div>
 @section Scripts
 {
-<script src="@Url.Content("../customjs/tag.js")"></script>
+	<script src="@Url.Content("../customjs/tag.js")"></script>
+	<script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'tag');
+        });
+    </script>
 <style>        
     .table thead th {
         padding:1px;

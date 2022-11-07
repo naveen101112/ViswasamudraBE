@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using io = VSAssetManagement.IOModels;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -18,14 +19,15 @@ namespace VSManagement.Repository.AssetManagement
             return _context.Tag.ToList();
         }
 
-        public IEnumerable<Tag> getAllListLinq()
+        public IEnumerable<io.Tag> getAllListLinq()
         {
             return (from tag in _context.Tag
-                    select new Tag
+                    select new io.Tag
                     {
                         CreatedDateTime = tag.CreatedDateTime,
                         LastUpdatedDateTime = tag.LastUpdatedDateTime,
                         Code = tag.Code,
+                        Status = String.IsNullOrEmpty(tag.Status.ToString()) ? "" : _context.LookupTypeValue.Where(l=>l.Guid == tag.Status).FirstOrDefault().Name,
                         CreatedBy = tag.CreatedBy,
                         Guid = tag.Guid,
                         Id = tag.Id,
@@ -81,6 +83,11 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(Tag record)
         {
+            Tag exist = getById(record.Guid);
+            record.CreatedBy = exist.CreatedBy;
+            record.CreatedDateTime = exist.CreatedDateTime;
+            record.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
+            record.LastUpdatedDateTime = System.DateTime.Now;
             _context.Update(record).Property(x => x.Id).IsModified = false; 
             return _context.SaveChanges();
         }

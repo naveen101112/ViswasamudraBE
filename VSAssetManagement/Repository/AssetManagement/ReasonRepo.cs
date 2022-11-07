@@ -30,20 +30,19 @@ namespace VSManagement.Repository.AssetManagement
             IQueryable<LookupTypeValue> lquery = _context.Set<LookupTypeValue>();
 
             var result = from x in query
-                         from y in lquery.Where(y => y.Code == x.ReasonType)
-                         select new
+                         from y in lquery.Where(y => y.Guid == x.ReasonType)
+                         select new io.Reason
                          {
-                             x.Id,
-                             x.ReasonName,
-                             x.ReasonCode,
-                             x.ReasonType,
-                             y.Name,
-                             x.CreatedBy,
-                             x.CreatedDateTime,
-                             x.LastUpdatedBy,
-                             x.LastUpdatedDateTime,
-                             x.RecordStatus,
-                             x.Guid,
+                             Id=x.Id,
+                             ReasonName=x.ReasonName,
+                             ReasonCode=x.ReasonCode,
+                             ReasonType=y.Name,
+                             CreatedBy=x.CreatedBy,
+                             CreatedDateTime=x.CreatedDateTime,
+                             LastUpdatedBy=x.LastUpdatedBy,
+                             LastUpdatedDateTime=x.LastUpdatedDateTime,
+                             RecordStatus=x.RecordStatus,
+                             Guid=x.Guid,
                          };
             return result.ToList<dynamic>();
         }
@@ -69,7 +68,7 @@ namespace VSManagement.Repository.AssetManagement
             NewRecord.ReasonName = record.ReasonName;
             NewRecord.ReasonType = record.ReasonType;
             NewRecord.LastUpdatedDateTime = System.DateTime.Now;
-            NewRecord.LastUpdatedBy = record.LastUpdatedBy;
+            NewRecord.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
 
             _context.Reason.Update(NewRecord).Property(x => x.Id).IsModified = false; 
             return _context.SaveChanges();

@@ -4,6 +4,11 @@
    <div class="card">
       <div class="card-header">
          <h5>Reason</h5>
+         <div class="card-header-right">
+                <div class="btn-group card-option">
+                    @Html.ActionLink("", "Index","Reason", "", new {@style="margin-right: 10px;",@class="feather icon-x-circle" })
+                </div>
+         </div>
       </div>
       <div class="card-body">
             <form id="reasonform">
@@ -39,6 +44,12 @@
 @section Scripts
 {
     <script src="~/customjs/reason.js"></script>
+    <script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'reason');
+        });
+    </script>
 <style>        
 .table thead th {
     padding:1px;
