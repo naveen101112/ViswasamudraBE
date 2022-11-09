@@ -5,8 +5,7 @@
     <div class="card">
         <div class="card-header">
             <h5 class="h5-body">Asset</h5>
-            <div class="card-header-right">
-                <button type="button" class="btn add-new"><i class="fa fa-plus"></i> Add New</button>
+            <div class="card-header-right">                
                 <button type="button" class="btn waves-effect waves-light btn-icon btn-primary body-add-record" hidden><i class="feather icon-plus-square"></i></button>
                 <div class="btn-group card-option">
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,12 +29,9 @@
                             <th data-breakpoints="xs">Id</th>
                             <th data-breakpoints="xs">Code</th>
                             <th data-breakpoints="xs">Name</th>
-                            <th data-breakpoints="xs">Company Name</th>
-                            <th data-breakpoints="xs">Created By</th>
-                            <th data-breakpoints="xs">Created Date Time</th>
-                            <th data-breakpoints="xs">Last Updated By</th>
-                            <th data-breakpoints="xs">Last Updated Date Time</th>
-                            <th data-breakpoints="xs">Record Status</th>
+                            <th data-breakpoints="xs">Company Name</th>                            
+                            <th data-breakpoints="xs">Action By</th>
+                            <th data-breakpoints="xs">Action On</th>                            
                             <th data-breakpoints="xs" hidden>Guid</th>
                             <th data-breakpoints="xs" hidden>Project Guid</th>
                             <th data-breakpoints="xs" hidden>Store Guid</th>
@@ -54,12 +50,9 @@
                                 <td>@Html.DisplayFor(modelItem=>item.Id)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Code)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Name)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>                                
                                 <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.RecordStatus)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>                                
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.ProjectGuid)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.StoreGuid)</td>
