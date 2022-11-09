@@ -103,29 +103,39 @@ namespace VSManagement.Controllers.AssetManagement
         {
             record.RecordStatus = 1;
             var model = JsonConvert.
-                DeserializeObject<LookupTypeValue>(JsonConvert.SerializeObject(record));
+                DeserializeObject<io.LookupTypeValue>(JsonConvert.SerializeObject(record));
             List<io.LookupTypeValue> list =
             JsonConvert.DeserializeObject<List<io.LookupTypeValue>>(JsonConvert.SerializeObject(valueRepo.searchListQuery(model)));
 
             return Ok(list);
         }
 
-        [HttpPost("value")]
-        public ActionResult createValueRecord([FromBody] io.LookupTypeValue record)
+
+
+
+
+        [HttpPost("value/Create")]
+        public ActionResult createRecord([FromBody] io.LookupTypeValue record)
         {
+            record.RecordStatus = 1;
             Guid id = valueRepo.create(JsonConvert.
                 DeserializeObject<LookupTypeValue>(JsonConvert.SerializeObject(record)));
-            return Created($"/lookup/value/{id}", "Created Successfully.");
+            return Created($"/lookup/{id}", "Created Successfully.");
         }
 
-        [HttpPut("value")]
-        public ActionResult updateValueRecord([FromBody] io.LookupTypeValue request)
+        [HttpPost("value/Update")]
+        public ActionResult updateRecord([FromBody] io.LookupTypeValue request)
         {
             LookupTypeValue record = valueRepo.getByGuid(request.Guid);
             record.Code = request.Code;
-            record.LookupTypeId = request.LookupTypeId;
             record.Name = request.Name;
-            int count = valueRepo.update(record);
+            record.LookupTypeId= request.LookupTypeId;
+            record.RecordStatus = record.RecordStatus;
+            if (record.CreatedDateTime != null)
+                request.CreatedDateTime = record.CreatedDateTime;
+            record.LastUpdatedDateTime = DateTime.Now;
+            record.LastUpdatedBy = "System";
+            int count = repo.update(record);
             if (count == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
         }

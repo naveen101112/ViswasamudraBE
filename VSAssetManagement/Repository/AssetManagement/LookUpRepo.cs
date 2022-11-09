@@ -43,6 +43,12 @@ namespace VSManagement.Repository.AssetManagement
             return _context.SaveChanges();
         }
 
+        public int update(LookupTypeValue record)
+        {
+            _context.LookupTypeValue.Update(record).Property(x => x.Id).IsModified = false; ;
+            return _context.SaveChanges();
+        }
+
         public int delete(Guid id)
         {
             _context.LookupType.Remove(getByGuid(id));

@@ -49,6 +49,24 @@ namespace ViswaSamudraUI.Providers.Assets
             return newList;
         }
 
+        public List<SelectListItem> GetLookUpMasterList()
+        {
+            LookupType ty = new LookupType();
+            SelectListItem selListItem = new SelectListItem() { Value = "", Text = "" };
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(selListItem);
+
+            foreach (var x in GetLookupData(ty).Select(i => new { i.Name, i.Code, i.Guid }))
+            {
+                selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.Name };
+
+                newList.Add(selListItem);
+            }           
+            return newList;
+        }
+
+        //LoadGrid
+
         public ResponseBody Add(io.LookupType model = null)
         {
             if (model != null)
@@ -58,6 +76,20 @@ namespace ViswaSamudraUI.Providers.Assets
                     return ch.PostRequest<io.LookupType>("LookUp/Create", model);
                 }
                 return ch.PostRequest<io.LookupType>("LookUp/Update", model);
+            }
+            else
+                return null;
+        }
+
+        public ResponseBody Add(io.LookupTypeValue model = null)
+        {
+            if (model != null)
+            {
+                if (model.Guid == Guid.Empty)
+                {
+                    return ch.PostRequest<io.LookupTypeValue>("LookUp/Value/Create", model);
+                }
+                return ch.PostRequest<io.LookupTypeValue>("LookUp/Value/Update", model);
             }
             else
                 return null;
