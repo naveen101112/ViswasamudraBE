@@ -5,15 +5,24 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using io = VSAssetManagement.IOModels;
 using VSAssetManagement.IOModels;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
+using System.Data.SqlClient;
+using VSManagement.Models.VISWASAMUDRA;
 
 namespace VSManagement.Repository.AssetManagement
 {
     public class BatchRepo
     {
         public mo.VISWASAMUDRAContext _context { get; set; }
+        public string _connection { get; set; }
         public BatchRepo(mo.VISWASAMUDRAContext context)
         {
             _context = context;
+            IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
+            IConfigurationRoot configuration = builder.Build();
+            _connection = configuration.GetConnectionString("VISWASAMUDRA");
         }
 
         public List<mo.Batch> getAllList()
@@ -23,9 +32,26 @@ namespace VSManagement.Repository.AssetManagement
 
         public int create(mo.Batch record)
         {
-            _context.Batch.Add(record);
-            _context.SaveChanges();
-            return record.Id;
+            SqlConnection con = new SqlConnection(_connection);
+            SqlCommand cmd = new SqlCommand("Create_Batch", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@BatchDescription", record.BatchDescription);
+            cmd.Parameters.AddWithValue("@BatchNo", record.BatchNo);
+            cmd.Parameters.AddWithValue("@AssetSpecification", record.AssetSpecification);
+            cmd.Parameters.AddWithValue("@AssetType", record.AssetType);
+            cmd.Parameters.AddWithValue("@PurchaseOrderId", record.PurchaseOrderId);
+            cmd.Parameters.AddWithValue("@BatchQuantity", record.BatchQuantity);
+            cmd.Parameters.AddWithValue("@BatchStatus", record.BatchStatus);
+            cmd.Parameters.AddWithValue("@InvoiceNo", record.InvoiceNo);
+            cmd.Parameters.AddWithValue("@InvoiceDate", record.InvoiceDate);
+            cmd.Parameters.AddWithValue("@ReceivedDate", record.ReceivedDate);
+            cmd.Parameters.AddWithValue("@ReceivedBy", record.ReceivedBy);
+            cmd.Parameters.AddWithValue("@StructureType", record.StructureType);
+            cmd.Parameters.AddWithValue("@UseFrequency", record.UseFrequency);
+            cmd.Parameters.AddWithValue("@StructureSubType", record.StructureSubType);
+            cmd.Parameters.AddWithValue("@UsageUom", record.UsageUom);
+            cmd.Parameters.AddWithValue("@Uom", record.Uom);
+            return cmd.ExecuteNonQuery();
         }
 
         public mo.Batch getByOnlyId(int id)
@@ -34,7 +60,7 @@ namespace VSManagement.Repository.AssetManagement
         }
 
         public int update(mo.Batch record)
-        {
+        {      
             _context.Update(record).Property(x => x.Id).IsModified = false; ;
             return _context.SaveChanges();
         }
