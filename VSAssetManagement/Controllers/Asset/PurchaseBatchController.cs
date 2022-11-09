@@ -77,8 +77,9 @@ namespace VSManagement.Controllers.AssetManagement
         }
 
         [HttpPost("Update")]
-        public ActionResult updateRecord([FromBody] io.Batch record)
+        public ActionResult updateRecord([FromBody] io.Batch request)
         {
+            Batch record = JsonConvert.DeserializeObject<Batch>(JsonConvert.SerializeObject(request));
             Batch batch = repo.getById(record.Guid);
             batch.BatchDescription = record.BatchDescription;
             batch.BatchNo = record.BatchNo;
@@ -96,6 +97,8 @@ namespace VSManagement.Controllers.AssetManagement
             batch.StructureSubType = record.StructureSubType;
             batch.UsageUom = record.UsageUom;
             batch.Uom = record.Uom;
+            batch.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
+            batch.LastUpdatedDateTime = DateTime.Now;
             repo._context.Entry(batch).State = EntityState.Detached;
             int id = repo.update(batch);
             if (id == 0) return Conflict("Error updating record");

@@ -39,7 +39,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
                 ViewBag.AssetType = lookUpProvider.GetSelectList("ATY");
                 ViewBag.AssetSpecification = lookUpProvider.GetSelectList("ATS");
                 ViewBag.Uom = lookUpProvider.GetSelectList("UOM");
-                ViewBag.UsageUom = lookUpProvider.GetUsageUomList();
+                ViewBag.UsageUom = lookUpProvider.GetSelectList("UUM");
                 ViewBag.Users = lookUpProvider.GetTempUserData();
                 ViewBag.PurchaseOrderNo = purchaseOrderProvider.GetSelectList();
                 ViewBag.PurchaseProject = projectProvider.GetSelectList();
@@ -54,7 +54,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
             ViewBag.AssetType = lookUpProvider.GetSelectList("ATY", result.AssetType.ToString());
             ViewBag.AssetSpecification = lookUpProvider.GetSelectList("ATS", result.AssetSpecification.ToString());
             ViewBag.Uom = lookUpProvider.GetSelectList("UOM", result.Uom.ToString());
-            ViewBag.UsageUom = lookUpProvider.GetUsageUomList();
+            //ViewBag.UsageUom = lookUpProvider.GetUsageUomList();
+            ViewBag.UsageUom = lookUpProvider.GetSelectList("UUM", result.UsageUom.ToString());
             ViewBag.Users = lookUpProvider.GetTempUserData();
             ViewBag.PurchaseOrderNo = purchaseOrderProvider.GetSelectList(result.PurchaseOrderId.ToString());
             ViewBag.PurchaseProject = projectProvider.GetSelectList(result.PurchaseProject.ToString());

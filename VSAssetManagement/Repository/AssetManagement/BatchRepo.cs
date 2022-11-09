@@ -46,33 +46,33 @@ namespace VSManagement.Repository.AssetManagement
 
             var result = from x in Batchquery
                          from y in POquery.Where(y => y.Guid == x.PurchaseOrderId)
-                         select new
+                         select new io.Batch
                          {
-                             x.Id,
-                             x.BatchNo,
-                             x.BatchDescription,
-                             x.BatchQuantity,
-                             x.AssetType,
-                             x.AssetSpecification,
-                             x.CreatedBy,
-                             x.CreatedDateTime,
-                             x.LastUpdatedBy,
-                             x.LastUpdatedDateTime,
-                             x.RecordStatus,
-                             x.Guid,
-                             x.Uom,
-                             x.StructureSubType,
-                             x.StructureType,
-                             x.BatchStatus,
-                             x.UsageUom,
-                             x.UseFrequency,
-                             x.InvoiceNo,
-                             x.InvoiceDate,
-                             x.ReceivedBy,
-                             x.ReceivedDate,
-                             x.PurchaseOrderId,
-                             y.PurchaseOrderNo,
-                             y.PurchaseOrderDate
+                             Id=x.Id,
+                             BatchNo=x.BatchNo,
+                             BatchDescription=x.BatchDescription,
+                             BatchQuantity=x.BatchQuantity,
+                             AssetType= _context.LookupTypeValue.Where(l => l.Guid == x.AssetType).FirstOrDefault().Name,
+                             AssetSpecification= _context.LookupTypeValue.Where(l => l.Guid == x.AssetSpecification).FirstOrDefault().Name,
+                             CreatedBy=x.CreatedBy,
+                             CreatedDateTime=x.CreatedDateTime,
+                             LastUpdatedBy=x.LastUpdatedBy,
+                             LastUpdatedDateTime=x.LastUpdatedDateTime,
+                             RecordStatus=x.RecordStatus,
+                             Guid=x.Guid,
+                             Uom=_context.LookupTypeValue.Where(l=>l.Guid == x.Uom).FirstOrDefault().Name,
+                             StructureSubType=_context.LookupTypeValue.Where(l => l.Guid == x.StructureSubType).FirstOrDefault().Name,
+                             StructureType=_context.LookupTypeValue.Where(l => l.Guid == x.StructureType).FirstOrDefault().Name,
+                             BatchStatus=x.BatchStatus,
+                             UsageUom= _context.LookupTypeValue.Where(l => l.Guid == x.UsageUom).FirstOrDefault().Name,
+                             UseFrequency= x.UseFrequency,
+                             InvoiceNo =x.InvoiceNo,
+                             InvoiceDate=x.InvoiceDate,
+                             ReceivedBy=x.ReceivedBy,
+                             ReceivedDate=x.ReceivedDate,
+                             PurchaseOrderId=y.Id.ToString(),
+                             PurchaseOrderNo=y.PurchaseOrderNo,
+                             PurchaseOrderDate=y.PurchaseOrderDate
 
                          };
 
