@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using System.Data.SqlClient;
 using VSManagement.Models.VISWASAMUDRA;
+using System.Data;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -32,8 +33,24 @@ namespace VSManagement.Repository.AssetManagement
 
         public int create(mo.Batch record)
         {
+            return batchOperation(record, "I");
+        }
+
+        public int update(mo.Batch record)
+        {
+            return batchOperation(record, "U");
+        }
+
+        public mo.Batch getByOnlyId(int id)
+        {
+            return _context.Batch.Where(a => a.Id == id).FirstOrDefault();
+        }
+
+        public int batchOperation(mo.Batch record,string state)
+        {
             SqlConnection con = new SqlConnection(_connection);
-            SqlCommand cmd = new SqlCommand("Create_Batch", con);
+            if(con.State==ConnectionState.Closed) con.Open();
+            SqlCommand cmd = new SqlCommand("Batch_Operations", con);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@BatchDescription", record.BatchDescription);
             cmd.Parameters.AddWithValue("@BatchNo", record.BatchNo);
@@ -51,18 +68,8 @@ namespace VSManagement.Repository.AssetManagement
             cmd.Parameters.AddWithValue("@StructureSubType", record.StructureSubType);
             cmd.Parameters.AddWithValue("@UsageUom", record.UsageUom);
             cmd.Parameters.AddWithValue("@Uom", record.Uom);
-            return cmd.ExecuteNonQuery();
-        }
-
-        public mo.Batch getByOnlyId(int id)
-        {
-            return _context.Batch.Where(a => a.Id == id).FirstOrDefault();
-        }
-
-        public int update(mo.Batch record)
-        {      
-            _context.Update(record).Property(x => x.Id).IsModified = false; ;
-            return _context.SaveChanges();
+            cmd.Parameters.AddWithValue("@mode", state);
+            return cmd.ExecuteNonQuery();            
         }
 
         public List<dynamic> GetAllWithPO()
