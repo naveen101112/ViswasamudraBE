@@ -20,49 +20,62 @@
                 </div>
             </div>
         </div>
-        <div class="card-body" style="padding:2px 2px 2px 2px"> 
+        <div class="card-body" style="padding:2px 2px 2px 2px">
             <div class="dt-responsive table-responsive">
-                <table id="simpletable" class="table table-striped table-bordered nowrap">            
-                <thead>
-                    <tr>
-                            <th>#</th>
-                            <th data-breakpoints="xs">Id</th>
-                            <th data-breakpoints="xs">Code</th>
-                            <th data-breakpoints="xs">Name</th>
-                            <th data-breakpoints="xs">Company Name</th>                            
-                            <th data-breakpoints="xs">Action By</th>
-                            <th data-breakpoints="xs">Action On</th>                            
-                            <th data-breakpoints="xs" hidden>Guid</th>
-                            <th data-breakpoints="xs" hidden>Project Guid</th>
-                            <th data-breakpoints="xs" hidden>Store Guid</th>
-                            <th data-breakpoints="xs" hidden>Batch Guid</th>
+                <div id="scr-vtr-dynamic_wrapper" class="dataTables_wrapper dt-bootstrap4">                  
+                    <div class="row">
+                        <div class="col-sm-12">                            
+                                <div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 75vh; width: 100%;">
+                                    <table id="scr-vtr-dynamic" class="table table-striped table-bordered nowrap dataTable" role="grid" aria-describedby="scr-vtr-dynamic_info" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th data-breakpoints="xs">Id</th>
+                                            <th data-breakpoints="xs">Code</th>
+                                            <th data-breakpoints="xs">Name</th>
+                                            <th data-breakpoints="xs">Company Name</th>
+                                            <th data-breakpoints="xs">Action By</th>
+                                            <th data-breakpoints="xs">Action On</th>
+                                            <th data-breakpoints="xs" hidden>Guid</th>
+                                            <th data-breakpoints="xs" hidden>Project Guid</th>
+                                            <th data-breakpoints="xs" hidden>Store Guid</th>
+                                            <th data-breakpoints="xs" hidden>Batch Guid</th>
 
-                    </tr>
-                </thead>
-                <tbody>                 
-                    <tr>
-                        @foreach (var item in Model)
-                        {
-                        <tr>
-                            <td>
-                               @Html.ActionLink("", "Ops","Asset", new { guid=item.Guid  }, new {@class="feather icon-edit" })
-                            </td>
-                                <td>@Html.DisplayFor(modelItem=>item.Id)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Code)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Name)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>                                
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>                                
-                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.ProjectGuid)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.StoreGuid)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.BatchGuid)</td>
-                        </tr>
-                        }                    
-                </tbody>
-            </table>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr role="row">
+                                                <td>
+                                                        @Html.ActionLink("", "Ops","Asset", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.Id)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetCode)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetName)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
+                                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
+                                                <td hidden>@Html.DisplayFor(modelItem=>item.ProjectGuid)</td>
+                                                <td hidden>@Html.DisplayFor(modelItem=>item.StoreGuid)</td>
+                                                <td hidden>@Html.DisplayFor(modelItem=>item.BatchGuid)</td>
+                                            </tr>
+                                            }
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+   
+
+
 </div>
 

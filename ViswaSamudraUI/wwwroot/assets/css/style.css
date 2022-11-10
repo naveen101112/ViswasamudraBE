@@ -142,6 +142,11 @@ strong {
     margin-bottom: 0;
 }
 
+.my-flex-card > div > div.card {
+    height: calc(100% - 15px);
+    margin-bottom: 15px;
+}
+
 .page-header .page-header-title + .breadcrumb > .breadcrumb-item {
     line-height: 1;
 }
@@ -11577,7 +11582,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 .table td,
 .table th {
     border-top: 1px solid #e2e5e8;
-    white-space: nowrap;    
+    white-space: nowrap;
+    padding: 0.3rem;
 }
 
 .table thead th {
