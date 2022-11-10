@@ -53,8 +53,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
             ViewBag.StructureSubType = lookUpProvider.GetSelectList("SST", result.StructureSubType.ToString());
             ViewBag.AssetType = lookUpProvider.GetSelectList("ATY", result.AssetType.ToString());
             ViewBag.AssetSpecification = lookUpProvider.GetSelectList("ATS", result.AssetSpecification.ToString());
-            ViewBag.Uom = lookUpProvider.GetSelectList("UOM", result.Uom.ToString());
-            //ViewBag.UsageUom = lookUpProvider.GetUsageUomList();
+            ViewBag.Uom = lookUpProvider.GetSelectList("UOM", result.Uom.ToString());            
             ViewBag.UsageUom = lookUpProvider.GetSelectList("UUM", result.UsageUom.ToString());
             ViewBag.Users = lookUpProvider.GetTempUserData();
             ViewBag.PurchaseOrderNo = purchaseOrderProvider.GetSelectList(result.PurchaseOrderId.ToString());

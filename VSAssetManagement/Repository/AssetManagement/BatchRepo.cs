@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using System.Data.SqlClient;
 using VSManagement.Models.VISWASAMUDRA;
+using System.Data;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -33,8 +34,8 @@ namespace VSManagement.Repository.AssetManagement
         public int create(mo.Batch record)
         {
             SqlConnection con = new SqlConnection(_connection);
-            con.Open();
             SqlCommand cmd = new SqlCommand("Create_Batch", con);
+            if (con.State == ConnectionState.Closed) con.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@BatchDescription", record.BatchDescription);
             cmd.Parameters.AddWithValue("@BatchNo", record.BatchNo);
