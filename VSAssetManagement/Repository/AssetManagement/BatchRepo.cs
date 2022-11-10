@@ -33,6 +33,7 @@ namespace VSManagement.Repository.AssetManagement
         public int create(mo.Batch record)
         {
             SqlConnection con = new SqlConnection(_connection);
+            con.Open();
             SqlCommand cmd = new SqlCommand("Create_Batch", con);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@BatchDescription", record.BatchDescription);
@@ -51,7 +52,11 @@ namespace VSManagement.Repository.AssetManagement
             cmd.Parameters.AddWithValue("@StructureSubType", record.StructureSubType);
             cmd.Parameters.AddWithValue("@UsageUom", record.UsageUom);
             cmd.Parameters.AddWithValue("@Uom", record.Uom);
-            return cmd.ExecuteNonQuery();
+            cmd.Parameters.AddWithValue("@CreatedBy", "SYSTEM");
+            cmd.Parameters.AddWithValue("@UpdatedBy", "SYSTEM");
+            var result = cmd.ExecuteNonQuery();
+            con.Close();
+            return result;
         }
 
         public mo.Batch getByOnlyId(int id)
