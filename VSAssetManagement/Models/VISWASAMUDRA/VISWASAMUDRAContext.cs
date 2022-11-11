@@ -23,6 +23,8 @@ namespace VSManagement.Models.VISWASAMUDRA
         public virtual DbSet<Asset> Asset { get; set; }
         public virtual DbSet<AssetHistory> AssetHistory { get; set; }
         public virtual DbSet<AssetOperations> AssetOperations { get; set; }
+        public virtual DbSet<AssetRequisitionDetails> AssetRequisitionDetails { get; set; }
+        public virtual DbSet<AssetRequisitionHeader> AssetRequisitionHeader { get; set; }
         public virtual DbSet<Batch> Batch { get; set; }
         public virtual DbSet<LookupType> LookupType { get; set; }
         public virtual DbSet<LookupTypeValue> LookupTypeValue { get; set; }
@@ -135,10 +137,7 @@ namespace VSManagement.Models.VISWASAMUDRA
 
                 entity.Property(e => e.AssetId).HasColumnName("ASSET_ID");
 
-                entity.Property(e => e.AssetStatus)
-                    .HasColumnName("ASSET_STATUS")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
+                entity.Property(e => e.AssetStatus).HasColumnName("ASSET_STATUS");
 
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
@@ -170,7 +169,6 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.TagId)
-                    .IsRequired()
                     .HasColumnName("TAG_ID")
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -237,6 +235,140 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnName("TAG_ID")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<AssetRequisitionDetails>(entity =>
+            {
+                entity.HasKey(e => e.Guid);
+
+                entity.ToTable("ASSET_REQUISITION_DETAILS");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.AssetRequisitionHeader).HasColumnName("ASSET_REQUISITION_HEADER");
+
+                entity.Property(e => e.AssetSpecification).HasColumnName("ASSET_SPECIFICATION");
+
+                entity.Property(e => e.AssetType).HasColumnName("ASSET_TYPE");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("CREATED_BY")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
+
+                entity.Property(e => e.CreatedDateTime)
+                    .HasColumnName("CREATED_DATE_TIME")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.LastUpdatedBy)
+                    .HasColumnName("LAST_UPDATED_BY")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastUpdatedDateTime)
+                    .HasColumnName("LAST_UPDATED_DATE_TIME")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.QuantityRequired).HasColumnName("QUANTITY_REQUIRED");
+
+                entity.Property(e => e.RecordStatus).HasColumnName("RECORD_STATUS");
+
+                entity.Property(e => e.StructureSubType).HasColumnName("STRUCTURE_SUB_TYPE");
+
+                entity.Property(e => e.StructureType).HasColumnName("STRUCTURE_TYPE");
+
+                entity.Property(e => e.Uom).HasColumnName("UOM");
+            });
+
+            modelBuilder.Entity<AssetRequisitionHeader>(entity =>
+            {
+                entity.HasKey(e => e.Guid)
+                    .HasName("PK_ASSET_REQUISITION");
+
+                entity.ToTable("ASSET_REQUISITION_HEADER");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.ApprovedBy)
+                    .HasColumnName("APPROVED_BY")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AssetRequisitionDate)
+                    .HasColumnName("ASSET_REQUISITION_DATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.AssetRequisitionNo)
+                    .HasColumnName("ASSET_REQUISITION_NO")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("CREATED_BY")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
+
+                entity.Property(e => e.CreatedDateTime)
+                    .HasColumnName("CREATED_DATE_TIME")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.LastUpdatedBy)
+                    .HasColumnName("LAST_UPDATED_BY")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastUpdatedDateTime)
+                    .HasColumnName("LAST_UPDATED_DATE_TIME")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Project).HasColumnName("PROJECT");
+
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Remarks)
+                    .HasColumnName("REMARKS")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RequestedBy)
+                    .HasColumnName("REQUESTED_BY")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RequiredFromDate)
+                    .HasColumnName("REQUIRED_FROM_DATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.RequiredToDate)
+                    .HasColumnName("REQUIRED_TO_DATE")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.RequisitionStatus)
+                    .HasColumnName("REQUISITION_STATUS")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaskType).HasColumnName("TASK_TYPE");
             });
 
             modelBuilder.Entity<Batch>(entity =>

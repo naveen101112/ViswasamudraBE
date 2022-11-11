@@ -10,3 +10,28 @@
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 }
+
+thead{
+    position:sticky;
+    top:0;
+}
+
+.sub-form .form-group{
+    margin-bottom: 2px !important;
+}
+
+.sub-form .form-label{
+    margin-bottom: 0px;
+}
+
+.main-form {
+    box-shadow: 0px 3px 1px;
+    border-radius: 7px;
+}
+
+.table-form {
+    margin-top: 12px;
+    border: 2px solid;
+    border-radius: 7px;
+    padding:0px !important;
+}

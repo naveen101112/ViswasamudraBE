@@ -114,6 +114,16 @@ namespace ViswaSamudraUI.Providers.Assets
             list.Add(new SelectListItem() { Value = "User2", Text = "User2" });
             return list;
         }
+
+        public List<SelectListItem> GetRequisitionStatusData()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem() { Value = "R", Text = "Requested" });
+            list.Add(new SelectListItem() { Value = "A", Text = "Open" });
+            list.Add(new SelectListItem() { Value = "O", Text = "Accepted" });
+            list.Add(new SelectListItem() { Value = "C", Text = "Closed" });
+            return list;
+        }
     }
 
 }
