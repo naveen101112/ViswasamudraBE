@@ -34,7 +34,7 @@ namespace VSManagement.Repository.AssetManagement
         public int create(mo.Batch record)
         {
             SqlConnection con = new SqlConnection(_connection);
-            SqlCommand cmd = new SqlCommand("Create_Batch", con);
+            SqlCommand cmd = new SqlCommand("Batch_Operations", con);
             if (con.State == ConnectionState.Closed) con.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@BatchDescription", record.BatchDescription);
@@ -55,6 +55,7 @@ namespace VSManagement.Repository.AssetManagement
             cmd.Parameters.AddWithValue("@Uom", record.Uom);
             cmd.Parameters.AddWithValue("@CreatedBy", "SYSTEM");
             cmd.Parameters.AddWithValue("@UpdatedBy", "SYSTEM");
+            cmd.Parameters.AddWithValue("@mode", "I");
             var result = cmd.ExecuteNonQuery();
             con.Close();
             return result;
