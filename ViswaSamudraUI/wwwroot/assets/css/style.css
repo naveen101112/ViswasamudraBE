@@ -142,11 +142,6 @@ strong {
     margin-bottom: 0;
 }
 
-.my-flex-card > div > div.card {
-    height: calc(100% - 15px);
-    margin-bottom: 15px;
-}
-
 .page-header .page-header-title + .breadcrumb > .breadcrumb-item {
     line-height: 1;
 }
