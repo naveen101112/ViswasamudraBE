@@ -42,5 +42,19 @@ namespace ViswaSamudraUI.Controllers.WINGS
         {
             return Ok(lookUpProvider.Add(model));            
         }
+
+        public IActionResult Delete(LookupType model)
+        {
+            ResponseBody res = lookUpProvider.Delete(model);
+            if (res != null && res.Status == true)
+            {
+                IEnumerable<LookupType> list = LookUpList(lookupType);
+                return View("Index", list);
+            }
+            else
+            {
+                return Ok(res);
+            }
+        }
     }
 }

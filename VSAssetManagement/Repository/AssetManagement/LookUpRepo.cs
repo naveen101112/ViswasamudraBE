@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using mo = VSAssetManagement.IOModels;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -15,7 +16,7 @@ namespace VSManagement.Repository.AssetManagement
 
         public List<LookupType> getAllList()
         {
-            return _context.LookupType.ToList();
+            return _context.LookupType.Where(x=>x.RecordStatus == 1).ToList();
         }
 
         public Guid create(LookupType record)
@@ -49,9 +50,14 @@ namespace VSManagement.Repository.AssetManagement
             return _context.SaveChanges();
         }
 
-        public int delete(Guid id)
+        public int delete(mo.LookupType request)
         {
-            _context.LookupType.Remove(getByGuid(id));
+            //_context.LookupTypeValue.Remove(getByGuid(id));
+            LookupType record = getByGuid(request.Guid);
+            record.RecordStatus = 0;
+            record.LastUpdatedBy = "SYSTEM";
+            record.LastUpdatedDateTime = DateTime.Now;
+            _context.Update(record).Property(x => x.Id).IsModified = false;
             return _context.SaveChanges();
         }
 

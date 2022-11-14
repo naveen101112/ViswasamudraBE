@@ -79,10 +79,10 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok("Updated successfully");
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult deleteRecord(Guid id)
+        [HttpPost("Delete")]
+        public ActionResult deleteRecord([FromBody] io.LookupType request)
         {
-            int count = repo.delete(id);
+            int count = repo.delete(request);
             //if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
         }
@@ -110,10 +110,6 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
-
-
-
-
         [HttpPost("value/Create")]
         public ActionResult createRecord([FromBody] io.LookupTypeValue record)
         {
@@ -140,10 +136,10 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok("Updated successfully");
         }
 
-        [HttpDelete("value/{id}")]
-        public ActionResult deleteValueRecord(Guid id)
+        [HttpPost("value/Delete")]
+        public ActionResult deleteValueRecord([FromBody] io.LookupTypeValue request)
         {
-            int count = valueRepo.delete(id);
+            int count = valueRepo.delete(request);
             //if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
         }

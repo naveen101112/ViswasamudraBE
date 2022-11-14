@@ -38,9 +38,14 @@ namespace VSManagement.Repository.AssetManagement
 
 
 
-        public int delete(Guid id)
+        public int delete(mo.LookupTypeValue request)
         {
-            _context.LookupTypeValue.Remove(getByGuid(id));
+            //_context.LookupTypeValue.Remove(getByGuid(id));
+            LookupTypeValue record = getByGuid(request.Guid);
+            record.RecordStatus = 0;
+            record.LastUpdatedBy = "SYSTEM";
+            record.LastUpdatedDateTime = DateTime.Now;
+            _context.Update(record).Property(x => x.Id).IsModified = false;
             return _context.SaveChanges();
         }
 

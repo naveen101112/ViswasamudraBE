@@ -124,6 +124,16 @@ namespace ViswaSamudraUI.Providers.Assets
             list.Add(new SelectListItem() { Value = "C", Text = "Closed" });
             return list;
         }
+
+        public ResponseBody Delete(io.LookupType model = null)
+        {
+            return ch.DeleteRequest<io.LookupType>("LookUp/Delete", model);
+        }
+
+        public ResponseBody DeleteValue(io.LookupTypeValue model = null)
+        {
+            return ch.DeleteRequest<io.LookupTypeValue>("LookUp/Value/Delete", model);
+        }
     }
 
 }

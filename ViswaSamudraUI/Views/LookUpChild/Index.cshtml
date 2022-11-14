@@ -50,8 +50,8 @@
                 <table id="simpletable" class="table table-striped table-bordered table-hover nowrap">
                     <thead>
                     <tr>
-                            <th>#</th>
-                            <th data-breakpoints="xs">Id</th>
+                            <th colspan="2">Actions</th>
+                            <th data-breakpoints="xs">S. No</th>
                             <th data-breakpoints="xs">Value Code</th>
                             <th data-breakpoints="xs">Value Name</th>
                             <th data-breakpoints="xs">Look Up Type</th>                                                        
@@ -65,8 +65,11 @@
                         @foreach (var item in Model)
                         {
                         <tr>
-                            <td>
+                            <td id="loadRecords">
                                     <a onclick="loadPartialview(this)" href="#" class="feather icon-edit"></a>
+                            </td>
+                            <td id="deleteRecord" class="text-center">
+                                @Html.ActionLink("", "Delete","LookUpChild", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger" })
                             </td>
                                 <td>@(rowNo += 1)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Code)</td>
