@@ -15,16 +15,16 @@
          @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
          @Html.AntiForgeryToken()
          <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Reason Code</label>
+                            <input class="form-control" asp-for="ReasonCode" name="reason_code" placeholder="Reason Code" id="ReasonCode">
+                        </div>
+                    </div>
             <div class="col-md-4">
                <div class="form-group">
                 <label class="form-label">Reason Name</label>
                 <input  class="form-control" asp-for="ReasonName" name="reason_name" placeholder="Reason Name" id="ReasonName">
-               </div>
-            </div>
-            <div class="col-md-4">
-               <div class="form-group">
-                <label class="form-label">Reason Code</label>
-                <input  class="form-control" asp-for="ReasonCode" name="reason_code" placeholder="Reason Code" id="ReasonCode">
                </div>
             </div>
             <div class="col-md-4">

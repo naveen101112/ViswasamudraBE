@@ -47,16 +47,14 @@
         </div>
         <div class="card-body" style="padding:2px 2px 2px 2px"> 
             <div class="dt-responsive table-responsive">
-                <table id="simpletable" class="table table-striped table-bordered nowrap">            
-                <thead>
+                <table id="simpletable" class="table table-striped table-bordered table-hover nowrap">
+                    <thead>
                     <tr>
                             <th>#</th>
                             <th data-breakpoints="xs">Id</th>
                             <th data-breakpoints="xs">Value Code</th>
                             <th data-breakpoints="xs">Value Name</th>
-                            <th data-breakpoints="xs">Look Up Type</th>                            
-                            <th data-breakpoints="xs">Action By</th>
-                            <th data-breakpoints="xs">Action On</th>                           
+                            <th data-breakpoints="xs">Look Up Type</th>                                                        
                             <th data-breakpoints="xs" hidden></th>
 
                     </tr>
@@ -73,9 +71,7 @@
                                 <td>@(rowNo += 1)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Code)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Name)</td>       
-                                <td>@Html.DisplayFor(modelItem=>item.LookupTypeName)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>                              
+                                <td>@Html.DisplayFor(modelItem=>item.LookupTypeName)</td>                                
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
                         </tr>
                         }                    

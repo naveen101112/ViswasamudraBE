@@ -14,7 +14,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
         LookUpProvider lookUpProvider = new LookUpProvider();
         public IActionResult Index()
         {
-            IEnumerable<Tag> list = provider.GetAll();
+            IEnumerable<Tag> list = provider.GetAll().OrderByDescending(l=>l.Id);
             return View(list);
         }
 
