@@ -7,11 +7,12 @@
             <h5>Batch</h5>
             <div class="card-header-right">
                 <div class="btn-group card-option">
+                    <a class="feather icon-search" data-toggle="collapse" style="margin-right: 4px;" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
                     @Html.ActionLink("", "BatchOps","Batch", "", new {@style="margin-right: 10px;",@class="feather icon-plus-circle" })
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather icon-more-horizontal"></i>
                     </button>
-                    <a class="btn feather icon-plus-circle" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                    
                     <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
                         <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
                         <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
@@ -25,8 +26,7 @@
             <div class="collapse" id="collapseExample">
                 <div class="card-body">
                     <p class="mb-0">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                        proident.
+                       Batch Under Construction
                     </p>
                 </div>
             </div>
@@ -36,8 +36,8 @@
                 <table id="simpletable" class="table table-striped table-bordered table-hover nowrap">                    
                     <thead>
                     <tr>
-                            <th>#</th>
-                            <th data-breakpoints="xs">S. No</th>
+                            <th class="ActionWidth">#</th>
+                            <th class="SnoWidth" data-breakpoints="xs">S. No</th>
                             <th data-breakpoints="xs">Batch No</th>
                             <th data-breakpoints="xs">Batch Description</th>
                             <th data-breakpoints="xs">Batch Quantity</th>
