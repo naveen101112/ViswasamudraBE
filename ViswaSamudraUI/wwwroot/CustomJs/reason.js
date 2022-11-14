@@ -1,4 +1,13 @@
 ﻿$(document).ready(function () {    
+
+    $('#loadRecord').click(function () {
+        openLoader("Loading details...");
+    });
+
+    $('#deleteRecord').click(function () {
+        openLoader("Deleting record...");
+    });
+
     // [ notification-button ]
     $('.notifications.btn').on('click', function (e) {
         e.preventDefault();

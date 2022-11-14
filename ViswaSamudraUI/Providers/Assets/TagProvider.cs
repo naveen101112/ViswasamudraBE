@@ -34,5 +34,10 @@ namespace ViswaSamudraUI.Providers.Assets
             else
                 return null;
         }
+
+        public ResponseBody Delete(io.Tag model = null)
+        {
+            return ch.DeleteRequest<io.Tag>("Tag/Delete", model);
+        }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ViswaSamudraUI.Models;
 using ViswaSamudraUI.Providers.Assets;
 using VSAssetManagement.IOModels;
 
@@ -37,6 +38,20 @@ namespace ViswaSamudraUI.Controllers.WINGS
         {
             return Ok(provider.Add(model));
             //return Content(status);
+        }
+
+        public IActionResult Delete(Store model)
+        {
+            ResponseBody res = provider.Delete(model);
+            if(res != null && res.Status == true)
+            {
+                IEnumerable<Store> list = provider.GetAll();
+                return View("Index", list);
+            }
+            else
+            {
+                return Ok(res);
+            }
         }
     }
 }

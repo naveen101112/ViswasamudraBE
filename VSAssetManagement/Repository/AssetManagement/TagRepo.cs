@@ -21,7 +21,7 @@ namespace VSManagement.Repository.AssetManagement
 
         public IEnumerable<io.Tag> getAllListLinq()
         {
-            return (from tag in _context.Tag
+            return (from tag in _context.Tag.Where(x => x.RecordStatus == 1)
                     select new io.Tag
                     {
                         CreatedDateTime = tag.CreatedDateTime,
@@ -40,7 +40,7 @@ namespace VSManagement.Repository.AssetManagement
 
         public IEnumerable<dynamic> getDataGrid()
         {
-            return (from tag in _context.Tag
+            return (from tag in _context.Tag.Where(x=>x.RecordStatus == 1)
                     select new
                     {
                         tag.Id,
@@ -88,13 +88,18 @@ namespace VSManagement.Repository.AssetManagement
             record.CreatedDateTime = exist.CreatedDateTime;
             record.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
             record.LastUpdatedDateTime = System.DateTime.Now;
-            _context.Update(record).Property(x => x.Id).IsModified = false; 
+            _context.Update(record).Property(x => x.Id).IsModified = false;
             return _context.SaveChanges();
         }
 
-        public int delete(int id)
+        public int delete(io.Tag request)
         {
-            _context.Tag.Remove(getByOnlyId(id));
+            //_context.Tag.Remove(getByOnlyId(id));
+            Tag record = getById(request.Guid);
+            record.RecordStatus = 0;
+            record.LastUpdatedBy = "SYSTEM";
+            record.LastUpdatedDateTime = DateTime.Now;
+            _context.Update(record).Property(x => x.Id).IsModified = false;
             return _context.SaveChanges();
         }
 
@@ -103,7 +108,7 @@ namespace VSManagement.Repository.AssetManagement
             IQueryable<Tag> query = _context.Set<Tag>();
             if (request.Guid != null)
             {
-                query = query.Where(t => t.Guid == request.Guid);
+                query = query.Where(t => t.Guid == request.Guid && t.RecordStatus == 1);
             }
             return query.ToList<Tag>();
         }

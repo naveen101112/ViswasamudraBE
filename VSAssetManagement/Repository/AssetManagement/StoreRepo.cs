@@ -20,7 +20,7 @@ namespace VSManagement.Repository.AssetManagement
             //return _context.Store.ToList();
             IQueryable<Store> storeQuery = _context.Set<Store>();
             IQueryable<Project> prjQuery = _context.Set<Project>();
-            var result = from x in storeQuery
+            var result = from x in storeQuery.Where(x => x.RecordStatus == 1)
                          from y in prjQuery.Where(y => y.Guid == x.Project)
                          select new io.Store
                          {
@@ -60,7 +60,7 @@ namespace VSManagement.Repository.AssetManagement
         public List<Store> getDropDown(int id)
         {
             return (from store in _context.Store
-                    where store.Id != id
+                    where store.Id != id && store.RecordStatus == 1
                     select new Store { Code=store.Code, Name = store.Name, Guid=store.Guid }).ToList();
         }
 
@@ -75,9 +75,14 @@ namespace VSManagement.Repository.AssetManagement
             return _context.SaveChanges();
         }
 
-        public int delete(Guid id)
+        public int delete(io.Store request)
         {
-            _context.Store.Remove(getById(id));
+            //_context.Store.Remove(getById(id));
+            Store record = getById(request.Guid);
+            record.RecordStatus = 0;
+            record.LastUpdatedBy = "SYSTEM";
+            record.LastUpdatedDateTime = DateTime.Now;
+            _context.Update(record).Property(x => x.Id).IsModified = false;
             return _context.SaveChanges();
         }
 
@@ -86,7 +91,7 @@ namespace VSManagement.Repository.AssetManagement
             IQueryable<Store> query = _context.Set<Store>();
             if (request.Guid != null)
             {
-                query = query.Where(t => t.Guid == request.Guid);
+                query = query.Where(t => t.Guid == request.Guid && t.RecordStatus == 1);
             }
             return query.ToList<Store>();
         }

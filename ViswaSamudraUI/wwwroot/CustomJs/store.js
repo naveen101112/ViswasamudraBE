@@ -5,6 +5,10 @@
         openLoader("Loading details...");
     });
 
+    $('#deleteRecord').click(function () {
+        openLoader("Deleting record...");
+    });
+
     $('.notifications.btn').on('click', function (e) {
         e.preventDefault();
 		

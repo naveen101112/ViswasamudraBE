@@ -29,7 +29,7 @@ namespace VSManagement.Repository.AssetManagement
 
             IQueryable<LookupTypeValue> lquery = _context.Set<LookupTypeValue>();
 
-            var result = from x in query
+            var result = from x in query.Where(x => x.RecordStatus == 1)
                          from y in lquery.Where(y => y.Guid == x.ReasonType)
                          select new io.Reason
                          {
@@ -74,9 +74,13 @@ namespace VSManagement.Repository.AssetManagement
             return _context.SaveChanges();
         }
 
-        public int delete(Guid id)
+        public int delete(io.Reason request)
         {
-            _context.Reason.Remove(getById(id));
+            Reason record = getById(request.Guid);
+            record.RecordStatus = 0;
+            record.LastUpdatedBy = "SYSTEM";
+            record.LastUpdatedDateTime = DateTime.Now;
+            _context.Update(record).Property(x => x.Id).IsModified = false;
             return _context.SaveChanges();
         }
     }

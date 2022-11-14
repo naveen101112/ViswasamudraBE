@@ -7,7 +7,7 @@ using ViswaSamudraUI.Providers.Assets;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using io =VSAssetManagement.IOModels;
 using System.Text.RegularExpressions;
-
+using ViswaSamudraUI.Models;
 
 namespace ViswaSamudraUI.Controllers.WINGS
 {
@@ -40,6 +40,20 @@ namespace ViswaSamudraUI.Controllers.WINGS
         {
             return Ok(reasonProvider.AddReason(resModel));
             //return Content(poStatus);
+        }
+
+        public IActionResult Delete(io.Reason model)
+        {
+            ResponseBody res = reasonProvider.Delete(model);
+            if (res != null && res.Status == true)
+            {
+                IEnumerable<io.Reason> reasonList = reasonProvider.GetAllReason();
+                return View("Index", reasonList);
+            }
+            else
+            {
+                return Ok(res);
+            }
         }
     }
 }

@@ -57,11 +57,11 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(new { status = "success" });
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult deleteRecord(int id)
+        [HttpPost("Delete")]
+        public ActionResult deleteRecord([FromBody] io.Tag request)
         {
-            int count = repo.delete(id);
-            if (id == 0) return Conflict("Error deleting record");
+            int count = repo.delete(request);
+            if (count == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
         }
 

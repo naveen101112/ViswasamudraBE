@@ -59,5 +59,10 @@ namespace ViswaSamudraUI.Providers.Assets
             else
                 return null;
         }
+
+        public ResponseBody Delete(io.Store model = null)
+        {
+            return ch.DeleteRequest<io.Store>("Store/Delete", model);
+        }
     }
 }

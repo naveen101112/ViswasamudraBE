@@ -21,6 +21,7 @@ namespace VSManagement.Repository.AssetManagement
             //return _context.Project.ToList();
             IQueryable<Project> prjQuery = _context.Set<Project>();
             var result = from x in prjQuery
+                         where x.RecordStatus == 1
                          select new io.Project
                          {
                              Id = x.Id,
@@ -75,15 +76,20 @@ namespace VSManagement.Repository.AssetManagement
             return _context.SaveChanges();
         }
 
-        public int delete(int id)
+        public int delete(io.Project request)
         {
-            _context.Project.Remove(getById(id));
+            Project record = getByGUId(request.Guid);
+            record.RecordStatus = 0;
+            record.LastUpdatedBy = "SYSTEM";
+            record.LastUpdatedDateTime = DateTime.Now;
+            _context.Update(record).Property(x => x.Id).IsModified = false;
             return _context.SaveChanges();
         }
 
         public IEnumerable<dynamic> getDataGrid()
         {
             return (from record in _context.Project
+                    where record.RecordStatus == 1
                     select new
                     {
                         record.Id,
@@ -107,7 +113,7 @@ namespace VSManagement.Repository.AssetManagement
         public dynamic getByIdEdit(int id)
         {
             return (from record in _context.Project
-                    where record.Id == id
+                    where record.Id == id && record.RecordStatus == 1
                     select new
                     {
                         record.Id,
@@ -132,14 +138,14 @@ namespace VSManagement.Repository.AssetManagement
             IQueryable<Project> query = _context.Set<Project>();
             if (po.Guid != null)
             {
-                query = query.Where(t => t.Guid == po.Guid);
+                query = query.Where(t => t.Guid == po.Guid && t.RecordStatus == 1);
             }
             return query.ToList<Project>();
         }
 
         public List<Project> getDropDown()
         {
-            return (from project in _context.Project
+            return (from project in _context.Project where project.RecordStatus == 1
                     select new Project { ProjectCode = project.ProjectCode, ProjectName = project.ProjectName, Guid = project.Guid, Id=project.Id }).ToList();
         }
     }

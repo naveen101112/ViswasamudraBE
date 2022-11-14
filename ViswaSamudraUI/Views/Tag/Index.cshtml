@@ -25,7 +25,8 @@
                 <table id="simpletable" class="table table-striped table-bordered table-hover nowrap">
                     <thead>
                     <tr>
-                            <th>#</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                             <th data-breakpoints="xs">Id</th>
                             <th data-breakpoints="xs">Code</th>
                             <th data-breakpoints="xs">Name</th>
@@ -42,8 +43,11 @@
                         @foreach (var item in Model)
                         {
                         <tr>
-                            <td>
+                            <td id="loadRecord">
                                @Html.ActionLink("", "TagOps","Tag", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                            </td>
+                            <td id="deleteRecord" class="text-center">
+                                @Html.ActionLink("", "Delete","Tag", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger" })
                             </td>
                                 <td>@(rowNo += 1)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Code)</td>

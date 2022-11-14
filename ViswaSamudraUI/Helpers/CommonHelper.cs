@@ -86,5 +86,10 @@ namespace ViswaSamudraUI
             }
         }
 
+        public ResponseBody DeleteRequest<T>(String Route, T PoIoModel)
+        {
+            return PostRequest(Route, PoIoModel);
+        }
+
     }
 }

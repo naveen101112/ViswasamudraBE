@@ -28,5 +28,9 @@ namespace ViswaSamudraUI.Providers.Assets
             else
                 return null;
         }
+        public ResponseBody Delete(io.Reason model = null)
+        {
+            return ch.DeleteRequest<io.Reason>("Reason/Delete", model);
+        }
     }
 }
