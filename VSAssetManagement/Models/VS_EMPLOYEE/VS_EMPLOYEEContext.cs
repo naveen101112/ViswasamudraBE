@@ -31,6 +31,7 @@ namespace VSManagement.Models.VS_EMPLOYEE
         public virtual DbSet<EmployeeStatus> EmployeeStatus { get; set; }
         public virtual DbSet<Locations> Locations { get; set; }
         public virtual DbSet<Salutation> Salutation { get; set; }
+        public virtual DbSet<UserLogin> UserLogin { get; set; }
         public virtual DbSet<Zones> Zones { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -984,6 +985,58 @@ namespace VSManagement.Models.VS_EMPLOYEE
                     .WithMany(p => p.Salutation)
                     .HasForeignKey(d => d.DepartmentUid)
                     .HasConstraintName("SALUTATION_DEPARTMENT_FK");
+            });
+
+            modelBuilder.Entity<UserLogin>(entity =>
+            {
+                entity.ToTable("USER_LOGIN");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("CREATED_BY")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
+
+                entity.Property(e => e.CreatedDateTime)
+                    .HasColumnName("CREATED_DATE_TIME")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.LastUpdatedBy)
+                    .HasColumnName("LAST_UPDATED_BY")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastUpdatedDateTime)
+                    .HasColumnName("LAST_UPDATED_DATE_TIME")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.LoggedIn).HasColumnName("LOGGED_IN");
+
+                entity.Property(e => e.OldPassword)
+                    .HasColumnName("OLD_PASSWORD")
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .HasColumnName("PASSWORD")
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PasswordReset).HasColumnName("PASSWORD_RESET");
+
+                entity.Property(e => e.UserName)
+                    .HasColumnName("USER_NAME")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.WrongAttempt).HasColumnName("WRONG_ATTEMPT");
             });
 
             modelBuilder.Entity<Zones>(entity =>
