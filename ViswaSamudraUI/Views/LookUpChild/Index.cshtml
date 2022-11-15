@@ -65,9 +65,8 @@
                         @foreach (var item in Model)
                         {
                         <tr>
-                            <td id="loadRecords">
+                            <td id="loadRecords" class="text-center">
                                     <a onclick="loadPartialview(this)" href="#" class="feather icon-edit"></a>
-
                                 @Html.ActionLink("", "Delete","LookUpChild", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger" })
                             </td>
                                 <td>@(rowNo += 1)</td>

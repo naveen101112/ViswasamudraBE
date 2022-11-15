@@ -15,7 +15,11 @@
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 
-	
+	<script>
+		const urlSearchParams = new URLSearchParams(window.location.search);
+		const params = Object.fromEntries(urlSearchParams.entries());
+		console.log(params);
+	</script>
 
 	<!-- Favicon icon -->
 	<link rel="icon" href="http://html.phoenixcoded.net/flex-able/bootstrap/assets/images/favicon.ico" type="image/x-icon">
