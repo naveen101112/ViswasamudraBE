@@ -8,6 +8,7 @@ using ViswasamudraCommonObjects.Util;
 
 namespace VSManagement.Controllers.AssetManagement
 {
+    [Route("asset")]
     [ApiController]
     public class AssetController : ControllerBase
     {
@@ -16,12 +17,22 @@ namespace VSManagement.Controllers.AssetManagement
         AssetOperationsRepo operationsRepo = new AssetOperationsRepo(new mo.VISWASAMUDRAContext());
 
         #region Asset
-        [HttpGet("asset")]
-        public ActionResult getAllList([FromQuery] Pagination page)
-        {
+        //[HttpGet("asset")]
+        //public ActionResult getAllList([FromQuery] Pagination page)
+        //{            
+        //    List<io.Asset> list =
+        //        JsonConvert.
+        //        DeserializeObject<List<io.Asset>>(JsonConvert.SerializeObject(repo.getAllList(page)));
+
+        //    return Ok(list);
+        //}
+
+        [HttpPost("search")]
+        public ActionResult getAllList([FromBody] io.Asset record)
+        {            
             List<io.Asset> list =
                 JsonConvert.
-                DeserializeObject<List<io.Asset>>(JsonConvert.SerializeObject(repo.getAllList(page)));
+                DeserializeObject<List<io.Asset>>(JsonConvert.SerializeObject(repo.GetAssetData(record)));
 
             return Ok(list);
         }

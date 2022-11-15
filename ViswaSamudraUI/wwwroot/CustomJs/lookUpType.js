@@ -57,6 +57,7 @@ $(document).ready(function () {
 
 
         if ($('#lookupform').valid()) {
+            
             $.ajax({
                 url: durl,
                 data: toJson(),
@@ -85,11 +86,16 @@ $(document).ready(function () {
 });
 
 function loadPartialview(thisvalue) {
+    openform();
     var x = thisvalue.parentElement.parentElement;    
     $("#Name").val(x.cells[2].innerHTML);
     $('#Code').val(x.cells[3].innerHTML);
     $('#hdnGuid').val(x.cells[6].innerHTML);
     $('#lookupform').show();
+}
+
+function openform() {
+    $('#lookupform').attr("style", "display:block");
 }
 
 function Closeform() {   

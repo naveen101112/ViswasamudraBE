@@ -10,7 +10,9 @@ namespace ViswaSamudraUI.Controllers.WINGS
         AssetProvider provider = new AssetProvider();
         public IActionResult Index()
         {
-            IEnumerable<Asset> list = provider.GetAll();
+            Asset asset=new Asset();
+            asset.RecordStatus = 1;
+            IEnumerable<Asset> list = provider.GetAll(asset);
             return View(list);
         }
     }
