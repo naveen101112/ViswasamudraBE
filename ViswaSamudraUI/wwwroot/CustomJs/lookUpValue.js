@@ -94,7 +94,7 @@ function loadPartialview(thisvalue) {
 }
 
 function Closeform() {   
-    $('#hdnGuid').toggle();  
+    $('#lookupform').toggle();  
     
 }
 

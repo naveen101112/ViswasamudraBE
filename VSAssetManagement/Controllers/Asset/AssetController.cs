@@ -5,6 +5,7 @@ using mo=VSManagement.Models.VISWASAMUDRA;
 using io = VSAssetManagement.IOModels;
 using VSManagement.Repository.AssetManagement;
 using ViswasamudraCommonObjects.Util;
+using System.Collections;
 
 namespace VSManagement.Controllers.AssetManagement
 {
@@ -53,16 +54,24 @@ namespace VSManagement.Controllers.AssetManagement
             return Created($"/asset/{id}", "Created Successfully.");
         }
 
-        [HttpPut("asset")]
-        public ActionResult updateRecord([FromForm] mo.Asset record)
+        [HttpPost("assetUpdate")]
+        public ActionResult updateRecord([FromBody] io.Asset record)
         {
             mo.Asset asset = repo.getById(record.Id, record.Guid);
             asset.AssetCode = record.AssetCode;
             asset.AssetName = record.AssetName;
+            asset.TagId = record.TagId;
+            asset.StructureType = record.StructureType;
+            asset.StructureSubType = record.StructureSubType;
+            asset.AssetType = record.AssetType;
+            asset.AssetSpecification = record.AssetSpecification;
             asset.ProjectCode = record.ProjectCode;
             asset.Store = record.Store;
             asset.BatchNo = record.BatchNo;
             asset.CompanyName = record.CompanyName;
+            asset.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
+            asset.LastUpdatedDateTime = System.DateTime.Now;
+
             int id = repo.update(asset);
             if (id == 0) return Conflict("Error updating record");
             return Ok(new { status = "success" });
@@ -80,6 +89,15 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult getDataGrid()
         {
             return Ok(repo.getDataGrid());
+        }
+
+        [HttpGet("combo")]
+        public ActionResult getDropDown()
+        {
+            List<io.Asset> record = JsonConvert.
+                DeserializeObject<List<io.Asset>>(JsonConvert.SerializeObject(repo.getDropDown()));
+            if (record == null) return NotFound();
+            return Ok(record);
         }
         #endregion
 

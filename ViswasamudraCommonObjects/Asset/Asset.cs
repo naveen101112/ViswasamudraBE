@@ -29,11 +29,12 @@ namespace VSAssetManagement.IOModels
         public Guid? AssetStatus { get; set; }
         public string AssetStatusName { get; set; }
         public Guid? TagId { get; set; }
+        public string TagName { get; set; }
         public Guid? StructureType { get; set; }
         public string StructureName { get; set; }
         public Guid? StructureSubType { get; set; }
         public string StructureSubName { get; set; }
-        public Guid? AssetType { get; set; }
+        public Guid AssetType { get; set; }
         public string AssetTypeName { get; set; }
         public Guid AssetSpecification { get; set; }
         public string AssetSpecificationName { get; set; }

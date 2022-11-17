@@ -31,7 +31,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
             IEnumerable<io.Reason> poList = reasonProvider.GetAllReason(resModel);
             var result = poList.FirstOrDefault();           
             
-            ViewBag.reasontype = lookUpProvider.GetSelectList("RTY", result.ReasonType);
+            ViewBag.reasontype = lookUpProvider.GetSelectList("RTY", result.ReasonType.ToString());
 
             return View("ReasonOps", result);
         }

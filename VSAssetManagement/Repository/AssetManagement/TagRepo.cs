@@ -14,6 +14,13 @@ namespace VSManagement.Repository.AssetManagement
             _context = context;
         }
 
+        public List<Tag> getDropDown()
+        {
+            return (from tag in _context.Tag
+                    where tag.RecordStatus == 1
+                    select new Tag { Code = tag.Code, Name = tag.Name, Guid = tag.Guid, Id = tag.Id }).ToList();
+        }
+
         public List<Tag> getAllList()
         {
             return _context.Tag.ToList();

@@ -44,11 +44,12 @@
                                             <th data-breakpoints="xs">Asset Code</th>
                                             <th data-breakpoints="xs">Asset Name</th>
                                             <th data-breakpoints="xs">Tag Id</th>
-                                            <th data-breakpoints="xs">StructureType</th>
-                                            <th data-breakpoints="xs">StructureSubType</th>
-                                            <th data-breakpoints="xs">AssetType</th>
-                                            <th data-breakpoints="xs">AssetSpecification</th>
-                                            <th data-breakpoints="xs">CompanyName</th>
+                                            <th data-breakpoints="xs">Structure Type</th>
+                                            <th data-breakpoints="xs">StructureSub Type</th>
+                                            <th data-breakpoints="xs">Asset Type</th>
+                                            <th data-breakpoints="xs">Asset Specification</th>
+                                            <th data-breakpoints="xs">Company Name</th>
+                                            <th data-breakpoints="xs">Project Name</th>
                                             <th data-breakpoints="xs">Store</th>                                            
                                             <th data-breakpoints="xs">BatchNo</th>
                                             <th data-breakpoints="xs">AssetStatus</th>                                           
@@ -68,12 +69,12 @@
                                                     <td>
                                                         
                                                     <a class="feather icon-eye" data-toggle="collapse" style="margin-right: 10px;" href="@String.Format("#Assetdetails{0}", @rowNo)" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
-                                                        @Html.ActionLink("", "Ops","Asset", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                                                        @Html.ActionLink("", "AssetOps","Asset", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                                                 </td>
                                                 <td>@rowNo</td>
                                                 <td>@Html.DisplayFor(modelItem=>item.AssetCode)</td>
                                                 <td>@Html.DisplayFor(modelItem=>item.AssetName)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.TagId)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.TagName)</td>
                                                 <td>@Html.DisplayFor(modelItem=>item.StructureName)
                                                         @Html.HiddenFor(modelItem=>item.StructureType)
                                                 </td>
@@ -86,6 +87,10 @@
                                                 <td>@Html.DisplayFor(modelItem=>item.AssetSpecificationName)
                                                         @Html.HiddenFor(modelItem=>item.AssetSpecification)</td>
                                                 <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
+                                                <td>
+                                                        @Html.DisplayFor(modelItem=>item.ProjectCodeName)
+                                                        @Html.HiddenFor(modelItem=>item.ProjectCode)
+                                                </td>
                                                 <td>@Html.DisplayFor(modelItem=>item.StoreName)
                                                         @Html.HiddenFor(modelItem=>item.Store)
                                                 </td>
