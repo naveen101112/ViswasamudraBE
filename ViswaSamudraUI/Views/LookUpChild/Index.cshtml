@@ -21,9 +21,9 @@
             </div>
         </div>
         <div class="card-body" id="shdiv" style="padding:4px 2px 2px 8px">
-            <form id="lookupform">
-                <input class="form-control" style="display:none" type="text" id="hdnGuid" />
-                <input class="form-control" style="display:none" type="text" id="hdntypeGuid" value="@ViewBag.lookupguid" />
+            <form id="lookupform" style="display: none;">
+                <input class="form-control" style="display:none" type="hidden" id="hdnGuid" />
+                <input class="form-control" style="display:none" type="hidden" id="hdntypeGuid" value="@ViewBag.lookupguid" />
                 
                 @Html.AntiForgeryToken()
                 <div class="row" style="width:100%">

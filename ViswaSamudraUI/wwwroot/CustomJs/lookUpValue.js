@@ -85,6 +85,7 @@ $(document).ready(function () {
 });
 
 function loadPartialview(thisvalue) {
+    openform();
     var x = thisvalue.parentElement.parentElement;    
     $("#Name").val(x.cells[3].innerHTML);
     $('#Code').val(x.cells[2].innerHTML);
@@ -93,8 +94,12 @@ function loadPartialview(thisvalue) {
 }
 
 function Closeform() {   
-    $('#hdnGuid').toggle();  
+    $('#lookupform').toggle();  
     
+}
+
+function openform() {
+    $('#lookupform').attr("style", "display:block");
 }
 
 function clearall() {

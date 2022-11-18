@@ -25,6 +25,7 @@ namespace VSManagement.Models.VISWASAMUDRA
         public virtual DbSet<AssetOperations> AssetOperations { get; set; }
         public virtual DbSet<AssetRequisitionDetails> AssetRequisitionDetails { get; set; }
         public virtual DbSet<AssetRequisitionHeader> AssetRequisitionHeader { get; set; }
+        public virtual DbSet<AssetUsage> AssetUsage { get; set; }
         public virtual DbSet<Batch> Batch { get; set; }
         public virtual DbSet<LookupType> LookupType { get; set; }
         public virtual DbSet<LookupTypeValue> LookupTypeValue { get; set; }
@@ -168,10 +169,7 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .HasColumnName("RECORD_STATUS")
                     .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.TagId)
-                    .HasColumnName("TAG_ID")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.TagId).HasColumnName("TAG_ID");
             });
 
             modelBuilder.Entity<AssetOperations>(entity =>
@@ -188,6 +186,11 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .IsRequired()
                     .HasColumnName("ASSET_ID")
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AssetOperationType)
+                    .HasColumnName("ASSET_OPERATION_TYPE")
+                    .HasMaxLength(5)
                     .IsUnicode(false);
 
                 entity.Property(e => e.AssetStatus)
@@ -369,6 +372,63 @@ namespace VSManagement.Models.VISWASAMUDRA
                     .IsUnicode(false);
 
                 entity.Property(e => e.TaskType).HasColumnName("TASK_TYPE");
+            });
+
+            modelBuilder.Entity<AssetUsage>(entity =>
+            {
+                entity.HasKey(e => e.Guid);
+
+                entity.ToTable("ASSET_USAGE");
+
+                entity.Property(e => e.Guid)
+                    .HasColumnName("GUID")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.AssetId).HasColumnName("ASSET_ID");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("CREATED_BY")
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('SYSTEM')");
+
+                entity.Property(e => e.CreatedDateTime)
+                    .HasColumnName("CREATED_DATE_TIME")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.EndDateTime)
+                    .HasColumnName("END_DATE_TIME")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.LastUpdatedBy)
+                    .HasColumnName("LAST_UPDATED_BY")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastUpdatedDateTime)
+                    .HasColumnName("LAST_UPDATED_DATE_TIME")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.RecordStatus)
+                    .HasColumnName("RECORD_STATUS")
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.StartDateTime)
+                    .HasColumnName("START_DATE_TIME")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Uom).HasColumnName("UOM");
+
+                entity.Property(e => e.UsageUom).HasColumnName("USAGE_UOM");
+
+                entity.Property(e => e.UseFrequency).HasColumnName("USE_FREQUENCY");
+
+                entity.Property(e => e.UsedCount).HasColumnName("USED_COUNT");
             });
 
             modelBuilder.Entity<Batch>(entity =>

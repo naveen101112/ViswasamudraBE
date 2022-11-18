@@ -8,8 +8,7 @@ namespace VSAssetManagement.IOModels
 
         public int Id { get; set; }
         public string AssetCode { get; set; }
-        public string AssetName { get; set; }
-        public string Type { get; set; }
+        public string AssetName { get; set; }        
         public int? Size { get; set; }
         [JsonPropertyName("Company Name")]
         public string CompanyName { get; set; }
@@ -25,11 +24,24 @@ namespace VSAssetManagement.IOModels
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
         [JsonPropertyName("Project Id")]
-        public Guid ProjectGuid { get; set; }
-        [JsonPropertyName("Store Id")]
-        public Guid StoreGuid { get; set; }
-        [JsonPropertyName("Batch Id")]
-        public Guid BatchGuid { get; set; }
+        public Guid ProjectCode { get; set; }
+        public string BatchNo { get; set; }
+        public Guid? AssetStatus { get; set; }
+        public string AssetStatusName { get; set; }
+        public Guid? TagId { get; set; }
+        public string TagName { get; set; }
+        public Guid? StructureType { get; set; }
+        public string StructureName { get; set; }
+        public Guid? StructureSubType { get; set; }
+        public string StructureSubName { get; set; }
+        public Guid AssetType { get; set; }
+        public string AssetTypeName { get; set; }
+        public Guid AssetSpecification { get; set; }
+        public string AssetSpecificationName { get; set; }
+        public string ProjectCodeName { get; set; }
+        public Guid Store { get; set; }
+        public string StoreName { get; set; }
+
     }
 
 }

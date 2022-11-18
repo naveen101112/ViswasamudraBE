@@ -1,0 +1,120 @@
+﻿@using System.Data
+@model VSAssetManagement.IOModels.Asset
+<div class="col-sm-12" style="padding:1px">
+    <div class="card">
+        <div class="card-header">
+            <h5>Asset Operation</h5>
+            <div class="card-header-right">
+                <div class="btn-group card-option">
+                    @Html.ActionLink("", "Index","Asset", "", new {@style="margin-right: 10px;",@class="feather icon-x-circle" })
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form id="assetform">
+                @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Asset Code</label>
+                            <input type="text" class="form-control" asp-for="AssetCode" name="AssetCode" id="AssetCode" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Asset Name</label>
+                            <input type="text" class="form-control" asp-for="AssetName" name="AssetName" id="AssetName">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Tag</label>
+                        <select class="form-control" name="TagId" asp-items="@ViewBag.selectTag" asp-for="TagId">
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Structure Type</label>
+                            <select class="form-control" name="StructureType" asp-items="@ViewBag.StructureType" asp-for="StructureType">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Structure Sub Type</label>
+                            <select class="form-control" name="StructureSubType" asp-items="@ViewBag.StructureSubType" asp-for="StructureSubType">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Asset Type</label>
+                            <select class="form-control" name="AssetType" asp-items="@ViewBag.AssetType" asp-for="AssetType">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Asset Specification</label>
+                            <select class="form-control" name="AssetSpecification" asp-items="@ViewBag.AssetSpecification" asp-for="AssetSpecification">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Company Name</label>
+                            <input type="text" class="form-control" asp-for="CompanyName" name="CompanyName" id="CompanyName">
+                        </div>
+                    </div>                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Project Name</label>
+                            <select class="form-control" asp-items="@ViewBag.PurchaseProject" asp-for="ProjectCode" name="ProjectCode">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Store Name</label>
+                            <select class="form-control" asp-items="@ViewBag.PurchaseStore" asp-for="Store" name="Store">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Batch No</label>
+                            <input type="text" class="form-control" asp-for="BatchNo" name="BatchNo" id="BatchNo" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="AssetButton" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {    
+    <script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'Asset')
+            
+        };
+        });
+    </script>
+    <script src="@Url.Content("../customjs/asset.js")"></script>
+    <script src="@Url.Content("../assets/plugins/sweetalert/js/sweetalert.min.js")"></script>
+    <script src="@Url.Content("../assets/js/pages/ac-alert.js")"></script>
+    <style>
+        .table thead th {
+            padding: 1px;
+        }
+
+        .table tbody td {
+            padding: 1px;
+        }
+    </style>
+}

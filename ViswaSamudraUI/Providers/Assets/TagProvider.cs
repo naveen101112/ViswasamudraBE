@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using ViswaSamudraUI.Models;
 using io = VSAssetManagement.IOModels;
 
@@ -38,6 +40,29 @@ namespace ViswaSamudraUI.Providers.Assets
         public ResponseBody Delete(io.Tag model = null)
         {
             return ch.DeleteRequest<io.Tag>("Tag/Delete", model);
+        }
+
+        public IEnumerable<io.Tag> GetDropDown()
+        {
+            return (IEnumerable<io.Tag>)ch.GetRequest<io.Tag>("tag/combo");
+        }
+
+        public List<SelectListItem> GetSelectList(string SelectedValue = null)
+        {
+            SelectListItem selListItem = new SelectListItem() { Value = "", Text = "" };
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(selListItem);
+
+            foreach (var x in GetDropDown().Select(i => new { i.Name, i.Code, i.Guid }))
+            {
+                if (SelectedValue != null && x.Guid.ToString() == SelectedValue)
+                    selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.Name, Selected = true };
+                else
+                    selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.Name };
+
+                newList.Add(selListItem);
+            }
+            return newList;
         }
     }
 }

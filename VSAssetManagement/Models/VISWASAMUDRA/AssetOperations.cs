@@ -10,15 +10,16 @@ namespace VSManagement.Models.VISWASAMUDRA
     public partial class AssetOperations
     {
         public int Id { get; set; }
+        public Guid Guid { get; set; }
+        public string AssetId { get; set; }
+        public string TagId { get; set; }
+        public string AssetOperationType { get; set; }
+        public string ReferenceOperationId { get; set; }
         public string AssetStatus { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public string LastUdatedBy { get; set; }
         public DateTime? LastUpdatedTime { get; set; }
         public int RecordStatus { get; set; }
-        public Guid Guid { get; set; }
-        public string AssetId { get; set; }
-        public string TagId { get; set; }
-        public string ReferenceOperationId { get; set; }
     }
 }

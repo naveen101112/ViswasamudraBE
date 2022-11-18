@@ -7,13 +7,17 @@ using System.Collections.Generic;
 
 namespace VSManagement.Models.VISWASAMUDRA
 {
-    public partial class AssetHistory
+    public partial class AssetUsage
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }
         public Guid AssetId { get; set; }
-        public Guid? TagId { get; set; }
-        public Guid? AssetStatus { get; set; }
+        public int? UseFrequency { get; set; }
+        public Guid? Uom { get; set; }
+        public Guid? UsageUom { get; set; }
+        public int? UsedCount { get; set; }
+        public DateTime StartDateTime { get; set; }
+        public DateTime? EndDateTime { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }

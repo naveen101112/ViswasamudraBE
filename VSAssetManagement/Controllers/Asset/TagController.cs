@@ -23,6 +23,15 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
+        [HttpGet("combo")]
+        public ActionResult getDropDown()
+        {
+            List<io.Tag> record = JsonConvert.
+                DeserializeObject<List<io.Tag>>(JsonConvert.SerializeObject(repo.getDropDown()));
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
+
         [HttpGet("grid")]
         public ActionResult getDataGrid()
         {

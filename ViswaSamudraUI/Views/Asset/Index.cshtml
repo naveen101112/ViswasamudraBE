@@ -41,22 +41,24 @@
                                         <tr>
                                             <th class="ActionWidth">#</th>
                                             <th class="ActionWidth"  data-breakpoints="xs">S. No</th>
-                                            <th data-breakpoints="xs">Code</th>
-                                            <th data-breakpoints="xs">Name</th>
+                                            <th data-breakpoints="xs">Asset Code</th>
+                                            <th data-breakpoints="xs">Asset Name</th>
+                                            <th data-breakpoints="xs">Tag Id</th>
+                                            <th data-breakpoints="xs">Structure Type</th>
+                                            <th data-breakpoints="xs">StructureSub Type</th>
+                                            <th data-breakpoints="xs">Asset Type</th>
+                                            <th data-breakpoints="xs">Asset Specification</th>
                                             <th data-breakpoints="xs">Company Name</th>
-                                            <th data-breakpoints="xs">Action By</th>
-                                            <th data-breakpoints="xs">Action On</th>
-                                            <th data-breakpoints="xs" hidden>Guid</th>
-                                            <th data-breakpoints="xs" hidden>Project Guid</th>
-                                            <th data-breakpoints="xs" hidden>Store Guid</th>
-                                            <th data-breakpoints="xs" hidden>Batch Guid</th>
+                                            <th data-breakpoints="xs">Project Name</th>
+                                            <th data-breakpoints="xs">Store</th>                                            
+                                            <th data-breakpoints="xs">BatchNo</th>
+                                            <th data-breakpoints="xs">AssetStatus</th>                                           
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             @{
-                                                int rowNo = 0;
-                                                int eroe = 0;
+                                                int rowNo = 0;                                               
                                             }
                                             @foreach (var item in Model)
                                             {
@@ -65,22 +67,40 @@
                                                 
                                                 <tr role="row">                                                    
                                                     <td>
+                                                        
                                                     <a class="feather icon-eye" data-toggle="collapse" style="margin-right: 10px;" href="@String.Format("#Assetdetails{0}", @rowNo)" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
-                                                        @Html.ActionLink("", "Ops","Asset", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                                                        @Html.ActionLink("", "AssetOps","Asset", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                                                 </td>
                                                 <td>@rowNo</td>
                                                 <td>@Html.DisplayFor(modelItem=>item.AssetCode)</td>
                                                 <td>@Html.DisplayFor(modelItem=>item.AssetName)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.TagName)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.StructureName)
+                                                        @Html.HiddenFor(modelItem=>item.StructureType)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.StructureSubName)
+                                                        @Html.HiddenFor(modelItem=>item.StructureSubType)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetTypeName)
+                                                        @Html.HiddenFor(modelItem=>item.AssetType)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetSpecificationName)
+                                                        @Html.HiddenFor(modelItem=>item.AssetSpecification)</td>
                                                 <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
-                                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
-                                                <td hidden>@Html.DisplayFor(modelItem=>item.ProjectGuid)</td>
-                                                <td hidden>@Html.DisplayFor(modelItem=>item.StoreGuid)</td>
-                                                <td hidden>@Html.DisplayFor(modelItem=>item.BatchGuid)</td>
+                                                <td>
+                                                        @Html.DisplayFor(modelItem=>item.ProjectCodeName)
+                                                        @Html.HiddenFor(modelItem=>item.ProjectCode)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.StoreName)
+                                                        @Html.HiddenFor(modelItem=>item.Store)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetStatusName)
+                                                        @Html.HiddenFor(modelItem=>item.AssetStatus)
+                                                </td>                                                
                                             </tr>
                                             <tr class="collapse" id="@String.Format("Assetdetails{0}", @rowNo)">
-                                                <td colspan="7">
+                                                <td colspan="13">
                                                     <div >
                                                         <div class="card-body">
                                                             <p class="mb-0">

@@ -38,19 +38,24 @@
                     <tr>
                             <th class="ActionWidth">#</th>
                             <th class="SnoWidth" data-breakpoints="xs">S. No</th>
-                            <th data-breakpoints="xs">Batch No</th>
-                            <th data-breakpoints="xs">Batch Description</th>
-                            <th data-breakpoints="xs">Batch Quantity</th>
+                            <th data-breakpoints="xs">Batch No</th>        
+                            <th data-breakpoints="xs">Batch Status</th>
+                            <th data-breakpoints="xs">Structure Type</th>
+                            <th data-breakpoints="xs">Structure Sub Type</th>                            
                             <th data-breakpoints="xs">Asset Type</th>
                             <th data-breakpoints="xs">Asset Specification</th>
-                            <th data-breakpoints="xs">Purchase OrderNo</th>
-                            <th data-breakpoints="xs">Purchase OrderDate</th>
+
+                            <th data-breakpoints="xs">Batch Quantity</th>                            
                             <th data-breakpoints="xs">Uom</th>
+                            <th data-breakpoints="xs">Used Frequency</th>
                             <th data-breakpoints="xs">Usage Uom</th>
+                            <th data-breakpoints="xs">Batch Description</th>
+
+                            
                             <th data-breakpoints="xs">Invoice No</th>
-                            <th data-breakpoints="xs">Invoice Date</th>
-                            <th data-breakpoints="xs">PO Received By</th>
+                            <th data-breakpoints="xs">Invoice Date</th>                            
                             <th data-breakpoints="xs">PO Received Date</th>
+                            <th data-breakpoints="xs">PO Received By</th>
                             <th data-breakpoints="xs" hidden>Guid</th>
                             <th data-breakpoints="xs" hidden>Purchase Order ID</th>                            
 
@@ -69,18 +74,29 @@
                             </td>
                                 <td>@(rowNo += 1)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.BatchDescription)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.BatchQuantity)</td>
+                                <td>
+                                    @if (item.BatchStatus == "New")
+                                    {
+                                            @Html.ActionLink("", "BatchOps","Batch", new { guid=item.Guid  }, new {@class="feather icon-layers" })
+                                    }                                    
+                                    @Html.DisplayFor(modelItem=>item.BatchStatus)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.StructureType)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.StructureSubType)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.AssetType)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.AssetSpecification)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderNo)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderDate)</td>
+
+                                <td>@Html.DisplayFor(modelItem=>item.BatchQuantity)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Uom)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.UseFrequency)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.UsageUom)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.BatchDescription)</td>
+
+                                
                                 <td>@Html.DisplayFor(modelItem=>item.InvoiceNo)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.InvoiceDate)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ReceivedBy)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ReceivedDate)</td>
+
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.PurchaseOrderId)</td>                                
                         </tr>
