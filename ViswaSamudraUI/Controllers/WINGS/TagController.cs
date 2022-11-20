@@ -23,12 +23,12 @@ namespace ViswaSamudraUI.Controllers.WINGS
         {
             if (ioModel.Guid == Guid.Empty)
             {
-                ViewBag.Status = lookUpProvider.GetSelectList("TST");
+                ViewBag.Status = lookUpProvider.GetSelectList("TGS");
                 return View(ioModel);
             }
             IEnumerable<Tag> list = provider.GetAllTag(ioModel);
             var tag = list.FirstOrDefault();
-            ViewBag.Status = lookUpProvider.GetSelectList("TST", tag.Status);
+            ViewBag.Status = lookUpProvider.GetSelectList("TGS", tag.Status);
             return View(tag);
         }
 

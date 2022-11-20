@@ -47,8 +47,9 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpPost("CreateResult")]
         public ActionResult createRecord([FromBody] io.Reason record)
         {
-            Guid id = repo.createReason(JsonConvert.
+            int id = repo.createReason(JsonConvert.
                 DeserializeObject<Reason>(JsonConvert.SerializeObject(record)));
+            if (id == -1) return Problem("Reason Exist");
             return Created($"/reason/{id}", "Created Successfully.");
         }
 
@@ -58,14 +59,14 @@ namespace VSManagement.Controllers.AssetManagement
             int id = repo.update(JsonConvert.
                 DeserializeObject<Reason>(JsonConvert.SerializeObject(record)));
             if (id == 0) return Conflict("Error updating record");
+            if (id == -1) return Problem("Reason Exist");
             return Ok("Updated successfully");
         }
 
         [HttpPost("Delete")]
         public ActionResult deleteRecord([FromBody] io.Reason request)
         {
-            int count = repo.delete(request);
-            //if (id == 0) return Conflict("Error deleting record");
+            int count = repo.delete(request);            
             return Ok("Deleted successfully");
         }
     }

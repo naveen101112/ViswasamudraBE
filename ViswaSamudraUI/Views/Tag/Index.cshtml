@@ -44,7 +44,9 @@
                         <tr>
                             <td id="loadRecord" class="text-center">
                                @Html.ActionLink("", "TagOps","Tag", new { guid=item.Guid  }, new {@class="feather icon-edit" })
-                               @Html.ActionLink("", "Delete","Tag", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger" })
+                               @Html.ActionLink("", "Delete","Tag", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger",onclick="return confirm('Are you sure? Tag will be deleted permanently')"})
+                                    
+
                             </td>
                                 <td>@(rowNo += 1)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Code)</td>

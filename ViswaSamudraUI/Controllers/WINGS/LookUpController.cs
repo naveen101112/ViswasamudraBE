@@ -16,7 +16,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
         LookupType lookupType = new LookupType();
         public IActionResult Index()
         {
-            IEnumerable<LookupType> list = LookUpList(lookupType);
+            IEnumerable<LookupType> list = LookUpList(lookupType).OrderByDescending(I=>I.Id);
             return View(list);
         }
 
@@ -28,7 +28,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public IEnumerable<LookupType> LookUpList(LookupType flookupType)
         {
-            return lookUpProvider.GetLookupData(flookupType);
+            return lookUpProvider.GetLookupData(flookupType).OrderByDescending(I => I.Id);
         }
 
         public IActionResult lookupops(Guid guid= new Guid())

@@ -7,7 +7,7 @@
             <h5>@ViewBag.lookupname - Values</h5>
             <div class="card-header-right">
                 <div class="btn-group card-option">
-                    <a onclick="Closeform(this)" href="#" class="feather icon-file-text" style="margin-right: 10px;display:block"></a>
+                    <a onclick="Closeform(this)" href="#" class="feather icon-plus-circle" style="margin-right: 10px;display:block"></a>
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather icon-more-horizontal"></i>
                     </button>
@@ -29,16 +29,16 @@
                 <div class="row" style="width:100%">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Name</label>
-                            <input class="form-control" placeholder="Look Up Value Name" type="text" id="Name" name="Name" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
                             <label class="form-label">Code</label>
                             <input class="form-control" placeholder="Look Up Value Code" type="text" id="Code" name="Code" />
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <input class="form-control" placeholder="Look Up Value Name" type="text" id="Name" name="Name" />
+                        </div>
+                    </div>                  
                 </div>
                 <button type="reset" class="btn btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right" onclick="clearall()">Clear</button>
                 <button type="submit" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
@@ -52,9 +52,9 @@
                     <tr>
                             <th class="ActionWidth">Actions</th>
                             <th class="ActionWidth"  data-breakpoints="xs">S. No</th>
-                            <th data-breakpoints="xs">Value Code</th>
-                            <th data-breakpoints="xs">Value Name</th>
-                            <th data-breakpoints="xs">Look Up Type</th>                                                        
+                            <th data-breakpoints="xs">Lookup Type</th>
+                            <th data-breakpoints="xs">Lookup Type Value Code</th>
+                            <th data-breakpoints="xs">Lookup Type Value Name</th>
                             <th data-breakpoints="xs" hidden></th>
 
                     </tr>
@@ -67,12 +67,12 @@
                         <tr>
                             <td id="loadRecords" class="text-center">
                                     <a onclick="loadPartialview(this)" href="#" class="feather icon-edit"></a>
-                                @Html.ActionLink("", "Delete","LookUpChild", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger" })
+                                @Html.ActionLink("", "Delete","LookUpChild", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger",onclick="return confirm('Are you sure? LookUp Type Value will be deleted permanently') "})
                             </td>
                                 <td>@(rowNo += 1)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LookupTypeName)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Code)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Name)</td>       
-                                <td>@Html.DisplayFor(modelItem=>item.LookupTypeName)</td>                                
+                                <td>@Html.DisplayFor(modelItem=>item.Name)</td>                                                                       
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
                         </tr>
                         }                    
@@ -87,6 +87,6 @@
 <script src="@Url.Content("../customjs/lookUpValue.js")"></script>
 <script>
     $(window).on('load', function () {
-        setActiveMenu('wingz', 'project');
+        setActiveMenu('wingz', 'LookUp');
     });
 </script>

@@ -27,12 +27,12 @@
                     <tr>
                             <th class="ActionWidth">Actions</th>
                             <th class="ActionWidth" data-breakpoints="xs">S. No</th>
-                            <th data-breakpoints="xs">Name</th>
+                            <th data-breakpoints="xs">Store Code</th>
+                            <th data-breakpoints="xs">Store Name</th>
                             <th data-breakpoints="xs">Parent Store</th>
-                            <th data-breakpoints="xs" hidden>Guid</th>
-                            <th data-breakpoints="xs">Code</th>
+                            <th data-breakpoints="xs" hidden>Guid</th>                            
                             <th data-breakpoints="xs">Project</th>
-                            <th data-breakpoints="xs">Incharge</th>
+                            <th data-breakpoints="xs">Store Incharge</th>
                             <th data-breakpoints="xs">Incharge Mobile</th>
                             
                     </tr>
@@ -47,13 +47,13 @@
                         <tr>
                             <td id="loadRecord" class="text-center">
                                 @Html.ActionLink("", "StoreOps","Store", new { guid=item.Guid  }, new {@class="feather icon-edit" })
-                                @Html.ActionLink("", "Delete","Store", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger" })
+                                @Html.ActionLink("", "Delete","Store", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger",onclick="return confirm('Are you sure? Store will be deleted permanently')" })
                             </td>
                                 <td>@(rowNo += 1)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Code)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Name)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ParentStore)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Code)</td>
+                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>                                
                                 <td>@Html.DisplayFor(modelItem=>item.Project)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Incharge)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.InchargeMobile)</td>                                

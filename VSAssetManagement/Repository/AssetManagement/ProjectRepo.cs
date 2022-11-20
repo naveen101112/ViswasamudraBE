@@ -50,9 +50,16 @@ namespace VSManagement.Repository.AssetManagement
 
         public int create(Project record)
         {
-            _context.Project.Add(record);
-            _context.SaveChanges();
-            return record.Id;
+            if (_context.Project.Where(a => (a.ProjectName == record.ProjectName || a.ProjectCode == record.ProjectCode) && a.RecordStatus == 1).Count() <= 0)
+            {
+                _context.Project.Add(record);
+                _context.SaveChanges();
+                return record.Id;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public Project getById(int id)
@@ -67,13 +74,15 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(Project record)
         {
-            Project exist = getByGUId(record.Guid);
-            record.CreatedBy = exist.CreatedBy;
-            record.CreatedDateTime = exist.CreatedDateTime;
-            record.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
-            record.LastUpdatedDateTime = System.DateTime.Now;
-            _context.Project.Update(record).Property(r => r.Id).IsModified = false;
-            return _context.SaveChanges();
+            if (_context.Project.Where(a => (a.ProjectName == record.ProjectName || a.ProjectCode == record.ProjectCode) && a.RecordStatus == 1 && a.Guid != record.Guid).Count() <= 0)
+            {
+                Project exist = getByGUId(record.Guid);
+                record.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
+                record.LastUpdatedDateTime = System.DateTime.Now;
+                _context.Project.Update(record).Property(r => r.Id).IsModified = false;
+                return _context.SaveChanges();
+            }
+            else return -1;
         }
 
         public int delete(io.Project request)

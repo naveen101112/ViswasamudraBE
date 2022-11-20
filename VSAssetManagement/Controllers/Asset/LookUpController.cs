@@ -5,6 +5,7 @@ using VSManagement.Models.VISWASAMUDRA;
 using io = VSAssetManagement.IOModels;
 using VSManagement.Repository.AssetManagement;
 using System;
+using System.Drawing;
 
 namespace VSManagement.Controllers.AssetManagement
 {
@@ -58,8 +59,9 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult createRecord([FromBody] io.LookupType record)
         {
             record.RecordStatus= 1;
-            Guid id = repo.create(JsonConvert.
+            int id = repo.create(JsonConvert.
                 DeserializeObject<LookupType>(JsonConvert.SerializeObject(record)));
+            if (id == -1) return Problem("Lookup Type Exist");
             return Created($"/lookup/{id}", "Created Successfully.");
         }
 
@@ -76,6 +78,7 @@ namespace VSManagement.Controllers.AssetManagement
             record.LastUpdatedBy = "System";
             int count = repo.update(record);
             if (count == 0) return Conflict("Error updating record");
+            if (count == -1) return Problem("Lookup Type Exist");
             return Ok("Updated successfully");
         }
 
@@ -114,8 +117,9 @@ namespace VSManagement.Controllers.AssetManagement
         public ActionResult createRecord([FromBody] io.LookupTypeValue record)
         {
             record.RecordStatus = 1;
-            Guid id = valueRepo.create(JsonConvert.
+            int id = valueRepo.create(JsonConvert.
                 DeserializeObject<LookupTypeValue>(JsonConvert.SerializeObject(record)));
+            if (id == -1) return Problem("Lookup Type Value Exist");
             return Created($"/lookup/{id}", "Created Successfully.");
         }
 
@@ -132,6 +136,7 @@ namespace VSManagement.Controllers.AssetManagement
             record.LastUpdatedDateTime = DateTime.Now;
             record.LastUpdatedBy = "System";
             int count = repo.update(record);
+            if (count == -1) return Problem("Lookup Type Value Exist");
             if (count == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
         }

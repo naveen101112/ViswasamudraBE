@@ -22,13 +22,17 @@ namespace VSManagement.Repository.AssetManagement
             return _context.LookupTypeValue.ToList();
         }
 
-        public Guid create(LookupTypeValue record)
+        public int create(LookupTypeValue record)
         {
-            record.CreatedDateTime = DateTime.Now;
-            record.LastUpdatedDateTime = DateTime.Now;
-            _context.LookupTypeValue.Add(record);
-            _context.SaveChanges();
-            return record.Guid;
+            if (_context.LookupType.Where(a => (a.Name == record.Name || a.Code == record.Code) && a.RecordStatus == 1).Count() <= 0)
+            {
+                record.CreatedDateTime = DateTime.Now;
+                record.LastUpdatedDateTime = DateTime.Now;
+                _context.LookupTypeValue.Add(record);
+                _context.SaveChanges();
+                return record.Id;
+            }
+            else return -1;
         }
 
         public LookupTypeValue getByOnlyId(int id)
@@ -61,8 +65,8 @@ namespace VSManagement.Repository.AssetManagement
 
         public List<dynamic> searchListQuery(mo.LookupTypeValue record)
         {
-            IQueryable<LookupTypeValue> TypeValuequery = _context.Set<LookupTypeValue>();
-            IQueryable<LookupType> Typequery = _context.Set<LookupType>();
+            IQueryable<LookupTypeValue> TypeValuequery = _context.Set<LookupTypeValue>().Where(a=>a.RecordStatus==1);
+            IQueryable<LookupType> Typequery = _context.Set<LookupType>().Where(a => a.RecordStatus == 1);
 
             if (record.Guid != Guid.Empty)
             {

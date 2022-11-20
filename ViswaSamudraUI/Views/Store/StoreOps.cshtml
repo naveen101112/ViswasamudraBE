@@ -15,10 +15,17 @@
 			 @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
 			 @Html.AntiForgeryToken()
 			 <div class="row">
+				 <div class="col-md-4">
+				   <div class="form-group">
+					  <label class="form-label">Project</label>
+					  <select class="form-control" asp-items="@ViewBag.Project" asp-for="Project">
+					  </select>
+				   </div>
+				</div>
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Store Code</label>
-					  <input class="form-control" disabled asp-for="Code" placeholder="Auto Generated">
+					  <input class="form-control" asp-for="Code" placeholder="Store Name">
 				   </div>
 				</div>
 				<div class="col-md-4">
@@ -26,14 +33,7 @@
 					  <label class="form-label">Store Name</label>
 					  <input class="form-control" asp-for="Name" placeholder="Store Name" maxlength="50">
 				   </div>
-				</div>
-				<div class="col-md-4">
-				   <div class="form-group">
-					  <label class="form-label">Project</label>
-					  <select class="form-control" asp-items="@ViewBag.Project" asp-for="Project">
-					  </select>
-				   </div>
-				</div>
+				</div>				
 				<div class="col-md-4">
 				   <div class="form-group">
 					  <label class="form-label">Parent Store</label>

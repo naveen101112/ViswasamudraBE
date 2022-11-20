@@ -48,11 +48,16 @@ namespace VSManagement.Repository.AssetManagement
             return result.ToList<dynamic>();
         }
 
-        public Guid createReason(Reason record)
+        public int createReason(Reason record)
         {
-            _context.Reason.Add(record);
-            _context.SaveChanges();
-            return record.Guid;
+            if (_context.Reason.Where(a => (a.ReasonName == record.ReasonName || a.ReasonCode == record.ReasonCode) && a.RecordStatus == 1).Count() <= 0)
+            {
+                _context.Reason.Add(record);
+                _context.SaveChanges();
+                return record.Id;
+            }
+            else
+                return -1;
         }
 
         public Reason getById(Guid id)
@@ -62,17 +67,20 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(Reason record)
         {
-            Reason OldRecord = getById(record.Guid);
-
-            Reason NewRecord= OldRecord;
-            NewRecord.ReasonCode= record.ReasonCode;
-            NewRecord.ReasonName = record.ReasonName;
-            NewRecord.ReasonType = record.ReasonType;
-            NewRecord.LastUpdatedDateTime = System.DateTime.Now;
-            NewRecord.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
-
-            _context.Reason.Update(NewRecord).Property(x => x.Id).IsModified = false; 
-            return _context.SaveChanges();
+            if (_context.Reason.Where(a => (a.ReasonName == record.ReasonName || a.ReasonCode == record.ReasonCode) && a.RecordStatus == 1 && a.Guid!=record.Guid).Count() <= 0)
+            {
+                Reason OldRecord = getById(record.Guid);
+                Reason NewRecord = OldRecord;
+                NewRecord.ReasonCode = record.ReasonCode;
+                NewRecord.ReasonName = record.ReasonName;
+                NewRecord.ReasonType = record.ReasonType;
+                NewRecord.LastUpdatedDateTime = System.DateTime.Now;
+                NewRecord.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "System" : record.LastUpdatedBy;
+                _context.Reason.Update(NewRecord).Property(x => x.Id).IsModified = false;
+                return _context.SaveChanges();
+            }
+            else
+                return -1;
         }
 
         public int delete(io.Reason request)

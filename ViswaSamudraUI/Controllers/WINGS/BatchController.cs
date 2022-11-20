@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ViswaSamudraUI.Models;
 using ViswaSamudraUI.Providers.Assets;
@@ -28,6 +29,14 @@ namespace ViswaSamudraUI.Controllers.WINGS
         {
             return Ok(purchaseOrderProvider.AddPurchaseOrder(PO));
             //return Content(PoStatus);
+        }
+
+        public PurchaseOrder POGet(PurchaseOrder PO)
+        {
+            PurchaseOrder po = new PurchaseOrder();
+            po.Guid = PO.Guid;            
+            var ddd= purchaseOrderProvider.GetAllPurchaseOrder(po).FirstOrDefault();
+            return ddd;
         }
 
         public async Task<IActionResult> BatchOps(BatchSearch model)

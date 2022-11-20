@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using io = VSAssetManagement.IOModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -20,6 +21,14 @@ namespace VSManagement.Repository.AssetManagement
                     where tag.RecordStatus == 1
                     select new Tag { Code = tag.Code, Name = tag.Name, Guid = tag.Guid, Id = tag.Id }).ToList();
         }
+
+        public List<Tag> getDropDowncombomap()
+        {
+            return (from tag in _context.Tag
+                    where (tag.RecordStatus == 1 && tag.Status!=Guid.Parse("33BCA1B0-FECE-4C0C-8A37-A8963A9C44BD"))
+                    select new Tag { Code = tag.Code, Name = tag.Name, Guid = tag.Guid, Id = tag.Id }).ToList();
+        }
+        
 
         public List<Tag> getAllList()
         {
@@ -60,9 +69,16 @@ namespace VSManagement.Repository.AssetManagement
 
         public int create(Tag record)
         {
-            _context.Tag.Add(record);
-            _context.SaveChanges();
-            return record.Id;
+            if (_context.Tag.Where(a => (a.Name == record.Name || a.Code == record.Code) && a.RecordStatus==1).Count() <= 0)
+            {
+                _context.Tag.Add(record);
+                _context.SaveChanges();
+                return record.Id;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public Tag getById(Guid guid)
@@ -90,18 +106,22 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(Tag record)
         {
-            Tag exist = getById(record.Guid);
-            record.CreatedBy = exist.CreatedBy;
-            record.CreatedDateTime = exist.CreatedDateTime;
-            record.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
-            record.LastUpdatedDateTime = System.DateTime.Now;
-            _context.Update(record).Property(x => x.Id).IsModified = false;
-            return _context.SaveChanges();
+            if (_context.Tag.Where(a => (a.Name == record.Name || a.Code == record.Code) && a.RecordStatus == 1 && a.Guid != record.Guid).Count() <= 0)
+            {
+                Tag exist = getById(record.Guid);
+                record.CreatedBy = exist.CreatedBy;
+                record.CreatedDateTime = exist.CreatedDateTime;
+                record.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
+                record.LastUpdatedDateTime = System.DateTime.Now;
+                _context.Update(record).Property(x => x.Id).IsModified = false;
+                return _context.SaveChanges();
+            }
+            else
+                return -1;
         }
 
         public int delete(io.Tag request)
-        {
-            //_context.Tag.Remove(getByOnlyId(id));
+        {            
             Tag record = getById(request.Guid);
             record.RecordStatus = 0;
             record.LastUpdatedBy = "SYSTEM";

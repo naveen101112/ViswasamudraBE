@@ -29,7 +29,9 @@ namespace ViswaSamudraUI.Providers.Assets
             {
                 if (model.Guid == Guid.Empty)
                 {
-                    return ch.PostRequest<io.Tag>("tag/Create", model);
+                    var res= ch.PostRequest<io.Tag>("tag/Create", model);
+                    return res;
+                        
                 }
                 return ch.PostRequest<io.Tag>("tag/Update", model);
             }
@@ -41,10 +43,16 @@ namespace ViswaSamudraUI.Providers.Assets
         {
             return ch.DeleteRequest<io.Tag>("Tag/Delete", model);
         }
+        
 
         public IEnumerable<io.Tag> GetDropDown()
         {
             return (IEnumerable<io.Tag>)ch.GetRequest<io.Tag>("tag/combo");
+        }
+
+        public IEnumerable<io.Tag> GetDropDowncombomap()
+        {
+            return (IEnumerable<io.Tag>)ch.GetRequest<io.Tag>("tag/combomap");
         }
 
         public List<SelectListItem> GetSelectList(string SelectedValue = null)
@@ -54,6 +62,24 @@ namespace ViswaSamudraUI.Providers.Assets
             newList.Add(selListItem);
 
             foreach (var x in GetDropDown().Select(i => new { i.Name, i.Code, i.Guid }))
+            {
+                if (SelectedValue != null && x.Guid.ToString() == SelectedValue)
+                    selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.Name, Selected = true };
+                else
+                    selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.Name };
+
+                newList.Add(selListItem);
+            }
+            return newList;
+        }
+
+        public List<SelectListItem> GetSelectListWithoutMapped(string SelectedValue = null)
+        {
+            SelectListItem selListItem = new SelectListItem() { Value = "", Text = "" };
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(selListItem);
+
+            foreach (var x in GetDropDowncombomap().Select(i => new { i.Name, i.Code, i.Guid }))
             {
                 if (SelectedValue != null && x.Guid.ToString() == SelectedValue)
                     selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.Name, Selected = true };

@@ -83,7 +83,9 @@
                     } else {
                         nType = 'danger';
                         message = data?.message;
-                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,"Error saving", " Reason ");
+                        if (message.includes("Reason Exist"))
+                            notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Reason Name or Reason Code are existed", " Reason ");
+                        else notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,"Error saving", " Reason ");
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {

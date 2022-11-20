@@ -44,6 +44,7 @@ namespace VSManagement.Controllers.AssetManagement
         {
             int id = repo.create(JsonConvert.
                 DeserializeObject<Project>(JsonConvert.SerializeObject(record)));
+            if (id == -1) return Problem("Project Exist");
             return Created($"/project/{id}", "Created Successfully.");
         }
 
@@ -53,6 +54,7 @@ namespace VSManagement.Controllers.AssetManagement
             int id = repo.update(JsonConvert.
                 DeserializeObject<Project>(JsonConvert.SerializeObject(record)));
             if (id == 0) return Conflict("Error updating record");
+            if (id == -1) return Problem("Project Exist");
             return Ok("Updated successfully");
         }
 

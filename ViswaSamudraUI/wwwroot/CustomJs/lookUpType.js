@@ -67,17 +67,20 @@ $(document).ready(function () {
                         nType = 'success';
                         message = data?.message;                        
                         redirect();
-                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#Code').val() + ' - ' + $('#Name').val() + ' : ' + message, " Look Up Type ");
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#Code').val() + ' - ' + $('#Name').val() + ' : ' + message, " Lookup Type ");
                     } else {
                         nType = 'danger';
                         message = data?.message;
-                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "  Look Up Type  ");
+                        if (message.includes("Lookup Type Exist"))
+                            notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Lookup Type Name or Code are existed", " Lookup Type ");
+                        else
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "  Lookup Type  ");
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     nType = 'danger';
                     message = 'Error In Operation';
-                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, message, " Reason1 ")
+                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, message, " Lookup Type ")
                 },
 
             });
@@ -88,19 +91,21 @@ $(document).ready(function () {
 function loadPartialview(thisvalue) {
     openform();
     var x = thisvalue.parentElement.parentElement;    
-    $("#Name").val(x.cells[2].innerHTML);
-    $('#Code').val(x.cells[3].innerHTML);
-    $('#hdnGuid').val(x.cells[6].innerHTML);
+    $("#Name").val(x.cells[3].innerHTML);
+    $('#Code').val(x.cells[2].innerHTML);
+    $('#hdnGuid').val(x.cells[4].innerHTML);
     $('#lookupform').show();
 }
 
-function openform() {
+function openform() {    
     $('#lookupform').attr("style", "display:block");
 }
 
 function Closeform() {   
-    $('#lookupform').toggle();  
-    
+    $("#Name").val('');
+    $('#Code').val('');
+    $('#hdnGuid').val('');
+    $('#lookupform').toggle();      
 }
 
 function toJson() {

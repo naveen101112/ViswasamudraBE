@@ -33,8 +33,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public ActionResult ProjectModification(Project model)
         {
-            return Ok(provider.Add(model));
-            //return Content(status);
+            model.RecordStatus = 1;
+            return Ok(provider.Add(model));            
         }
 
         public IActionResult Delete(Project model)

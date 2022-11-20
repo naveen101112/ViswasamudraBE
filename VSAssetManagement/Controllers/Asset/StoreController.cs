@@ -43,8 +43,9 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Store record)
         {
-            Guid id = repo.createAsset(JsonConvert.
+            int id = repo.createStore(JsonConvert.
                 DeserializeObject<Store>(JsonConvert.SerializeObject(record)));
+            if (id == -1) return Problem("Store Exist");
             return Created($"/store/{id}", "Created Successfully.");
         }
 
@@ -54,6 +55,7 @@ namespace VSManagement.Controllers.AssetManagement
             int id = repo.update(JsonConvert.
                 DeserializeObject<Store>(JsonConvert.SerializeObject(record)));
             if (id == 0) return Conflict("Error updating record");
+            if (id == -1) return Problem("Store Exist");
             return Ok("Updated successfully");
         }
 

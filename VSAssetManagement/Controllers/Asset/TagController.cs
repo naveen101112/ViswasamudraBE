@@ -32,6 +32,15 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
+        [HttpGet("combomap")]
+        public ActionResult getDropDownMap()
+        {
+            List<io.Tag> record = JsonConvert.
+                DeserializeObject<List<io.Tag>>(JsonConvert.SerializeObject(repo.getDropDowncombomap()));
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
+
         [HttpGet("grid")]
         public ActionResult getDataGrid()
         {
@@ -51,6 +60,7 @@ namespace VSManagement.Controllers.AssetManagement
         {
             int id = repo.create(JsonConvert.
                 DeserializeObject<Tag>(JsonConvert.SerializeObject(record)));
+            if(id==-1) return Problem("Tag Exist");
             return Created($"/tag/{id}", "Created Successfully.");
         }
 
@@ -63,6 +73,7 @@ namespace VSManagement.Controllers.AssetManagement
             tag.Status = new Guid(record.Status);
             int id = repo.update(tag);
             if (id == 0) return Conflict("Error updating record");
+            if (id == -1) return Problem("Tag Exist");
             return Ok(new { status = "success" });
         }
 

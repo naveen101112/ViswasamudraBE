@@ -3,7 +3,7 @@
 <div class="col-sm-12" style="padding:1px">
    <div class="card">
       <div class="card-header">
-         <h5>Tag</h5>
+			<h5>Tag Operations</h5>
          <div class="card-header-right">
                 <div class="btn-group card-option">
                     @Html.ActionLink("", "Index","Tag", "", new {@style="margin-right: 10px;",@class="feather icon-x-circle" })
@@ -27,13 +27,17 @@
 					  <input class="form-control" asp-for="Name" placeholder="Tag Name" maxlength="50">
 				   </div>
 				</div>
+				 @if (Model.Guid != Guid.Empty)
+					  {
 				<div class="col-md-4">
 				   <div class="form-group">
-					  <label class="form-label">Tag Status</label>
+					  <label class="form-label">Tag Status</label>					
 					  <select class="form-control" asp-items="@ViewBag.Status" asp-for="Status">                      
 					  </select>
+					  
 				   </div>
 				</div>
+					  }
 			 </div>
 			 
 			 <button type="submit" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>

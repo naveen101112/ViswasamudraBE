@@ -70,13 +70,16 @@ $(document).ready(function () {
                     } else {
                         nType = 'danger';
                         message = data?.message;
-                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "  Look Up Type  ");
+                        if (message.includes("Lookup Type Value Exist"))
+                            notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Lookup Type Value Exist Name or Code are existed", " Lookup Type Value ");
+                        else
+                            notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "  Lookup Type Value  ");
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     nType = 'danger';
                     message = 'Error In Operation';
-                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, message, " Reason1 ")
+                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, message, " Lookup Type Value ");
                 },
 
             });
@@ -87,15 +90,17 @@ $(document).ready(function () {
 function loadPartialview(thisvalue) {
     openform();
     var x = thisvalue.parentElement.parentElement;    
-    $("#Name").val(x.cells[3].innerHTML);
-    $('#Code').val(x.cells[2].innerHTML);
-    $('#hdnGuid').val(x.cells[7].innerHTML);
+    $('#Code').val(x.cells[3].innerHTML);
+    $("#Name").val(x.cells[4].innerHTML);    
+    $('#hdnGuid').val(x.cells[5].innerHTML);
     $('#lookupform').show();
 }
 
-function Closeform() {   
+function Closeform() {  
+    $("#Name").val('');
+    $('#Code').val('');
+    $('#hdnGuid').val('');
     $('#lookupform').toggle();  
-    
 }
 
 function openform() {

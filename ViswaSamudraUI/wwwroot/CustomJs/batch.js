@@ -4,7 +4,26 @@
         $("#PurchaseOrderId").removeClass('is-invalid');
     });
 
-    $("#PurchaseOrderId").change(function () {
+    $("#PurchaseOrderId").change(function () {      
+        $.ajax({
+            url: 'POGet',            
+            type: 'Post',
+            data: Batch = { Guid: $(this).val() },
+            success: function (data) {                                                                   
+                $("#PurchaseOrderNo").val(data.purchaseOrderNo);
+                $("#PurchaseOrderDate").val(data.purchaseOrderDate);
+                $("#PurchaseStore").val(data.purchaseStore);
+                $("#PurchaseProject").(data.purchaseProject);
+                $("#CompanyName").val(data.companyName);                                    
+                closeLoader();   
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                nType = 'danger';
+                message = 'Error In Updation';
+                closeLoader();                
+            },
+
+        });
         if ($(this).val() == '' || $(this).val() < 1) {
             $("#PurchaseOrderId").addClass('is-invalid');
             $("#PurchaseOrderId").focus();

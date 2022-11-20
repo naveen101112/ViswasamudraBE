@@ -34,7 +34,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
             asset.RecordStatus = 1;
 
             var result = assetprovider.GetAll(asset).FirstOrDefault();
-            ViewBag.selectTag = tagProvider.GetSelectList(result.TagId.ToString());
+            ViewBag.selectTag = tagProvider.GetSelectListWithoutMapped(result.TagId.ToString());
             ViewBag.StructureType = lookUpProvider.GetSelectList("STY", result.StructureType.ToString());
             ViewBag.StructureSubType = lookUpProvider.GetSelectList("SST", result.StructureSubType.ToString());
             ViewBag.AssetType = lookUpProvider.GetSelectList("ATY", result.AssetType.ToString());

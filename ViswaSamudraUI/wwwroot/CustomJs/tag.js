@@ -30,10 +30,7 @@
                 },
                 'Name': {
                     required: true,
-                },
-                'Status': {
-                    required: true,
-                }
+                }                
             },
 
             // Errors //
@@ -82,7 +79,10 @@
                     } else {
                         nType = 'danger';
                         message = data?.message;
-                        console.error('Error saving Tag:',data);
+                        console.error('Error saving Tag:', message);
+                        if (message.includes("Tag Exist"))
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Tag Name or Code are existed", " Tag ");
+                        else
                         notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Error saving", " Tag ");
                     }
 				},

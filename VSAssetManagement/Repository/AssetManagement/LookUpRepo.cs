@@ -19,13 +19,17 @@ namespace VSManagement.Repository.AssetManagement
             return _context.LookupType.Where(x=>x.RecordStatus == 1).ToList();
         }
 
-        public Guid create(LookupType record)
+        public int create(LookupType record)
         {
-            record.CreatedDateTime = DateTime.Now;
-            record.LastUpdatedDateTime = DateTime.Now;
-            _context.LookupType.Add(record);
-            _context.SaveChanges();
-            return record.Guid;
+            if (_context.LookupType.Where(a => (a.Name == record.Name || a.Code == record.Code) && a.RecordStatus == 1).Count() <= 0)
+            {
+                record.CreatedDateTime = DateTime.Now;
+                record.LastUpdatedDateTime = DateTime.Now;
+                _context.LookupType.Add(record);
+                _context.SaveChanges();
+                return record.Id;
+            }
+            return -1;
         }
 
         public LookupType getByOnlyId(int id)
@@ -40,14 +44,28 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(LookupType record)
         {
-            _context.Update(record).Property(x => x.Id).IsModified = false; ;
-            return _context.SaveChanges();
+            if (_context.LookupType.Where(a => (a.Name == record.Name || a.Code == record.Code) && a.RecordStatus == 1 && a.Guid!=record.Guid).Count() <= 0)
+            {
+                record.LastUpdatedBy = "System";
+                record.LastUpdatedDateTime = DateTime.Now;
+                record.RecordStatus = 1;
+                _context.Update(record).Property(x => x.Id).IsModified = false;
+                return _context.SaveChanges();
+            }
+            else return -1;
         }
 
         public int update(LookupTypeValue record)
         {
-            _context.LookupTypeValue.Update(record).Property(x => x.Id).IsModified = false; ;
-            return _context.SaveChanges();
+            if (_context.LookupTypeValue.Where(a => (a.Name == record.Name || a.Code == record.Code) && a.RecordStatus == 1 && a.Guid != record.Guid).Count() <= 0)
+            {
+                record.LastUpdatedBy = "System";
+                record.LastUpdatedDateTime = DateTime.Now;
+                record.RecordStatus = 1;
+                _context.LookupTypeValue.Update(record).Property(x => x.Id).IsModified = false;
+                return _context.SaveChanges();
+            }
+            else return -1;
         }
 
         public int delete(mo.LookupType request)

@@ -86,6 +86,9 @@
                         nType = 'danger';
                         message = data?.message ? data?.message : 'Error saving';
                         console.error("Error saving project details:", data);
+                        if (message.includes("Project Exist"))
+                            notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Project Name or Code are existed", " Project ");
+                        else
                         notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Error saving", " Project ");
                     }
                 },
@@ -102,5 +105,5 @@
 });
 
 function toJson() {
-    return Project = { Guid: $("#hdnGuid").val(), ProjectCode: $('#ProjectCode').val(), ProjectName: $('#ProjectName').val(), ClientName: $('#ClientName').val(), ProjectType: $('#ProjectType').val(), ProjectStartDate: $('#ProjectStartDate').val(), ProjectEndDate: $('#ProjectEndDate').val(), ProjectSiteHead: $('#ProjectSiteHead').val(), SiteHeadMobile: $('#sSiteHeadMobile').val(), GstinNo: $('#GstinNo').val(), CityTown: $('#CityTown').val(), AddressLine1: $('#AddressLine1').val(), AddressLine2: $('#AddressLine2').val() };
+    return Project = { Guid: $("#hdnGuid").val(), ProjectCode: $('#ProjectCode').val(), ProjectName: $('#ProjectName').val(), ClientName: $('#ClientName').val(), ProjectType: $('#ProjectType').val(), ProjectStartDate: $('#ProjectStartDate').val(), ProjectEndDate: $('#ProjectEndDate').val(), ProjectSiteHead: $('#ProjectSiteHead').val(), SiteHeadMobile: $('#SiteHeadMobile').val(), GstinNo: $('#GstinNo').val(), CityTown: $('#CityTown').val(), AddressLine1: $('#AddressLine1').val(), AddressLine2: $('#AddressLine2').val() };
 };

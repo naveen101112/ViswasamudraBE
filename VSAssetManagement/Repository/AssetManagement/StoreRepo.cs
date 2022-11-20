@@ -42,14 +42,22 @@ namespace VSManagement.Repository.AssetManagement
             return result.ToList();
         }
 
-        public Guid createAsset(Store record)
+        public int createStore(Store record)
         {
-            int prjCount = _context.Store.Where(a => a.Project == record.Project).Count();
-            string strCode = _context.Project.Where(p => p.Guid == record.Project).FirstOrDefault().ProjectCode + (prjCount+1).ToString().PadLeft(2,'0');
-            record.Code = strCode;
-            _context.Store.Add(record);
-            _context.SaveChanges();
-            return record.Guid;
+            string Project = _context.Project.Where(p => p.Guid == record.Project).FirstOrDefault().ProjectCode;            
+            if (_context.Store.Where(a => (a.Name == record.Name || a.Code.Contains("/"+record.Code)) && a.RecordStatus == 1).Count() <= 0)
+            {
+                int prjCount = _context.Store.Where(a => a.Project == record.Project).Count();
+                string strCode = Project + "/" + record.Code;
+                record.Code = strCode;
+                _context.Store.Add(record);
+                _context.SaveChanges();
+                return record.Id;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public Store getById(Guid id)
@@ -66,13 +74,18 @@ namespace VSManagement.Repository.AssetManagement
 
         public int update(Store record)
         {
-            Store exist = getById(record.Guid);
-            record.CreatedBy = exist.CreatedBy;
-            record.CreatedDateTime = exist.CreatedDateTime;
-            record.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
-            record.LastUpdatedDateTime = System.DateTime.Now;
-            _context.Update(record).Property(r => r.Id).IsModified = false;
-            return _context.SaveChanges();
+            string Project = _context.Project.Where(p => p.Guid == record.Project).FirstOrDefault().ProjectCode;
+            string[] values = record.Code.Split('/');
+            if (_context.Store.Where(a => (a.Name == record.Name || a.Code.Contains("/" + values[1])) && a.RecordStatus == 1 && a.Guid!=record.Guid).Count() <= 0)
+            {   
+                record.Code = Project + "/" + values[1];
+                record.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
+                record.LastUpdatedDateTime = System.DateTime.Now;
+                record.RecordStatus = 1;
+                _context.Update(record).Property(r => r.Id).IsModified = false;
+                return _context.SaveChanges();
+            }
+            else return -1;
         }
 
         public int delete(io.Store request)

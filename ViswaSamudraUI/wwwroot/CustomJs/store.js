@@ -91,7 +91,9 @@
                     } else {
                         nType = 'danger';
                         message = data?.message;
-                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Store ");
+                        if (message.includes("Store Exist"))
+                            notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Store Name or Code are existed", " Store ");
+                        else notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Store ");
                     }
 				},
                 error: function (xhr, ajaxOptions, thrownError) {
