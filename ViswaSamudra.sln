@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViswasamudraCommonObjects",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViswaSamudraUI", "ViswaSamudraUI\ViswaSamudraUI.csproj", "{F45ACDF8-7AFC-4B77-8284-B3B48BD3515E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehiveDataImporter", "BehiveDataImporter\BehiveDataImporter.csproj", "{8F16CE1D-DE8D-457D-96C0-FD62D92D697C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BehiveDataImporter", "BehiveDataImporter\BehiveDataImporter.csproj", "{8F16CE1D-DE8D-457D-96C0-FD62D92D697C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUtility", "TestUtility\TestUtility.csproj", "{04906788-0998-44E0-8D66-3EF92FC8DEF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8F16CE1D-DE8D-457D-96C0-FD62D92D697C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F16CE1D-DE8D-457D-96C0-FD62D92D697C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F16CE1D-DE8D-457D-96C0-FD62D92D697C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04906788-0998-44E0-8D66-3EF92FC8DEF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04906788-0998-44E0-8D66-3EF92FC8DEF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04906788-0998-44E0-8D66-3EF92FC8DEF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04906788-0998-44E0-8D66-3EF92FC8DEF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

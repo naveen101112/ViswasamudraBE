@@ -47,7 +47,8 @@ namespace BehiveDataImporter.Helper
                 {
                     return "Unauthorized Request : Session Auth Token is null";
                 }
-                string url = Route + "?from=01-Aug-2020 10:00:00 AM";// (string.IsNullOrEmpty(query) ? "" : "?"+query);
+                //string url = Route + "?from=01-Aug-2020 10:00:00 AM";// (string.IsNullOrEmpty(query) ? "" : "?"+query);
+                string url = Route + (string.IsNullOrEmpty(query) ? "" : "?"+query);
                 client.BaseAddress = new Uri(baseUri);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
