@@ -3,6 +3,8 @@ Scaffold-DbContext "Server=.\SQLEXPRESS;Database=VS_EMPLOYEE;Trusted_Connection=
 
 Scaffold-DbContext "Server=14.97.10.154;Database=VISWASAMUDRA;User ID=administrator;Password=admin@123$;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/VISWASAMUDRA -f
 
+Scaffold-DbContext "Server=14.97.10.154;Database=VS_EMPLOYEE;User ID=administrator;Password=admin@123$;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/VS_EMPLOYEE -f
+
 if (!optionsBuilder.IsConfigured)
 {
     IConfigurationBuilder builder = new ConfigurationBuilder()

@@ -25,12 +25,36 @@ namespace VSManagement.Models.VS_EMPLOYEE
         public virtual DbSet<Department> Department { get; set; }
         public virtual DbSet<Deputation> Deputation { get; set; }
         public virtual DbSet<Division> Division { get; set; }
+        public virtual DbSet<EmpTemp> EmpTemp { get; set; }
         public virtual DbSet<EmployeeDetails> EmployeeDetails { get; set; }
         public virtual DbSet<EmployeeMaster> EmployeeMaster { get; set; }
         public virtual DbSet<EmployeeRoles> EmployeeRoles { get; set; }
         public virtual DbSet<EmployeeStatus> EmployeeStatus { get; set; }
+        public virtual DbSet<EmployeestatusTemp> EmployeestatusTemp { get; set; }
         public virtual DbSet<Locations> Locations { get; set; }
+        public virtual DbSet<MigrationTemp> MigrationTemp { get; set; }
         public virtual DbSet<Salutation> Salutation { get; set; }
+        public virtual DbSet<TblMigrationBand> TblMigrationBand { get; set; }
+        public virtual DbSet<TblMigrationBank> TblMigrationBank { get; set; }
+        public virtual DbSet<TblMigrationBranch> TblMigrationBranch { get; set; }
+        public virtual DbSet<TblMigrationBranchaddress> TblMigrationBranchaddress { get; set; }
+        public virtual DbSet<TblMigrationCategory> TblMigrationCategory { get; set; }
+        public virtual DbSet<TblMigrationCity> TblMigrationCity { get; set; }
+        public virtual DbSet<TblMigrationCompany> TblMigrationCompany { get; set; }
+        public virtual DbSet<TblMigrationCountry> TblMigrationCountry { get; set; }
+        public virtual DbSet<TblMigrationDepartment> TblMigrationDepartment { get; set; }
+        public virtual DbSet<TblMigrationDeputation> TblMigrationDeputation { get; set; }
+        public virtual DbSet<TblMigrationDesignation> TblMigrationDesignation { get; set; }
+        public virtual DbSet<TblMigrationDivision> TblMigrationDivision { get; set; }
+        public virtual DbSet<TblMigrationEmployee> TblMigrationEmployee { get; set; }
+        public virtual DbSet<TblMigrationEmployeestatus> TblMigrationEmployeestatus { get; set; }
+        public virtual DbSet<TblMigrationGrade> TblMigrationGrade { get; set; }
+        public virtual DbSet<TblMigrationLocation> TblMigrationLocation { get; set; }
+        public virtual DbSet<TblMigrationSalarygroup> TblMigrationSalarygroup { get; set; }
+        public virtual DbSet<TblMigrationState> TblMigrationState { get; set; }
+        public virtual DbSet<TblMigrationSubdepartment> TblMigrationSubdepartment { get; set; }
+        public virtual DbSet<TblMigrationZone> TblMigrationZone { get; set; }
+        public virtual DbSet<Test> Test { get; set; }
         public virtual DbSet<UserLogin> UserLogin { get; set; }
         public virtual DbSet<Zones> Zones { get; set; }
 
@@ -299,6 +323,18 @@ namespace VSManagement.Models.VS_EMPLOYEE
                     .HasConstraintName("DIVISION_COMPANY_FK");
             });
 
+            modelBuilder.Entity<EmpTemp>(entity =>
+            {
+                entity.ToTable("EMP_TEMP");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Data)
+                    .HasColumnName("DATA")
+                    .HasMaxLength(8000)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<EmployeeDetails>(entity =>
             {
                 entity.HasKey(e => e.UniqueId)
@@ -548,16 +584,15 @@ namespace VSManagement.Models.VS_EMPLOYEE
                     .IsUnicode(false);
 
                 entity.Property(e => e.Gender)
-                    .HasMaxLength(1)
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.IsActive)
                     .HasColumnName("Is_Active")
-                    .HasMaxLength(1)
-                    .IsUnicode(false)
-                    .IsFixedLength();
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Language)
                     .HasMaxLength(150)
@@ -885,6 +920,18 @@ namespace VSManagement.Models.VS_EMPLOYEE
                     .HasConstraintName("EMPLOYEE_STATUS_EMPLOYEE_MASTER_FK");
             });
 
+            modelBuilder.Entity<EmployeestatusTemp>(entity =>
+            {
+                entity.ToTable("EMPLOYEESTATUS_TEMP");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Data)
+                    .HasColumnName("DATA")
+                    .HasMaxLength(8000)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Locations>(entity =>
             {
                 entity.HasKey(e => e.UniqueId)
@@ -940,6 +987,18 @@ namespace VSManagement.Models.VS_EMPLOYEE
                     .HasConstraintName("LOCATION_BRANCH_FK");
             });
 
+            modelBuilder.Entity<MigrationTemp>(entity =>
+            {
+                entity.ToTable("MIGRATION_TEMP");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Data)
+                    .HasColumnName("DATA")
+                    .HasMaxLength(8000)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Salutation>(entity =>
             {
                 entity.HasKey(e => e.UniqueId)
@@ -985,6 +1044,1021 @@ namespace VSManagement.Models.VS_EMPLOYEE
                     .WithMany(p => p.Salutation)
                     .HasForeignKey(d => d.DepartmentUid)
                     .HasConstraintName("SALUTATION_DEPARTMENT_FK");
+            });
+
+            modelBuilder.Entity<TblMigrationBand>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_BAND");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.BandCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BandName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationBank>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_BANK");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.BankCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BankName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationBranch>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_BRANCH");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.BranchCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BranchName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationBranchaddress>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_BRANCHADDRESS");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.BranchAddressCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BranchAddressName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationCategory>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_CATEGORY");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CategoryCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CategoryName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationCity>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_CITY");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CityCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CityName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationCompany>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_COMPANY");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CompanyCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CompanyName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationCountry>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_COUNTRY");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CountryCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CountryName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationDepartment>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_DEPARTMENT");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DepartmentName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationDeputation>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_DEPUTATION");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DeputationCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DeputationName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationDesignation>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_DESIGNATION");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DesignationCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DesignationName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationDivision>(entity =>
+            {
+                entity.ToTable("TBL_MIGRATION_DIVISION");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DivisionCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DivisionName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationEmployee>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TBL_MIGRATION_EMPLOYEE");
+
+                entity.Property(e => e.AadharName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AadharNumber)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Address1)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Address2)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BankIfsccode)
+                    .HasColumnName("BankIFSCCode")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BankName)
+                    .HasColumnName("Bank_Name")
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BloodGroup)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BranchName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CategoryName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CompanyCode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CompanyName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConfirmationDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CostCenterName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("createdBy")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.CurrAddress1)
+                    .HasColumnName("Curr_Address_1")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrAddress2)
+                    .HasColumnName("Curr_Address_2")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrCity)
+                    .HasColumnName("Curr_City")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrEmailPersonal)
+                    .HasColumnName("Curr_Email_Personal")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrEmailWork)
+                    .HasColumnName("Curr_Email_Work")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrHome)
+                    .HasColumnName("Curr_Home")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrMobile)
+                    .HasColumnName("Curr_Mobile")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrOther)
+                    .HasColumnName("Curr_Other")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrPinCode)
+                    .HasColumnName("Curr_Pin_Code")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrState)
+                    .HasColumnName("Curr_State")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateOfBirth)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateOfJoining)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DepartmentName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DeputationName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DesignationName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DivisionName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmergAddress1)
+                    .HasColumnName("Emerg_Address_1")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmergAddress2)
+                    .HasColumnName("Emerg_Address_2")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmergCity)
+                    .HasColumnName("Emerg_City")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmergEmailPersonal)
+                    .HasColumnName("Emerg_Email_Personal")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmergEmailWork)
+                    .HasColumnName("Emerg_Email_Work")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmergHome)
+                    .HasColumnName("Emerg_Home")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmergMobile)
+                    .HasColumnName("Emerg_Mobile")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmergOther)
+                    .HasColumnName("Emerg_Other")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmergPinCode)
+                    .HasColumnName("Emerg_Pin_Code")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmergState)
+                    .HasColumnName("Emerg_State")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmpName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmployeeCode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmployeeStatusId)
+                    .HasColumnName("EmployeeStatus_ID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmployeeStatusName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Empsysid).HasColumnName("EMPSYSID");
+
+                entity.Property(e => e.EsicApplicable)
+                    .HasColumnName("ESIC_Applicable")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EsicGroup)
+                    .HasColumnName("ESIC_Group")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EsicNumber)
+                    .HasColumnName("ESIC_Number")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FatherName)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FunctionalDesignation)
+                    .HasColumnName("Functional_Designation")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FunctionalDesignationName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Gender)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GradeName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.IfscCode)
+                    .HasColumnName("IFSC_Code")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsActive)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsBranchEsicApplicable)
+                    .HasColumnName("Is_Branch_ESIC_Applicable")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Isdaily).HasColumnName("ISDAILY");
+
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastworkingDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LocationName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MaritalStatus)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NoticePeriod)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Panno)
+                    .HasColumnName("PANNo")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PastExperience)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PaymentMode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PfApplicable)
+                    .HasColumnName("PF_Applicable")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PfCeiling)
+                    .HasColumnName("PF_Ceiling")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PfGroup)
+                    .HasColumnName("PF_Group")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Pfnumber)
+                    .HasColumnName("PFNumber")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrmnentAddress1)
+                    .HasColumnName("Prmnent_Address_1")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrmnentAddress2)
+                    .HasColumnName("Prmnent_Address_2")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrmnentCity)
+                    .HasColumnName("Prmnent_City")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrmnentEmailPersonal)
+                    .HasColumnName("Prmnent_Email_Personal")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrmnentEmailWork)
+                    .HasColumnName("Prmnent_Email_Work")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrmnentHome)
+                    .HasColumnName("Prmnent_Home")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrmnentMobile)
+                    .HasColumnName("Prmnent_Mobile")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrmnentOther)
+                    .HasColumnName("Prmnent_Other")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrmnentPinCode)
+                    .HasColumnName("Prmnent_Pin_Code")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrmnentState)
+                    .HasColumnName("Prmnent_State")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProbationPeriod)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PtApplicable)
+                    .HasColumnName("PT_Applicable")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ptgroup)
+                    .HasColumnName("PTGroup")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RelevantExperince)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Reporting1).HasColumnName("Reporting_1");
+
+                entity.Property(e => e.Reporting2).HasColumnName("Reporting_2");
+
+                entity.Property(e => e.Reporting3).HasColumnName("Reporting_3");
+
+                entity.Property(e => e.ResignationDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SalaryAccountNo)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SalaryBankBranch)
+                    .HasColumnName("Salary_Bank_Branch")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SalaryGroup)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SubDepartmentName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SubGradeName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TotalExperience)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Uannumber)
+                    .HasColumnName("UANNumber")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Vpfapplicable)
+                    .HasColumnName("VPFApplicable")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Vpfpercentage)
+                    .HasColumnName("VPFPercentage")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZoneName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TblMigrationEmployeestatus>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TBL_MIGRATION_EMPLOYEESTATUS");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.EmployeeStatusCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmployeeStatusName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationGrade>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TBL_MIGRATION_GRADE");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.GradeCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GradeName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationLocation>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TBL_MIGRATION_LOCATION");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.LocationCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LocationName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<TblMigrationSalarygroup>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TBL_MIGRATION_SALARYGROUP");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.SalaryGroupCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SalaryGroupName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TblMigrationState>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TBL_MIGRATION_STATE");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.StateCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StateName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TblMigrationSubdepartment>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TBL_MIGRATION_SUBDEPARTMENT");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.SubDepartmentCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SubDepartmentName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TblMigrationZone>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TBL_MIGRATION_ZONE");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.MigratedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.ZoneCode)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZoneName)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Test>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TEST");
+
+                entity.Property(e => e.Data)
+                    .HasColumnName("DATA")
+                    .HasMaxLength(800)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<UserLogin>(entity =>

@@ -1,0 +1,253 @@
+﻿@using System.Data
+@model IEnumerable<VSManagement.IOModels.TblMigrationEmployee>
+
+<div class="col-sm-12" style="padding:1px">
+    <div class="card">
+        <div class="card-header">
+            <h5>Employee Migrated Data</h5>
+            <div class="card-header-right">
+                <div class="btn-group card-option">
+                    @Html.ActionLink("", "TagOps","Tag", "", new {@style="margin-right: 10px;",@class="feather icon-plus-circle" })
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="feather icon-more-horizontal"></i>
+                    </button>
+                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                        <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                        <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding:2px 2px 2px 2px"> 
+            <div class="dt-responsive table-responsive">
+                <table id="simpletable" class="table table-striped table-bordered table-hover nowrap">
+                    <thead>
+                    <tr>
+                            <th class="ActionWidth"  data-breakpoints="xs">S. No</th>
+                            <th data-breakpoints="xs">EMPSYSID</th>
+                            <th data-breakpoints="xs">EmployeeCode</th>
+                            <th data-breakpoints="xs">FirstName</th>
+                            <th data-breakpoints="xs">LastName</th>
+                            <th data-breakpoints="xs">EmpName</th>
+                            <th data-breakpoints="xs">FatherName</th>
+                            <th data-breakpoints="xs">DateOfBirth</th>
+                            <th data-breakpoints="xs">Gender</th>
+                            <th data-breakpoints="xs">BloodGroup</th>
+                            <th data-breakpoints="xs">IsActive</th>
+                            <th data-breakpoints="xs">MaritalStatus</th>
+                            <th data-breakpoints="xs">AadharNumber</th>
+                            <th data-breakpoints="xs">AadharName</th>
+                            <th data-breakpoints="xs">Curr_Address_1</th>
+                            <th data-breakpoints="xs">Curr_Address_2</th>
+                            <th data-breakpoints="xs">Curr_City</th>
+                            <th data-breakpoints="xs">Curr_State</th>
+                            <th data-breakpoints="xs">Curr_Pin_Code</th>
+                            <th data-breakpoints="xs">Curr_Mobile</th>
+                            <th data-breakpoints="xs">Curr_Home</th>
+                            <th data-breakpoints="xs">Curr_Other</th>
+                            <th data-breakpoints="xs">Curr_Email_Work</th>
+                            <th data-breakpoints="xs">Curr_Email_Personal</th>
+                            <th data-breakpoints="xs">Prmnent_Address_1</th>
+                            <th data-breakpoints="xs">Prmnent_Address_2</th>
+                            <th data-breakpoints="xs">Prmnent_City</th>
+                            <th data-breakpoints="xs">Prmnent_State</th>
+                            <th data-breakpoints="xs">Prmnent_Pin_Code</th>
+                            <th data-breakpoints="xs">Prmnent_Mobile</th>
+                            <th data-breakpoints="xs">Prmnent_Home</th>
+                            <th data-breakpoints="xs">Prmnent_Other</th>
+                            <th data-breakpoints="xs">Prmnent_Email_Work</th>
+                            <th data-breakpoints="xs">Prmnent_Email_Personal</th>
+                            <th data-breakpoints="xs">Emerg_Address_1</th>
+                            <th data-breakpoints="xs">Emerg_Address_2</th>
+                            <th data-breakpoints="xs">Emerg_City</th>
+                            <th data-breakpoints="xs">Emerg_State</th>
+                            <th data-breakpoints="xs">Emerg_Pin_Code</th>
+                            <th data-breakpoints="xs">Emerg_Mobile</th>
+                            <th data-breakpoints="xs">Emerg_Home</th>
+                            <th data-breakpoints="xs">Emerg_Other</th>
+                            <th data-breakpoints="xs">Emerg_Email_Work</th>
+                            <th data-breakpoints="xs">Emerg_Email_Personal</th>
+                            <th data-breakpoints="xs">EmployeeStatus_ID</th>
+                            <th data-breakpoints="xs">DateOfJoining</th>
+                            <th data-breakpoints="xs">ProbationPeriod</th>
+                            <th data-breakpoints="xs">ConfirmationDate</th>
+                            <th data-breakpoints="xs">Functional_Designation</th>
+                            <th data-breakpoints="xs">RelevantExperince</th>
+                            <th data-breakpoints="xs">PastExperience</th>
+                            <th data-breakpoints="xs">TotalExperience</th>
+                            <th data-breakpoints="xs">SalaryGroup</th>
+                            <th data-breakpoints="xs">NoticePeriod</th>
+                            <th data-breakpoints="xs">CompanyName</th>
+                            <th data-breakpoints="xs">CompanyCode</th>
+                            <th data-breakpoints="xs">DivisionName</th>
+                            <th data-breakpoints="xs">ZoneName</th>
+                            <th data-breakpoints="xs">BranchName</th>
+                            <th data-breakpoints="xs">LocationName</th>
+                            <th data-breakpoints="xs">DepartmentName</th>
+                            <th data-breakpoints="xs">DeputationName</th>
+                            <th data-breakpoints="xs">EmployeeStatusName</th>
+                            <th data-breakpoints="xs">DesignationName</th>
+                            <th data-breakpoints="xs">FunctionalDesignationName</th>
+                            <th data-breakpoints="xs">GradeName</th>
+                            <th data-breakpoints="xs">CategoryName</th>
+                            <th data-breakpoints="xs">SubDepartmentName</th>
+                            <th data-breakpoints="xs">SubGradeName</th>
+                            <th data-breakpoints="xs">Reporting_1</th>
+                            <th data-breakpoints="xs">Reporting_2</th>
+                            <th data-breakpoints="xs">Reporting_3</th>
+                            <th data-breakpoints="xs">IFSC_Code</th>
+                            <th data-breakpoints="xs">Address1</th>
+                            <th data-breakpoints="xs">Address2</th>
+                            <th data-breakpoints="xs">Bank_Name</th>
+                            <th data-breakpoints="xs">SalaryAccountNo</th>
+                            <th data-breakpoints="xs">BankIFSCCode</th>
+                            <th data-breakpoints="xs">Salary_Bank_Branch</th>
+                            <th data-breakpoints="xs">PaymentMode</th>
+                            <th data-breakpoints="xs">PANNo</th>
+                            <th data-breakpoints="xs">PF_Applicable</th>
+                            <th data-breakpoints="xs">PFNumber</th>
+                            <th data-breakpoints="xs">PF_Group</th>
+                            <th data-breakpoints="xs">PF_Ceiling</th>
+                            <th data-breakpoints="xs">ESIC_Applicable</th>
+                            <th data-breakpoints="xs">ESIC_Number</th>
+                            <th data-breakpoints="xs">ESIC_Group</th>
+                            <th data-breakpoints="xs">PT_Applicable</th>
+                            <th data-breakpoints="xs">PTGroup</th>
+                            <th data-breakpoints="xs">VPFApplicable</th>
+                            <th data-breakpoints="xs">VPFPercentage</th>
+                            <th data-breakpoints="xs">ResignationDate</th>
+                            <th data-breakpoints="xs">Is_Branch_ESIC_Applicable</th>
+                            <th data-breakpoints="xs">SalaryOnHold</th>
+                            <th data-breakpoints="xs">ISDAILY</th>
+                            <th data-breakpoints="xs">LastworkingDate</th>
+                            <th data-breakpoints="xs">UANNumber</th>
+                            <th data-breakpoints="xs">CostCenterName</th>
+                            <th data-breakpoints="xs">Migrated Date Time</th>
+
+                    </tr>
+                </thead>
+                <tbody>                 
+                    <tr>
+                            @{
+                                int rowNo = 0;
+                            }
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                                <td>@(rowNo += 1)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Empsysid)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmployeeCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.FirstName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LastName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmpName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.FatherName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.DateOfBirth)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Gender)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.BloodGroup)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.IsActive)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.MaritalStatus)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.AadharNumber)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.AadharName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CurrAddress1)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CurrAddress2)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CurrCity)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CurrState)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CurrPinCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CurrMobile)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CurrHome)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CurrOther)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CurrEmailWork)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CurrEmailPersonal)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PrmnentAddress1)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PrmnentAddress2)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PrmnentCity)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PrmnentState)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PrmnentPinCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PrmnentMobile)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PrmnentHome)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PrmnentOther)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PrmnentEmailWork)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PrmnentEmailPersonal)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmergAddress1)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmergAddress2)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmergCity)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmergState)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmergPinCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmergMobile)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmergHome)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmergOther)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmergEmailWork)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmergEmailPersonal)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmployeeStatusId)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.DateOfJoining)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ProbationPeriod)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ConfirmationDate)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.FunctionalDesignation)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.RelevantExperince)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PastExperience)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.TotalExperience)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.SalaryGroup)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.NoticePeriod)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CompanyCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.DivisionName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ZoneName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.BranchName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LocationName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.DepartmentName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.DeputationName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EmployeeStatusName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.DesignationName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.FunctionalDesignationName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.GradeName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CategoryName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.SubDepartmentName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.SubGradeName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Reporting1)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Reporting2)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Reporting3)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.IfscCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Address1)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Address2)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.BankName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.SalaryAccountNo)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.BankIfsccode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.SalaryBankBranch)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PaymentMode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Panno)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PfApplicable)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Pfnumber)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PfGroup)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PfCeiling)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EsicApplicable)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EsicNumber)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.EsicGroup)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.PtApplicable)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Ptgroup)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Vpfapplicable)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Vpfpercentage)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ResignationDate)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.IsBranchEsicApplicable)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.SalaryOnHold)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Isdaily)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LastworkingDate)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Uannumber)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CostCenterName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
+                        </tr>
+                        }                    
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("../customjs/util.js")"></script>
+<script>
+    $(window).on('load', function () {
+        setActiveMenu('wingz', 'tag');
+    });
+</script>
