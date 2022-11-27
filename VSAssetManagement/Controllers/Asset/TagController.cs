@@ -55,6 +55,14 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
+        [HttpGet("{guid}")]
+        public ActionResult getById(Guid guid)
+        {
+            var record = repo.getById(guid);
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
+
         [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Tag record)
         {

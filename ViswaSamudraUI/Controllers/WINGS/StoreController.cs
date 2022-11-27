@@ -15,7 +15,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
         ProjectProvider projectProvider = new ProjectProvider();
         public IActionResult Index()
         {
-            IEnumerable<Store> list = provider.GetAll();
+            IEnumerable<Store> list = provider.GetAll().OrderByDescending(s=>s.Id);
             return View(list);
         }
 
@@ -36,8 +36,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public ActionResult StoreModification(Store model)
         {
-            return Ok(provider.Add(model));
-            //return Content(status);
+            return Ok(provider.Add(model));           
         }
 
         public IActionResult Delete(Store model)

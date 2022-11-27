@@ -40,6 +40,15 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
+        [HttpGet("combobyProject")]
+        public ActionResult getDropDownByProject([FromQuery] int id, [FromQuery] Guid guid)
+        {
+            List<io.Store> record = JsonConvert.
+                DeserializeObject<List<io.Store>>(JsonConvert.SerializeObject(repo.getDropDownByProject(id, guid)));
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
+
         [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Store record)
         {

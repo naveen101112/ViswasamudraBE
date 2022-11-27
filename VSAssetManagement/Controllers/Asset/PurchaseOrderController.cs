@@ -47,6 +47,7 @@ namespace VSManagement.Controllers.AssetManagement
         {
             int id = repo.create(JsonConvert.
                 DeserializeObject<PurchaseOrder>(JsonConvert.SerializeObject(record)));
+            if (id == -1) return Problem("PurchaseOrder Exist");
             return Created($"/PurchaseOrder/{id}", "Created Successfully.");
         }
 
@@ -59,6 +60,24 @@ namespace VSManagement.Controllers.AssetManagement
             order.PurchaseStore = record.PurchaseStore;
             order.PurchaseProject = record.PurchaseProject;
             order.CompanyName = record.CompanyName;
+            order.LastUpdatedBy = "User";
+            order.LastUpdatedDateTime = System.DateTime.Now;
+            int id = repo.update(order);
+            if (id == 0) return Conflict("Error updating record");
+            return Ok("Updated successfully");
+        }
+
+        [HttpPost("UpdatePoByName")]
+        public ActionResult updateRecordByName([FromBody] io.PurchaseOrder record)
+        {
+            PurchaseOrder order = repo.getById(record.Guid);            
+            order.PurchaseOrderDate = record.PurchaseOrderDate;
+            order.PurchaseOrderNo = order.PurchaseOrderNo;
+            order.PurchaseStore = record.PurchaseStore;
+            order.PurchaseProject = record.PurchaseProject;
+            order.CompanyName = record.CompanyName;
+            order.CreatedBy= order.CreatedBy;
+            order.CreatedDateTime = order.CreatedDateTime;
             order.LastUpdatedBy = "User";
             order.LastUpdatedDateTime = System.DateTime.Now;
             int id = repo.update(order);

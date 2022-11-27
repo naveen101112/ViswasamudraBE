@@ -13,155 +13,148 @@
         <div class="card-body">
             <form id="poform">
                 <div class="col-md-12">
-                    <div class="card" style="margin-top: 0px;padding:0px;box-shadow:none">
-                        <div class="card-header border-0" style="margin-top: 0px;padding:0px;margin-top: 1px;">
-                            <label class="form-label" for="PurchaseOrderId">Purchase Order</label>
-                            <div class="input-group" style="width:333px">
-                                <select class="custom-select form-group" asp-items="@ViewBag.PurchaseOrderNo" style="width:200px" asp-for="PurchaseOrderId">
-                                </select>
-                                <div class="input-group-append">
-                                    <button class="btn waves-effect waves-light btn-primary feather icon-plus" id="opsbutton" type="button" data-toggle="collapse" aria-controls="collapseExample" data-target="#collapseExample"></button>
-                                </div>
-                                <label id="validation-url-error" class="error jquery-validation-error small form-text invalid-feedback" for="PurchaseOrderId">Please select a Purchase Order.</label>
-                            </div>                                
-                               
-                        </div>
-                        <div class="collapse" id="collapseExample" style="">
-                            <div class="card-body">
-                                <p class="mb-0">
+                    <div class="card" style="margin-top: 0px;margin-bottom: 0px;padding:0px;box-shadow:none">
+                        
                                     <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class="form-label">Purchase Order Number</label>
-                                            <input class="form-control" asp-for="PurchaseOrderNo" placeholder="Purchase Order Number">
+                                            <label class="form-label">Purchase Order Number</label>                                            
+                                            <select class="form-control" asp-items="@ViewBag.PurchaseOrderNo" asp-for="PurchaseOrderId">
+                                                </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="form-label">Purchase Order Date</label>
                                             <input class="form-control" asp-for="PurchaseOrderDate" placeholder="Purchase Order Date">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label">Project</label>
+                                    <select class="form-control" asp-items="@ViewBag.PurchaseProject" asp-for="PurchaseProject">
+                                    </select>
+                                </div>
+                            </div>
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class="form-label">Purchase Store</label>
+                                            <label class="form-label">Store</label>
                                             <select class="form-control" asp-items="@ViewBag.PurchaseStore" asp-for="PurchaseStore">
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="form-label">Purchase Project</label>
-                                            <select class="form-control" asp-items="@ViewBag.PurchaseProject" asp-for="PurchaseProject">
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
+                                    </div>                               
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="form-label">Company Name</label>
-                                            <input  class="form-control" asp-for="CompanyName" placeholder="Company Name">
+                                    <input class="form-control" asp-for="CompanyName" placeholder="Company Name">
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group" id="npo">
+                                            <label class="form-label">New Purchase Order Number</label>
+                                            <input  class="form-control" id="NewPurchaseOrderNo" name="NewPurchaseOrderNo" placeholder="New Purchase OrderNo">
+                                        </div>
                                     </div>
-                                    <button type="submit" id="POButton"  class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
-                                    
-                                </p>
-                            </div>
-                        </div>
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-3">
+                                    <button type="submit" id="POButton" class="btn notifications btn-primary" style="float: right;margin-top: 24px" data-type="success" data-from="top" data-align="right">Submit</button>
+                                    </div>
+                                    </div>                                    
+                                                  
                     </div>
                 </div>
           </form>
-
+          <hr style="margin-top:-1rem" />
             <form id="batchform">
                 @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
                 @Html.AntiForgeryToken()
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Batch Number</label>
                             <input type="text" class="form-control" asp-for="BatchNo" name="BatchNo" placeholder="Batch Number" id="BatchNo" maxlength="4">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Batch Description</label>
                             <input  class="form-control" asp-for="BatchDescription" name="BatchDescription" placeholder="Batch Description" id="BatchDescription">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Structure Type</label>
                             <select class="form-control" name="StructureType" asp-items="@ViewBag.StructureType" asp-for="StructureType">
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Structure Sub Type</label>
                             <select class="form-control" name="StructureSubType" asp-items="@ViewBag.StructureSubType" asp-for="StructureSubType">
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Asset Type</label>
                             <select class="form-control" name="AssetType" asp-items="@ViewBag.AssetType" asp-for="AssetType">
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Asset Specification</label>
                             <select class="form-control" name="AssetSpecification" asp-items="@ViewBag.AssetSpecification" asp-for="AssetSpecification">
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Batch Quantity</label>
                             <input  class="form-control" asp-for="BatchQuantity" name="BatchQuantity" placeholder="Batch Quantity" id="BatchQuantity">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">UOM</label>
                             <select class="form-control" asp-items="@ViewBag.Uom" asp-for="Uom">
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Use Frequency</label>
                             <input  class="form-control" asp-for="UseFrequency" name="UseFrequency" placeholder="Use Frequency" id="UseFrequency">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Usage Uom</label>
                             <select class="form-control" asp-items="@ViewBag.UsageUom" asp-for="UsageUom">
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Invoice No</label>
                             <input  class="form-control" asp-for="InvoiceNo" placeholder="Invoice No">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Invoice Date</label>
                             <input class="form-control" asp-for="InvoiceDate" name="InvoiceDate" placeholder="Invoice Date" id="InvoiceDate">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Received By</label>
                             <select class="form-control" asp-items="@ViewBag.Users" asp-for="ReceivedBy">
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label class="form-label">Received Date</label>
                             <input class="form-control" asp-for="ReceivedDate" placeholder="Received Date">

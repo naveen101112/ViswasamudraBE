@@ -27,6 +27,28 @@ namespace ViswaSamudraUI.Providers.Assets
         {
             return (IEnumerable<io.Store>)ch.GetRequest<io.Store>("Store/combo?id="+id);
         }
+        public IEnumerable<io.Store> GetDropDownByProj(int id,Guid guid)
+        {
+            return (IEnumerable<io.Store>)ch.GetRequest<io.Store>("Store/combobyProject?id=" + id+ "&guid=" + guid);
+        }
+
+        public List<SelectListItem> GetSelectListPro(int id, Guid project,string SelectedValue = null)
+        {
+            SelectListItem selListItem = new SelectListItem() { Value = "", Text = "" };
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(selListItem);
+
+            foreach (var x in GetDropDownByProj(id, project).Select(i => new { i.Name, i.Code, i.Guid }))
+            {
+                if (SelectedValue != null && x.Guid.ToString() == SelectedValue)
+                    selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.Name, Selected = true };
+                else
+                    selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.Name };
+
+                newList.Add(selListItem);
+            }
+            return newList;
+        }
 
         public List<SelectListItem> GetSelectList(int id, string SelectedValue = null)
         {

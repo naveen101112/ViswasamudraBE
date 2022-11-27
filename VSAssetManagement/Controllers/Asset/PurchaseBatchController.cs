@@ -15,6 +15,8 @@ namespace VSManagement.Controllers.AssetManagement
     public class PurchaseBatchController : ControllerBase
     {
         BatchRepo repo = new BatchRepo(new VISWASAMUDRAContext());
+        PurchaseOrderRepo porepo= new PurchaseOrderRepo(new VISWASAMUDRAContext());
+
         [HttpGet]
         public ActionResult getAllList()
         {
@@ -67,8 +69,8 @@ namespace VSManagement.Controllers.AssetManagement
             try
             {
                 int id = repo.create(JsonConvert.
-                    DeserializeObject<Batch>(JsonConvert.SerializeObject(record)));
-                if(id == 0) return Conflict("Error while creating batch.");
+                    DeserializeObject<Batch>(JsonConvert.SerializeObject(record)));                
+                if (id == 0) return Conflict("Error while creating batch.");
                 return Created($"/batch/{id}", "Created Successfully.");
             }catch(Exception e)
             {

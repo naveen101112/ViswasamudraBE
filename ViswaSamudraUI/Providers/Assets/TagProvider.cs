@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ViswaSamudraUI.Models;
+using VSAssetManagement.IOModels;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
 {
 	public class TagProvider
 	{
-        CommonHelper ch = new CommonHelper();
+        CommonHelper ch = new CommonHelper();        
         public IEnumerable<io.Tag> GetAll()
         {
             return (IEnumerable<io.Tag>)ch.GetRequest<io.Tag>("tag");
@@ -70,6 +71,28 @@ namespace ViswaSamudraUI.Providers.Assets
 
                 newList.Add(selListItem);
             }
+            return newList;
+        }
+
+        public List<SelectListItem> GetSelectListwithExisted(Guid tagid)
+        {
+            io.Tag tg = new Tag();
+            tg.Guid = tagid;
+            io.Tag tag = GetAllTag(tg).FirstOrDefault();
+
+            SelectListItem selListItem = new SelectListItem() { Value = "", Text = "" };
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(selListItem);
+
+            foreach (var x in GetDropDowncombomap().Select(i => new { i.Name, i.Code, i.Guid }))
+            {
+                selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.Name };
+                newList.Add(selListItem);
+            }            
+            
+            selListItem = new SelectListItem() { Value = tag.Guid.ToString(), Text = tag.Name, Selected = true };
+            newList.Add(selListItem);
+
             return newList;
         }
 

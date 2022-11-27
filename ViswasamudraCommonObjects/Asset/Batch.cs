@@ -18,7 +18,7 @@ namespace VSAssetManagement.IOModels
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
-        public string PurchaseOrderId { get; set; }
+        public Guid PurchaseOrderId { get; set; }
         public string Uom { get; set; }
         public int? UseFrequency { get; set; }
         public string UsageUom { get; set; }
@@ -26,8 +26,7 @@ namespace VSAssetManagement.IOModels
         public string InvoiceNo { get; set; }
         public DateTime InvoiceDate { get; set; } = DateTime.Now;
         public string ReceivedBy { get; set; }
-        public DateTime ReceivedDate { get; set; } = DateTime.Now;
-        public string PurchaseOrderNo { get; set; }
+        public DateTime ReceivedDate { get; set; } = DateTime.Now;       
         public DateTime? PurchaseOrderDate { get; set; }
     }
 }

@@ -9,6 +9,7 @@
     });
 
     // [ notification-button ]
+    
     $('.notifications.btn').on('click', function (e) {
         e.preventDefault();
         var nFrom = $(this).attr('data-from');
@@ -97,6 +98,13 @@
             });
         }
     });
+
+    //var tagid = $('#TagId').children("option:selected").val();
+    var tagid =$("#TagId option:selected").text()
+
+    if (tagid.length > 3) {
+        $("#TagId").attr('disabled', 'disabled');
+    }
 });
 
 function toJson() {

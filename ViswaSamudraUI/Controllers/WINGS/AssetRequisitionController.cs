@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ViswaSamudraUI.Providers.Assets;
 using VSAssetManagement.IOModels;
 
@@ -12,7 +13,16 @@ namespace ViswaSamudraUI.Controllers.WINGS
         ProjectProvider projectProvider = new ProjectProvider();
         public IActionResult Index()
         {
-            //IEnumerable<Asset> list = provider.GetAll();
+            IEnumerable<AssetRequisitionHeader> list = null;
+            return View(list);
+        }
+
+        public ActionResult AssetRequisitionModification(AssetRequisition model)
+        {
+            return Ok(null);//assetprovider.Add(model));
+        }
+        public async Task<IActionResult> AssetRequisitionOps(AssetRequisition model)
+        {
             ViewBag.Users = lookUpProvider.GetTempUserData();
             ViewBag.ReqStatus = lookUpProvider.GetRequisitionStatusData();
             ViewBag.TaskType = lookUpProvider.GetSelectList("TTY");

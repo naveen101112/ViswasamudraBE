@@ -40,6 +40,11 @@ namespace VSManagement.Repository.AssetManagement
             return _context.LookupTypeValue.Where(a => a.Id == id).FirstOrDefault();
         }
 
+        public LookupTypeValue getByOnlyCode(string code)
+        {
+            return _context.LookupTypeValue.Where(a => a.Code == code).FirstOrDefault();
+        }
+
 
 
         public int delete(mo.LookupTypeValue request)

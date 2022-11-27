@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using VSAssetManagement;
 using io = VSAssetManagement.IOModels;
+using System.Runtime.CompilerServices;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -31,9 +32,14 @@ namespace VSManagement.Repository.AssetManagement
         }
         public int create(PurchaseOrder record)
         {
-            _context.PurchaseOrder.Add(record);
-            _context.SaveChanges();
-            return record.Id;
+            if (_context.PurchaseOrder.Where(a => a.PurchaseOrderNo == record.PurchaseOrderNo && a.RecordStatus == 1).Count() <= 0)
+            {
+                _context.PurchaseOrder.Add(record);
+                _context.SaveChanges();
+                return record.Id;
+            }
+            else
+                return -1;
         }
 
         public dynamic getByIdEdit(int id)
@@ -54,6 +60,16 @@ namespace VSManagement.Repository.AssetManagement
         public PurchaseOrder getById(int id, Guid guid)
         {
             return _context.PurchaseOrder.Where(a => a.Id == id || a.Guid == guid).FirstOrDefault();
+        }
+
+        public PurchaseOrder getById(Guid guid)
+        {
+            return _context.PurchaseOrder.Where(a => a.Guid == guid).FirstOrDefault();
+        }
+
+        public PurchaseOrder getByPOname(String PO)
+        {
+            return _context.PurchaseOrder.Where(a=>a.PurchaseOrderNo==PO).FirstOrDefault();
         }
 
         public PurchaseOrder getByOnlyId(int id)

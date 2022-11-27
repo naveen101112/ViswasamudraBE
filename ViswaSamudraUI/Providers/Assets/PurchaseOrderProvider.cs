@@ -31,6 +31,11 @@ namespace ViswaSamudraUI.Providers.Assets
                 return null;
         }
 
+        public ResponseBody UpdatePurchaseOrder(io.PurchaseOrder PoIoModel = null)
+        {
+            return ch.PostRequest<io.PurchaseOrder>("purchaseOrder/UpdatePoByName", PoIoModel);
+        }
+
         public IEnumerable<io.PurchaseOrder> GetDropDown()
         {
             return (IEnumerable<io.PurchaseOrder>)ch.GetRequest<io.PurchaseOrder>("purchaseOrder/combo");
@@ -42,7 +47,7 @@ namespace ViswaSamudraUI.Providers.Assets
             List<SelectListItem> newList = new List<SelectListItem>();
             newList.Add(selListItem);
 
-            foreach (var x in GetDropDown().Select(i => new { i.Id, i.PurchaseOrderNo, i.Guid }))
+            foreach (var x in GetDropDown().Select(i => new { i.Id, i.PurchaseOrderNo, i.Guid }).Where(s => s.PurchaseOrderNo != null).OrderByDescending(i => i.Id))
             {
                 if (SelectedValue != null && x.Guid.ToString() == SelectedValue)
                     selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.PurchaseOrderNo, Selected = true };

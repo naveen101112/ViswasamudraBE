@@ -1,0 +1,171 @@
+﻿@using System.Data
+@using VSAssetManagement.IOModels;
+@model VSAssetManagement.IOModels.AssetRequisition
+
+<div class="card">
+    <div class="card-header">
+        <h5>Asset Requisition</h5>
+        <div class="card-header-right">
+        </div>
+    </div>
+    <div class="card-body">
+
+        @Html.HiddenFor(model=>model.header.Guid,new{id="hdnGuid"})
+        @Html.AntiForgeryToken()
+        <form id="dynamicform">
+            <div class="row main-form">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="form-label">Asset Requisition Number</label>
+                        <input class="form-control" readonly asp-for="header.AssetRequisitionNo" placeholder="Requisition Number" maxlength="30">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="form-label">Asset Requisition Date</label>
+                        <input class="form-control" readonly asp-for="header.AssetRequisitionDate" placeholder="Requisition Date">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="form-label">Task Type</label>
+                        <select class="form-control" asp-items="@ViewBag.TaskType" asp-for="header.TaskType">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="form-label">Project</label>
+                        <select class="form-control" asp-items="@ViewBag.Project" asp-for="header.Project">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="form-label">Requisition From Date</label>
+                        <input class="form-control" asp-for="header.RequiredFromDate" placeholder="Required From Date">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="form-label">Requisition To Date</label>
+                        <input class="form-control" asp-for="header.RequiredToDate" placeholder="Required To Date">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="form-label">Requested By</label>
+                        <select class="form-control" asp-items="@ViewBag.Users" asp-for="header.RequestedBy">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Remarks</label>
+                        <input class="form-control" asp-for="header.Remarks" placeholder="Remarks">
+                    </div>
+                </div>
+                <div class="col-md-2">&nbsp;</div>
+                <div class="col-md-2">&nbsp</div>
+            </div>
+        </form>
+        <form id="assetreqform" class="row" style="border:solid 1px #e2e5e8">
+            <div class="col-md-3 sub-form" style="border-right:solid 1px #e2e5e8;padding-top:10px">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-label">Structure Type</label>
+                        <select class="form-control" asp-items="@ViewBag.StructureType" id="stype" name="stype">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-label">Structure Sub Type</label>
+                        <select class="form-control" asp-items="@ViewBag.StructureSubType" id="sstype" name="sstype">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-label">Asset Type</label>
+                        <select class="form-control" asp-items="@ViewBag.AssetType" id="assetType" name="assetType">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-label">Asset Specification</label>
+                        <select class="form-control" asp-items="@ViewBag.AssetSpecification" id="assetSpec" name="assetSpec">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-label">Quantity Required</label>
+                        <input class="form-control" type="number" placeholder="Quantity" id="quantity" name="quantity">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-label">UOM</label>
+                        <select class="form-control" asp-items="@ViewBag.Uom" id="uom" name="uom">
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="adddetails" style="float: right;margin-top:5px" data-type="success" data-from="top" data-align="right">>></button>
+
+            </div>
+
+            <div class="col-md-9 table-form" style="margin-top:0px">
+                <div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 40vh; width: 100%;">
+                    <table id="assetReqTbl" class="table table-striped table-bordered nowrap dataTable" role="grid" aria-describedby="scr-vtr-dynamic_info" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th data-breakpoints="xs">Structure Type</th>
+                                <th data-breakpoints="xs">Structure Sub Type</th>
+                                <th data-breakpoints="xs">Asset Type</th>
+                                <th data-breakpoints="xs">Asset Specification</th>
+                                <th data-breakpoints="xs">Quantity Required</th>
+                                <th data-breakpoints="xs">Uom</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </form>
+
+        <button type="submit" class="btn notifications btn-primary" style="float: right;margin-top:10px" data-type="success" data-from="top" data-align="right">Submit</button>
+
+    </div>
+</div>
+
+
+
+
+@section Scripts
+    {
+    <script src="@Url.Content("../customjs/assetRequestion.js")"></script>
+    <script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'asset-requisition');
+        });
+    </script>
+    <script src="@Url.Content("../assets/plugins/sweetalert/js/sweetalert.min.js")"></script>
+    <script src="@Url.Content("../assets/js/pages/ac-alert.js")"></script>
+    <style>
+        .table thead th {
+            padding: 1px;
+        }
+
+        .table tbody td {
+            padding: 1px;
+        }
+    </style>
+}

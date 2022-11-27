@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using System.Data.SqlClient;
 using VSManagement.Models.VISWASAMUDRA;
 using System.Data;
+using System.Data.SqlTypes;
 
 namespace VSManagement.Repository.AssetManagement
 {
@@ -45,7 +46,7 @@ namespace VSManagement.Repository.AssetManagement
             cmd.Parameters.AddWithValue("@BatchQuantity", record.BatchQuantity);
             cmd.Parameters.AddWithValue("@BatchStatus", record.BatchStatus);
             cmd.Parameters.AddWithValue("@InvoiceNo", record.InvoiceNo);
-            cmd.Parameters.AddWithValue("@InvoiceDate", record.InvoiceDate);
+            cmd.Parameters.AddWithValue("@InvoiceDate", record.InvoiceDate.ToString("yyyy-MM-dd HH:mm:ss"));
             cmd.Parameters.AddWithValue("@ReceivedDate", record.ReceivedDate);
             cmd.Parameters.AddWithValue("@ReceivedBy", record.ReceivedBy);
             cmd.Parameters.AddWithValue("@StructureType", record.StructureType);
@@ -58,7 +59,7 @@ namespace VSManagement.Repository.AssetManagement
             cmd.Parameters.AddWithValue("@mode", "I");
             var result = cmd.ExecuteNonQuery();
             con.Close();
-            return result;
+            return result; 
         }
 
         public mo.Batch getByOnlyId(int id)
@@ -79,7 +80,7 @@ namespace VSManagement.Repository.AssetManagement
 
             var result = from x in Batchquery
                          from y in POquery.Where(y => y.Guid == x.PurchaseOrderId)
-                         select new io.Batch
+                         select new io.BatchSearch
                          {
                              Id=x.Id,
                              BatchNo=x.BatchNo,
@@ -103,9 +104,9 @@ namespace VSManagement.Repository.AssetManagement
                              InvoiceDate=x.InvoiceDate,
                              ReceivedBy=x.ReceivedBy,
                              ReceivedDate=x.ReceivedDate,
-                             PurchaseOrderId=y.Id.ToString(),
+                             PurchaseOrderId=y.Guid,
                              PurchaseOrderNo=y.PurchaseOrderNo,
-                             PurchaseOrderDate=y.PurchaseOrderDate
+                             PurchaseOrderDate= (DateTime)y.PurchaseOrderDate
 
                          };
 
@@ -145,7 +146,10 @@ namespace VSManagement.Repository.AssetManagement
                              x.ReceivedDate,
                              x.PurchaseOrderId,
                              y.PurchaseOrderNo,
-                             y.PurchaseOrderDate
+                             y.PurchaseOrderDate,
+                             y.PurchaseProject,
+                             y.PurchaseStore,
+                             y.CompanyName
 
                          };
 

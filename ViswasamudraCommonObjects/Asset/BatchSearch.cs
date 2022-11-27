@@ -8,6 +8,6 @@ namespace VSAssetManagement.IOModels
         public Guid PurchaseStore { get; set; }
         public Guid PurchaseProject { get; set; }
         public string CompanyName { get; set; }
-        public DateTime? PurchaseOrderDate { get; set; } = DateTime.Now;
+        public DateTime PurchaseOrderDate { get; set; } = DateTime.Now;
     }
 }

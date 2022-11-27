@@ -1,464 +1,130 @@
 ﻿@using System.Data
-@using VSAssetManagement.IOModels;
-@model VSAssetManagement.IOModels.AssetRequisition
+@model IEnumerable<VSAssetManagement.IOModels.AssetRequisition>
 
-<div class="card">
+<div class="col-sm-12" style="padding:1px">
+    <div class="card">
         <div class="card-header">
-         <h5>Asset Requisition</h5>
-         <div class="card-header-right">
-         </div>
-      </div>
-        <div class="card-body">
-
-                @Html.HiddenFor(model=>model.header.Guid,new{id="hdnGuid"})
-                @Html.AntiForgeryToken()
-        <div class="row main-form">            
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Requisition Number</label>
-                            <input class="form-control" asp-for="header.AssetRequisitionNo" placeholder="Requisition Number" maxlength="30">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Remarks</label>
-                            <input class="form-control" asp-for="header.Remarks" placeholder="Remarks">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Requisition Date</label>
-                            <input class="form-control" asp-for="header.AssetRequisitionDate" placeholder="Requisition Date">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Required From Date</label>
-                            <input class="form-control" asp-for="header.RequiredFromDate" placeholder="Required From Date">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Required To Date</label>
-                            <input class="form-control" asp-for="header.RequiredToDate" placeholder="Required To Date">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Requested By</label>
-                            <select class="form-control" asp-items="@ViewBag.Users" asp-for="header.RequestedBy">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Approved By</label>
-                            <select class="form-control" asp-items="@ViewBag.Users" asp-for="header.ApprovedBy">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Requisition Status</label>
-                            <select class="form-control" asp-items="@ViewBag.ReqStatus" asp-for="header.RequisitionStatus">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Project</label>
-                            <select class="form-control" asp-items="@ViewBag.Project" asp-for="header.Project">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Task Type</label>
-                            <select class="form-control" asp-items="@ViewBag.TaskType" asp-for="header.TaskType">
-                            </select>
-                        </div>
-                    </div>
-            <div class="col-md-2">&nbsp;</div>
-            <div class="col-md-2">&nbsp</div>
-        </div>
-        <hr />
-        <div class="row">
-            <div class="col-md-3 sub-form">                
-                <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-label">Structure Type</label>
-                            <select class="form-control" asp-items="@ViewBag.StructureType" id="stype">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-label">Structure Sub Type</label>
-                            <select class="form-control" asp-items="@ViewBag.StructureSubType" id="sstype">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-label">Asset Type</label>
-                            <select class="form-control" asp-items="@ViewBag.AssetType" id="assetType">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-label">Asset Specification</label>
-                            <select class="form-control" asp-items="@ViewBag.AssetSpecification" id="assetSpec">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-label">Quantity Required</label>
-                            <input class="form-control" type="number" placeholder="Quantity" id="quantity">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-label">UOM</label>
-                            <select class="form-control" asp-items="@ViewBag.Uom" id="uom">
-                            </select>
-                        </div>
-                    </div>
+            <h5 class="h5-body">Asset</h5>
+            <div class="card-header-right">
+                <button type="button" class="btn waves-effect waves-light btn-icon btn-primary body-add-record" hidden><i class="feather icon-plus-square"></i></button>
+                <div class="btn-group card-option">
+                    <a class="feather icon-search" data-toggle="collapse" style="margin-right: 10px;" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="feather icon-more-vertical"></i>
+                    </button>
+                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                        <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                        <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-9 table-form" style="border:1px solid #e2e4e7">
-                <div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 40vh; width: 100%;">
-                                    <table id="scr-vtr-dynamic" class="table table-striped table-bordered nowrap dataTable" role="grid" aria-describedby="scr-vtr-dynamic_info" style="width: 100%;">
+        </div>
+        <div class="card-body" style="padding:2px 2px 2px 2px">
+            <div class="collapse" id="collapseExample">
+                <div class="card-body">
+                    <p class="mb-0">
+                        Asset Under Construction
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding:2px 2px 2px 2px">
+            <div class="dt-responsive table-responsive">
+                <div id="scr-vtr-dynamic_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 75vh; width: 100%;">
+                                <table id="scr-vtr-dynamic" class="table table-striped table-bordered table-hover nowrap dataTable" role="grid" aria-describedby="scr-vtr-dynamic_info" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th data-breakpoints="xs">S. No</th>
+                                            <th class="ActionWidth">Actions</th>
+                                            <th class="ActionWidth" data-breakpoints="xs">S. No</th>
+                                            <th data-breakpoints="xs">Code</th>
+                                            <th data-breakpoints="xs">Asset Name</th>
                                             <th data-breakpoints="xs">Structure Type</th>
-                                            <th data-breakpoints="xs">Structure Sub Type</th>
+                                            <th data-breakpoints="xs">StructureSub Type</th>
                                             <th data-breakpoints="xs">Asset Type</th>
                                             <th data-breakpoints="xs">Asset Specification</th>
-                                            <th data-breakpoints="xs">Quantity Required</th>
-                                            <th data-breakpoints="xs">Uom</th>
-                                            <th data-breakpoints="xs" hidden>Guid</th>
-
+                                            <th data-breakpoints="xs">Project Name</th>
+                                            <th data-breakpoints="xs">Store</th>
+                                            <th data-breakpoints="xs">BatchNo</th>
+                                            <th data-breakpoints="xs">Company Name</th>
+                                            <th data-breakpoints="xs">AssetStatus</th>
+                                            <th data-breakpoints="xs">Tag Id</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="edit">
-                                        <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>1</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>2</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>3</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>4</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>5</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>6</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>7</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>8</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>9</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>10</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>11</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>12</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>13</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>14</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>15</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                                <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>16</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>17</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                                <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>18</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>19</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>20</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                                <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>21</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            <tr role="row">
-                                                <td>
-                                                        <span class="feather icon-edit"></span>
-                                                </td>
-                                                <td>22</td>
-                                                <td>Reason For Receipt</td>
-                                                <td>Pier</td>
-                                                <td>Curved</td>
-                                                <td>Scaffolding Pipe - 2.5 Mtr</td>
-                                                <td>6</td>
-                                                <td>Times</td>
-                                            </tr>
-                                            </tr>
-                                            </tr>
-                                            </tr>
-
-                                    </tbody>
-                                    <tbody style="display:none" id="list">
-                                        <tr style="display:none">
-                                            @foreach (var item in Model.details)
+                                    <tbody>
+                                        <tr>
+                                            @{
+                                                int rowNo = 0;
+                                            }
+                                            @foreach (var item in Model)
                                             {
+
+                                                rowNo = rowNo + 1;
+
                                             <tr role="row">
                                                 <td>
-                                                        @Html.ActionLink("", "Ops","AssetRequisition", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+
+                                                    <a class="feather icon-eye" data-toggle="collapse" hidden style="margin-right: 10px;" href="@String.Format("#Assetdetails{0}", @rowNo)" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                                                        @Html.ActionLink("", "AssetRequisitionOps","AssetRequisition", new { guid=item.Guid  }, new {@class="feather icon-edit" })
                                                 </td>
-                                                <td>@Html.DisplayFor(modelItem=>item.Id)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.StructureType)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.StructureSubType)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.AssetType)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.AssetSpecification)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.QuantityRequired)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.Uom)</td>
-                                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
+                                                <td>@rowNo</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetCode)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetName)</td>
+                                                <td>
+                                                        @Html.DisplayFor(modelItem=>item.StructureName)
+                                                        @Html.HiddenFor(modelItem=>item.StructureType)
+                                                </td>
+                                                <td>
+                                                        @Html.DisplayFor(modelItem=>item.StructureSubName)
+                                                        @Html.HiddenFor(modelItem=>item.StructureSubType)
+                                                </td>
+                                                <td>
+                                                        @Html.DisplayFor(modelItem=>item.AssetTypeName)
+                                                        @Html.HiddenFor(modelItem=>item.AssetType)
+                                                </td>
+                                                <td>
+                                                        @Html.DisplayFor(modelItem=>item.AssetSpecificationName)
+                                                        @Html.HiddenFor(modelItem=>item.AssetSpecification)
+                                                </td>
+                                                <td>
+                                                        @Html.DisplayFor(modelItem=>item.ProjectCodeName)
+                                                        @Html.HiddenFor(modelItem=>item.ProjectCode)
+                                                </td>
+                                                <td>
+                                                        @Html.DisplayFor(modelItem=>item.StoreName)
+                                                        @Html.HiddenFor(modelItem=>item.Store)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
+                                                <td>
+                                                        @Html.DisplayFor(modelItem=>item.AssetStatusName)
+                                                        @Html.HiddenFor(modelItem=>item.AssetStatus)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.TagName)</td>
+                                            </tr>
+                                            <tr class="collapse" id="@String.Format("Assetdetails{0}", @rowNo)">
+                                                <td colspan="13">
+                                                    <div>
+                                                        <div class="card-body">
+                                                            <p class="mb-0">
+                                                                Asset Details
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             }
                                     </tbody>
-                                    </table>
-                                </div>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <hr />
-        <button type="submit" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
     </div>
 </div>
-
-
-
-
-@section Scripts
-    {
-    <script src="@Url.Content("../customjs/batch1.js")"></script>
-    <script src="@Url.Content("../customjs/util.js")"></script>
-    <script>
-        $(window).on('load', function () {
-            setActiveMenu('wingz', 'asset-requisition');
-        });
-    </script>
-    <script src="@Url.Content("../assets/plugins/sweetalert/js/sweetalert.min.js")"></script>
-    <script src="@Url.Content("../assets/js/pages/ac-alert.js")"></script>
-    <style>
-        .table thead th {
-            padding: 1px;
-        }
-
-        .table tbody td {
-            padding: 1px;
-        }
-    </style>
-}

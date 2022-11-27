@@ -41,18 +41,18 @@
                                         <tr>
                                             <th class="ActionWidth">Actions</th>
                                             <th class="ActionWidth"  data-breakpoints="xs">S. No</th>
-                                            <th data-breakpoints="xs">Asset Code</th>
-                                            <th data-breakpoints="xs">Asset Name</th>
-                                            <th data-breakpoints="xs">Tag Id</th>
+                                            <th data-breakpoints="xs">Code</th>
+                                            <th data-breakpoints="xs">Asset Name</th>                                            
                                             <th data-breakpoints="xs">Structure Type</th>
                                             <th data-breakpoints="xs">StructureSub Type</th>
                                             <th data-breakpoints="xs">Asset Type</th>
-                                            <th data-breakpoints="xs">Asset Specification</th>
-                                            <th data-breakpoints="xs">Company Name</th>
+                                            <th data-breakpoints="xs">Asset Specification</th>                                            
                                             <th data-breakpoints="xs">Project Name</th>
                                             <th data-breakpoints="xs">Store</th>                                            
                                             <th data-breakpoints="xs">BatchNo</th>
-                                            <th data-breakpoints="xs">AssetStatus</th>                                           
+                                            <th data-breakpoints="xs">Company Name</th>
+                                            <th data-breakpoints="xs">AssetStatus</th>    
+                                            <th data-breakpoints="xs">Tag Id</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -73,8 +73,7 @@
                                                 </td>
                                                 <td>@rowNo</td>
                                                 <td>@Html.DisplayFor(modelItem=>item.AssetCode)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.AssetName)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.TagName)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetName)</td>                                                
                                                 <td>@Html.DisplayFor(modelItem=>item.StructureName)
                                                         @Html.HiddenFor(modelItem=>item.StructureType)
                                                 </td>
@@ -85,8 +84,7 @@
                                                         @Html.HiddenFor(modelItem=>item.AssetType)
                                                 </td>
                                                 <td>@Html.DisplayFor(modelItem=>item.AssetSpecificationName)
-                                                        @Html.HiddenFor(modelItem=>item.AssetSpecification)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
+                                                        @Html.HiddenFor(modelItem=>item.AssetSpecification)</td>                                                
                                                 <td>
                                                         @Html.DisplayFor(modelItem=>item.ProjectCodeName)
                                                         @Html.HiddenFor(modelItem=>item.ProjectCode)
@@ -95,9 +93,11 @@
                                                         @Html.HiddenFor(modelItem=>item.Store)
                                                 </td>
                                                 <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
                                                 <td>@Html.DisplayFor(modelItem=>item.AssetStatusName)
                                                         @Html.HiddenFor(modelItem=>item.AssetStatus)
-                                                </td>                                                
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.TagName)</td>
                                             </tr>
                                             <tr class="collapse" id="@String.Format("Assetdetails{0}", @rowNo)">
                                                 <td colspan="13">
@@ -125,5 +125,5 @@
    
 
 
-</div>
+
 

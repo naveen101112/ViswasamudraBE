@@ -11607,6 +11607,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .table.dataTable[class*="table-"] thead th {
     background: #eff3f6;
+    font-weight: 600;
+    color: #343434;
 }
 
 /* Border versions */
@@ -12002,7 +12004,7 @@ table.dataTable tbody > tr.selected td.select-checkbox:after, table.dataTable tb
       Button css start
 ==========================  **/
 .btn {
-    padding: 5px 20px;
+    padding: 2px 20px;
     border-radius: 0.25rem;
     font-size: 14px;
     margin-bottom: 5px;

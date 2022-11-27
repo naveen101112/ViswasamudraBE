@@ -16,7 +16,7 @@ namespace VSManagement.Repository.AssetManagement
         }
 
         public List<Tag> getDropDown()
-        {
+        {            
             return (from tag in _context.Tag
                     where tag.RecordStatus == 1
                     select new Tag { Code = tag.Code, Name = tag.Name, Guid = tag.Guid, Id = tag.Id }).ToList();
@@ -24,8 +24,11 @@ namespace VSManagement.Repository.AssetManagement
 
         public List<Tag> getDropDowncombomap()
         {
+            LookUpValueRepo lkp = new LookUpValueRepo(_context);
+            LookupTypeValue lutv = lkp.getByOnlyCode("TGUNU");
+
             return (from tag in _context.Tag
-                    where (tag.RecordStatus == 1 && tag.Status!=Guid.Parse("33BCA1B0-FECE-4C0C-8A37-A8963A9C44BD"))
+                    where (tag.RecordStatus == 1 && tag.Status!= lutv.Guid)
                     select new Tag { Code = tag.Code, Name = tag.Name, Guid = tag.Guid, Id = tag.Id }).ToList();
         }
         

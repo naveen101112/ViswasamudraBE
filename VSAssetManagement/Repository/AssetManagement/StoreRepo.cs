@@ -50,6 +50,8 @@ namespace VSManagement.Repository.AssetManagement
                 int prjCount = _context.Store.Where(a => a.Project == record.Project).Count();
                 string strCode = Project + "/" + record.Code;
                 record.Code = strCode;
+                record.CreatedBy = "SYSTEM";
+                record.CreatedDateTime = System.DateTime.Now;
                 _context.Store.Add(record);
                 _context.SaveChanges();
                 return record.Id;
@@ -68,8 +70,15 @@ namespace VSManagement.Repository.AssetManagement
         public List<Store> getDropDown(int id)
         {
             return (from store in _context.Store
-                    where store.Id != id && store.RecordStatus == 1
+                    where store.Id != id && store.RecordStatus == 1 
                     select new Store { Code=store.Code, Name = store.Name, Guid=store.Guid }).ToList();
+        }
+
+        public List<Store> getDropDownByProject(int id,Guid guid)
+        {
+            return (from store in _context.Store
+                    where store.Id != id && store.RecordStatus == 1 && store.Project == guid
+                    select new Store { Code = store.Code, Name = store.Name, Guid = store.Guid }).ToList();
         }
 
         public int update(Store record)
@@ -77,10 +86,14 @@ namespace VSManagement.Repository.AssetManagement
             string Project = _context.Project.Where(p => p.Guid == record.Project).FirstOrDefault().ProjectCode;
             string[] values = record.Code.Split('/');
             if (_context.Store.Where(a => (a.Name == record.Name || a.Code.Contains("/" + values[1])) && a.RecordStatus == 1 && a.Guid!=record.Guid).Count() <= 0)
-            {   
+            {
+                Store OldRecord = getById(record.Guid);
+
+                record.CreatedBy = OldRecord.CreatedBy;
+                record.CreatedDateTime = OldRecord.CreatedDateTime;
                 record.Code = Project + "/" + values[1];
                 record.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
-                record.LastUpdatedDateTime = System.DateTime.Now;
+                record.LastUpdatedDateTime = System.DateTime.Now;                
                 record.RecordStatus = 1;
                 _context.Update(record).Property(r => r.Id).IsModified = false;
                 return _context.SaveChanges();

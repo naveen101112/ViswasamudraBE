@@ -5,33 +5,41 @@
     });
 
     $("#PurchaseOrderId").change(function () {      
-        $.ajax({
-            url: 'POGet',            
-            type: 'Post',
-            data: Batch = { Guid: $(this).val() },
-            success: function (data) {                                                                   
-                $("#PurchaseOrderNo").val(data.purchaseOrderNo);
-                $("#PurchaseOrderDate").val(data.purchaseOrderDate);
-                $("#PurchaseStore").val(data.purchaseStore);
-                $("#PurchaseProject").(data.purchaseProject);
-                $("#CompanyName").val(data.companyName);                                    
-                closeLoader();   
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                nType = 'danger';
-                message = 'Error In Updation';
-                closeLoader();                
-            },
-
-        });
+        
         if ($(this).val() == '' || $(this).val() < 1) {
-            $("#PurchaseOrderId").addClass('is-invalid');
-            $("#PurchaseOrderId").focus();
-            $("#PurchaseOrderId").blur();
+            $("#PurchaseProject").val('');
+            $("#PurchaseStore").val('');
+            $("#CompanyName").val('');
+            $("#POButton").css("display", "block");
+            $("#npo").css("display", "block");
         } else {
-            $("#PurchaseOrderId").removeClass('is-invalid');
+            $("#POButton").css("display", "none");
+            $("#npo").css("display", "none");
+            $.ajax({
+                url: 'POGet',
+                type: 'Post',
+                data: Batch = { Guid: $(this).val() },
+                success: function (data) {
+                    $("#PurchaseOrderNo").val(data.purchaseOrderNo);
+                    $("#PurchaseOrderDate").val(data.purchaseOrderDate);
+                    $("#PurchaseProject").val(data.purchaseProject);
+                    getstore(data.purchaseProject, data.purchaseStore);                    
+                    $("#CompanyName").val(data.companyName);
+                    closeLoader();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    nType = 'danger';
+                    message = 'Error In Updation';                   
+                    closeLoader();
+                },
+
+            });
         }
     });
+
+    $("#PurchaseProject").change(function () {        
+        getstore($(this).val());
+    });   
 
     // [ notification-button ]
     $('#batchButton').on('click', function (e) {
@@ -135,12 +143,12 @@
         $('#poform').validate({
             ignore: '.ignore, .select2-input',
             focusInvalid: false,
-            rules: {
-                "PurchaseOrderNo": { required: true, },
+            rules: {    
+                "NewPurchaseOrderNo": { required: true, },
                 "PurchaseOrderDate": { required: false, },
                 "PurchaseStore": { required: true, },
                 "PurchaseProject": { required: true, },
-                "CompanyName": { required: true, }
+                "CompanyName": { required: true, },                
             },
 
             // Errors //
@@ -181,17 +189,20 @@
                 type: 'Post',
                 success: function (data) {
                     closeLoader();
+                    console.log(data);
                     if (data?.status) {
-                        $('#PurchaseOrderNo').append(new Option($('#PurchaseOrderNo').val(), $('#PurchaseOrderNo').val()));
-                        $("#PurchaseOrderNo").val($('#PurchaseOrderNo').val());
-                        $('#opsbutton').click();
+                        $('#PurchaseOrderId').append(new Option($('#PurchaseOrderId').val(), $('#PurchaseOrderId').val()));
+                        $("#PurchaseOrderId").val($('#PurchaseOrderId').val());                        
                         clearall();
                         nType = 'success';
                         message = data?.message;
-                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#PurchaseOrderNo').val() + ' : Created Successfully', " Purchase Order ");
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, $('#NewPurchaseOrderNo').val() + ' : Created Successfully', " Purchase Order ");
                     } else {
                         nType = 'danger';
                         message = data?.message;
+                        if (message.includes("PurchaseOrder Exist"))
+                            notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "PurchaseOrder No Exist ", " PurchaseOrder ");
+                        else
                         notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Batch ");
                     }
                 },
@@ -205,14 +216,53 @@
             });
         }
     });
+
+    function getstore(projectId, storeid) {
+        setTimeout(function () {
+            $.ajax({
+                url: 'POStoreByProject',
+                type: 'Post',
+                data: Project = { Guid: projectId },
+                success: function (data) {
+                    $("#PurchaseStore").empty();
+                    $.each(data, function (text, value) {
+                        if (value.value != storeid)
+                            $("#PurchaseStore").append($("<option/>").val(value.value).text(value.text));
+                        else
+                            $("#PurchaseStore").append($("<option selected/>").val(value.value).text(value.text));
+                    });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+
+                }
+            });
+        }, 200);
+    }
+
+    const urlSearchParamlo = new URLSearchParams(window.location.search);
+    const lparams = Object.fromEntries(urlSearchParamlo.entries());
+
+    if (lparams.guid.length > 3) {
+        $("#POButton").css("display", "none");
+        $("#npo").css("display", "none");
+        $("#PurchaseOrderId").attr('disabled', 'disabled');        
+    }
+
 });
 
 function toJson() {
-    return Batch = { Guid: $("#hdnGuid").val(), BatchNo: $("#BatchNo").val(), BatchDescription: $("#BatchDescription").val(), BatchQuantity: $("#BatchQuantity").val(), AssetType: $("#AssetType").val(), AssetSpecification: $("#AssetSpecification").val(), PurchaseOrderId: $("#PurchaseOrderId").val(), Uom: $("#Uom").val(), UseFrequency: $("#UseFrequency").val(), UsageUom: $("#UsageUom").val(), BatchStatus: "New", InvoiceNo: $("#InvoiceNo").val(), InvoiceDate: $("#InvoiceDate").val(), ReceivedBy: $("#ReceivedBy").val(), ReceivedDate: $("#ReceivedDate").val(), StructureType: $("#StructureType").val(), StructureSubType: $("#StructureSubType").val(), CreatedBy: 'SYSTEM' };
+    return Batch = {
+        Guid: $("#hdnGuid").val(), BatchNo: $("#BatchNo").val(), BatchDescription: $("#BatchDescription").val(), BatchQuantity: $("#BatchQuantity").val(),
+        AssetType: $("#AssetType").val(), AssetSpecification: $("#AssetSpecification").val(), PurchaseOrderId: $("#PurchaseOrderId").val(), Uom: $("#Uom").val(),
+        UseFrequency: $("#UseFrequency").val(), UsageUom: $("#UsageUom").val(), BatchStatus: "New", InvoiceNo: $("#InvoiceNo").val(), InvoiceDate: $("#InvoiceDate").val(), ReceivedBy: $("#ReceivedBy").val(),
+        ReceivedDate: $("#ReceivedDate").val(), StructureType: $("#StructureType").val(), StructureSubType: $("#StructureSubType").val(), CreatedBy: 'SYSTEM',
+        PurchaseOrderNo: $("#NewPurchaseOrderNo").val(), PurchaseOrderDate: $("#PurchaseOrderDate").val(), PurchaseStore: $("#PurchaseStore").val(),
+        PurchaseProject: $("#PurchaseProject").val(), CompanyName: $("#CompanyName").val()
+    };
 };
 
 function toPOJson() {
-    return PurchaseOrder = { PurchaseOrderNo: $("#PurchaseOrderNo").val(), PurchaseOrderDate: $("#PurchaseOrderDate").val(), PurchaseStore: $("#PurchaseStore").val(), PurchaseProject: $("#PurchaseProject").val(), CompanyName: $("#CompanyName").val() };
+    return PurchaseOrder = { PurchaseOrderNo: $("#NewPurchaseOrderNo").val(), PurchaseOrderDate: $("#PurchaseOrderDate").val(), PurchaseStore: $("#PurchaseStore").val(), PurchaseProject: $("#PurchaseProject").val(), CompanyName: $("#CompanyName").val() };
 };
 
 function clearall() {

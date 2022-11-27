@@ -36,7 +36,7 @@
                 <table id="simpletable" class="table table-striped table-bordered table-hover nowrap">                    
                     <thead>
                     <tr>
-                            <th class="ActionWidth">#</th>
+                            <th class="ActionWidth">Actions</th>
                             <th class="SnoWidth" data-breakpoints="xs">S. No</th>
                             <th data-breakpoints="xs">Batch No</th>        
                             <th data-breakpoints="xs">Batch Status</th>
@@ -68,17 +68,16 @@
                             }
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>
-                               @Html.ActionLink("", "BatchOps","Batch", new { guid=item.Guid  }, new {@class="feather icon-edit" })
-                            </td>
+                                <tr>
+                                    <td>
+                                        @if (item.BatchStatus == "New")
+                                        {
+                                            @Html.ActionLink("", "BatchOps","Batch", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                                        }
+                                    </td>
                                 <td>@(rowNo += 1)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
-                                <td>
-                                    @if (item.BatchStatus == "New")
-                                    {
-                                            @Html.ActionLink("", "BatchOps","Batch", new { guid=item.Guid  }, new {@class="feather icon-layers" })
-                                    }                                    
+                                <td>                                    
                                     @Html.DisplayFor(modelItem=>item.BatchStatus)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.StructureType)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.StructureSubType)</td>
