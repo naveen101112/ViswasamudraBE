@@ -67,7 +67,7 @@ namespace VSManagement.Repository.AssetManagement
                              CreatedBy = x.CreatedBy,
                              CreatedDateTime = x.CreatedDateTime,
                              LastUpdatedBy = x.LastUpdatedBy,
-                             LastUpdatedDateTime = x.LastUpdatedDateTime,
+                             LastUpdatedDateTime = (DateTime)x.LastUpdatedDateTime,
                              RecordStatus = x.RecordStatus,
                              Guid = x.Guid
                          };

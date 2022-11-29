@@ -1,130 +1,130 @@
 ﻿@using System.Data
 @model IEnumerable<VSAssetManagement.IOModels.AssetRequisition>
-
 <div class="col-sm-12" style="padding:1px">
-    <div class="card">
-        <div class="card-header">
-            <h5 class="h5-body">Asset</h5>
-            <div class="card-header-right">
-                <button type="button" class="btn waves-effect waves-light btn-icon btn-primary body-add-record" hidden><i class="feather icon-plus-square"></i></button>
-                <div class="btn-group card-option">
-                    <a class="feather icon-search" data-toggle="collapse" style="margin-right: 10px;" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
-                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="feather icon-more-vertical"></i>
-                    </button>
-                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                        <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
-                        <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
-                        <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
-                        <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="card-body" style="padding:2px 2px 2px 2px">
-            <div class="collapse" id="collapseExample">
-                <div class="card-body">
-                    <p class="mb-0">
-                        Asset Under Construction
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="card-body" style="padding:2px 2px 2px 2px">
-            <div class="dt-responsive table-responsive">
-                <div id="scr-vtr-dynamic_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 75vh; width: 100%;">
-                                <table id="scr-vtr-dynamic" class="table table-striped table-bordered table-hover nowrap dataTable" role="grid" aria-describedby="scr-vtr-dynamic_info" style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th class="ActionWidth">Actions</th>
-                                            <th class="ActionWidth" data-breakpoints="xs">S. No</th>
-                                            <th data-breakpoints="xs">Code</th>
-                                            <th data-breakpoints="xs">Asset Name</th>
-                                            <th data-breakpoints="xs">Structure Type</th>
-                                            <th data-breakpoints="xs">StructureSub Type</th>
-                                            <th data-breakpoints="xs">Asset Type</th>
-                                            <th data-breakpoints="xs">Asset Specification</th>
-                                            <th data-breakpoints="xs">Project Name</th>
-                                            <th data-breakpoints="xs">Store</th>
-                                            <th data-breakpoints="xs">BatchNo</th>
-                                            <th data-breakpoints="xs">Company Name</th>
-                                            <th data-breakpoints="xs">AssetStatus</th>
-                                            <th data-breakpoints="xs">Tag Id</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            @{
-                                                int rowNo = 0;
-                                            }
-                                            @foreach (var item in Model)
-                                            {
-
-                                                rowNo = rowNo + 1;
-
-                                            <tr role="row">
-                                                <td>
-
-                                                    <a class="feather icon-eye" data-toggle="collapse" hidden style="margin-right: 10px;" href="@String.Format("#Assetdetails{0}", @rowNo)" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
-                                                        @Html.ActionLink("", "AssetRequisitionOps","AssetRequisition", new { guid=item.Guid  }, new {@class="feather icon-edit" })
-                                                </td>
-                                                <td>@rowNo</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.AssetCode)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.AssetName)</td>
-                                                <td>
-                                                        @Html.DisplayFor(modelItem=>item.StructureName)
-                                                        @Html.HiddenFor(modelItem=>item.StructureType)
-                                                </td>
-                                                <td>
-                                                        @Html.DisplayFor(modelItem=>item.StructureSubName)
-                                                        @Html.HiddenFor(modelItem=>item.StructureSubType)
-                                                </td>
-                                                <td>
-                                                        @Html.DisplayFor(modelItem=>item.AssetTypeName)
-                                                        @Html.HiddenFor(modelItem=>item.AssetType)
-                                                </td>
-                                                <td>
-                                                        @Html.DisplayFor(modelItem=>item.AssetSpecificationName)
-                                                        @Html.HiddenFor(modelItem=>item.AssetSpecification)
-                                                </td>
-                                                <td>
-                                                        @Html.DisplayFor(modelItem=>item.ProjectCodeName)
-                                                        @Html.HiddenFor(modelItem=>item.ProjectCode)
-                                                </td>
-                                                <td>
-                                                        @Html.DisplayFor(modelItem=>item.StoreName)
-                                                        @Html.HiddenFor(modelItem=>item.Store)
-                                                </td>
-                                                <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
-                                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
-                                                <td>
-                                                        @Html.DisplayFor(modelItem=>item.AssetStatusName)
-                                                        @Html.HiddenFor(modelItem=>item.AssetStatus)
-                                                </td>
-                                                <td>@Html.DisplayFor(modelItem=>item.TagName)</td>
-                                            </tr>
-                                            <tr class="collapse" id="@String.Format("Assetdetails{0}", @rowNo)">
-                                                <td colspan="13">
-                                                    <div>
-                                                        <div class="card-body">
-                                                            <p class="mb-0">
-                                                                Asset Details
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="h5-body">Asset Requisition</h5>
+                <div class="card-header-right">
+                    <button type="button" class="btn waves-effect waves-light btn-icon btn-primary body-add-record" hidden><i class="feather icon-plus-square"></i></button>
+                    <div class="btn-group card-option">
+                        <a class="feather icon-search" data-toggle="collapse" style="margin-right: 10px;" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                        @Html.ActionLink("", "AssetRequisitionOps","AssetRequisition", "", new {@style="margin-right: 10px;",@class="feather icon-plus-circle" })
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="feather icon-more-vertical"></i>
+                        </button>
+                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                            <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                            <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                            <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                        </ul>
                     </div>
+                </div>
+            </div>
+            <div class="card-body" style="padding:2px 2px 2px 2px">
+                <div class="collapse" id="collapseExample">
+                    <div class="card-body">
+                        <p class="mb-0">
+                            Asset Search Under Construction
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body" style="padding:2px 2px 2px 2px">
+                <div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 75vh; width: 100%;">
+                    <table id="simpletable" class="table table-striped table-bordered table-hover nowrap">
+                        <thead>
+                            <tr>
+                                <th class="ActionWidth">Actions</th>
+                                <th class="SnoWidth" data-breakpoints="xs">S. No</th>
+                                <th data-breakpoints="xs">Asset ReqNo</th>
+                                <th data-breakpoints="xs">Requisition Date</th>
+                                <th data-breakpoints="xs">TaskType </th>
+                                <th data-breakpoints="xs">Project </th>
+                                <th data-breakpoints="xs">Required FromDate</th>
+                                <th data-breakpoints="xs">Required ToDate</th>
+                                <th data-breakpoints="xs">Status</th>
+                                <th data-breakpoints="xs">Requested By</th>
+                                <th data-breakpoints="xs">Approved By</th>
+                                <th data-breakpoints="xs">Remarks</th>
+                                <th data-breakpoints="xs" hidden>Guid</th>
+                                <th data-breakpoints="xs" hidden></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @{
+                                    int rowNo = 0;
+                                    string remarks = "";
+                                    string fullrem = "";
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    rowNo = rowNo + 1;
+                                    fullrem = item.header.Remarks;
+                                    remarks = item.header.Remarks.Length > 5 ? item.header.Remarks.Substring(0, 5) + ".." : item.header.Remarks;
+                                <tr role="row">
+                                    <td>
+                                        <a class="feather icon-eye" data-toggle="collapse" href="@String.Format("#Assetreqdetails{0}", @rowNo)" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                                        @Html.ActionLink("", "AssetRequisitionOps","AssetRequisition",new { item.header.Guid  } , new {@class="feather icon-edit" })
+                                        @Html.ActionLink("", "Delete","AssetRequisition", new { guid=item.header.Guid  }, new {@class="feather icon-trash-2 text-danger",onclick="return confirm('Are you sure? Requisition will be deleted permanently')" })
+                                    </td>
+                                    <td>@rowNo</td>
+                                    <td>@Html.DisplayFor(modelItem=>item.header.AssetRequisitionNo)</td>
+                                    <td>@Html.DisplayFor(modelItem=>item.header.AssetRequisitionDate)</td>
+                                    <td>@Html.DisplayFor(modelItem=>item.header.TaskTypeName)</td>
+                                    <td>@Html.DisplayFor(modelItem=>item.header.ProjectName)</td>
+                                    <td>@Html.DisplayFor(modelItem=>item.header.RequiredFromDate)</td>
+                                    <td>@Html.DisplayFor(modelItem=>item.header.RequiredToDate)</td>
+                                    <td>@Html.DisplayFor(modelItem=>item.header.RequisitionStatusName)</td>
+                                    <td>@Html.DisplayFor(modelItem=>item.header.RequestedBy)</td>
+                                    <td>@Html.DisplayFor(modelItem=>item.header.ApprovedBy)</td>
+                                    <td>
+                                        <label style="margin:0" data-toggle="tooltip" data-placement="left" data-original-title="@fullrem" title="">@remarks</label>
+                                    </td>
+                                    <td hidden>@Html.DisplayFor(modelItem=>item.header.Guid)</td>
+                                    <td hidden></td>
+                                </tr>
+                                <tr class="collapse" id="@String.Format("Assetreqdetails{0}", @rowNo)">
+                                    <td colspan="13" style="padding:inherit;margin:0">
+                                        <div class="card-header" style="    background: #d6dce1;padding: 3px 4px;">
+                                            <h8 class="h2-body">Requisition Details</h8>
+                                        </div>
+                                        <div class="card-body" style="padding:inherit;margin:0">
+                                            <div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 75vh; width: 100%;">
+                                                <table id="simpletable" class="table table-striped table-bordered table-hover nowrap" style="border:0.8px solid #979292">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Structure Type</th>
+                                                            <th>Structure SubType</th>
+                                                            <th>Asset Type</th>
+                                                            <th>Asset Specification</th>
+                                                            <th>Quantity Required</th>
+                                                            <th>UOM</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                            @foreach (var detail in item.details)
+                                                            {
+                                                            <tr>
+                                                                <td>@Html.DisplayFor(modelItem=>detail.StructureTypeName)</td>
+                                                                <td>@Html.DisplayFor(modelItem=>detail.StructureSubTypeName)</td>
+                                                                <td>@Html.DisplayFor(modelItem=>detail.AssetTypeName)</td>
+                                                                <td>@Html.DisplayFor(modelItem=>detail.AssetSpecificationName)</td>
+                                                                <td>@Html.DisplayFor(modelItem=>detail.QuantityRequired)</td>
+                                                                <td>@Html.DisplayFor(modelItem=>detail.UomName)</td>
+                                                            </tr>
+                                                            }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>

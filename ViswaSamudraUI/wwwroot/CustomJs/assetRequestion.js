@@ -80,6 +80,7 @@
                 'header.RequiredFromDate': { required: true, },
                 'header.RequiredToDate': { required: true, fromtodate_format: true },
                 'header.RequestedBy': { required: true, },
+                'header.ApprovedBy': { required: true, },
                 'header.Remarks': { required: true, }                
             },
 
@@ -117,7 +118,32 @@
             if ($('#assetReqTbl tr').length <= 1) {
                 nType = 'danger';
                 notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "Please select asset you require", " Asset Req ");
-            }    
+            }
+            else {
+                $.ajax({
+                    url: 'AssetRequisitionModification',
+                    type: 'Post',
+                    data: toJson(),
+                    success: function (data) {
+                        if (data?.status) {
+                            nType = 'success';
+                            message = data?.message;
+                            redirect();
+                            notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,  message, " Asset Requisition Type ");
+                        } else {
+                            nType = 'danger';
+                            message = data?.message;                                                        
+                            notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, "  Asset Requisition Type  ");
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        nType = 'danger';
+                        message = 'Error In Operation';
+                        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, message, " Asset Requisition Type ")
+                    },
+                })
+                
+            }
         }
     });
 
@@ -140,33 +166,33 @@ function addtabledata() {
 
     var td1text = $("#stype option:selected").text();
     var td1value = '<input type="hidden" value="' + $("#stype option:selected").val() +'">';    
-    var td1 = td1text + ' ' + td1value;
+    var td1 = td1text +  td1value;
 
 
     var td2text = $("#sstype option:selected").text();
     var td2value = '<input type="hidden" value="' + $("#sstype option:selected").val() + '">';
-    var td2 = td2text + ' ' + td2value;
+    var td2 = td2text  + td2value;
 
 
     var td3text = $("#assetType option:selected").text();
     var td3value = '<input type="hidden" value="' + $("#assetType option:selected").val() + '">';
-    var td3 = td3text + ' ' + td3value;
+    var td3 = td3text +  td3value;
 
     var td4text = $("#assetSpec option:selected").text();
     var td4value = '<input type="hidden" value="' + $("#assetSpec option:selected").val() + '">';
-    var td4 = td4text + ' ' + td4value;
+    var td4 = td4text +  td4value;
 
     var td5 = $("#quantity").val();
 
     var td6text = $("#uom option:selected").text();  
     var td6value = '<input type="hidden" value="' + $("#uom option:selected").val() + '">';
-    var td6 = td6text + ' ' + td6value;
+    var td6 = td6text +  td6value;
 
-    let stat = 0;
+    let stat = 0; 
     $('#assetReqTbl > tbody  > tr').each(function () {
         if (this.cells.length > 0) {
-            if (td1 === this.cells[1].innerHTML && td2 === this.cells[2].innerHTML
-                && td3 === this.cells[3].innerHTML && td4 === this.cells[4].innerHTML) {
+            if ($("#stype option:selected").val() === this.cells[1].querySelector('input').value && $("#sstype option:selected").val() === this.cells[2].querySelector('input').value
+                && $("#assetType option:selected").val() === this.cells[3].querySelector('input').value && $("#assetSpec option:selected").val() === this.cells[4].querySelector('input').value) {
                 stat = 1;
             }
         }
@@ -185,11 +211,33 @@ function addtabledata() {
 }
 
 function toJson() {
-    var AssetRequisitionHeader = {
+    var header ={
+        Guid: $("#hdnGuid").val(), AssetRequisitionNo: $('#header_AssetRequisitionNo').val(), AssetRequisitionDate: $('#header_AssetRequisitionDate').val(),
+        TaskType: $('#header_TaskType').val(), Project: $('#header_Project').val(), RequiredFromDate: $('#header_RequiredFromDate').val(),
+        RequiredToDate: $('#header_RequiredToDate').val(), RequestedBy: $('#header_RequestedBy').val(), ApprovedBy: $('#header_ApprovedBy').val(),
+        Remarks: $('#header_Remarks').val()
+        };
+    var details =[];
+    $('#assetReqTbl > tbody  > tr').each(function () {
+        var AssetRequisitionDetail = {};            
+           if (this.cells.length > 0) {
+               AssetRequisitionDetail['StructureType'] = this.cells[1].querySelector('input').value;
+               AssetRequisitionDetail['StructureSubType'] = this.cells[2].querySelector('input').value;
+               AssetRequisitionDetail['AssetType'] = this.cells[3].querySelector('input').value;
+               AssetRequisitionDetail['AssetSpecification'] = this.cells[4].querySelector('input').value;
+               AssetRequisitionDetail['QuantityRequired'] = this.cells[5].innerText;
+               AssetRequisitionDetail['Uom'] = this.cells[6].querySelector('input').value;
+               details.push(AssetRequisitionDetail);
+           }        
+        });
+    
+    return AssetRequisition = { header, details };
+}
 
-    };
-    var AssetRequisitionDetails = {};
-    return AssetRequisition = {};
+function redirect() {
+    setTimeout(function () {        
+        window.location.replace('/AssetRequisition/');
+    }, 2000);
 }
 
 

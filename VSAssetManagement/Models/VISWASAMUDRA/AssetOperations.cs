@@ -15,11 +15,11 @@ namespace VSManagement.Models.VISWASAMUDRA
         public string TagId { get; set; }
         public string AssetOperationType { get; set; }
         public string ReferenceOperationId { get; set; }
-        public string AssetStatus { get; set; }
+        public Guid? AssetStatus { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime CreatedDateTime { get; set; }
+        public DateTime? CreatedDateTime { get; set; }
         public string LastUdatedBy { get; set; }
         public DateTime? LastUpdatedTime { get; set; }
-        public int RecordStatus { get; set; }
+        public int? RecordStatus { get; set; }
     }
 }

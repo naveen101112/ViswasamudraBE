@@ -105,13 +105,13 @@ namespace ViswaSamudraUI.Providers.Assets
             return list;
         }
 
-        public List<SelectListItem> GetTempUserData()
+        public List<SelectListItem> GetTempUserData(String user=null)
         {
             List<SelectListItem> list = new List<SelectListItem>();
             list.Add(new SelectListItem() { Value = "", Text = "" });
-            list.Add(new SelectListItem() { Value = "User1", Text = "User1" });
-            list.Add(new SelectListItem() { Value = "Admin", Text = "Admin" });
-            list.Add(new SelectListItem() { Value = "User2", Text = "User2" });
+            list.Add(new SelectListItem() { Value = "User1", Text = "User1", Selected=user== "User1" ? true:false });
+            list.Add(new SelectListItem() { Value = "Admin", Text = "Admin", Selected = user == "Admin" ? true : false });
+            list.Add(new SelectListItem() { Value = "User2", Text = "User2", Selected = user == "User2" ? true : false });
             return list;
         }
 

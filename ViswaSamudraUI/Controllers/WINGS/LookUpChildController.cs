@@ -24,7 +24,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
             }
             lookupTypevalue.LookupTypeId = guid;
             lookupType.Guid = guid;           
-            return View(Getdata(lookupTypevalue));           
+            return View(Getdata(lookupTypevalue).OrderByDescending(O=>O.Id));           
         }
 
         public IEnumerable<LookupTypeValue> Getdata(LookupTypeValue lookupTypevalue)

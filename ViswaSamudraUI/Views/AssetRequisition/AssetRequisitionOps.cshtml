@@ -56,7 +56,14 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label class="form-label">Requested By</label>
-                        <select class="form-control" asp-items="@ViewBag.Users" asp-for="header.RequestedBy">
+                        <select class="form-control" asp-items="@ViewBag.RequestedUsers" asp-for="header.RequestedBy">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="form-label">Approved By</label>
+                        <select class="form-control" asp-items="@ViewBag.ApproveUsers" asp-for="header.ApprovedBy">
                         </select>
                     </div>
                 </div>
@@ -133,6 +140,34 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if(Model.details!=null)
+                            @foreach (var detail in Model.details)
+                            {
+                                <tr role="row">
+                                    <td><a class="remTD feather icon-x-circle" href="#"></a></td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem=>detail.StructureTypeName)
+                                        <input type="hidden" value="@detail.StructureType">
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem=>detail.StructureSubTypeName)
+                                        <input type="hidden" value="@detail.StructureSubType">
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem=>detail.AssetTypeName)
+                                        <input type="hidden" value="@detail.AssetType">
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem=>detail.AssetSpecificationName)
+                                        <input type="hidden" value="@detail.AssetSpecification">
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem=>detail.QuantityRequired)</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem=>detail.UomName)
+                                        <input type="hidden" value="@detail.Uom">
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

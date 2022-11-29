@@ -30,10 +30,10 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpPost("search")]
         public ActionResult Search([FromBody] io.BatchSearch record)
         {
-            var AssectModel = JsonConvert.
+            var BatchModel = JsonConvert.
                 DeserializeObject<io.BatchSearch>(JsonConvert.SerializeObject(record));
             List<io.BatchSearch> list =
-            JsonConvert.DeserializeObject<List<io.BatchSearch>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
+            JsonConvert.DeserializeObject<List<io.BatchSearch>>(JsonConvert.SerializeObject(repo.searchListQuery(BatchModel)));
 
             return Ok(list);
         }

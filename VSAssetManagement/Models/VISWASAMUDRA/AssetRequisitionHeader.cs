@@ -18,7 +18,7 @@ namespace VSManagement.Models.VISWASAMUDRA
         public string RequestedBy { get; set; }
         public string ApprovedBy { get; set; }
         public string Remarks { get; set; }
-        public string RequisitionStatus { get; set; }
+        public Guid? RequisitionStatus { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }

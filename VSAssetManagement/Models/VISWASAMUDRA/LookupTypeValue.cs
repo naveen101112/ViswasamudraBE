@@ -19,6 +19,7 @@ namespace VSManagement.Models.VISWASAMUDRA
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
+        public int? OrderId { get; set; }
 
         public virtual LookupType LookupType { get; set; }
     }

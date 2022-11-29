@@ -10,6 +10,7 @@ namespace VSManagement.Models.VISWASAMUDRA
     public partial class Tag
     {
         public int Id { get; set; }
+        public Guid Guid { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public Guid? Status { get; set; }
@@ -18,6 +19,5 @@ namespace VSManagement.Models.VISWASAMUDRA
         public string LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
-        public Guid Guid { get; set; }
     }
 }
