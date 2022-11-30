@@ -47,8 +47,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
             ResponseBody res = reasonProvider.Delete(model);
             if (res != null && res.Status == true)
             {
-                IEnumerable<io.Reason> reasonList = reasonProvider.GetAllReason();
-                return View("Index", reasonList);
+                return RedirectToAction("Index");
             }
             else
             {

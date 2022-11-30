@@ -106,8 +106,8 @@ namespace VSManagement.Repository.AssetManagement
             return result.ToList<dynamic>();
         }
 
-        public int createAsserReq(mo.AssetRequisition record,string op)
-        {            
+        public DataTable createTableFordetails(mo.AssetRequisition record)
+        {
             DataTable dt = new DataTable();
             dt.Columns.Add("StructureType");
             dt.Columns.Add("StructureSubType");
@@ -117,6 +117,7 @@ namespace VSManagement.Repository.AssetManagement
             dt.Columns.Add("Uom");
 
             DataRow dr = null;
+
             foreach (var detail in record.details)
             {
                 dr = dt.NewRow();
@@ -128,7 +129,12 @@ namespace VSManagement.Repository.AssetManagement
                 dr["Uom"] = detail.Uom;
                 dt.Rows.Add(dr);
             }
+            return dt;
+        }
 
+        public int opsAsserReq(mo.AssetRequisition record,string op)
+        {
+            DataTable dt = createTableFordetails(record);  
             SqlParameter dtparameter = new SqlParameter("@ardetails", dt)
             {
                 SqlDbType = SqlDbType.Structured,
@@ -158,23 +164,11 @@ namespace VSManagement.Repository.AssetManagement
             con.Close();
             return result;
             
-        }  
+        }
 
         public mo.AssetRequisitionHeader getById(Guid id)
         {
             return _context.AssetRequisitionHeader.Where(a => a.Guid == id).FirstOrDefault();
-        }
-
-        public int update(mo.AssetRequisitionHeader record)
-        {
-            //AssetRequisitionHeader OldRecord = getById(record.Guid);
-
-            //AssetRequisitionHeader NewRecord = OldRecord;
-            //NewRecord.LastUpdatedDateTime = System.DateTime.Now;
-            //NewRecord.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
-
-            //_context.AssetRequisitionHeader.Update(NewRecord).Property(x => x.Id).IsModified = false; 
-            return 1;
         }
 
         public int delete(Guid id)

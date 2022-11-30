@@ -15,11 +15,16 @@ namespace ViswaSamudraUI.Providers.Assets
         public ResponseBody Add(io.AssetRequisition model = null)
         {
             if (model.header.Guid == System.Guid.Empty)
-            {                
+            {
                 return ch.PostRequest<io.AssetRequisition>("assetRequisition/createAssetRequisition", model);
             }
             else
                 return ch.PostRequest<io.AssetRequisition>("assetRequisition/updateAssetRequisition", model);
+        }
+
+        public ResponseBody Delete(io.AssetRequisition model)
+        {
+            return ch.PostRequest<io.AssetRequisition>("assetRequisition/DeleteAssetRequisition", model);
         }
     }
 }

@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
+using ViswaSamudraUI.Models;
 using ViswaSamudraUI.Providers.Assets;
 using VSAssetManagement.IOModels;
 
@@ -20,11 +22,16 @@ namespace ViswaSamudraUI.Controllers.WINGS
         AssetRequistionProvider assetRequistionProvider = new AssetRequistionProvider();
 
         public IActionResult Index()
+        {            
+            IEnumerable<AssetRequisition> list = getdetails();
+            return View(list);
+        }
+
+        public IEnumerable<AssetRequisition> getdetails()
         {
             aHeader.RecordStatus = 1;
             aRequisition.header = aHeader;
-            IEnumerable<AssetRequisition> list = assetRequistionProvider.GetAll(aRequisition).OrderByDescending(a=>a.header.Id);
-            return View(list);
+            return assetRequistionProvider.GetAll(aRequisition).OrderByDescending(a => a.header.Id);
         }
 
         public ActionResult AssetRequisitionModification(AssetRequisition model)
@@ -62,19 +69,22 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
             return View(AssetReq);
         }
-        public IActionResult Delete(AssetRequisition model)
+        public ActionResult Delete(Guid guid)
         {
-            //ResponseBody res = provider.Delete(model);
-            //if (res != null && res.Status == true)
-            //{
-            //    IEnumerable<Project> list = provider.GetAll();
-            //    return View("Index", list);
-            //}
-            //else
-            //{
-            //    return Ok(res);
-            //}
-            return null;
+            aHeader.Guid = guid;
+            aRequisition.header = aHeader;
+            AssetRequisition AssetReq = aRequisition;
+            ResponseBody res = assetRequistionProvider.Delete(AssetReq);
+            if (res != null && res.Status == true)
+            {   
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return Ok(res);
+            }
+
+
         }
     }
 }

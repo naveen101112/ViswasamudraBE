@@ -24,10 +24,10 @@ namespace VSManagement.Controllers.AssetManagement
         {            
             List<io.AssetRequisition> areqList = new List<io.AssetRequisition>(); 
             var AssectReqModel = JsonConvert.
-                DeserializeObject<io.AssetRequisitionHeader>(JsonConvert.SerializeObject(record));
+                DeserializeObject<io.AssetRequisition>(JsonConvert.SerializeObject(record));
 
             List<io.AssetRequisitionHeader> headers =
-            JsonConvert.DeserializeObject<List<io.AssetRequisitionHeader>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectReqModel)));
+            JsonConvert.DeserializeObject<List<io.AssetRequisitionHeader>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectReqModel.header)));
             foreach (var header in headers)
             {
                 io.AssetRequisition areq = new io.AssetRequisition();
@@ -47,7 +47,7 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpPost("createAssetRequisition")]
         public ActionResult createRecord([FromBody] io.AssetRequisition record)
         {            
-                int id = repo.createAsserReq(JsonConvert.
+                int id = repo.opsAsserReq(JsonConvert.
                     DeserializeObject<mo.AssetRequisition>(JsonConvert.SerializeObject(record)), "I");
                 return Created($"/assetRequisition/{id}", "Created Successfully.");
         }
@@ -55,9 +55,16 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpPost("updateAssetRequisition")]
         public ActionResult updateRecord([FromBody] io.AssetRequisition record)
         {
-            int id = repo.createAsserReq(JsonConvert.
+            int id = repo.opsAsserReq(JsonConvert.
                 DeserializeObject<mo.AssetRequisition>(JsonConvert.SerializeObject(record)), "U");
-            return Created($"/assetRequisition/{id}", "Created Successfully.");
+            return Created($"/assetRequisition/{id}", "Updated Successfully.");
         }
+        [HttpPost("DeleteAssetRequisition")]
+        public ActionResult deleteRecord([FromBody] io.AssetRequisition record)
+        {
+            int id = repo.delete(record.header.Guid);
+            return Created($"/assetRequisition/{id}", "Delete Successfully.");
+        }
+            
     }
 }

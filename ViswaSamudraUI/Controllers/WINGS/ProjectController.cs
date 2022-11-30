@@ -37,13 +37,12 @@ namespace ViswaSamudraUI.Controllers.WINGS
             return Ok(provider.Add(model));            
         }
 
-        public IActionResult Delete(Project model)
+        public ActionResult Delete(Project model)
         {
             ResponseBody res = provider.Delete(model);
             if (res != null && res.Status == true)
             {
-                IEnumerable<Project> list = provider.GetAll();
-                return View("Index", list);
+                return RedirectToAction("Index");                
             }
             else
             {

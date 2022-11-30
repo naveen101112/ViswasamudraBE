@@ -44,8 +44,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
             ResponseBody res = provider.Delete(model);
             if(res != null && res.Status == true)
             {
-                IEnumerable<Store> list = provider.GetAll();
-                return View("Index", list);
+                return RedirectToAction("Index");
             }
             else
             {
