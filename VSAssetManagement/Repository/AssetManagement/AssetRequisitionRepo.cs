@@ -77,7 +77,7 @@ namespace VSManagement.Repository.AssetManagement
             IQueryable<mo.LookupTypeValue> lquery = _context.Set<mo.LookupTypeValue>();
             IQueryable<mo.Project> prjQuery = _context.Set<mo.Project>();
 
-            var result = from x in query
+            var result = from x in query.Where(x => x.RecordStatus == 1)
                          from y in lquery.Where(y => y.Guid == x.TaskType)
                          from z in prjQuery.Where(z => z.Guid == x.Project)
                          select new io.AssetRequisitionHeader
@@ -173,8 +173,15 @@ namespace VSManagement.Repository.AssetManagement
 
         public int delete(Guid id)
         {
-            _context.AssetRequisitionHeader.Remove(getById(id));
+            mo.AssetRequisitionHeader record = getById(id);
+            record.RecordStatus = 0;
+            record.LastUpdatedBy = "SYSTEM";
+            record.LastUpdatedDateTime = DateTime.Now;
+            _context.Update(record).Property(x => x.Id).IsModified = false;
             return _context.SaveChanges();
+            
+            //_context.AssetRequisitionHeader.Remove(getById(id));
+            //return _context.SaveChanges();
         }
     }
 }
