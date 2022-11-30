@@ -18,10 +18,9 @@
 	<script>
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());		
-	</script>
-
+	</script>    
 	<!-- Favicon icon -->
-	<link rel="icon" href="http://html.phoenixcoded.net/flex-able/bootstrap/assets/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
 	<!-- fontawesome icon -->
 	<link rel="stylesheet" href="../assets/fonts/fontawesome/css/fontawesome-all.min.css">
 	<!-- animation css -->
@@ -181,18 +180,16 @@
 							<i class="icon feather icon-settings"></i>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right profile-notification">
-							<div class="pro-head">
-								<img src="../assets/images/user/avatar-1.jpg" class="img-radius" alt="User">
-								<span>User</span>
-								<a href="auth-signin.html" class="dud-logout" title="Logout">
+							<div class="pro-head">								
+								<span> <i class="feather icon-user"></i> User</span>
+								<a href="/Login" class="dud-logout" title="Logout">
 									<i class="feather icon-log-out"></i>
 								</a>
 							</div>
 							<ul class="pro-body">
 								<li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
-								<li><a href="#!" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-								<li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-								<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+								<li><a href="#!" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>								
+								<li><a href="/Login" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
 							</ul>
 						</div>
 					</div>
