@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VSManagement.IOModels;
 
 namespace ViswaSamudraUI.Controllers.WINGS
 {
@@ -9,9 +10,21 @@ namespace ViswaSamudraUI.Controllers.WINGS
             return View();
         }
 
-        public IActionResult login()
+        [HttpPost]
+        public IActionResult login([FromForm]UserLogin model)
         {
-            return RedirectToRoute("Dashboard/Index");
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes("loggedin");
+            string authKey = string.Empty;
+
+            if(model.UserName == "admin@mail.com" && model.Password == "Password123")
+            {
+                authKey = System.Convert.ToBase64String(plainTextBytes);
+            }
+            else
+            {
+                return Redirect("unuthorized");
+            }
+            return Redirect("../Dashboard/Index?authKey=" + authKey);
         }
     }
 }
