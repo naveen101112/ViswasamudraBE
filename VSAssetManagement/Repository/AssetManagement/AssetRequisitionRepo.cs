@@ -95,7 +95,7 @@ namespace VSManagement.Repository.AssetManagement
                              ApprovedBy = x.ApprovedBy,
                              Remarks = x.Remarks,
                              RequisitionStatus = x.RequisitionStatus,
-                             RequisitionStatusName=y.Name,//_context.LookupTypeValue.Where(l => l.Guid == x.RequisitionStatus).FirstOrDefault().Name,
+                             RequisitionStatusName = _context.LookupTypeValue.Where(l => l.Guid == x.RequisitionStatus).FirstOrDefault().Name,
                              CreatedBy = x.CreatedBy,
                              CreatedDateTime = x.CreatedDateTime,
                              LastUpdatedBy = x.LastUpdatedBy,
