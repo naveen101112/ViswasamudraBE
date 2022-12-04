@@ -8,17 +8,9 @@
 <html lang="en">
 
 
-<!-- Mirrored from html.phoenixcoded.net/flex-able/bootstrap/default/auth-signin-img-side.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 04 Oct 2022 12:47:28 GMT -->
 <head>
 
 	<title>Viswasamudra</title>
-	<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 11]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	<!-- Meta -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -26,14 +18,10 @@
 	<meta name="keywords" content="">
 	<meta name="author" content="Phoenixcoded" />
 
-	<!-- Favicon icon -->
 	<link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
-	<!-- fontawesome icon -->
 	<link rel="stylesheet" href="../assets/fonts/fontawesome/css/fontawesome-all.min.css">
-	<!-- animation css -->
 	<link rel="stylesheet" href="../assets/plugins/animation/css/animate.min.css">
 
-	<!-- vendor css -->
 	<link rel="stylesheet" href="../assets/css/style.css">
 	
 	
@@ -41,7 +29,6 @@
 
 </head>
 <body>
-<!-- [ signin-img ] start -->
 <div class="auth-wrapper aut-bg-img-side cotainer-fiuid align-items-stretch">
 	<div class="row align-items-center w-100 align-items-stretch bg-white">
 		<div class="d-none d-lg-flex col-md-8 aut-bg-img d-md-flex justify-content-center">
@@ -71,8 +58,7 @@
 				</div>
 			</div>
 		</div>
-		@using (Html.BeginForm("login", "Login", FormMethod.Post))
-		{
+		<form id="loginForm">
 			<div class="align-items-stret h-100 ad-flex justify-content-center">
 				<div class=" auth-content">
 						<img src="../assets/images/logo-dark.png" alt="" style="height: 55px;" class="img-fluid mb-4">
@@ -97,19 +83,25 @@
 							<label for="checkbox-p-1" class="cr">Save credentials</label>
 						</div>
 					</div>
-						<input type="submit" value="Login" class="btn waves-effect waves-light btn-primary mb-4">
+						<input type="submit" id="login-btn" value="Login" class="btn notifications btn-primary waves-effect waves-light btn-primary mb-4">
 						<p class="mb-2 text-muted">Forgot password? <a href="#" class="f-w-400">Reset</a></p>				
 				</div>
 			</div>
-		}
+		</form>
 	</div>
 </div>
-<!-- [ signin-img ] end -->
 
-<!-- Required Js -->
-<script src="../assets/js/vendor-all.min.js"></script>
-<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="../assets/js/waves.min.js"></script>
+<script src="@Url.Content("../customjs/util.js")"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/CustomJs/login.js"></script>
+
+	<!-- jquery-validation Js -->
+	<script src="../assets/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+
+		<!-- notification Js -->
+	<script src="../assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+	<script src="~/customjs/growlnotification.js"></script>
+	<script src="../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
 
 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using VSManagement.IOModels;
 
@@ -7,6 +8,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
     public class DashboardController : Controller
     {
         [HttpGet]
+        [Authorize]
         public IActionResult Index([FromQuery] string authKey)
         {
             try
