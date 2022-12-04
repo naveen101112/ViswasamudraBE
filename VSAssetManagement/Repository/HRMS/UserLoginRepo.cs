@@ -17,11 +17,19 @@ namespace VSManagement.Repository.HRMS
         public io.ResponseBody login(io.UserLogin request)
         {
             int count = _context.UserLogin.Where(u => u.UserName.ToUpper() == request.UserName.ToUpper()).Count();
-            if(count == 0)
+            int empCount = _context.EmployeeMaster.Where(e => e.EmployeeCode.ToUpper() == request.UserName.ToUpper()).Count();
+            if(count == 0 || empCount == 0)
             {
                 return new io.ResponseBody { Status = false, Message = "Invalid UserName/Password" };
             }
 
+            if(_context.EmployeeMaster.Where(e => e.EmployeeCode.ToUpper() == request.UserName.ToUpper()).FirstOrDefault().IsActive != "Y")
+            {
+                return new io.ResponseBody { Status = false, Message = "User Inative." };
+            }
+
+            var base64EncodedBytes = System.Convert.FromBase64String(request.Password);
+            request.Password = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
             UserLogin userLogin = _context.UserLogin.Where(u=>u.UserName.ToUpper() == request.UserName.ToUpper()).FirstOrDefault();
             if (userLogin.WrongAttempt >= 3)
             {

@@ -1,30 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ViswaSamudraUI.Providers.HRMS;
 using VSManagement.IOModels;
 
 namespace ViswaSamudraUI.Controllers.WINGS
 {
     public class LoginController : Controller
     {
+        UserProvider provider = new UserProvider();
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpPost]
-        public IActionResult login([FromForm]UserLogin model)
+        public IActionResult RedirectDashboard()
         {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes("loggedin");
-            string authKey = string.Empty;
+            return RedirectToAction("Index", "Dashboard");
+        }
 
-            if(model.UserName == "admin@mail.com" && model.Password == "Password123")
+        [HttpPost]
+        public IActionResult authenticate([FromForm] UserLogin model)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(model.UserName + "~success");
+            string authKey = string.Empty;
+            authKey = System.Convert.ToBase64String(plainTextBytes);
+
+            ResponseBody response = provider.Login(model);
+
+            if(response.Status)
             {
-                authKey = System.Convert.ToBase64String(plainTextBytes);
+                response.UserName = authKey;
             }
-            else
-            {
-                return Redirect("unuthorized");
-            }
-            return Redirect("../Dashboard/Index?authKey=" + authKey);
+            return Ok(response);
         }
     }
 }
