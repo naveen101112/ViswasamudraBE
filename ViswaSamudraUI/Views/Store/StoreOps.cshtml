@@ -1,0 +1,81 @@
+﻿@using System.Data
+@model VSAssetManagement.IOModels.Store
+<div class="col-sm-12" style="padding:1px">
+   <div class="card">
+      <div class="card-header">
+         <h5>Store</h5>
+         <div class="card-header-right">
+                <div class="btn-group card-option">
+                    @Html.ActionLink("", "Index","Store", "", new {@style="margin-right: 10px;",@class="feather icon-x-circle" })
+                </div>
+            </div>
+      </div>
+      <div class="card-body">
+         <form id="storeform">
+			 @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
+			 @Html.AntiForgeryToken()
+			 <div class="row">
+				 <div class="col-md-4">
+				   <div class="form-group">
+					  <label class="form-label">Project</label>
+					  <select class="form-control" asp-items="@ViewBag.Project" asp-for="Project">
+					  </select>
+				   </div>
+				</div>
+				<div class="col-md-4">
+				   <div class="form-group">
+					  <label class="form-label">Store Code</label>
+					  <input class="form-control" asp-for="Code" placeholder="Store Name">
+				   </div>
+				</div>
+				<div class="col-md-4">
+				   <div class="form-group">
+					  <label class="form-label">Store Name</label>
+					  <input class="form-control" asp-for="Name" placeholder="Store Name" maxlength="50">
+				   </div>
+				</div>				
+				<div class="col-md-4">
+				   <div class="form-group">
+					  <label class="form-label">Parent Store</label>
+					  <select class="form-control" asp-items="@ViewBag.ParentStore" asp-for="ParentStore">
+					  </select>
+				   </div>
+				</div>
+				<div class="col-md-4">
+				   <div class="form-group">
+					  <label class="form-label">Store Incharge</label>
+					  <input class="form-control" asp-for="Incharge" placeholder="Incharge" maxlength="50">
+				   </div>
+				</div>
+				<div class="col-md-4">
+				   <div class="form-group">
+					  <label class="form-label">Incharge Mobile</label>
+					  <input class="form-control" asp-for="InchargeMobile" maxlength="12" placeholder="Incharge Mobile">
+				   </div>
+				</div>
+			 </div>
+			 
+			 <button type="submit" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+         </form>
+      </div>
+   </div>
+</div>
+@section Scripts
+{
+	<script src="@Url.Content("../customjs/store.js")"></script>
+	<script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'store');
+        });
+		closeLoader();
+    </script>
+<style>        
+    .table thead th {
+        padding:1px;
+    }
+    .table tbody td {
+        padding:1px;
+    }
+</style>
+}

@@ -21,7 +21,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
         PurchaseOrderProvider purchaseOrder = new PurchaseOrderProvider();
         public async Task<IActionResult> Index()
         {
-            IEnumerable<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder();
+            List<PurchaseOrder> poList = purchaseOrder.GetAllPurchaseOrder();
             return View(poList);
         }
 
@@ -37,8 +37,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
         public ActionResult PoModification(PurchaseOrder PoIoModel)
         {
-            string poStatus = purchaseOrder.AddPurchaseOrder(PoIoModel);
-            return Content(poStatus);
+            return Ok(purchaseOrder.AddPurchaseOrder(PoIoModel));
+            //return Content(poStatus);
         }
     }
 }

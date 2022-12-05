@@ -8,7 +8,7 @@ using System;
 
 namespace VSManagement.Controllers.AssetManagement
 {
-    [Route("store")]
+    [Route("Store")]
     [ApiController]
     public class StoreController : ControllerBase
     {
@@ -31,27 +31,58 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
-        [HttpPost]
+        [HttpGet("combo")]
+        public ActionResult getDropDown([FromQuery] int id)
+        {
+            List<io.Store> record = JsonConvert.
+                DeserializeObject<List<io.Store>>(JsonConvert.SerializeObject(repo.getDropDown(id)));
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
+
+        [HttpGet("combobyProject")]
+        public ActionResult getDropDownByProject([FromQuery] int id, [FromQuery] Guid guid)
+        {
+            List<io.Store> record = JsonConvert.
+                DeserializeObject<List<io.Store>>(JsonConvert.SerializeObject(repo.getDropDownByProject(id, guid)));
+            if (record == null) return NotFound();
+            return Ok(record);
+        }
+
+        [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Store record)
         {
-            Guid id = repo.createAsset(JsonConvert.
+            int id = repo.createStore(JsonConvert.
                 DeserializeObject<Store>(JsonConvert.SerializeObject(record)));
+            if (id == -1) return Problem("Store Exist");
             return Created($"/store/{id}", "Created Successfully.");
         }
 
-        [HttpPut]
+        [HttpPost("Update")]
         public ActionResult updateRecord([FromBody] io.Store record)
         {
             int id = repo.update(JsonConvert.
                 DeserializeObject<Store>(JsonConvert.SerializeObject(record)));
             if (id == 0) return Conflict("Error updating record");
+            if (id == -1) return Problem("Store Exist");
             return Ok("Updated successfully");
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult deleteRecord(Guid id)
+        [HttpPost("search")]
+        public ActionResult Search([FromBody] io.Store record)
         {
-            int count = repo.delete(id);
+            var model = JsonConvert.
+                DeserializeObject<io.Store>(JsonConvert.SerializeObject(record));
+            List<io.Store> list =
+            JsonConvert.DeserializeObject<List<io.Store>>(JsonConvert.SerializeObject(repo.searchListQuery(model)));
+
+            return Ok(list);
+        }
+
+        [HttpPost("Delete")]
+        public ActionResult deleteRecord([FromBody] io.Store request)
+        {
+            int count = repo.delete(request);
             //if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
         }

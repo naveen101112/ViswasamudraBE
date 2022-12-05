@@ -7,6 +7,7 @@
             <h5>Tag</h5>
             <div class="card-header-right">
                 <div class="btn-group card-option">
+                    @Html.ActionLink("", "TagOps","Tag", "", new {@style="margin-right: 10px;",@class="feather icon-plus-circle" })
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather icon-more-horizontal"></i>
                     </button>
@@ -21,47 +22,37 @@
         </div>
         <div class="card-body" style="padding:2px 2px 2px 2px"> 
             <div class="dt-responsive table-responsive">
-                <table id="simpletable" class="table table-striped table-bordered nowrap">            
-                <thead>
+                <table id="simpletable" class="table table-striped table-bordered table-hover nowrap">
+                    <thead>
                     <tr>
-                            <th>#</th>
-                            <th data-breakpoints="xs">Id</th>
+                            <th class="ActionWidth">Actions</th>
+                            <th class="ActionWidth"  data-breakpoints="xs">S. No</th>
                             <th data-breakpoints="xs">Code</th>
                             <th data-breakpoints="xs">Name</th>
-                            <th data-breakpoints="xs">Status</th>
-                            <th data-breakpoints="xs">Created By</th>
-                            <th data-breakpoints="xs">Created Date Time</th>
-                            <th data-breakpoints="xs">Last Updated By</th>
-                            <th data-breakpoints="xs">Last Updated Date Time</th>
-                            <th data-breakpoints="xs">Record Status</th>
+                            <th data-breakpoints="xs">Status</th>                            
                             <th data-breakpoints="xs" hidden>Guid</th>
-                            <th data-breakpoints="xs">Company Code</th>
-                            <th data-breakpoints="xs">Dept Code</th>
-                            <th data-breakpoints="xs">User Code</th>
 
                     </tr>
                 </thead>
                 <tbody>                 
                     <tr>
+                            @{
+                                int rowNo = 0;
+                            }
                         @foreach (var item in Model)
                         {
                         <tr>
-                            <td>
-                               @Html.ActionLink("", "Ops","Tag", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                            <td id="loadRecord" class="text-center">
+                               @Html.ActionLink("", "TagOps","Tag", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                               @Html.ActionLink("", "Delete","Tag", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger",onclick="return confirm('Are you sure? Tag will be deleted permanently')"})
+                                    
+
                             </td>
-                                <td>@Html.DisplayFor(modelItem=>item.Id)</td>
+                                <td>@(rowNo += 1)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Code)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.Name)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Status)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.RecordStatus)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Guid)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CompanyCode)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.DeptCode)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.UserCode)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Status)</td>                                                                
+                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
                         </tr>
                         }                    
                 </tbody>
@@ -71,3 +62,9 @@
     </div>
 </div>
 
+<script src="@Url.Content("../customjs/util.js")"></script>
+<script>
+    $(window).on('load', function () {
+        setActiveMenu('wingz', 'tag');
+    });
+</script>

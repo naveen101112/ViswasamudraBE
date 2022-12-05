@@ -4,44 +4,52 @@
    <div class="card">
       <div class="card-header">
          <h5>Reason</h5>
+         <div class="card-header-right">
+                <div class="btn-group card-option">
+                    @Html.ActionLink("", "Index","Reason", "", new {@style="margin-right: 10px;",@class="feather icon-x-circle" })
+                </div>
+         </div>
       </div>
       <div class="card-body">
-         @using (Html.BeginForm("", "", FormMethod.Post, new { style = "width:100%" }))
-         {
+            <form id="reasonform">
          @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
          @Html.AntiForgeryToken()
          <div class="row">
-            <div class="col-md-4">
-               <div class="form-group">
-                  <label class="form-label">Reason Name</label>
-                            @Html.EditorFor(model => model.ReasonName, new { htmlAttributes = new { @class = "form-control",@placeholder="Reason Name",@id="ReasonName" } })
-                            @Html.ValidationMessageFor(model => model.ReasonName, "", new { @class = "text-danger" })
-               </div>
-            </div>
-            <div class="col-md-4">
-               <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label class="form-label">Reason Code</label>
-                            @Html.EditorFor(model => model.ReasonCode, new { htmlAttributes = new { @class = "form-control",@placeholder="Reason Code",@id="ReasonCode" } })
-                            @Html.ValidationMessageFor(model => model.ReasonCode, "", new { @class = "text-danger" })
+                            <input class="form-control" asp-for="ReasonCode" name="reason_code" placeholder="Reason Code" id="ReasonCode">
+                        </div>
+                    </div>
+            <div class="col-md-4">
+               <div class="form-group">
+                <label class="form-label">Reason Name</label>
+                <input  class="form-control" asp-for="ReasonName" name="reason_name" placeholder="Reason Name" id="ReasonName">
                </div>
             </div>
             <div class="col-md-4">
                <div class="form-group">
-                            <label class="form-label">Reason Type</label>
-                            @Html.EditorFor(model => model.ReasonType, new { htmlAttributes = new { @class = "form-control",@placeholder="Reason Type",@id="ReasonType" } })
-                            @Html.ValidationMessageFor(model => model.ReasonType, "", new { @class = "text-danger" })
+                <label class="form-label">Reason Type</label>
+                    <select class="form-control" name="reason_type" asp-items="@ViewBag.reasontype" asp-for="ReasonType">                      
+                    </select>
                </div>
             </div>
          </div>      
-                <button class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
-         
-         }
+                <button type="submit" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+
+            </form>
       </div>
    </div>
 </div>
 @section Scripts
 {
-<script src="@Url.Content("../customjs/reason.js")"></script>
+    <script src="~/customjs/reason.js"></script>
+    <script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'reason');
+        });
+    </script>
 <style>        
 .table thead th {
     padding:1px;

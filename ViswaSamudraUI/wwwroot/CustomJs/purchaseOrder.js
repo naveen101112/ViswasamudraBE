@@ -56,9 +56,15 @@
             data: toJson(),
             type: 'Post',
             success: function (data) {
-                nType = 'success';
-                message = data;
-                notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, message)
+                if (data?.status) {
+                    nType = 'success';
+                    message = data?.message;
+                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, message);
+                } else {
+                    nType = 'danger';
+                    message = data?.message;
+                    notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, " Tag ");
+                }
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 nType = 'danger';

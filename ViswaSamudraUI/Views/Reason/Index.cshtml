@@ -7,7 +7,6 @@
             <h5>Reason</h5>
             <div class="card-header-right">
                 <div class="btn-group card-option">
-
                     @Html.ActionLink("", "ReasonGetDetailById","Reason", "", new {@style="margin-right: 10px;",@class="feather icon-plus-circle" })
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather icon-more-horizontal"></i>
@@ -23,31 +22,33 @@
         </div>
         <div class="card-body" style="padding:2px 2px 2px 2px">
             <div class="dt-responsive table-responsive">
-                <table id="simpletable" class="table table-striped table-bordered nowrap">
+                <table id="simpletable" class="table table-striped table-bordered table-hover nowrap">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Reason Name</th>
+                            <th class="ActionWidth">Actions</th>
+                            <th class="ActionWidth">S. No</th>
                             <th data-breakpoints="xs">Reason Code</th>
-                            <th data-breakpoints="xs">Reason Type</th>                            
-                            <th data-breakpoints="xs">last Updated By</th>
-                            <th data-breakpoints="xs">last Updated On</th>
+                            <th>Reason Name</th>
+                            <th data-breakpoints="xs">Reason Type</th>                                  
                             <th hidden></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            @{
+                                int rowNo = 0;
+                            }
                             @foreach (var item in Model)
                             {
                             <tr>
-                                <td>
-                                        @Html.ActionLink("", "ReasonGetDetailById","Reason", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                                <td id="loadRecord" class="text-center">
+                                    @Html.ActionLink("", "ReasonGetDetailById","Reason", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                                        @Html.ActionLink("", "Delete","Reason", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger",onclick="return confirm('Are you sure? Reason will be deleted permanently') " })
                                 </td>
-                                <td>@Html.DisplayFor(modelItem=>item.ReasonName)</td>
+                                <td>@(rowNo += 1)</td>
                                 <td>@Html.DisplayFor(modelItem=>item.ReasonCode)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.ReasonType)</td>                         
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ReasonName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.ReasonTypeName)</td>
                                 <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
 
                             </tr>
@@ -58,3 +59,9 @@
         </div>
     </div>
 </div>
+<script src="@Url.Content("../customjs/util.js")"></script>
+<script>
+    $(window).on('load', function () {
+        setActiveMenu('wingz', 'reason');
+    });
+</script>

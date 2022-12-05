@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Viswasamudra</title>
+	<title>Vishwa samudra</title>
 	<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 11]>
@@ -15,10 +15,12 @@
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 
-	
-
+	<script>
+		const urlSearchParams = new URLSearchParams(window.location.search);
+		const params = Object.fromEntries(urlSearchParams.entries());		
+	</script>    
 	<!-- Favicon icon -->
-	<link rel="icon" href="http://html.phoenixcoded.net/flex-able/bootstrap/assets/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
 	<!-- fontawesome icon -->
 	<link rel="stylesheet" href="../assets/fonts/fontawesome/css/fontawesome-all.min.css">
 	<!-- animation css -->
@@ -32,6 +34,7 @@
 	<link rel="stylesheet" href="../assets/css/style.css">
 	<!-- data tables css -->
 	<link rel="stylesheet" href="../assets/plugins/data-tables/css/datatables.min.css">
+	<link rel="stylesheet" href="../assets/css/custom.css" />
 
 	<!-- vendor css -->
 	<link rel="stylesheet" href="../assets/css/style.css">
@@ -80,15 +83,17 @@
 					<li class="nav-item pcoded-menu-caption">
 						<label>Operations</label>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<li class="nav-item pcoded-hasmenu" id="wingz-link">
 						<a href="#!" class="nav-link waves-effect waves-light"><span class="pcoded-micon"><i class="feather icon-package"></i></span><span class="pcoded-mtext">Wingz</span></a>
-						<ul class="pcoded-submenu">							
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="PurchaseOrder" asp-action="index">Purchace Order</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Batch" asp-action="index">Batch</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Asset" asp-action="index">Asset</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Project" asp-action="index">Project</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Tag" asp-action="index">Tag</a></li>
-							<li class=""><a class="waves-effect" asp-area="" asp-controller="Reason" asp-action="index">Reason</a></li>
+						<ul class="pcoded-submenu">		
+							<li class="" id="tag-link"><a class="waves-effect" asp-area="" asp-controller="Tag" asp-action="index">Tag</a></li>
+							<li class="" id="project-link"><a class="waves-effect" asp-area="" asp-controller="Project" asp-action="index">Project</a></li>
+							<li class="" id="store-link"><a class="waves-effect" asp-area="" asp-controller="Store" asp-action="index">Store</a></li>
+							<li class="" id="lookup-link"><a class="waves-effect" asp-area="" asp-controller="LookUp" asp-action="index">LookUp</a></li>
+							<li class="" id="reason-link"><a class="waves-effect" asp-area="" asp-controller="Reason" asp-action="index">Reason</a></li>							
+							<li class="" id="batch-link"><a class="waves-effect" asp-area="" asp-controller="Batch" asp-action="index">Purchase Reference Batch</a></li>
+							<li class="" id="asset-link"><a class="waves-effect" asp-area="" asp-controller="Asset" asp-action="index">Asset</a></li>
+							<li class="" id="asset-requisition-link"><a class="waves-effect" asp-area="" asp-controller="AssetRequisition" asp-action="index">Asset Requisition</a></li>
 						</ul>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
@@ -113,6 +118,7 @@
 							<li class=""><a class="waves-effect" asp-area="" asp-controller="Locations" asp-action="index">Locations</a></li>
 							<li class=""><a class="waves-effect" asp-area="" asp-controller="Salutation" asp-action="index">Salutation</a></li>
 							<li class=""><a class="waves-effect" asp-area="" asp-controller="Zones" asp-action="index">Zones</a></li>
+							<li class=""><a class="waves-effect" asp-area="" asp-controller="EmpMigrate" asp-action="index">Beehive Migrated Employee Data</a></li>
 						</ul>
 					</li>
 					<li class="nav-item pcoded-menu-caption">
@@ -164,18 +170,7 @@
 		<div class="collapse navbar-collapse">
 			<a href="#!" class="mob-toggler"></a>
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item">
-					<div class="main-search">
-						<div class="input-group">
-							<input type="text" id="m-search" class="form-control" placeholder="Search . . .">
-							<a href="#!" class="input-group-append search-close">
-								<i class="feather icon-x input-group-text"></i>
-							</a>
-							<span class="input-group-append search-btn waves-effect waves-light btn waves-effect waves-light btn-primary">
-								<i class="feather icon-search input-group-text"></i>
-							</span>
-						</div>
-					</div>
+				<li class="nav-item">				
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
@@ -185,18 +180,16 @@
 							<i class="icon feather icon-settings"></i>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right profile-notification">
-							<div class="pro-head">
-								<img src="../assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-								<span>John Doe</span>
-								<a href="auth-signin.html" class="dud-logout" title="Logout">
+							<div class="pro-head">								
+								<span> <i class="feather icon-user"></i> User</span>
+								<a href="/Login" class="dud-logout" title="Logout">
 									<i class="feather icon-log-out"></i>
 								</a>
 							</div>
 							<ul class="pro-body">
 								<li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
-								<li><a href="#!" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-								<li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-								<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+								<li><a href="#!" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>								
+								<li><a href="/Login" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
 							</ul>
 						</div>
 					</div>
@@ -214,7 +207,7 @@
 					<div class="main-body">
 						<div class="page-wrapper">
 							<!-- [ Main Content ] start -->
-							<div class="row">
+							<div class="row my-flex-card">
 								<!-- page statustic card start -->
 								@RenderBody()
 
@@ -294,14 +287,24 @@
 	<script src="../assets/js/pages/dashboard-analytics.js"></script>
 	<script src="../assets/js/map.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfUvHeQpaf7M8Q9WTNceF8JLX5_p2kl8&callback=myMap"></script>
-
+	<script src="../assets/js/pages/chart.js"></script>
+	<script src="../assets/js/pages/dashboard-sale.js"></script>
 	<script src="../assets/plugins/data-tables/js/datatables.min.js"></script>
 	<script src="../assets/js/pages/data-basic-custom.js"></script>
+    <script src="../assets/js/pages/data-column-custom.js"></script>
+
+	<!-- jquery-validation Js -->
+	<script src="../assets/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 
 		<!-- notification Js -->
 	<script src="../assets/plugins/notification/js/bootstrap-growl.min.js"></script>
-
+	<script src="~/customjs/growlnotification.js"></script>
+	<script src="../assets/plugins/sweetalert/js/sweetalert.min.js"></script>
 </body>
+	<div class="loader" style="display:none">
+		<span style="position: absolute;color: black;font-weight: 900;" id="loader-message">Please wait.....</span>
+		<div class="spinner-border" style="width: 18rem;height: 18rem;color: black;" role="status">
+			<span class="sr-only" style="color: black;">Loading...</span>
+		</div>
+	</div>
 </html>
-
-

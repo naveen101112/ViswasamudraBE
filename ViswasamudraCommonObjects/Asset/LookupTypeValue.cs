@@ -6,6 +6,8 @@ namespace VSAssetManagement.IOModels
     {
         public int Id { get; set; }
         public Guid LookupTypeId { get; set; }
+        public string LookupTypeName { get; set; }
+        public string LookupTypeCode { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public string CreatedBy { get; set; }

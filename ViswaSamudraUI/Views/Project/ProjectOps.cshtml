@@ -1,0 +1,116 @@
+﻿@using System.Data
+@model VSAssetManagement.IOModels.Project    
+<div class="col-sm-12" style="padding:1px">
+   <div class="card">
+      <div class="card-header">
+         <h5>Project Operations</h5>
+         <div class="card-header-right">
+                <div class="btn-group card-option">
+                    @Html.ActionLink("", "Index","Project", "", new {@style="margin-right: 10px;",@class="feather icon-x-circle" })
+                </div>
+         </div>
+      </div>
+      <div class="card-body">
+         <form id="projectform">
+             @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
+             @Html.AntiForgeryToken()
+             <div class="row">
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">Project Code</label>                                                       
+                      <input class="form-control" asp-for="ProjectCode" placeholder="Project Code" maxlength="4">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">Project Name</label> 
+                      <input class="form-control" asp-for="ProjectName" placeholder="Project Name" maxlength="50">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">Project Type</label>
+                      <select class="form-control" asp-items="@ViewBag.ProjectType" asp-for="ProjectType">
+                      </select>
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">Client Name</label> 
+                      <input class="form-control" asp-for="ClientName" placeholder="Client Name" maxlength="100">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">Project Start Date</label>
+                      <input class="form-control" asp-for="ProjectStartDate" placeholder="Project Start Date">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">End Date</label>
+                      <input class="form-control" asp-for="ProjectEndDate" placeholder="Project End Date">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">Project Site Head</label>
+                      <input class="form-control" asp-for="ProjectSiteHead" placeholder="Project Site Head" maxlength="30">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">Site Head Mobile</label>
+                      <input class="form-control" asp-for="SiteHeadMobile" placeholder="Site Head Mobile" maxlength="12">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">GSTIN No</label>
+                      <input  class="form-control" asp-for="GstinNo" placeholder="GSTIN No" maxlength="20">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">CITY/TOWN</label>
+                      <input class="form-control" asp-for="CityTown" placeholder="City/Town" maxlength="30">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">Address Line 1</label>
+                      <input class="form-control" asp-for="AddressLine1" placeholder="Address Line 1" maxlength="100">
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-group">
+                      <label class="form-label">Address Line 2</label>
+                      <input class="form-control" asp-for="AddressLine2" placeholder="Address Line 2" maxlength="100">
+                   </div>
+                </div>
+             </div>
+         
+             <button type="submit" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+         
+         </form>
+      </div>
+   </div>
+</div>
+@section Scripts
+{
+    <script src="@Url.Content("../customjs/project.js")"></script>
+    <script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'project');
+        });
+    </script>
+<style>        
+.table thead th {
+    padding:1px;
+}
+.table tbody td {
+    padding:1px;
+}
+</style>
+}

@@ -1,6 +1,10 @@
 ﻿Scaffold-DbContext "Server=.\SQLEXPRESS;Database=VISWASAMUDRA;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/VISWASAMUDRA -f
 Scaffold-DbContext "Server=.\SQLEXPRESS;Database=VS_EMPLOYEE;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/VS_EMPLOYEE -f
 
+Scaffold-DbContext "Server=14.97.10.154;Database=VISWASAMUDRA;User ID=administrator;Password=admin@123$;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/VISWASAMUDRA -f
+
+Scaffold-DbContext "Server=14.97.10.154;Database=VS_EMPLOYEE;User ID=administrator;Password=admin@123$;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/VS_EMPLOYEE -f
+
 if (!optionsBuilder.IsConfigured)
 {
     IConfigurationBuilder builder = new ConfigurationBuilder()
@@ -14,3 +18,14 @@ Column Names Fetch:
 SELECT COLUMN_NAME--dbo.ToProperCase(COLUMN_NAME)
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = N'ZONES'
+
+
+                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+
+SELECT '<th data-breakpoints="xs">'+dbo.ToProperCase(replace(COLUMN_NAME,'_',' '))+'</th>'
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = N'STORE'
+
+SELECT '<td>@Html.DisplayFor(modelItem=>item.'+replace(dbo.ToProperCase(replace(COLUMN_NAME,'_',' ')),' ','')+')</td>'
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = N'STORE'

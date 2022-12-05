@@ -44,13 +44,11 @@ namespace VSManagement.Repository.AssetManagement
         public IEnumerable<dynamic> getDataGrid()
         {
             return (from record in _context.AssetHistory
-                    join status in _context.Status on record.AssetStatus equals status.Id.ToString()
                     select new
                     {
                         record.Id,
-                        AssetID = record.AssetGuid,
-                        TagID = record.TagGuid,
-                        Status = status.Description,
+                        AssetID = record.AssetId,
+                        TagID = record.TagId,
                         record.Guid
                     }).ToList();
 

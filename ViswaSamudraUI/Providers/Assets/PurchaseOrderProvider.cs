@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using ViswaSamudraUI.Models;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -7,14 +10,14 @@ namespace ViswaSamudraUI.Providers.Assets
     public class PurchaseOrderProvider
     {
         CommonHelper ch = new CommonHelper();
-        public IEnumerable<io.PurchaseOrder> GetAllPurchaseOrder(io.PurchaseOrder PoIoModel = null)
+        public List<io.PurchaseOrder> GetAllPurchaseOrder(io.PurchaseOrder PoIoModel = null)
         {
             if (PoIoModel == null)
-                return (IEnumerable<io.PurchaseOrder>)ch.GetRequest<io.PurchaseOrder>("purchaseOrder");
+                return (List<io.PurchaseOrder>)ch.GetRequest<io.PurchaseOrder>("purchaseOrder");
             else
-                return (IEnumerable<io.PurchaseOrder>)ch.GetDetailsRequest<io.PurchaseOrder>("purchaseOrder/posearch", PoIoModel);
+                return (List<io.PurchaseOrder>)ch.GetDetailsRequest<io.PurchaseOrder>("purchaseOrder/posearch", PoIoModel);
         }
-        public string AddPurchaseOrder(io.PurchaseOrder PoIoModel = null)
+        public ResponseBody AddPurchaseOrder(io.PurchaseOrder PoIoModel = null)
         {
             if (PoIoModel != null)
             {
@@ -26,6 +29,34 @@ namespace ViswaSamudraUI.Providers.Assets
             }
             else
                 return null;
+        }
+
+        public ResponseBody UpdatePurchaseOrder(io.PurchaseOrder PoIoModel = null)
+        {
+            return ch.PostRequest<io.PurchaseOrder>("purchaseOrder/UpdatePoByName", PoIoModel);
+        }
+
+        public IEnumerable<io.PurchaseOrder> GetDropDown()
+        {
+            return (IEnumerable<io.PurchaseOrder>)ch.GetRequest<io.PurchaseOrder>("purchaseOrder/combo");
+        }
+
+        public List<SelectListItem> GetSelectList(string SelectedValue = null)
+        {
+            SelectListItem selListItem = new SelectListItem() { Value = "", Text = "" };
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(selListItem);
+
+            foreach (var x in GetDropDown().Select(i => new { i.Id, i.PurchaseOrderNo, i.Guid }).Where(s => s.PurchaseOrderNo != null).OrderByDescending(i => i.Id))
+            {
+                if (SelectedValue != null && x.Guid.ToString() == SelectedValue)
+                    selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.PurchaseOrderNo, Selected = true };
+                else
+                    selListItem = new SelectListItem() { Value = x.Guid.ToString(), Text = x.PurchaseOrderNo };
+
+                newList.Add(selListItem);
+            }
+            return newList;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ViswaSamudraUI.Models;
 using io = VSAssetManagement.IOModels;
 
 namespace ViswaSamudraUI.Providers.Assets
@@ -14,11 +15,11 @@ namespace ViswaSamudraUI.Providers.Assets
             else
                 return (IEnumerable<io.Reason>)ch.GetDetailsRequest<io.Reason>("reason/reasonsearch", PoIoModel);
         }
-        public string AddReason(io.Reason PoIoModel = null)
+        public ResponseBody AddReason(io.Reason PoIoModel = null)
         {
             if (PoIoModel != null)
             {
-                if (PoIoModel.Guid == Guid.Empty)
+                if (PoIoModel.Guid == Guid.Empty || PoIoModel.Guid == null)
                 {
                     return ch.PostRequest<io.Reason>("reason/CreateResult", PoIoModel);
                 }
@@ -26,6 +27,10 @@ namespace ViswaSamudraUI.Providers.Assets
             }
             else
                 return null;
+        }
+        public ResponseBody Delete(io.Reason model = null)
+        {
+            return ch.DeleteRequest<io.Reason>("Reason/Delete", model);
         }
     }
 }

@@ -1,0 +1,65 @@
+﻿@using System.Data
+@model VSAssetManagement.IOModels.Tag    
+<div class="col-sm-12" style="padding:1px">
+   <div class="card">
+      <div class="card-header">
+			<h5>Tag Operations</h5>
+         <div class="card-header-right">
+                <div class="btn-group card-option">
+                    @Html.ActionLink("", "Index","Tag", "", new {@style="margin-right: 10px;",@class="feather icon-x-circle" })
+                </div>
+            </div>
+      </div>
+      <div class="card-body">
+         <form id="tagform">
+			 @Html.HiddenFor(model=>model.Guid,new{id="hdnGuid"})
+			 @Html.AntiForgeryToken()
+			 <div class="row">
+				<div class="col-md-4">
+				   <div class="form-group">
+					  <label class="form-label">Tag Code</label>
+					  <input class="form-control" asp-for="Code" placeholder="Tag Code">
+				   </div>
+				</div>
+				<div class="col-md-4">
+				   <div class="form-group">
+					  <label class="form-label">Tag Name</label>
+					  <input class="form-control" asp-for="Name" placeholder="Tag Name" maxlength="50">
+				   </div>
+				</div>
+				 @if (Model.Guid != Guid.Empty)
+					  {
+				<div class="col-md-4">
+				   <div class="form-group">
+					  <label class="form-label">Tag Status</label>					
+					  <select class="form-control" asp-items="@ViewBag.Status" asp-for="Status">                      
+					  </select>
+					  
+				   </div>
+				</div>
+					  }
+			 </div>
+			 
+			 <button type="submit" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+         </form>
+      </div>
+   </div>
+</div>
+@section Scripts
+{
+	<script src="@Url.Content("../customjs/tag.js")"></script>
+	<script src="@Url.Content("../customjs/util.js")"></script>
+    <script>
+        $(window).on('load', function () {
+            setActiveMenu('wingz', 'tag');
+        });
+    </script>
+<style>        
+    .table thead th {
+        padding:1px;
+    }
+    .table tbody td {
+        padding:1px;
+    }
+</style>
+}

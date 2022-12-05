@@ -7,7 +7,7 @@ using VSManagement.Repository.AssetManagement;
 
 namespace VSManagement.Controllers.AssetManagement
 {
-    [Route("project")]
+    [Route("Project")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
@@ -39,35 +39,57 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Project record)
         {
             int id = repo.create(JsonConvert.
                 DeserializeObject<Project>(JsonConvert.SerializeObject(record)));
+            if (id == -1) return Problem("Project Exist");
             return Created($"/project/{id}", "Created Successfully.");
         }
 
-        [HttpPut]
+        [HttpPost("Update")]
         public ActionResult updateRecord([FromBody] io.Project record)
         {
             int id = repo.update(JsonConvert.
                 DeserializeObject<Project>(JsonConvert.SerializeObject(record)));
             if (id == 0) return Conflict("Error updating record");
+            if (id == -1) return Problem("Project Exist");
             return Ok("Updated successfully");
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult deleteRecord(int id)
+        [HttpPost("Delete")]
+        public ActionResult deleteRecord([FromBody] io.Project request)
         {
-            int count = repo.delete(id);
-            if (id == 0) return Conflict("Error deleting record");
+            int count = repo.delete(request);
+            if (count == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
+        }
+
+        [HttpPost("search")]
+        public ActionResult Search([FromBody] io.Project record)
+        {
+            var AssectModel = JsonConvert.
+                DeserializeObject<io.Project>(JsonConvert.SerializeObject(record));
+            List<io.Project> list =
+            JsonConvert.DeserializeObject<List<io.Project>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
+
+            return Ok(list);
         }
 
         [HttpGet("grid")]
         public ActionResult getDataGrid()
         {
             return Ok(repo.getDataGrid());
+        }
+
+        [HttpGet("combo")]
+        public ActionResult getDropDown()
+        {
+            List<io.Project> record = JsonConvert.
+                DeserializeObject<List<io.Project>>(JsonConvert.SerializeObject(repo.getDropDown()));
+            if (record == null) return NotFound();
+            return Ok(record);
         }
     }
 }

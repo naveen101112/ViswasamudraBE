@@ -15,14 +15,14 @@ namespace VSManagement.Models.VISWASAMUDRA
         }
 
         public int Id { get; set; }
+        public Guid Guid { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
-        public DateTime LastUpdatedDateTime { get; set; }
-        public int? RecordStatus { get; set; }
-        public Guid Guid { get; set; }
+        public DateTime? LastUpdatedDateTime { get; set; }
+        public int RecordStatus { get; set; }
 
         public virtual ICollection<LookupTypeValue> LookupTypeValue { get; set; }
     }

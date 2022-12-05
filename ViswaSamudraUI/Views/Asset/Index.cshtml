@@ -5,10 +5,10 @@
     <div class="card">
         <div class="card-header">
             <h5 class="h5-body">Asset</h5>
-            <div class="card-header-right">
-                <button type="button" class="btn add-new"><i class="fa fa-plus"></i> Add New</button>
+            <div class="card-header-right">                
                 <button type="button" class="btn waves-effect waves-light btn-icon btn-primary body-add-record" hidden><i class="feather icon-plus-square"></i></button>
                 <div class="btn-group card-option">
+                    <a class="feather icon-search" data-toggle="collapse" style="margin-right: 10px;" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="feather icon-more-vertical"></i>
                     </button>
@@ -21,55 +21,109 @@
                 </div>
             </div>
         </div>
-        <div class="card-body" style="padding:2px 2px 2px 2px"> 
+        <div class="card-body" style="padding:2px 2px 2px 2px">
+            <div class="collapse" id="collapseExample">
+                <div class="card-body">
+                    <p class="mb-0">
+                        Asset Under Construction
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding:2px 2px 2px 2px">
             <div class="dt-responsive table-responsive">
-                <table id="simpletable" class="table table-striped table-bordered nowrap">            
-                <thead>
-                    <tr>
-                            <th>#</th>
-                            <th data-breakpoints="xs">Id</th>
-                            <th data-breakpoints="xs">Code</th>
-                            <th data-breakpoints="xs">Name</th>
-                            <th data-breakpoints="xs">Company Name</th>
-                            <th data-breakpoints="xs">Created By</th>
-                            <th data-breakpoints="xs">Created Date Time</th>
-                            <th data-breakpoints="xs">Last Updated By</th>
-                            <th data-breakpoints="xs">Last Updated Date Time</th>
-                            <th data-breakpoints="xs">Record Status</th>
-                            <th data-breakpoints="xs" hidden>Guid</th>
-                            <th data-breakpoints="xs" hidden>Project Guid</th>
-                            <th data-breakpoints="xs" hidden>Store Guid</th>
-                            <th data-breakpoints="xs" hidden>Batch Guid</th>
+                <div id="scr-vtr-dynamic_wrapper" class="dataTables_wrapper dt-bootstrap4">                  
+                    <div class="row">
+                        <div class="col-sm-12">                            
+                                <div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 75vh; width: 100%;">
+                                <table id="scr-vtr-dynamic" class="table table-striped table-bordered table-hover nowrap dataTable" role="grid" aria-describedby="scr-vtr-dynamic_info" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th class="ActionWidth">Actions</th>
+                                            <th class="ActionWidth"  data-breakpoints="xs">S. No</th>
+                                            <th data-breakpoints="xs">Code</th>
+                                            <th data-breakpoints="xs">Asset Name</th>                                            
+                                            <th data-breakpoints="xs">Structure Type</th>
+                                            <th data-breakpoints="xs">StructureSub Type</th>
+                                            <th data-breakpoints="xs">Asset Type</th>
+                                            <th data-breakpoints="xs">Asset Specification</th>                                            
+                                            <th data-breakpoints="xs">Project Name</th>
+                                            <th data-breakpoints="xs">Store</th>                                            
+                                            <th data-breakpoints="xs">BatchNo</th>
+                                            <th data-breakpoints="xs">Company Name</th>
+                                            <th data-breakpoints="xs">AssetStatus</th>    
+                                            <th data-breakpoints="xs">Tag Id</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @{
+                                                int rowNo = 0;                                               
+                                            }
+                                            @foreach (var item in Model)
+                                            {
 
-                    </tr>
-                </thead>
-                <tbody>                 
-                    <tr>
-                        @foreach (var item in Model)
-                        {
-                        <tr>
-                            <td>
-                               @Html.ActionLink("", "Ops","Asset", new { guid=item.Guid  }, new {@class="feather icon-edit" })
-                            </td>
-                                <td>@Html.DisplayFor(modelItem=>item.Id)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Code)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.Name)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.LastUpdatedDateTime)</td>
-                                <td>@Html.DisplayFor(modelItem=>item.RecordStatus)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.ProjectGuid)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.StoreGuid)</td>
-                                <td hidden>@Html.DisplayFor(modelItem=>item.BatchGuid)</td>
-                        </tr>
-                        }                    
-                </tbody>
-            </table>
+                                                rowNo = rowNo + 1;
+                                                
+                                                <tr role="row">                                                    
+                                                    <td>
+                                                        
+                                                    <a class="feather icon-eye" data-toggle="collapse" hidden style="margin-right: 10px;" href="@String.Format("#Assetdetails{0}", @rowNo)" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                                                        @Html.ActionLink("", "AssetOps","Asset", new { guid=item.Guid  }, new {@class="feather icon-edit" })
+                                                </td>
+                                                <td>@rowNo</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetCode)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetName)</td>                                                
+                                                <td>@Html.DisplayFor(modelItem=>item.StructureName)
+                                                        @Html.HiddenFor(modelItem=>item.StructureType)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.StructureSubName)
+                                                        @Html.HiddenFor(modelItem=>item.StructureSubType)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetTypeName)
+                                                        @Html.HiddenFor(modelItem=>item.AssetType)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetSpecificationName)
+                                                        @Html.HiddenFor(modelItem=>item.AssetSpecification)</td>                                                
+                                                <td>
+                                                        @Html.DisplayFor(modelItem=>item.ProjectCodeName)
+                                                        @Html.HiddenFor(modelItem=>item.ProjectCode)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.StoreName)
+                                                        @Html.HiddenFor(modelItem=>item.Store)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.BatchNo)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.CompanyName)</td>
+                                                <td>@Html.DisplayFor(modelItem=>item.AssetStatusName)
+                                                        @Html.HiddenFor(modelItem=>item.AssetStatus)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem=>item.TagName)</td>
+                                            </tr>
+                                            <tr class="collapse" id="@String.Format("Assetdetails{0}", @rowNo)">
+                                                <td colspan="13">
+                                                    <div >
+                                                        <div class="card-body">
+                                                            <p class="mb-0">
+                                                                Asset Details
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            }
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+   
+
+
+
 

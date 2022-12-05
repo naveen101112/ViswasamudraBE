@@ -5,6 +5,7 @@ using VSManagement.Models.VISWASAMUDRA;
 using io = VSAssetManagement.IOModels;
 using VSManagement.Repository.AssetManagement;
 using System;
+using System.Drawing;
 
 namespace VSManagement.Controllers.AssetManagement
 {
@@ -15,12 +16,13 @@ namespace VSManagement.Controllers.AssetManagement
         LookUpRepo repo = new LookUpRepo(new VISWASAMUDRAContext());
         LookUpValueRepo valueRepo = new LookUpValueRepo(new VISWASAMUDRAContext());
 
-        [HttpGet("dropdown/{id}")]
-        public ActionResult getdropdownlist(Guid id)
+        [HttpGet("{code}")]
+        public ActionResult getdropdownlist(string code)
         {
+            return Ok(valueRepo.getLookUpDropDownByCode(code));
             List<io.LookupTypeValue> list =
                 JsonConvert.
-                DeserializeObject<List<io.LookupTypeValue>>(JsonConvert.SerializeObject(valueRepo.getLookUpDropDownById(id)));
+                DeserializeObject<List<io.LookupTypeValue>>(JsonConvert.SerializeObject(valueRepo.getLookUpDropDownByCode(code)));
             return Ok(list);
         }
 
@@ -34,36 +36,56 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult getById(Guid id)
+        [HttpPost("search")]
+        public ActionResult Search([FromBody] io.LookupType record)
         {
-            io.LookupType record = JsonConvert.
-                DeserializeObject<io.LookupType>(JsonConvert.SerializeObject(repo.getByGuid(id)));
-            if (record == null) return NotFound();
-            return Ok(record);
+            try
+            {
+                record.RecordStatus = 1;
+                var model = JsonConvert.
+                    DeserializeObject<LookupType>(JsonConvert.SerializeObject(record));
+                List<io.LookupType> list =
+                JsonConvert.DeserializeObject<List<io.LookupType>>(JsonConvert.SerializeObject(repo.searchListQuery(model)));
+
+                return Ok(list);
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.LookupType record)
         {
-            Guid id = repo.create(JsonConvert.
+            record.RecordStatus= 1;
+            int id = repo.create(JsonConvert.
                 DeserializeObject<LookupType>(JsonConvert.SerializeObject(record)));
+            if (id == -1) return Problem("Lookup Type Exist");
             return Created($"/lookup/{id}", "Created Successfully.");
         }
 
-        [HttpPut]
-        public ActionResult updateRecord([FromBody] io.LookupType record)
+        [HttpPost("Update")]
+        public ActionResult updateRecord([FromBody] io.LookupType request)
         {
-            int id = repo.update(JsonConvert.
-                DeserializeObject<LookupType>(JsonConvert.SerializeObject(record)));
-            if (id == 0) return Conflict("Error updating record");
+            LookupType record = repo.getByGuid(request.Guid);
+            record.Code = request.Code;
+            record.Name = request.Name;
+            record.RecordStatus = record.RecordStatus;
+            if(record.CreatedDateTime!=null)
+                request.CreatedDateTime = record.CreatedDateTime;
+            record.LastUpdatedDateTime = DateTime.Now;
+            record.LastUpdatedBy = "System";
+            int count = repo.update(record);
+            if (count == 0) return Conflict("Error updating record");
+            if (count == -1) return Problem("Lookup Type Exist");
             return Ok("Updated successfully");
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult deleteRecord(Guid id)
+        [HttpPost("Delete")]
+        public ActionResult deleteRecord([FromBody] io.LookupType request)
         {
-            int count = repo.delete(id);
+            int count = repo.delete(request);
             //if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
         }
@@ -79,36 +101,50 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
-        [HttpGet("value/{id}")]
-        public ActionResult getValueById(Guid id)
+        [HttpPost("value/search")]
+        public ActionResult ValueSearch([FromBody] io.LookupTypeValue record)
         {
-            io.LookupTypeValue record = JsonConvert.
-                DeserializeObject<io.LookupTypeValue>(JsonConvert.SerializeObject(valueRepo.getByGuid(id)));
-            if (record == null) return NotFound();
-            return Ok(record);
+            record.RecordStatus = 1;
+            var model = JsonConvert.
+                DeserializeObject<io.LookupTypeValue>(JsonConvert.SerializeObject(record));
+            List<io.LookupTypeValue> list =
+            JsonConvert.DeserializeObject<List<io.LookupTypeValue>>(JsonConvert.SerializeObject(valueRepo.searchListQuery(model)));
+
+            return Ok(list);
         }
 
-        [HttpPost("value")]
-        public ActionResult createValueRecord([FromBody] io.LookupTypeValue record)
+        [HttpPost("value/Create")]
+        public ActionResult createRecord([FromBody] io.LookupTypeValue record)
         {
-            Guid id = valueRepo.create(JsonConvert.
+            record.RecordStatus = 1;
+            int id = valueRepo.create(JsonConvert.
                 DeserializeObject<LookupTypeValue>(JsonConvert.SerializeObject(record)));
-            return Created($"/lookup/value/{id}", "Created Successfully.");
+            if (id == -1) return Problem("Lookup Type Value Exist");
+            return Created($"/lookup/{id}", "Created Successfully.");
         }
 
-        [HttpPut("value")]
-        public ActionResult updateValueRecord([FromBody] io.LookupTypeValue record)
+        [HttpPost("value/Update")]
+        public ActionResult updateRecord([FromBody] io.LookupTypeValue request)
         {
-            int id = valueRepo.update(JsonConvert.
-                DeserializeObject<LookupTypeValue>(JsonConvert.SerializeObject(record)));
-            if (id == 0) return Conflict("Error updating record");
+            LookupTypeValue record = valueRepo.getByGuid(request.Guid);
+            record.Code = request.Code;
+            record.Name = request.Name;
+            record.LookupTypeId= request.LookupTypeId;
+            record.RecordStatus = record.RecordStatus;
+            if (record.CreatedDateTime != null)
+                request.CreatedDateTime = record.CreatedDateTime;
+            record.LastUpdatedDateTime = DateTime.Now;
+            record.LastUpdatedBy = "System";
+            int count = repo.update(record);
+            if (count == -1) return Problem("Lookup Type Value Exist");
+            if (count == 0) return Conflict("Error updating record");
             return Ok("Updated successfully");
         }
 
-        [HttpDelete("value/{id}")]
-        public ActionResult deleteValueRecord(Guid id)
+        [HttpPost("value/Delete")]
+        public ActionResult deleteValueRecord([FromBody] io.LookupTypeValue request)
         {
-            int count = valueRepo.delete(id);
+            int count = valueRepo.delete(request);
             //if (id == 0) return Conflict("Error deleting record");
             return Ok("Deleted successfully");
         }

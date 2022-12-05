@@ -186,7 +186,7 @@ $(document).ready(function() {
        series.dataFields.valueY = "income";
        series.dataFields.categoryX = "city";
        series.columns.template.height = am4core.percent(90);
-       series.tooltipText = "Income in : {valueY.value}";
+       series.tooltipText = "Project in : {valueY.value}";
        series.columns.template.fill = am4core.color("#4680ff");
        series.columns.template.stroke = am4core.color("#4680ff");
 

@@ -1,0 +1,92 @@
+﻿@using System.Data
+@model IEnumerable<VSAssetManagement.IOModels.LookupTypeValue>
+
+<div class="col-sm-12" style="padding:1px">
+    <div class="card">
+        <div class="card-header">
+            <h5>@ViewBag.lookupname - Values</h5>
+            <div class="card-header-right">
+                <div class="btn-group card-option">
+                    <a onclick="Closeform(this)" href="#" class="feather icon-plus-circle" style="margin-right: 10px;display:block"></a>
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="feather icon-more-horizontal"></i>
+                    </button>
+                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                        <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                        <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                        <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" id="shdiv" style="padding:4px 2px 2px 8px">
+            <form id="lookupform" style="display: none;">
+                <input class="form-control" style="display:none" type="hidden" id="hdnGuid" />
+                <input class="form-control" style="display:none" type="hidden" id="hdntypeGuid" value="@ViewBag.lookupguid" />
+                
+                @Html.AntiForgeryToken()
+                <div class="row" style="width:100%">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Code</label>
+                            <input class="form-control" placeholder="Look Up Value Code" type="text" id="Code" name="Code" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <input class="form-control" placeholder="Look Up Value Name" type="text" id="Name" name="Name" />
+                        </div>
+                    </div>                  
+                </div>
+                <button type="reset" class="btn btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right" onclick="clearall()">Clear</button>
+                <button type="submit" class="btn notifications btn-primary" style="float: right;" data-type="success" data-from="top" data-align="right">Submit</button>
+
+            </form>
+        </div>
+        <div class="card-body" style="padding:2px 2px 2px 2px"> 
+            <div class="dt-responsive table-responsive">
+                <table id="simpletable" class="table table-striped table-bordered table-hover nowrap">
+                    <thead>
+                    <tr>
+                            <th class="ActionWidth">Actions</th>
+                            <th class="ActionWidth"  data-breakpoints="xs">S. No</th>
+                            <th data-breakpoints="xs">Lookup Type</th>
+                            <th data-breakpoints="xs">Lookup Type Value Code</th>
+                            <th data-breakpoints="xs">Lookup Type Value Name</th>
+                            <th data-breakpoints="xs" hidden></th>
+
+                    </tr>
+                </thead>
+                <tbody>                 
+                    <tr>
+                         @{ int rowNo = 0; }
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td id="loadRecords" class="text-center">
+                                    <a onclick="loadPartialview(this)" href="#" class="feather icon-edit"></a>
+                                @Html.ActionLink("", "Delete","LookUpChild", new { guid=item.Guid  }, new {@class="feather icon-trash-2 text-danger",onclick="return confirm('Are you sure? LookUp Type Value will be deleted permanently') "})
+                            </td>
+                                <td>@(rowNo += 1)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.LookupTypeName)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Code)</td>
+                                <td>@Html.DisplayFor(modelItem=>item.Name)</td>                                                                       
+                                <td hidden>@Html.DisplayFor(modelItem=>item.Guid)</td>
+                        </tr>
+                        }                    
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("../customjs/util.js")"></script>
+<script src="@Url.Content("../customjs/lookUpValue.js")"></script>
+<script>
+    $(window).on('load', function () {
+        setActiveMenu('wingz', 'LookUp');
+    });
+</script>

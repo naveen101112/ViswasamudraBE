@@ -17,9 +17,7 @@ namespace VSManagement.Controllers.AssetManagement
         [HttpGet("status")]
         public ActionResult getByStatusListByType([FromQuery] Pagination page)
         {
-            List<Status> statusList = repo.getStatusListForType(page);
-            if (statusList == null) return NotFound();
-            return Ok(statusList);
+            return Ok("");
         }
     }
 }

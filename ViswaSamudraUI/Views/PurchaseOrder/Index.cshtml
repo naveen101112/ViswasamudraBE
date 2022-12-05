@@ -1,5 +1,5 @@
 ﻿@using System.Data
-@model IEnumerable<VSAssetManagement.IOModels.PurchaseOrder>
+@model List<VSAssetManagement.IOModels.PurchaseOrder>
 
 <div class="col-sm-12" style="padding:1px">
     <div class="card">
@@ -27,10 +27,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                            <th>purchase OrderNo</th>
+                        <th>Purchase OrderNo</th>
                         <th data-breakpoints="xs">PO Date</th>
-                        <th data-breakpoints="xs">ReceivedBy</th>
-                        <th data-breakpoints="xs">ReceivedDate</th>
+                        <th>Purchase Store</th>
+                        <th>Purchase Project</th>
                         <th data-breakpoints="xs">Created By</th>
                         <th data-breakpoints="xs">created DateTime</th>
                         <th data-breakpoints="xs">last Updated By</th>
@@ -49,8 +49,8 @@
                             </td>
                             <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderNo)</td>
                             <td>@Html.DisplayFor(modelItem=>item.PurchaseOrderDate)</td>
-                            <td>@Html.DisplayFor(modelItem=>item.ReceivedBy)</td>
-                            <td>@Html.DisplayFor(modelItem=>item.ReceivedDate)</td>
+                            <td>@Html.DisplayFor(modelItem=>item.PurchaseStore)</td>
+                            <td>@Html.DisplayFor(modelItem=>item.PurchaseProject)</td>
                             <td>@Html.DisplayFor(modelItem=>item.CreatedBy)</td>
                             <td>@Html.DisplayFor(modelItem=>item.CreatedDateTime)</td>
                             <td>@Html.DisplayFor(modelItem=>item.LastUpdatedBy)</td>

@@ -9,38 +9,23 @@ namespace VSManagement.Models.VISWASAMUDRA
 {
     public partial class Asset
     {
-        public Asset()
-        {
-            AssetHistory = new HashSet<AssetHistory>();
-            AssetOperations = new HashSet<AssetOperations>();
-        }
-
         public int Id { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
+        public string AssetCode { get; set; }
+        public string AssetName { get; set; }
         public string CompanyName { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public string LastUpdatedBy { get; set; }
-        public DateTime LastUpdatedDateTime { get; set; }
+        public DateTime? LastUpdatedDateTime { get; set; }
         public int RecordStatus { get; set; }
         public Guid Guid { get; set; }
-        public Guid ProjectGuid { get; set; }
-        public Guid StoreGuid { get; set; }
-        public Guid BatchGuid { get; set; }
-        public string TagId { get; set; }
-        public string AssetType { get; set; }
-        public string AssetSpecification { get; set; }
-        public string ProjectName { get; set; }
-        public string Store { get; set; }
-        public string Batch { get; set; }
-        public string FrequencyOfUse { get; set; }
-        public string UsageUom { get; set; }
-
-        public virtual Batch BatchGu { get; set; }
-        public virtual Project ProjectGu { get; set; }
-        public virtual Store StoreGu { get; set; }
-        public virtual ICollection<AssetHistory> AssetHistory { get; set; }
-        public virtual ICollection<AssetOperations> AssetOperations { get; set; }
+        public Guid ProjectCode { get; set; }
+        public Guid? StructureType { get; set; }
+        public Guid? TagId { get; set; }
+        public Guid AssetType { get; set; }
+        public Guid AssetSpecification { get; set; }
+        public Guid Store { get; set; }
+        public string BatchNo { get; set; }
+        public Guid? StructureSubType { get; set; }
     }
 }

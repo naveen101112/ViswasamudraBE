@@ -63,8 +63,8 @@ File: style.css
 ==========================  **/
 body {
     font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    color: #686c71;
+    font-size: 12px;
+    color: #080808;
     font-weight: 400;
     background: #eff3f6;
     position: relative;
@@ -120,6 +120,14 @@ p {
 b,
 strong {
     font-weight: 400;
+}
+
+.ActionWidth {
+    width: 5px;
+}
+
+.SnoWidth {
+    width: 5px;
 }
 
 .img-radius {
@@ -11036,8 +11044,8 @@ body.layout-14 .pcoded-navbar.navbar-dark .navbar-popup:after {
 .custom-select,
 .form-control {
     background: #eff3f6;
-    padding: 4px 7px;
-    font-size: 14px;
+    padding: 1px 7px;
+    font-size: 12px;
     height: auto;
 }
 
@@ -11101,13 +11109,13 @@ body.layout-14 .pcoded-navbar.navbar-dark .navbar-popup:after {
 }
 
 .custom-select {
-    height: calc(2.25rem + 9px);
+    height: calc(2.25rem + -4px);
 }
 
 /* input group End */
 /**====== Form Componant css end ======**/
 select.form-control:not([size]):not([multiple]) {
-    height: calc(2.55rem + 2px);
+    height: calc(2.55rem + -18px);  
 }
 
 .input-group-lg > .input-group-append > select.btn:not([size]):not([multiple]),
@@ -11577,7 +11585,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 .table td,
 .table th {
     border-top: 1px solid #e2e5e8;
-    white-space: nowrap;    
+    white-space: nowrap;
+    padding: 0.3rem;
 }
 
 .table thead th {
@@ -11598,6 +11607,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .table.dataTable[class*="table-"] thead th {
     background: #eff3f6;
+    font-weight: 600;
+    color: #343434;
 }
 
 /* Border versions */
@@ -11993,7 +12004,7 @@ table.dataTable tbody > tr.selected td.select-checkbox:after, table.dataTable tb
       Button css start
 ==========================  **/
 .btn {
-    padding: 5px 20px;
+    padding: 2px 20px;
     border-radius: 0.25rem;
     font-size: 14px;
     margin-bottom: 5px;

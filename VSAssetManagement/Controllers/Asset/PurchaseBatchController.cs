@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using VSManagement.Models.VISWASAMUDRA;
 using io = VSAssetManagement.IOModels;
 using VSManagement.Repository.AssetManagement;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace VSManagement.Controllers.AssetManagement
 {
@@ -13,6 +15,8 @@ namespace VSManagement.Controllers.AssetManagement
     public class PurchaseBatchController : ControllerBase
     {
         BatchRepo repo = new BatchRepo(new VISWASAMUDRAContext());
+        PurchaseOrderRepo porepo= new PurchaseOrderRepo(new VISWASAMUDRAContext());
+
         [HttpGet]
         public ActionResult getAllList()
         {
@@ -23,14 +27,22 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(list);
         }
 
-        [HttpPost("batchsearch")]
-        public ActionResult Search([FromBody] io.Batch record)
+        [HttpPost("search")]
+        public ActionResult Search([FromBody] io.BatchSearch record)
         {
-            var AssectModel = JsonConvert.
+            var BatchModel = JsonConvert.
                 DeserializeObject<io.BatchSearch>(JsonConvert.SerializeObject(record));
             List<io.BatchSearch> list =
-            JsonConvert.DeserializeObject<List<io.BatchSearch>>(JsonConvert.SerializeObject(repo.searchListQuery(AssectModel)));
+            JsonConvert.DeserializeObject<List<io.BatchSearch>>(JsonConvert.SerializeObject(repo.searchListQuery(BatchModel)));
 
+            return Ok(list);
+        }
+
+        [HttpGet("all")]
+        public ActionResult GetAll()
+        {
+            List<io.BatchSearch> list =
+            JsonConvert.DeserializeObject<List<io.BatchSearch>>(JsonConvert.SerializeObject(repo.GetAllWithPO()));
             return Ok(list);
         }
 
@@ -51,24 +63,44 @@ namespace VSManagement.Controllers.AssetManagement
             return Ok(record);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public ActionResult createRecord([FromBody] io.Batch record)
         {
-            int id = repo.create(JsonConvert.
-                DeserializeObject<Batch>(JsonConvert.SerializeObject(record)));
-            return Created($"/project/{id}", "Created Successfully.");
+            try
+            {
+                int id = repo.create(JsonConvert.
+                    DeserializeObject<Batch>(JsonConvert.SerializeObject(record)));                
+                if (id == 0) return Conflict("Error while creating batch.");
+                return Created($"/batch/{id}", "Created Successfully.");
+            }catch(Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,"Error while creating batch");
+            }
         }
 
-        [HttpPost]
-        public ActionResult updateRecord([FromForm] io.Batch record)
+        [HttpPost("Update")]
+        public ActionResult updateRecord([FromBody] io.Batch request)
         {
-            Batch batch = repo.getById(record.Id, record.Guid);
-            batch.BatchDescription = record.BatchName;
+            Batch record = JsonConvert.DeserializeObject<Batch>(JsonConvert.SerializeObject(request));
+            Batch batch = repo.getById(record.Guid);
+            batch.BatchDescription = record.BatchDescription;
             batch.BatchNo = record.BatchNo;
-            batch.AssetSpecification = record.AssetSize;
+            batch.AssetSpecification = record.AssetSpecification;
             batch.AssetType = record.AssetType;
-            batch.PurchaseBatchMasterGuid = record.PurchaseBatchMasterGuid;
-            batch.Quantity = record.Quantity.Value;
+            batch.PurchaseOrderId = record.PurchaseOrderId;
+            batch.BatchQuantity = record.BatchQuantity;
+            batch.BatchStatus = record.BatchStatus;
+            batch.InvoiceNo= record.InvoiceNo;
+            batch.InvoiceDate = record.InvoiceDate;
+            batch.ReceivedDate = record.ReceivedDate;
+            batch.ReceivedBy = record.ReceivedBy;
+            batch.StructureType = record.StructureType;
+            batch.UseFrequency = record.UseFrequency;
+            batch.StructureSubType = record.StructureSubType;
+            batch.UsageUom = record.UsageUom;
+            batch.Uom = record.Uom;
+            batch.LastUpdatedBy = string.IsNullOrEmpty(record.LastUpdatedBy) ? "SYSTEM" : record.LastUpdatedBy;
+            batch.LastUpdatedDateTime = DateTime.Now;
             repo._context.Entry(batch).State = EntityState.Detached;
             int id = repo.update(batch);
             if (id == 0) return Conflict("Error updating record");
