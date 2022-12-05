@@ -5,19 +5,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <body>
-        <div class="row">
+        <div>
             <img src="/assets/images/403.png" />
-            <div style="width: fit-content; margin: auto;">Redirecting to login page in <span id="counter">5</span></div>
-            <script>
-                setInterval(function() {
-                    var div = document.querySelector("#counter");
-                    var count = div.textContent * 1 - 1;
-                    div.textContent = count;
-                    if (count <= 0) {
-                        window.location.replace("../login");
-                    }
-                }, 1000);
-            </script>
         </div>
     </body>
 </html>

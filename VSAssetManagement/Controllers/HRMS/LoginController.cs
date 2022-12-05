@@ -8,20 +8,14 @@ using System;
 
 namespace VSManagement.Controllers.HRMS
 {
-    [Route("User")]
+    [Route("login")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class LoginController : ControllerBase
     {
         UserLoginRepo repo = new UserLoginRepo(new VS_EMPLOYEEContext());
 
         [HttpPost]
         public ActionResult createRecord([FromBody] io.UserLogin record)
-        {
-            return Ok(repo.login(record));
-        }
-
-        [HttpPost("Login")]
-        public ActionResult validateUser([FromBody] io.UserLogin record)
         {
             return Ok(repo.login(record));
         }
