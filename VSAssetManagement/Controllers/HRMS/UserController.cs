@@ -8,9 +8,9 @@ using System;
 
 namespace VSManagement.Controllers.HRMS
 {
-    [Route("login")]
+    [Route("User")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class UserController : ControllerBase
     {
         UserLoginRepo repo = new UserLoginRepo(new VS_EMPLOYEEContext());
 
