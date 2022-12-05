@@ -134,6 +134,30 @@ namespace ViswaSamudraUI.Providers.Assets
         {
             return ch.DeleteRequest<io.LookupTypeValue>("LookUp/Value/Delete", model);
         }
+
+        public IEnumerable<string> GetActiveUserNames()
+        {
+            return (IEnumerable<string>)ch.GetRequest<string>("User/UsersList");
+        }
+
+        public List<SelectListItem> GetUserData(String user = null)
+        {
+            LookupType ty = new LookupType();
+            SelectListItem selListItem = new SelectListItem() { Value = "", Text = "" };
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(selListItem);
+
+            foreach (var x in GetActiveUserNames().Select(i => i))
+            {
+                if (user != null && x == user)
+                    selListItem = new SelectListItem() { Value = x, Text = x, Selected = true };
+                else
+                    selListItem = new SelectListItem() { Value = x, Text = x };
+
+                newList.Add(selListItem);
+            }
+            return newList;
+        }
     }
 
 }

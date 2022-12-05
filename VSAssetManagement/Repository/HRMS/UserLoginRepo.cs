@@ -39,5 +39,14 @@ namespace VSManagement.Repository.HRMS
             }
             return new io.ResponseBody { Status = true, Message = "Success", UserName = request.UserName };
         }
+
+        public List<string> getUserNames()
+        {
+            return (from user in _context.UserLogin
+                    join emp in _context.EmployeeMaster on user.UserName equals emp.EmployeeCode
+                    where emp.IsActive == "Y"
+                    select user.UserName
+                    ).ToList();
+        }
     }
 }

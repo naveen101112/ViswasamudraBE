@@ -9,7 +9,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
         [HttpGet]
         public IActionResult Index([FromQuery] string authKey)
         {
-            try
+            return View();
+            /*try
             {
                 if (!string.IsNullOrEmpty(authKey))
                 {
@@ -24,7 +25,7 @@ namespace ViswaSamudraUI.Controllers.WINGS
             } catch(Exception e)
             {
                 return Redirect("../unauthorized");
-            }
+            }*/
         }
     }
 }

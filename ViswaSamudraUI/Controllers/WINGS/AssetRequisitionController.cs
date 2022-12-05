@@ -46,8 +46,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
 
             if (model.Guid == System.Guid.Empty)
             {
-                ViewBag.RequestedUsers = lookUpProvider.GetTempUserData();
-                ViewBag.ApproveUsers = lookUpProvider.GetTempUserData();
+                ViewBag.RequestedUsers = lookUpProvider.GetUserData();
+                ViewBag.ApproveUsers = lookUpProvider.GetUserData();
                 ViewBag.TaskType = lookUpProvider.GetSelectList("TTY");
                 ViewBag.Project = projectProvider.GetSelectList();
             }
@@ -55,8 +55,8 @@ namespace ViswaSamudraUI.Controllers.WINGS
             {
                 
                 AssetReq = assetRequistionProvider.GetAll(aRequisition).FirstOrDefault();
-                ViewBag.RequestedUsers = lookUpProvider.GetTempUserData(AssetReq.header.RequestedBy);
-                ViewBag.ApproveUsers = lookUpProvider.GetTempUserData(AssetReq.header.ApprovedBy);
+                ViewBag.RequestedUsers = lookUpProvider.GetUserData(AssetReq.header.RequestedBy);
+                ViewBag.ApproveUsers = lookUpProvider.GetUserData(AssetReq.header.ApprovedBy);
                 ViewBag.TaskType = lookUpProvider.GetSelectList("TTY", AssetReq.header.TaskType.ToString());
                 ViewBag.Project = projectProvider.GetSelectList(AssetReq.header.Project.ToString());
             }           

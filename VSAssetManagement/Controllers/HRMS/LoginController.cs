@@ -19,5 +19,17 @@ namespace VSManagement.Controllers.HRMS
         {
             return Ok(repo.login(record));
         }
+
+        [HttpPost("Login")]
+        public ActionResult validateUser([FromBody] io.UserLogin record)
+        {
+            return Ok(repo.login(record));
+        }
+
+        [HttpGet("UsersList")]
+        public ActionResult GetActiveUserNames()
+        {
+            return Ok(repo.getUserNames());
+        }
     }
 }
