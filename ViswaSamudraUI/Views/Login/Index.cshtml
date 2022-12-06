@@ -1,6 +1,4 @@
-﻿@model VSManagement.IOModels.UserLogin
-
-@{
+﻿@{
 	Layout = "";
 }
 
@@ -71,37 +69,35 @@
 				</div>
 			</div>
 		</div>
-		@using (Html.BeginForm("login", "Login", FormMethod.Post))
-		{
-			<div class="align-items-stret h-100 ad-flex justify-content-center">
-				<div class=" auth-content">
-						<img src="../assets/images/logo-dark.png" alt="" style="height: 55px;" class="img-fluid mb-4">
-					<h4 class="mb-3 f-w-400">Login into your account</h4>
-					<div class="input-group mb-2">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="feather icon-user"></i></span>
-						</div>
-						<input type="email" class="form-control" asp-for="UserName" placeholder="Username" readonly value="admin@mail.com">
+		<div class="col-md-4 align-items-stret h-100 ad-flex justify-content-center">
+			<div class=" auth-content">
+					<img src="../assets/images/logo-dark.png" alt="" style="height: 55px;" class="img-fluid mb-4">
+				<h4 class="mb-3 f-w-400">Login into your account</h4>
+				<div class="input-group mb-2">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="feather icon-user"></i></span>
 					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="feather icon-lock"></i></span>
-						</div>
-						<input type="password" class="form-control" asp-for="Password" placeholder="Password" readonly value="Password123">
-					</div>
-				
-				
-					<div class="form-group mt-2">
-						<div class="checkbox checkbox-primary d-inline">
-							<input type="checkbox" name="checkbox-p-1" id="checkbox-p-1" checked="">
-							<label for="checkbox-p-1" class="cr">Save credentials</label>
-						</div>
-					</div>
-						<input type="submit" value="Login" class="btn waves-effect waves-light btn-primary mb-4">
-						<p class="mb-2 text-muted">Forgot password? <a href="#" class="f-w-400">Reset</a></p>				
+					<input type="email" class="form-control" placeholder="Username">
 				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="feather icon-lock"></i></span>
+					</div>
+					<input type="password" class="form-control" placeholder="Password">
+				</div>
+				
+				
+				<div class="form-group mt-2">
+					<div class="checkbox checkbox-primary d-inline">
+						<input type="checkbox" name="checkbox-p-1" id="checkbox-p-1" checked="">
+						<label for="checkbox-p-1" class="cr">Save credentials</label>
+					</div>
+				</div>
+					@Html.ActionLink("Login", "Index","Dashboard", "",
+					new {@style="color: white;", @class="btn waves-effect waves-light btn-primary mb-4" })
+					<p class="mb-2 text-muted">Forgot password? <a href="#" class="f-w-400">Reset</a></p>				
 			</div>
-		}
+		</div>
 	</div>
 </div>
 <!-- [ signin-img ] end -->
