@@ -25,7 +25,7 @@
 	<link rel="stylesheet" href="../assets/fonts/fontawesome/css/fontawesome-all.min.css">
 	<!-- animation css -->
 	<link rel="stylesheet" href="../assets/plugins/animation/css/animate.min.css">
-
+	<link rel="stylesheet" href="../assets/plugins/nestable-master/css/nestable.min.css">
 
 	<!-- notification css -->
 	<link rel="stylesheet" href="../assets/plugins/notification/css/notification.min.css">
@@ -94,6 +94,7 @@
 							<li class="" id="batch-link"><a class="waves-effect" asp-area="" asp-controller="Batch" asp-action="index">Purchase Reference Batch</a></li>
 							<li class="" id="asset-link"><a class="waves-effect" asp-area="" asp-controller="Asset" asp-action="index">Asset</a></li>
 							<li class="" id="asset-requisition-link"><a class="waves-effect" asp-area="" asp-controller="AssetRequisition" asp-action="index">Asset Requisition</a></li>
+							<li class="" id="asset-requisition-link"><a class="waves-effect" asp-area="" asp-controller="DetailedReport" asp-action="index">Report</a></li>
 						</ul>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
@@ -273,25 +274,31 @@
 	<script src="../assets/js/waves.min.js"></script>
 	<script src="../assets/js/pcoded.min.js"></script>
 	<script src="../assets/js/menu-setting.min.js"></script>
+
+	<!-- chartjs js -->
+	<script src="../assets/plugins/chart-chartjs/js/Chart.min.js"></script>
+	<script src="~/assets/js/pages/chartjs-plugin-datalabels.js"></script>
+
+
 	<!-- google-map Js -->
 	<script src="../assets/plugins/google-maps/js/markerclusterer.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 	<script src="../assets/plugins/google-maps/js/gmaps.js"></script>
 	<script src="../assets/js/pages/google-maps.js"></script>
 
-	<!-- am chart js -->
-	<script src="../assets/plugins/chart-am4/js/core.js"></script>
-	<script src="../assets/plugins/chart-am4/js/charts.js"></script>
-	<script src="../assets/plugins/chart-am4/js/animated.js"></script>
-	<!-- dashboard-custom js -->
-	<script src="../assets/js/pages/dashboard-analytics.js"></script>
-	<script src="../assets/js/map.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfUvHeQpaf7M8Q9WTNceF8JLX5_p2kl8&callback=myMap"></script>
-	<script src="../assets/js/pages/chart.js"></script>
-	<script src="../assets/js/pages/dashboard-sale.js"></script>
-	<script src="../assets/plugins/data-tables/js/datatables.min.js"></script>
+	<!-- dashboard-custom js -->		
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfUvHeQpaf7M8Q9WTNceF8JLX5_p2kl8&callback=myMap"></script>	
+	
+	
 	<script src="../assets/js/pages/data-basic-custom.js"></script>
     <script src="../assets/js/pages/data-column-custom.js"></script>
+
+	<!-- datatable Js -->
+	<script src="../assets/plugins/data-tables/js/datatables.min.js"></script>
+	<script src="../assets/plugins/data-tables/js/dataTables.select.min.js"></script>
+	<script src="../assets/js/pages/data-autofill-custom.js"></script>
+	<script src="../assets/plugins/nestable-master/js/jquery.nestable.js"></script>
+	<script src="../assets/js/pages/ac-nestable.js"></script>
 
 	<!-- jquery-validation Js -->
 	<script src="../assets/plugins/jquery-validation/js/jquery.validate.min.js"></script>

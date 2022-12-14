@@ -5,9 +5,10 @@ $(document).ready(function() {
             autoFill: true
         });
         // [ KeyTable Integration ]
-        $('#key-intergration').DataTable({
-            keys: true,
-            autoFill: true
+        $('#Report_table').DataTable({
+            keys: false,
+            searching: false,
+            autoFill: false
         });
         // [ Column Selector ]
         $('#confirm-table').DataTable({

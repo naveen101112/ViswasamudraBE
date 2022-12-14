@@ -1,5 +1,6 @@
 'use strict';
-$(window).on('load', function() {
+$(window).on('load', function () {
+
     var updateOutput = function(e) {
         var list = e.length ? e : $(e.target),
             output = list.data('output');
@@ -45,4 +46,5 @@ $(window).on('load', function() {
     });
 
     $('#nestable3').nestable();
+    
 });
