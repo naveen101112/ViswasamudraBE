@@ -11,11 +11,11 @@ $(document).ready(function () {
 });
 
 function loaddashboarddata(data) {
-
+    var dataGot =[]= data;
     var stackeddata = [];
 
-    for (var i = 0; i < data.length; i++) {
-        var item = data[i].split("$$$");
+    for (var i = 0; i < dataGot.length; i++) {
+        var item = dataGot[i].split("$$$");
 
         if (item[0] === 'Assets') {
             var assetsummary = item[1].split(",");

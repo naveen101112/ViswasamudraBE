@@ -24,9 +24,7 @@ namespace VSManagement.Repository.AssetManagement
             _context = context;
             IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
             IConfigurationRoot configuration = builder.Build();
-            _connection = configuration.GetConnectionString("VISWASAMUDRA");
-            con = new SqlConnection(_connection);
-            if (con.State == ConnectionState.Closed) con.Open();
+            _connection = configuration.GetConnectionString("VISWASAMUDRA");            
         }
 
         public List<io.DetailedReport> GetStoreWiseData()
@@ -246,6 +244,8 @@ namespace VSManagement.Repository.AssetManagement
         {
             try
             {
+                SqlConnection con = new SqlConnection(_connection);
+                if (con.State == ConnectionState.Closed) con.Open();
                 List<string> storedetailedReport= new List<string>();                
                 SqlCommand cmd = new SqlCommand("GET_DASHBOARD_DATA", con);                
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
